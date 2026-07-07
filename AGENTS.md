@@ -15,7 +15,7 @@ Companion to `CLAUDE.md`. Read both. This project is a hackathon Builder-track e
 
 ## Working agreement
 - Data-validation lookups are **deterministic functions/tools**, not LLM calls. Reserve LLM/agent calls for genuine judgment.
-- Keep changes small and testable; the builder works in short async bursts. Leave `NEXT.md` updated.
+- Keep changes small and testable; the builder works in short async bursts. The live handoff is `memory/NEXT_SESSION.md` (dashboard: `WORK_PROGRESS.md`, index: `MEMORY.md`) — leave it updated.
 - The 3-hop validation substrate + the DTO/tool contract are in `docs/plan.md` (sections 3 and 5). Follow it.
 
 ## How to run

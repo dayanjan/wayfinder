@@ -8,7 +8,7 @@ The edge is the **confident, receipt-backed NO** — refuting a plausible claim 
 ## Hard constraints
 - **NEW WORK ONLY.** Every submitted file is authored during the event (started July 7, 2026). No reuse of prior projects (PyZoBot POC is *reference only*, zero file copy). Git history is the compliance proof.
 - **Open source, MIT.** Entire repo is public.
-- **Deadline: July 13, 2026, 9:00 PM ET.** Solo builder; async, interruptible workflow — keep `NEXT.md` current so any session resumes cleanly.
+- **Deadline: July 13, 2026, 9:00 PM ET.** Solo builder; async, interruptible workflow — keep `memory/NEXT_SESSION.md` current so any session resumes cleanly.
 - **Claude for reasoning/generation; Voyage for embeddings** (Anthropic has no embedder). Never OpenAI.
 
 ## Conventions
@@ -19,12 +19,24 @@ The edge is the **confident, receipt-backed NO** — refuting a plausible claim 
 
 ## Structure
 ```
-docs/plan.md     # the v6 build plan (thesis, agent cast, 3-hop substrate, judging map)
-data/            # public Perturb-seq supplementary tables (fetch via fetch_data.sh; gitignored)
-src/arbiter/     # the tool (fresh code)
+docs/plan.md            # the v6 build plan (thesis, agent cast, 3-hop substrate, judging map)
+data/                   # public Perturb-seq supplementary tables (fetch via fetch_data.sh; gitignored)
+src/arbiter/            # the tool (fresh code)
 tests/
-NEXT.md          # async handoff — what to do next (keep current)
+memory/NEXT_SESSION.md  # async handoff — canonical (read/written by session-start & session-closer)
+MEMORY.md               # lean session index (status, decisions, recent sessions)
+WORK_PROGRESS.md        # live dashboard (phase, milestones, blockers, progress log)
+memory/                 # sessions/, decisions/ (ADRs), lessons-learned.md, patterns.md
 ```
+
+## Session workflow (PM skills)
+Async, interruptible, solo. Use the session-lifecycle skills at the boundaries:
+- **`/session-start`** — at the top of a session: reads the handoff, cross-checks state, briefs you.
+- **`/session-closer`** — at the end: writes the session log, syncs `MEMORY.md`/`WORK_PROGRESS.md`, refreshes `memory/NEXT_SESSION.md`, commits housekeeping (or checkpoints).
+- **`/freshen`** — drift check across the PM docs.
+- **`/atomic-planner`** — decompose a workstream into 1–3h testable task cards.
+
+Codex delegation + review skills (`codex-rescue`, `codex-review-diff`, `codex-spike`, …) are user-level and already available.
 
 ## Judging weights (aim every hour here)
 Demo 30% - Claude Use 25% - Impact 25% - Depth 20%. See `docs/plan.md` section 12.
