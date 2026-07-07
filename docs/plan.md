@@ -1,7 +1,21 @@
 # PyZoBot — "Built with Claude: Life Sciences" hackathon build plan (v6)
 
-**Status:** domain + substrate LOCKED · rules reconciled · **Date:** 2026-07-07
-**Lineage:** v1 (harness stack) → v2 (deploy-first, de-scoped, Codex debate) → v3 (validation-not-generation thesis, grant-critique) → v4 (Perturb-seq substrate + "hypothesis referee") → v5 (winning strategy, Fable review — "receipt-backed NO") → **v6 (official rules reconciled: new-work-only clean-room, open-source, team≤2, judging map)**
+**Status:** domain + substrate LOCKED · rules reconciled · **track committed: RESEARCHER** · **Date:** 2026-07-07
+**Lineage:** v1 (harness stack) → v2 (deploy-first, de-scoped, Codex debate) → v3 (validation-not-generation thesis, grant-critique) → v4 (Perturb-seq substrate + "hypothesis referee") → v5 (winning strategy, Fable review — "receipt-backed NO") → v6 (official rules reconciled: new-work-only clean-room, open-source, team≤2, judging map) → **v7 (Researcher-track pivot: finding-first via Claude Science; tool = the method/vehicle)**
+
+## 0. v7 — Researcher-track reframe (committed 2026-07-07)
+**This section governs where it conflicts with the Builder-framed sections below (esp. §1, §6, §7, §11, §12); those are being re-aimed, not deleted.**
+
+- **Track = RESEARCHER (committed).** Operator applied as Researcher. Per the kickoff transcript the track is technically set at the *Submit* button (not hard-locked at application), and an independent Fable 5 review argued Builder is the stronger fit for a *referee tool* — but the operator has committed to Researcher. Decision recorded; we execute finding-first and do **not** hedge (hedging is the only thing that triggers the "between two stools" risk).
+- **Deliverable shift.** Researcher track asks for *"a discrete finding / trained model / analysis others can reproduce, and how Claude Science got you there"* (kickoff). So the deliverable is a **reproducible T-cell Perturb-seq FINDING**, derived **through Claude Science**, that another scientist can re-run. The **PyZoBot Arbiter referee is the METHOD/vehicle** that produces and presents the finding — shown as *how the finding was reached*, not as a product to adopt.
+- **What carries over UNCHANGED (the moat is intact):** the thesis (**falsification / the receipt-backed NO**), the 3-hop validation chain (§3), the two anchors (known-true + non-obvious), the **knockdown-QC rigor gate**, and calibrated language. These are *more* persuasive to Researcher/Gladstone judges than to a demo-driven Builder panel.
+- **What CHANGES under Researcher:**
+  1. **Claude Science is REQUIRED and on the critical path** (the track mandates it). Install + placement runbook: `docs/claude-science-wsl-install-plan_2026-07-07.md` (debate-hardened; GATE-0 docs confirmed). Because there is no "just use pandas" fallback, a VCU managed-endpoint block is a **Day-1 escalation risk** — de-risk first.
+  2. **Reproducibility is the product.** Lean on Claude Science's native provenance (code + environment + full message history per artifact) as the "others can reproduce" evidence. The finding must re-run from the receipts.
+  3. **Video/README lead with the FINDING**, not a tool tour. The "NO with a receipt" is presented as a **scientific result** ("we refuted claim X against real Perturb-seq data; we caught artifact Y as *untested*, not *negative*"), with the Claude-Science workflow shown as the how. Infra/UI ~invisible.
+  4. **Judging aim = Researcher rubric** (real reproducible finding + genuine Claude Science use + scientific rigor), plus the **track-agnostic Gladstone Special Prize** ("most potential to advance science overcoming disease") — very reachable with a real autoimmune-relevant gene→program→disease result. Note: the kickoff named explicit prize $ for the Builder track ($30k/$10k/$5k); Researcher has its own top-3 + the Gladstone award.
+  5. **Compute unchanged in scale** (CPU pandas on the aggregated CSVs); Claude Science is the *workbench/orchestration + provenance* layer. The local RTX 3090 (24 GB, CUDA 13.2 in WSL) is an *optional* deeper-analysis bonus (embeddings), gated by GATE-GPU — NOT required for the finding.
+- **Efficiency guardrails (Fable review):** timebox the Claude Science stand-up to ~half a day with a hard escalate-the-endpoint exit; skip persistence/GPU gold-plating; keep the anchor-biology validation as the scarce-attention sink.
 
 ## 1. Goal & posture
 - **Event:** *Built with Claude: Life Sciences* (Anthropic × Gladstone), global virtual hackathon **July 7–13, 2026**, $100k credits, **Build track**.

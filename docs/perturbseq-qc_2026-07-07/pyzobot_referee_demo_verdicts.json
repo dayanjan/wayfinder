@@ -1,0 +1,219 @@
+{
+  "EGR2@Stim8hr": {
+    "gene_symbol": "EGR2",
+    "gene_ensg": "ENSG00000122877",
+    "condition": "Stim8hr",
+    "overall": "consistent with a validated gene -> program -> disease chain re-derived from the tables",
+    "gate_pass": true,
+    "hops": [
+      {
+        "hop": 0,
+        "name": "GATE",
+        "status": "supported",
+        "claim": "knockdown validated: 2/2 guides significant (best adj-p 1e-16)",
+        "receipt": {
+          "n_guides": 2,
+          "n_signif_knockdown_guides": 2,
+          "best_guide_adj_p": 1e-16,
+          "mean_guide_expr": 0.2511,
+          "mean_ntc_expr": 0.8849
+        },
+        "caveats": []
+      },
+      {
+        "hop": 1,
+        "name": "EFFECT",
+        "status": "supported",
+        "claim": "perturbation produces a downstream transcriptional effect",
+        "receipt": {
+          "ontarget_significant": true,
+          "ontarget_effect_size": -11.0613,
+          "ontarget_effect_category": "on-target KD",
+          "n_downstream_DE_genes": 854,
+          "offtarget_flag": false,
+          "crossdonor_correlation_mean": 0.6105,
+          "crossguide_correlation": 0.7936
+        },
+        "caveats": []
+      },
+      {
+        "hop": 2,
+        "name": "PROGRAM",
+        "status": "supported",
+        "claim": "gene shifts the Th1/Th2 program in >=1 reference contrast",
+        "receipt": {
+          "Th2_vs_Th1 (Ota 2021)": {
+            "log_fc": 0.3304,
+            "zscore": 0.8617,
+            "adj_p_value": 0.5879,
+            "significant": false,
+            "direction": "no significant shift"
+          },
+          "Th2_vs_Th1 (Hollbacker 2021)": {
+            "log_fc": 2.443,
+            "zscore": 3.0564,
+            "adj_p_value": 0.0494,
+            "significant": true,
+            "direction": "Th1-associated"
+          }
+        },
+        "caveats": []
+      },
+      {
+        "hop": 3,
+        "name": "DISEASE",
+        "status": "supported",
+        "claim": "gene is a member of >=1 autoimmune-disease-enriched cluster",
+        "receipt": {
+          "n_significant_disease_clusters": 34,
+          "diseases": [
+            "Crohn's disease",
+            "ankylosing spondylitis",
+            "asthma",
+            "atopic eczema",
+            "autoimmune disease",
+            "celiac disease",
+            "inflammatory bowel disease",
+            "multiple sclerosis",
+            "psoriasis",
+            "rheumatoid arthritis",
+            "systemic lupus erythematosus",
+            "type 1 diabetes mellitus",
+            "ulcerative colitis"
+          ],
+          "top_hits": [
+            {
+              "disease": "asthma",
+              "cluster": 110,
+              "odds_ratio": 20.424,
+              "p_adj_fdr": 4.971e-05
+            },
+            {
+              "disease": "atopic eczema",
+              "cluster": 110,
+              "odds_ratio": 24.2689,
+              "p_adj_fdr": 0.000123
+            },
+            {
+              "disease": "psoriasis",
+              "cluster": 110,
+              "odds_ratio": 17.6014,
+              "p_adj_fdr": 0.0002632
+            },
+            {
+              "disease": "Crohn's disease",
+              "cluster": 110,
+              "odds_ratio": 18.5066,
+              "p_adj_fdr": 0.0002632
+            },
+            {
+              "disease": "systemic lupus erythematosus",
+              "cluster": 100,
+              "odds_ratio": 3.7403,
+              "p_adj_fdr": 0.0025
+            }
+          ]
+        },
+        "caveats": []
+      }
+    ]
+  },
+  "IL2@Rest": {
+    "gene_symbol": "IL2",
+    "gene_ensg": "ENSG00000109471",
+    "condition": "Rest",
+    "overall": "untested - knockdown failed the QC gate; any null downstream result cannot be read as a negative",
+    "gate_pass": false,
+    "hops": [
+      {
+        "hop": 0,
+        "name": "GATE",
+        "status": "untested",
+        "claim": "knockdown did NOT reach significance for any guide - downstream absence of effect is UNINTERPRETABLE, not 'no effect'",
+        "receipt": {
+          "n_guides": 2,
+          "n_signif_knockdown_guides": 0,
+          "best_guide_adj_p": 0.32,
+          "mean_guide_expr": 0.0307,
+          "mean_ntc_expr": 0.0356
+        },
+        "caveats": [
+          "target barely expressed at this condition - nothing to knock down"
+        ]
+      }
+    ]
+  },
+  "SLC1A5@Stim8hr": {
+    "gene_symbol": "SLC1A5",
+    "gene_ensg": "ENSG00000105281",
+    "condition": "Stim8hr",
+    "overall": "gene->disease link refuted: gene in cluster gene-sets but enrichment not significant",
+    "gate_pass": true,
+    "hops": [
+      {
+        "hop": 0,
+        "name": "GATE",
+        "status": "supported",
+        "claim": "knockdown validated: 1/2 guides significant (best adj-p 0.0092)",
+        "receipt": {
+          "n_guides": 2,
+          "n_signif_knockdown_guides": 1,
+          "best_guide_adj_p": 0.0092,
+          "mean_guide_expr": 1.4228,
+          "mean_ntc_expr": 1.4872
+        },
+        "caveats": []
+      },
+      {
+        "hop": 1,
+        "name": "EFFECT",
+        "status": "refuted",
+        "claim": "perturbation produces a downstream transcriptional effect",
+        "receipt": {
+          "ontarget_significant": false,
+          "ontarget_effect_size": -3.4563,
+          "ontarget_effect_category": "no on-target KD",
+          "n_downstream_DE_genes": 1,
+          "offtarget_flag": false
+        },
+        "caveats": []
+      },
+      {
+        "hop": 2,
+        "name": "PROGRAM",
+        "status": "supported",
+        "claim": "gene shifts the Th1/Th2 program in >=1 reference contrast",
+        "receipt": {
+          "Th2_vs_Th1 (Ota 2021)": {
+            "log_fc": 0.1941,
+            "zscore": 3.6991,
+            "adj_p_value": 0.0011,
+            "significant": true,
+            "direction": "Th1-associated"
+          },
+          "Th2_vs_Th1 (Hollbacker 2021)": {
+            "log_fc": 0.4763,
+            "zscore": 1.681,
+            "adj_p_value": 0.5347,
+            "significant": false,
+            "direction": "no significant shift"
+          }
+        },
+        "caveats": []
+      },
+      {
+        "hop": 3,
+        "name": "DISEASE",
+        "status": "refuted",
+        "claim": "gene appears in disease cluster gene-sets but NONE reach FDR<0.05 - the disease link is not supported by the enrichment",
+        "receipt": {
+          "n_appearances": 9,
+          "best_p_adj_fdr": 0.0538,
+          "best_odds_ratio": 2.7316,
+          "best_disease": "type 1 diabetes mellitus"
+        },
+        "caveats": []
+      }
+    ]
+  }
+}

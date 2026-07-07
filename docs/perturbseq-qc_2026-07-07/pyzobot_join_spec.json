@@ -1,0 +1,130 @@
+{
+  "tables": {
+    "T1_DE_stats": {
+      "file": "DE_stats.suppl_table.csv",
+      "rows": 33983,
+      "grain": "perturbation(ENSG) x culture_condition",
+      "id_cols": [
+        "target_contrast (ENSG)",
+        "target_contrast_gene_name (SYMBOL)",
+        "culture_condition"
+      ],
+      "semantic": "gene -> EFFECT (on-target KD + downstream count + reproducibility)"
+    },
+    "T2_Th2_Th1": {
+      "file": "Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv",
+      "rows": 37288,
+      "grain": "gene(SYMBOL) x contrast",
+      "id_cols": [
+        "variable (SYMBOL)",
+        "contrast"
+      ],
+      "semantic": "gene -> PROGRAM shift (Th1<->Th2 log_fc/zscore)"
+    },
+    "T3_cluster_enrichment": {
+      "file": "cluster_autoimmune_enrichment_results.suppl_table.csv",
+      "rows": 5236,
+      "grain": "cluster x disease x gene_set",
+      "id_cols": [
+        "cluster",
+        "disease",
+        "gene_set",
+        "intersecting_genes (list of SYMBOL)"
+      ],
+      "semantic": "program/cluster -> DISEASE odds ratio + member genes"
+    },
+    "T4_guide_kd": {
+      "file": "guide_kd_efficiency.suppl_table.csv",
+      "rows": 73765,
+      "grain": "guide x culture_condition",
+      "id_cols": [
+        "Unnamed: 0 (guide id)",
+        "perturbed_gene_id (ENSG)",
+        "culture_condition"
+      ],
+      "semantic": "guide -> KNOCKDOWN QC gate (signif_knockdown)"
+    }
+  },
+  "joins": [
+    {
+      "name": "gate",
+      "left": "T4",
+      "right": "T1",
+      "on_left": [
+        "perturbed_gene_id",
+        "culture_condition"
+      ],
+      "on_right": [
+        "target_contrast",
+        "culture_condition"
+      ],
+      "key_type": "ENSG + condition",
+      "note": "aggregate T4 to gene x condition (any signif_knockdown) before joining; 11,422 ENSG shared"
+    },
+    {
+      "name": "effect_to_program",
+      "left": "T1",
+      "right": "T2",
+      "on_left": [
+        "target_contrast_gene_name"
+      ],
+      "on_right": [
+        "variable"
+      ],
+      "key_type": "gene SYMBOL",
+      "note": "T2 has 2 rows/gene (Ota & Hollbacker contrasts) - pick or facet by contrast; 10,422 symbols shared"
+    },
+    {
+      "name": "program_to_disease",
+      "left": "T2",
+      "right": "T3",
+      "on_left": [
+        "variable"
+      ],
+      "on_right": [
+        "intersecting_genes (exploded)"
+      ],
+      "key_type": "gene SYMBOL in list",
+      "note": "explode T3.intersecting_genes; align T3.gene_set suffix to culture_condition; 1,748 of 1,814 T3 genes in T2"
+    },
+    {
+      "name": "gene_to_disease_direct",
+      "left": "T1",
+      "right": "T3",
+      "on_left": [
+        "target_contrast_gene_name"
+      ],
+      "on_right": [
+        "intersecting_genes (exploded)"
+      ],
+      "key_type": "gene SYMBOL in list",
+      "note": "shortcut for the referee: does a perturbed gene appear in a disease-enriched cluster? 1,692 shared"
+    }
+  ],
+  "condition_vocab": [
+    "Rest",
+    "Stim8hr",
+    "Stim48hr"
+  ],
+  "qc_flags": {
+    "T1": {
+      "offtarget_flag_true": 2837,
+      "crossdonor_corr_missing_frac": 0.859,
+      "crossguide_corr_missing_frac": 0.912,
+      "note": "reproducibility cols only populated for perturbations with multi-donor/guide data"
+    },
+    "T2": {
+      "duplicate_symbols": 11616,
+      "reason": "two contrasts (Ota 2021, Hollbacker 2021) - NOT a defect",
+      "adj_p_missing_frac": 0.013
+    },
+    "T3": {
+      "intersecting_genes": "stringified python list - must ast.literal_eval",
+      "negative_control_disease_rows": 924
+    },
+    "T4": {
+      "perturbed_gene_id_missing_frac": 0.013,
+      "note": "~1.3% guides lack ENSG mapping - drop before gating"
+    }
+  }
+}

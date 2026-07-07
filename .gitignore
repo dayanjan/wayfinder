@@ -24,6 +24,10 @@ data/*.csv
 .DS_Store
 Thumbs.db
 .scratch/
+.claude/scratch/
+
+# codex debate/install-audit local material (raw ANSI logs, installer bytes)
+memory/install-audit/
 
 # local hackathon reference (voice memo, event notes) — keep out of public history
 01-hackaton details/
