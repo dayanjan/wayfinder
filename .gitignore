@@ -1,0 +1,26 @@
+# secrets
+.env
+.env.*
+*.key
+.claude/settings.local.json
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+dist/
+
+# data (public; reproduce via data/fetch_data.sh)
+data/*.csv
+
+# OS / scratch
+.DS_Store
+Thumbs.db
+.scratch/
