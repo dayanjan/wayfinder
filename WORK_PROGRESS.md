@@ -5,9 +5,10 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 
 ## Snapshot
 - **Phase:** Day-1 insurance — deterministic Validator + one-gene money-shot
-- **Active workstream:** Validator tool (3-hop CSV lookup + KD-QC gate)
-- **Last updated:** 2026-07-07
+- **Active workstream:** Validator tool (3-hop CSV lookup + KD-QC gate) — not started
+- **Last updated:** 2026-07-07 13:10
 - **Deadline:** 2026-07-13, 9:00 PM ET
+- **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline). API key verified active.
 
 ## Milestones (judging aims: Demo 30% · Claude Use 25% · Impact 25% · Depth 20%)
 | # | Milestone | Status |
@@ -30,3 +31,9 @@ Pulled session-lifecycle skills (`session-start`, `session-closer`, `freshen`,
 `atomic-planner`) from the sibling generator/Halcyon repos; instantiated the
 `memory/` scaffold, `MEMORY.md`, this dashboard, and migrated the handoff to
 `memory/NEXT_SESSION.md`. Product work not yet started.
+
+### 2026-07-07 13:10 — Session close (full-close): PM tooling + repo live
+Verified the `.env` Anthropic key is active (models 200 + minimal messages 200).
+Created private GitHub repo `dayanjan/pyzobot-arbiter`, gitignored the local
+`01-hackaton details/` folder, and pushed both commits. Secrets/data confirmed
+absent from remote history. M0 complete; next up is M1 (deterministic Validator).
