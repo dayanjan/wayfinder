@@ -1,37 +1,17 @@
 # NEXT_SESSION — async handoff (canonical; written/read by session-closer & session-start)
 
-## Next session priorities — written 2026-07-07 13:10
+## Next session priorities — written 2026-07-07 19:30
 
-**Current state**: M0 complete (repo scaffold + PM tooling + private GitHub repo
-`dayanjan/pyzobot-arbiter`, both commits pushed; API key verified active). Full-close, tree clean.
-Plan of record = `docs/plan.md` (v6). Day-1 insurance phase; no product code yet.
+**Current state**: Full-close, tree clean, all pushed. Researcher track (plan v7). Referee/Validator BUILT + demonstrated (receipt-backed YES / UNTESTED / REFUTED). Claude Science installed + drivable fully headless (the `drive-claude-science` skill, validated E2E zero-click). Strategic reframe locked: **LBD generates the questions → Claude Science + data answers them**. Anchors ranked but NOT yet biology-vetted.
 
-**Next action**: Write `src/arbiter/validator.py` — the deterministic 3-hop CSV lookup
-(DE_stats → polarization → autoimmune enrichment, + KD-efficiency QC) returning a
-`ProvenanceEdge` per hop, and prove the receipt-backed NO/YES loop end-to-end on ONE real gene.
-Capture the money-shot rough. Do this BEFORE the agent cast or UI polish. [CODEX-RESCUE]
+**Next action**: Explore + build the **thin LBD question-proposer** per `docs/lbd-proposer-spec.md`. Start by pinning the disease→EFO/MeSH and program→keyword maps (the one non-mechanical step), then the API clients (PubTator3 / Europe PMC / OpenAlex + Open Targets / GWAS Catalog exclusion) + the co-occurrence/novelty logic; emit `lbd_questions.json` that the existing referee consumes unchanged. [HYBRID: Claude pins maps + scoring; Codex builds clients/logic; Claude reviews.]
 
-**Prerequisites**: venv + deps (`pandas`, `anthropic`); data CSVs present
-(`bash data/fetch_data.sh`). `.env` key confirmed active this session.
+**Prerequisites**: none blocking — CPU/API only, no GPU/Colab. Optional NCBI API key raises PubMed to 10 req/s. Referee already at `docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`.
 
-**Open questions**: (1) Which TWO anchor hypotheses (known-true + non-obvious)? Claude drafts
-candidates from the tables; operator confirms the biology before locking. (2) Add `VOYAGE_API_KEY`
-to `.env` before the embedding/retrieval hop — not needed for the deterministic Validator (M1).
+**Open questions**: (1) vet the biology on ranked anchor candidates (GATA3/STAT4/ITK known-true; ZBTB25/CRIM1/IGSF9B/SLAMF1/ANXA4 non-obvious) before locking; (2) confirm the judging weights on the CV submit form (currently unverified — only "demo video super important" confirmed); (3) scope discipline vs July 13 — the referee alone is already a complete finding, so keep the LBD proposer thin and let it be the generate→answer upgrade.
 
-**Do not touch**: Nothing in-flight (no WIP artifacts). Don't commit `.env`, data CSVs, or the
-gitignored `01-hackaton details/` folder.
+**Do not touch**: never commit `.env`, data CSVs, `01-hackaton details/`, `.claude/scratch/`, `memory/install-audit/`. Claude Science's data dir (`~/.claude-science/.../workspaces/`) is scratch/reference, not the repo.
 
-**Context to preload**: `docs/plan.md`, `CLAUDE.md`, `AGENTS.md`, `data/README.md`,
-`WORK_PROGRESS.md`, `MEMORY.md`, `memory/sessions/2026-07-07.md`.
+**Context to preload**: `docs/lbd-proposer-spec.md`, `memory/decisions/lbd-question-engine-reframe.md`, `docs/plan.md` (§0 v7), `docs/perturbseq-qc_2026-07-07/pyzobot_referee_results.md`, `docs/claude-science-capabilities.md`, `memory/decisions/hackathon-track-and-facts.md`, `WORK_PROGRESS.md`, `MEMORY.md`.
 
-**Estimated budget**: ~3–5 hours for the Validator + one-gene proof (M1).
-
-## Do NOT (standing constraints)
-- Reuse any prior-project code (new-work-only). Assert biology from an LLM (receipts only).
-  Use OpenAI. Commit data or secrets.
-
-## Delegation tags (per user doctrine §10)
-1. venv + deps  — [CODEX-RESCUE]
-2. `validator.py` 3-hop lookup  — [CODEX-RESCUE]
-3. Anchor-hypothesis vetting  — [CLAUDE + operator]
-4. Minimal Streamlit verdict page  — [CODEX-RESCUE]
+**Estimated budget**: ~0.5–1 day for the thin LBD proposer (fresh build; delegatable to Codex after the maps are pinned).

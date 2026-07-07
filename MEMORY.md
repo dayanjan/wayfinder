@@ -10,9 +10,9 @@ Plan = `docs/plan.md` (v7 Researcher reframe, §0). Claude Science 0.1.16 instal
 sandbox verified, and **driven headlessly via Playwright** (no task CLI exists). Through it, the
 **referee/Validator was built and demonstrated** with real receipts: EGR2 = YES, IL2@Rest = the
 UNTESTED artifact-catch, SLC1A5 = REFUTED. Artifacts in `docs/perturbseq-qc_2026-07-07/`.
-**Next:** vet the biology + lock the two operator anchors (known-true + non-obvious); batch-mode
-the referee to hunt the non-obvious anchor; promote `pyzobot_referee.py` -> `src/arbiter/`; commit
-the day's work. See `memory/NEXT_SESSION.md`.
+**Next:** build the thin **LBD question-proposer** (`docs/lbd-proposer-spec.md`) — LBD generates the
+untested questions, the referee answers them; also vet anchor biology + confirm judging weights.
+See `memory/NEXT_SESSION.md`.
 
 ## Hard constraints (never lose)
 - **NEW WORK ONLY** — every file authored during the event (started 2026-07-07); git history is the compliance proof.
@@ -33,4 +33,4 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-07 | PM tooling + repo | Session-lifecycle skills + doc scaffold; handoff → `memory/NEXT_SESSION.md`; API key verified active; private repo `dayanjan/pyzobot-arbiter` created & pushed |
 | 2026-07-07 (PM) | Claude Science + Validator | Researcher-track commit; Claude Science installed on WSL + driven via Playwright; QC/join-map + referee (Validator) built through it — YES/UNTESTED/REFUTED demonstrated with receipts; 6 artifacts in `docs/perturbseq-qc_2026-07-07/`; hardware fully characterized; 3-round codex-debate + independent Fable review on the install plan |
 
-_Last updated: 2026-07-07 (PM)_
+_Last updated: 2026-07-07 19:30 (session close)_
