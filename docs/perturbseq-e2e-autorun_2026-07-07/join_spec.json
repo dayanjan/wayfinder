@@ -1,0 +1,158 @@
+{
+  "description": "Machine-readable join specification for the CD4+ T-cell Perturb-seq hypothesis referee. Chain: HOP0 knockdown gate -> HOP1 effect -> HOP2 program -> HOP3 disease. KD gate is queried FIRST.",
+  "condition_vocabulary": [
+    "Rest",
+    "Stim8hr",
+    "Stim48hr"
+  ],
+  "tables": {
+    "KD": {
+      "file": "guide_kd_efficiency.suppl_table.csv",
+      "role": "HOP0 knockdown-QC gate",
+      "grain": "guide x culture_condition",
+      "rows": 73765
+    },
+    "DE": {
+      "file": "DE_stats.suppl_table.csv",
+      "role": "HOP1 on-target effect + reproducibility",
+      "grain": "gene x culture_condition",
+      "rows": 33983,
+      "note": "ENSG<->symbol Rosetta stone, strictly 1:1"
+    },
+    "POL": {
+      "file": "Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv",
+      "role": "HOP2 Th1/Th2 program",
+      "grain": "gene x contrast",
+      "rows": 37288
+    },
+    "ENR": {
+      "file": "cluster_autoimmune_enrichment_results.suppl_table.csv",
+      "role": "HOP3 autoimmune-disease enrichment",
+      "grain": "cluster x disease x gene_set",
+      "rows": 5236
+    }
+  },
+  "identifier_bridge": {
+    "ensembl_id": {
+      "tables": [
+        "KD.perturbed_gene_id",
+        "DE.target_contrast"
+      ],
+      "example": "ENSG00000121410"
+    },
+    "gene_symbol": {
+      "tables": [
+        "DE.target_contrast_gene_name",
+        "POL.variable",
+        "ENR.intersecting_genes[]"
+      ],
+      "example": "GATA3"
+    },
+    "bridge_table": "DE",
+    "bridge_note": "DE carries both target_contrast (ENSG) and target_contrast_gene_name (symbol), 1:1; use it to translate KD's ENSG to POL/ENR's symbol."
+  },
+  "hops": [
+    {
+      "hop": 0,
+      "name": "knockdown_gate",
+      "left": "input(gene, condition)",
+      "right": "KD",
+      "keys": {
+        "gene->perturbed_gene_id": "ENSG (resolve symbol via DE Rosetta first)",
+        "condition->culture_condition": "exact"
+      },
+      "aggregation": "over 1-3 guides for gene x condition",
+      "gate_rule": "PASS if any guide signif_knockdown==True; else UNTESTED (never 'no effect')",
+      "receipt_cols": [
+        "Unnamed: 0",
+        "signif_knockdown",
+        "guide_mean_expr",
+        "ntc_mean_expr",
+        "t_statistic",
+        "p_value",
+        "adj_p_value",
+        "rank"
+      ],
+      "quality_filters": [
+        "drop guides with null perturbed_gene_id (933)"
+      ]
+    },
+    {
+      "hop": 1,
+      "name": "ontarget_effect",
+      "left": "KD-gated gene",
+      "right": "DE",
+      "keys": {
+        "perturbed_gene_id==target_contrast": "ENSG",
+        "culture_condition": "exact"
+      },
+      "cardinality": "1:1",
+      "status_rule": "supported if ontarget_significant==True; refuted if False (only meaningful when HOP0 passed); flagged if offtarget_flag==True",
+      "receipt_cols": [
+        "ontarget_significant",
+        "ontarget_effect_size",
+        "ontarget_effect_category",
+        "offtarget_flag",
+        "n_downstream",
+        "n_total_de_genes",
+        "crossdonor_correlation_mean",
+        "crossdonor_correlation_min",
+        "crossguide_correlation"
+      ],
+      "overlap_genes": 11422
+    },
+    {
+      "hop": 2,
+      "name": "th1_th2_program",
+      "left": "DE gene (symbol)",
+      "right": "POL",
+      "keys": {
+        "target_contrast_gene_name==variable": "symbol"
+      },
+      "cardinality": "1:many (one row per contrast)",
+      "facet_by": [
+        "Th2_vs_Th1 (Ota 2021)",
+        "Th2_vs_Th1 (Hollbacker 2021)"
+      ],
+      "status_rule": "per-contrast: supported if adj_p_value<0.05; direction from sign(log_fc) [+ = Th2, - = Th1]; untested if gene absent from that contrast",
+      "receipt_cols": [
+        "log_fc",
+        "lfcSE",
+        "stat",
+        "zscore",
+        "p_value",
+        "adj_p_value",
+        "contrast"
+      ],
+      "note": "no condition dimension; both contrasts always reported"
+    },
+    {
+      "hop": 3,
+      "name": "autoimmune_disease",
+      "left": "gene symbol + condition",
+      "right": "ENR",
+      "keys": {
+        "gene in ast.literal_eval(intersecting_genes)": "symbol membership",
+        "condition->gene_set": "downstream_{condition}; 'regulators' is condition-independent"
+      },
+      "cardinality": "many (cluster x disease)",
+      "status_rule": "supported if gene is a member of >=1 enriched (non-control) disease row; receipt = that row's OR/p_adj_fdr",
+      "receipt_cols": [
+        "cluster",
+        "disease",
+        "gene_set",
+        "odds_ratio",
+        "ci_low",
+        "ci_high",
+        "p_value",
+        "p_adj_fdr",
+        "cluster_size"
+      ],
+      "quality_filters": [
+        "EXCLUDE negative_control_disease==True (924 rows)",
+        "ast.literal_eval explode intersecting_genes",
+        "null-OR rows (995) = empty intersection, no membership"
+      ]
+    }
+  ]
+}

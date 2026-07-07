@@ -1,0 +1,785 @@
+{
+  "GATA3_Stim48hr": {
+    "tag": "receipt-backed YES",
+    "gene_query": "GATA3",
+    "gene_symbol": "GATA3",
+    "gene_ensg": "ENSG00000107485",
+    "condition": "Stim48hr",
+    "overall": "YES",
+    "headline": "GATA3 in Stim48hr: knockdown verified, significant on-target effect, Th1/Th2 program membership, AND autoimmune-disease enrichment \u2014 a receipt-backed YES across all four hops.",
+    "hops": [
+      {
+        "hop": 0,
+        "name": "knockdown-QC gate",
+        "status": "supported",
+        "statement": "Knockdown PASSED: 2/2 guide(s) achieved a significant knockdown of GATA3 in Stim48hr (signif_knockdown=True). The perturbation is established; downstream hops are interpretable.",
+        "receipt": {
+          "n_guides": 2,
+          "n_guides_signif_knockdown": 2,
+          "guides": [
+            "GATA3-1",
+            "GATA3-2"
+          ],
+          "signif_knockdown_per_guide": {
+            "GATA3-1": true,
+            "GATA3-2": true
+          },
+          "best_guide": "GATA3-1",
+          "best_guide_mean_expr": 0.3475542258721567,
+          "ntc_mean_expr": 0.9017550849444952,
+          "best_guide_t_statistic": -22.58663261102465,
+          "best_guide_p_value": 1.0460840700904324e-78,
+          "best_guide_adj_p_value": 1e-16
+        },
+        "table": "guide_kd_efficiency"
+      },
+      {
+        "hop": 1,
+        "name": "on-target transcriptional effect",
+        "status": "supported",
+        "statement": "GATA3 shows a significant on-target effect in Stim48hr (ontarget_significant=True, category='on-target KD', effect_size=-14.948753114565852, 1252 downstream DE genes); reproducibility: cross-donor r_mean=0.721, cross-guide r=0.884.",
+        "receipt": {
+          "ontarget_significant": true,
+          "ontarget_effect_size": -14.948753114565852,
+          "ontarget_effect_category": "on-target KD",
+          "offtarget_flag": false,
+          "n_downstream": 1252,
+          "n_total_de_genes": 1253,
+          "crossdonor_correlation_mean": 0.72059820097887,
+          "crossdonor_correlation_min": 0.7045087482895224,
+          "crossguide_correlation": 0.8843615508648568
+        },
+        "table": "DE_stats"
+      },
+      {
+        "hop": 2,
+        "name": "Th1/Th2 polarization program",
+        "status": "supported",
+        "statement": "GATA3 is a significant member of the Th1/Th2 polarization signature (adj_p<0.05) in at least one contrast \u2014 Ota 2021: Th2-associated (log_fc>0); Hollbacker 2021: Th2-associated (log_fc>0).",
+        "receipt": {
+          "contrasts": {
+            "Th2_vs_Th1 (Ota 2021)": {
+              "present": true,
+              "status": "supported",
+              "log_fc": 1.0189708369358728,
+              "zscore": 24.63779548502105,
+              "p_value": 4.973906774578221e-134,
+              "adj_p_value": 2.2418503145640613e-131,
+              "direction": "Th2-associated (log_fc>0)"
+            },
+            "Th2_vs_Th1 (Hollbacker 2021)": {
+              "present": true,
+              "status": "supported",
+              "log_fc": 1.2491627311805855,
+              "zscore": 5.827420807694477,
+              "p_value": 5.629054662594643e-09,
+              "adj_p_value": 8.354455295067549e-07,
+              "direction": "Th2-associated (log_fc>0)"
+            }
+          }
+        },
+        "table": "Th2_Th1_polarization"
+      },
+      {
+        "hop": 3,
+        "name": "autoimmune-disease enrichment",
+        "status": "supported",
+        "statement": "GATA3 is a member of 5 significant (FDR<0.05, negative controls excluded) autoimmune-disease enrichment(s) via Stim48hr gene sets: asthma, atopic eczema, rheumatoid arthritis, type 1 diabetes mellitus. Strongest: atopic eczema (cluster 94, OR=4.56, FDR=3.83e-03).",
+        "receipt": {
+          "gene_sets_searched": [
+            "downstream_Stim48hr",
+            "regulators"
+          ],
+          "n_membership_rows": 40,
+          "n_significant": 5,
+          "memberships": [
+            {
+              "disease": "atopic eczema",
+              "cluster": 94,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 4.563876736586396,
+              "ci_low": 2.028372292128352,
+              "ci_high": 9.292620057351908,
+              "p_adj_fdr": 0.0038258963213997,
+              "significant": true
+            },
+            {
+              "disease": "type 1 diabetes mellitus",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 3.4346886780266748,
+              "ci_low": 1.5414911319548907,
+              "ci_high": 6.902562300660887,
+              "p_adj_fdr": 0.0277212655952825,
+              "significant": true
+            },
+            {
+              "disease": "asthma",
+              "cluster": 94,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 2.361312508864616,
+              "ci_low": 1.2428972415530395,
+              "ci_high": 4.21181781946053,
+              "p_adj_fdr": 0.03176991114824,
+              "significant": true
+            },
+            {
+              "disease": "rheumatoid arthritis",
+              "cluster": 94,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 2.247128215617535,
+              "ci_low": 1.2074666721485572,
+              "ci_high": 3.946331516750432,
+              "p_adj_fdr": 0.03176991114824,
+              "significant": true
+            },
+            {
+              "disease": "atopic eczema",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 3.469619501640573,
+              "ci_low": 1.400936709106938,
+              "ci_high": 7.501872592291813,
+              "p_adj_fdr": 0.0356083201888133,
+              "significant": true
+            },
+            {
+              "disease": "autoimmune disease",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.7445784093708658,
+              "ci_low": 1.0868243812554583,
+              "ci_high": 2.7416332233618745,
+              "p_adj_fdr": 0.059612988231096,
+              "significant": false
+            },
+            {
+              "disease": "rheumatoid arthritis",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.9024939171268291,
+              "ci_low": 0.9823703691574088,
+              "ci_high": 3.435644321432723,
+              "p_adj_fdr": 0.0798769590703359,
+              "significant": false
+            },
+            {
+              "disease": "Hashimoto's thyroiditis",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 2.832863973683082,
+              "ci_low": 0.9777354304257148,
+              "ci_high": 6.743819236807654,
+              "p_adj_fdr": 0.0798769590703359,
+              "significant": false
+            },
+            {
+              "disease": "asthma",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.9785637520936912,
+              "ci_low": 0.995625535291696,
+              "ci_high": 3.6409372252445937,
+              "p_adj_fdr": 0.0798769590703359,
+              "significant": false
+            },
+            {
+              "disease": "psoriasis",
+              "cluster": 94,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 2.3992665069527224,
+              "ci_low": 1.036755750960763,
+              "ci_high": 4.91946365481936,
+              "p_adj_fdr": 0.0876521862872094,
+              "significant": false
+            },
+            {
+              "disease": "autoimmune disease",
+              "cluster": 94,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.4959242200659115,
+              "ci_low": 0.9156771614786968,
+              "ci_high": 2.380589792373176,
+              "p_adj_fdr": 0.1324219050717691,
+              "significant": false
+            },
+            {
+              "disease": "inflammatory bowel disease",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.5714266987343464,
+              "ci_low": 0.7706780147492875,
+              "ci_high": 2.9398237554667355,
+              "p_adj_fdr": 0.2286212255437313,
+              "significant": false
+            },
+            {
+              "disease": "multiple sclerosis",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.8678394450404,
+              "ci_low": 0.6522018691838232,
+              "ci_high": 4.371632038603731,
+              "p_adj_fdr": 0.2296373362865953,
+              "significant": false
+            },
+            {
+              "disease": "rheumatoid arthritis",
+              "cluster": 25,
+              "gene_set": "regulators",
+              "odds_ratio": 3.917616989203229,
+              "ci_low": 0.6926333575364099,
+              "ci_high": 15.100154685392168,
+              "p_adj_fdr": 0.2645342412419861,
+              "significant": false
+            },
+            {
+              "disease": "atopic eczema",
+              "cluster": 25,
+              "gene_set": "regulators",
+              "odds_ratio": 6.22800907035883,
+              "ci_low": 0.6594998109079053,
+              "ci_high": 29.16558188849697,
+              "p_adj_fdr": 0.2645342412419861,
+              "significant": false
+            },
+            {
+              "disease": "Hashimoto's thyroiditis",
+              "cluster": 25,
+              "gene_set": "regulators",
+              "odds_ratio": 7.316232509067878,
+              "ci_low": 0.7714268533057355,
+              "ci_high": 34.50330536746839,
+              "p_adj_fdr": 0.2645342412419861,
+              "significant": false
+            },
+            {
+              "disease": "multiple sclerosis",
+              "cluster": 25,
+              "gene_set": "regulators",
+              "odds_ratio": 5.626269555623645,
+              "ci_low": 0.5971951957944989,
+              "ci_high": 26.24589789827984,
+              "p_adj_fdr": 0.2645342412419861,
+              "significant": false
+            },
+            {
+              "disease": "asthma",
+              "cluster": 25,
+              "gene_set": "regulators",
+              "odds_ratio": 3.4253881616714583,
+              "ci_low": 0.6064712925981723,
+              "ci_high": 13.176761786621864,
+              "p_adj_fdr": 0.275105151471659,
+              "significant": false
+            },
+            {
+              "disease": "psoriasis",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.5078678577266926,
+              "ci_low": 0.52882072235466,
+              "ci_high": 3.5068089435401624,
+              "p_adj_fdr": 0.3541117550078227,
+              "significant": false
+            },
+            {
+              "disease": "multiple sclerosis",
+              "cluster": 94,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.5238882683141906,
+              "ci_low": 0.4729818373273357,
+              "ci_high": 3.807253594778801,
+              "p_adj_fdr": 0.5206963207546682,
+              "significant": false
+            },
+            {
+              "disease": "Crohn's disease",
+              "cluster": 94,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.3306841741003557,
+              "ci_low": 0.4676926091731341,
+              "ci_high": 3.0850862302772226,
+              "p_adj_fdr": 0.5206963207546682,
+              "significant": false
+            },
+            {
+              "disease": "Crohn's disease",
+              "cluster": 82,
+              "gene_set": "downstream_Stim48hr",
+              "odds_ratio": 1.0887347577795392,
+              "ci_low": 0.3399228776597299,
+              "ci_high": 2.696078276152349,
+              "p_adj_fdr": 0.6021743753919175,
+              "significant": false
+            },
+            {
+              "disease": "autoimmune disease",
+              "cluster": 25,
+              "gene_set": "regulators",
+              "odds_ratio": 1.783959005038452,
+              "ci_low": 0.4059443706120771,
+              "ci_high": 6.23153273295787,
+              "p_adj_fdr": 0.6186665227001191,
+              "significant": false
+            },
+            {
+              "disease": "type 1 diabetes mellitus",
+              "cluster": 25,
+              "gene_set": "regulators",
+              "odds_ratio": 3.146933018899309,
+              "ci_low": 0.0725018695930161,
+              "ci_high": 21.84598454599225,
+              "p_adj_fdr": 0.6186665227001191,
+              "significant": false
+            },
+            {
+              "disease": "psoriasis",
+              "cluster": 25,
+              "gene_set": "regulators",
+              "odds_ratio": 2.010264809738453,
+              "ci_low": 0.0466498477397992,
+              "ci_high": 13.754052271450147,
+              "p_adj_fdr": 0.6368172270167073,
+              "significant": false
+            }
+          ],
+          "negative_controls_excluded": true
+        },
+        "table": "cluster_autoimmune_enrichment"
+      }
+    ]
+  },
+  "IL2_Rest": {
+    "tag": "UNTESTED artifact-catch (failed knockdown)",
+    "gene_query": "IL2",
+    "gene_symbol": "IL2",
+    "gene_ensg": "ENSG00000109471",
+    "condition": "Rest",
+    "overall": "UNTESTED",
+    "headline": "Knockdown of IL2 in Rest did not pass QC (HOP0=untested). The hypothesis is UNTESTED in this condition \u2014 downstream signals cannot be read as effect or no-effect.",
+    "hops": [
+      {
+        "hop": 0,
+        "name": "knockdown-QC gate",
+        "status": "untested",
+        "statement": "Knockdown FAILED the QC gate: 0/2 guide(s) achieved a significant knockdown of IL2 in Rest (signif_knockdown=False for all). The perturbation was NOT established, so any downstream 'no effect' is UNINTERPRETABLE. Verdict is UNTESTED, never 'no effect'.",
+        "receipt": {
+          "n_guides": 2,
+          "n_guides_signif_knockdown": 0,
+          "guides": [
+            "IL2-1",
+            "IL2-2"
+          ],
+          "signif_knockdown_per_guide": {
+            "IL2-1": false,
+            "IL2-2": false
+          },
+          "best_guide": "IL2-1",
+          "best_guide_mean_expr": 0.0259461088832718,
+          "ntc_mean_expr": 0.035586652028034,
+          "best_guide_t_statistic": -1.1570238856293067,
+          "best_guide_p_value": 0.2485028331384921,
+          "best_guide_adj_p_value": 0.3199563475864344
+        },
+        "table": "guide_kd_efficiency"
+      },
+      {
+        "hop": 1,
+        "name": "on-target transcriptional effect",
+        "status": "untested",
+        "statement": "IL2 shows ontarget_significant=False in Rest, but because the knockdown gate did not pass this is UNTESTED, not evidence of no effect (category='no on-target KD').",
+        "receipt": {
+          "ontarget_significant": false,
+          "ontarget_effect_size": -1.2796709138862865,
+          "ontarget_effect_category": "no on-target KD",
+          "offtarget_flag": false,
+          "n_downstream": 0,
+          "n_total_de_genes": 0,
+          "crossdonor_correlation_mean": null,
+          "crossdonor_correlation_min": null,
+          "crossguide_correlation": null
+        },
+        "table": "DE_stats"
+      },
+      {
+        "hop": 2,
+        "name": "Th1/Th2 polarization program",
+        "status": "supported",
+        "statement": "IL2 is a significant member of the Th1/Th2 polarization signature (adj_p<0.05) in at least one contrast \u2014 Ota 2021: Th2-associated (log_fc>0); Hollbacker 2021: Th2-associated (log_fc>0).",
+        "receipt": {
+          "contrasts": {
+            "Th2_vs_Th1 (Ota 2021)": {
+              "present": true,
+              "status": "supported",
+              "log_fc": 3.4337627306279384,
+              "zscore": 23.70659696272872,
+              "p_value": 3.0828840402948456e-124,
+              "adj_p_value": 1.1368835554050943e-121,
+              "direction": "Th2-associated (log_fc>0)"
+            },
+            "Th2_vs_Th1 (Hollbacker 2021)": {
+              "present": true,
+              "status": "supported",
+              "log_fc": 3.015017026201497,
+              "zscore": 5.3179614085015805,
+              "p_value": 1.0493631809889453e-07,
+              "adj_p_value": 1.1158523754937795e-05,
+              "direction": "Th2-associated (log_fc>0)"
+            }
+          }
+        },
+        "table": "Th2_Th1_polarization"
+      },
+      {
+        "hop": 3,
+        "name": "autoimmune-disease enrichment",
+        "status": "untested",
+        "statement": "IL2 appears in 11 disease gene list(s) for Rest but none reach FDR<0.05. Reported as UNTESTED context (knockdown gate did not pass).",
+        "receipt": {
+          "gene_sets_searched": [
+            "downstream_Rest",
+            "regulators"
+          ],
+          "n_membership_rows": 11,
+          "n_significant": 0,
+          "memberships": [
+            {
+              "disease": "autoimmune disease",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.8125660735119984,
+              "ci_low": 1.1284484537809294,
+              "ci_high": 2.850499291099628,
+              "p_adj_fdr": 0.1174473665804639,
+              "significant": false
+            },
+            {
+              "disease": "Crohn's disease",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 2.4576645090926013,
+              "ci_low": 1.060326301273374,
+              "ci_high": 5.049837058759836,
+              "p_adj_fdr": 0.1552355725425295,
+              "significant": false
+            },
+            {
+              "disease": "psoriasis",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.8889110988062872,
+              "ci_low": 0.7214853479765014,
+              "ci_high": 4.185740848457368,
+              "p_adj_fdr": 0.2738888157746966,
+              "significant": false
+            },
+            {
+              "disease": "inflammatory bowel disease",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.6806660864831418,
+              "ci_low": 0.8470859341547837,
+              "ci_high": 3.0865013693205494,
+              "p_adj_fdr": 0.2738888157746966,
+              "significant": false
+            },
+            {
+              "disease": "celiac disease",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 2.1278199987331217,
+              "ci_low": 0.4139388354054999,
+              "ci_high": 6.867399888258642,
+              "p_adj_fdr": 0.4477789508293741,
+              "significant": false
+            },
+            {
+              "disease": "asthma",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.3547843580629269,
+              "ci_low": 0.5909058596137634,
+              "ci_high": 2.743402438939539,
+              "p_adj_fdr": 0.496004129187947,
+              "significant": false
+            },
+            {
+              "disease": "ankylosing spondylitis",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.4944892726487822,
+              "ci_low": 0.463634412715267,
+              "ci_high": 3.7364921476413255,
+              "p_adj_fdr": 0.496004129187947,
+              "significant": false
+            },
+            {
+              "disease": "ulcerative colitis",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.3622168823723524,
+              "ci_low": 0.4782366825865643,
+              "ci_high": 3.163314820907737,
+              "p_adj_fdr": 0.5071781544491263,
+              "significant": false
+            },
+            {
+              "disease": "rheumatoid arthritis",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.0977363327158145,
+              "ci_low": 0.4538141980416906,
+              "ci_high": 2.297740220241463,
+              "p_adj_fdr": 0.7077282011431618,
+              "significant": false
+            },
+            {
+              "disease": "atopic eczema",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.0764982208543283,
+              "ci_low": 0.2135357950206579,
+              "ci_high": 3.3601319884180376,
+              "p_adj_fdr": 0.7600564585933681,
+              "significant": false
+            },
+            {
+              "disease": "type 1 diabetes mellitus",
+              "cluster": 21,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 0.6747912196580954,
+              "ci_low": 0.0792353452144662,
+              "ci_high": 2.5834783324453654,
+              "p_adj_fdr": 0.9017641988242628,
+              "significant": false
+            }
+          ],
+          "negative_controls_excluded": true
+        },
+        "table": "cluster_autoimmune_enrichment"
+      }
+    ]
+  },
+  "CTLA4_Rest": {
+    "tag": "REFUTED (knockdown passed, no on-target effect)",
+    "gene_query": "CTLA4",
+    "gene_symbol": "CTLA4",
+    "gene_ensg": "ENSG00000163599",
+    "condition": "Rest",
+    "overall": "REFUTED",
+    "headline": "CTLA4 passed knockdown QC in Rest but shows NO on-target transcriptional effect \u2014 the perturbation was real and the effect hypothesis is refuted.",
+    "hops": [
+      {
+        "hop": 0,
+        "name": "knockdown-QC gate",
+        "status": "supported",
+        "statement": "Knockdown PASSED: 2/2 guide(s) achieved a significant knockdown of CTLA4 in Rest (signif_knockdown=True). The perturbation is established; downstream hops are interpretable.",
+        "receipt": {
+          "n_guides": 2,
+          "n_guides_signif_knockdown": 2,
+          "guides": [
+            "CTLA4-1",
+            "CTLA4-2"
+          ],
+          "signif_knockdown_per_guide": {
+            "CTLA4-1": true,
+            "CTLA4-2": true
+          },
+          "best_guide": "CTLA4-1",
+          "best_guide_mean_expr": 0.0043656748833416,
+          "ntc_mean_expr": 0.0532634560366297,
+          "best_guide_t_statistic": -11.15845877544914,
+          "best_guide_p_value": 4.393903630157907e-21,
+          "best_guide_adj_p_value": 1e-16
+        },
+        "table": "guide_kd_efficiency"
+      },
+      {
+        "hop": 1,
+        "name": "on-target transcriptional effect",
+        "status": "refuted",
+        "statement": "Despite a passing knockdown, CTLA4 shows NO significant on-target effect in Rest (ontarget_significant=False, category='no on-target KD'). This refutes a transcriptional-effect hypothesis for this condition.",
+        "receipt": {
+          "ontarget_significant": false,
+          "ontarget_effect_size": -3.4913997327795108,
+          "ontarget_effect_category": "no on-target KD",
+          "offtarget_flag": false,
+          "n_downstream": 0,
+          "n_total_de_genes": 0,
+          "crossdonor_correlation_mean": null,
+          "crossdonor_correlation_min": null,
+          "crossguide_correlation": null
+        },
+        "table": "DE_stats"
+      },
+      {
+        "hop": 2,
+        "name": "Th1/Th2 polarization program",
+        "status": "supported",
+        "statement": "CTLA4 is a significant member of the Th1/Th2 polarization signature (adj_p<0.05) in at least one contrast \u2014 Ota 2021: Th1-associated (log_fc<0); Hollbacker 2021: Th1-associated (log_fc<0).",
+        "receipt": {
+          "contrasts": {
+            "Th2_vs_Th1 (Ota 2021)": {
+              "present": true,
+              "status": "supported",
+              "log_fc": -1.5373575325265054,
+              "zscore": -17.817699335998842,
+              "p_value": 5.15118948373328e-71,
+              "adj_p_value": 6.02763465598963e-69,
+              "direction": "Th1-associated (log_fc<0)"
+            },
+            "Th2_vs_Th1 (Hollbacker 2021)": {
+              "present": true,
+              "status": "supported",
+              "log_fc": -0.3799247914201621,
+              "zscore": -3.2288017173027987,
+              "p_value": 0.0012431005189013,
+              "adj_p_value": 0.0313719315164844,
+              "direction": "Th1-associated (log_fc<0)"
+            }
+          }
+        },
+        "table": "Th2_Th1_polarization"
+      },
+      {
+        "hop": 3,
+        "name": "autoimmune-disease enrichment",
+        "status": "refuted",
+        "statement": "CTLA4 appears in 12 disease gene list(s) for Rest but none reach FDR<0.05. No significant disease enrichment.",
+        "receipt": {
+          "gene_sets_searched": [
+            "downstream_Rest",
+            "regulators"
+          ],
+          "n_membership_rows": 12,
+          "n_significant": 0,
+          "memberships": [
+            {
+              "disease": "type 1 diabetes mellitus",
+              "cluster": 30,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 2.6535524124044536,
+              "ci_low": 1.0047101463739443,
+              "ci_high": 5.95341103566634,
+              "p_adj_fdr": 0.166466834508282,
+              "significant": false
+            },
+            {
+              "disease": "Hashimoto's thyroiditis",
+              "cluster": 30,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 2.9057066777811507,
+              "ci_low": 1.000538217596034,
+              "ci_high": 6.94102498501747,
+              "p_adj_fdr": 0.166466834508282,
+              "significant": false
+            },
+            {
+              "disease": "systemic lupus erythematosus",
+              "cluster": 30,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 2.24743330639565,
+              "ci_low": 0.917792631020283,
+              "ci_high": 4.783651358418775,
+              "p_adj_fdr": 0.166466834508282,
+              "significant": false
+            },
+            {
+              "disease": "autoimmune disease",
+              "cluster": 30,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.4724528256082936,
+              "ci_low": 0.8946203218604726,
+              "ci_high": 2.356435577235604,
+              "p_adj_fdr": 0.184022045646492,
+              "significant": false
+            },
+            {
+              "disease": "celiac disease",
+              "cluster": 30,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 2.9404965803914864,
+              "ci_low": 0.7482546184951574,
+              "ci_high": 8.394828432723573,
+              "p_adj_fdr": 0.184022045646492,
+              "significant": false
+            },
+            {
+              "disease": "systemic lupus erythematosus",
+              "cluster": 60,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.6176934049658973,
+              "ci_low": 0.5660896406611313,
+              "ci_high": 3.774216293559858,
+              "p_adj_fdr": 0.5023610146606422,
+              "significant": false
+            },
+            {
+              "disease": "autoimmune disease",
+              "cluster": 60,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.4724528256082936,
+              "ci_low": 0.8946203218604726,
+              "ci_high": 2.356435577235604,
+              "p_adj_fdr": 0.5023610146606422,
+              "significant": false
+            },
+            {
+              "disease": "celiac disease",
+              "cluster": 60,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 2.1278199987331217,
+              "ci_low": 0.4139388354054999,
+              "ci_high": 6.867399888258642,
+              "p_adj_fdr": 0.5023610146606422,
+              "significant": false
+            },
+            {
+              "disease": "Hashimoto's thyroiditis",
+              "cluster": 60,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 2.356174105484341,
+              "ci_low": 0.7222102441200724,
+              "ci_high": 5.99930597651382,
+              "p_adj_fdr": 0.5023610146606422,
+              "significant": false
+            },
+            {
+              "disease": "type 1 diabetes mellitus",
+              "cluster": 60,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.8076462584405537,
+              "ci_low": 0.5583255787853504,
+              "ci_high": 4.5495149231151935,
+              "p_adj_fdr": 0.5023610146606422,
+              "significant": false
+            },
+            {
+              "disease": "rheumatoid arthritis",
+              "cluster": 30,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.0977363327158145,
+              "ci_low": 0.4538141980416906,
+              "ci_high": 2.297740220241463,
+              "p_adj_fdr": 0.5070128741931421,
+              "significant": false
+            },
+            {
+              "disease": "rheumatoid arthritis",
+              "cluster": 60,
+              "gene_set": "downstream_Rest",
+              "odds_ratio": 1.0977363327158145,
+              "ci_low": 0.4538141980416906,
+              "ci_high": 2.297740220241463,
+              "p_adj_fdr": 0.6240158451607903,
+              "significant": false
+            }
+          ],
+          "negative_controls_excluded": true
+        },
+        "table": "cluster_autoimmune_enrichment"
+      }
+    ]
+  }
+}
