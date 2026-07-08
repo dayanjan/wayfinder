@@ -22,11 +22,21 @@ for appendix candidates — Codex said Stim8hr alone is sufficient, do NOT let t
 **Prerequisites**: `pip install -r requirements.txt` (pandas+requests). API cache in `data/lbd_cache/`
 (gitignored) makes the sweep re-run fast/offline. No GPU/Colab.
 
-**Open questions / honest-framing guardrails (Codex-vetted — respect these in the demo)**:
-(1) NAB2 is **near-novel, NOT novel** — ac_lit=6 is a low noisy count, never say "known/established";
+**Independent NAB2 audit done (2026-07-08)** — `docs/nab2_knowledge_synthesis_2026-07-08.md` (4-agent
+literature team via new `src/arbiter/lit/` tool). Result: NAB2→Th1/Th2 and NAB2→atopic eczema are BOTH
+**genuinely novel (0 direct papers)** — but **STAT6-confounded** (NAB2 is ~1.9 kb from STAT6, the master
+atopic gene). Partial defense in our data (different clusters; NAB2-specific KD). This STRENGTHENS the
+submission (catching the confounder = the thesis).
+
+**Open questions / honest-framing guardrails (respect these in the demo)**:
+(1) NAB2→eczema is **novel but STAT6-confounded** — present as "novel + STAT6-flagged," never "clean discovery" or "known/established";
 (2) only **1 of 2 program contrasts** significant (Ota yes, Hollbacker no) — state it;
-(3) the **EGR2–NAB2 corepressor** link is a *hypothesis-strengthener, NOT referee evidence* — subordinate to the receipt;
+(3) **EGR-mediation**: the Th shift could be EGR-target-mediated (NAB2 is an EGR corepressor); EGR2–NAB2 is a *hypothesis-strengthener, NOT referee evidence*;
 (4) judging **weights still unverified** on the CV form (only "demo video super important" confirmed).
+
+**Optional follow-up checks (would further nail the STAT6 question before the demo)**:
+(a) do the T3 disease clusters map to the shared 12q13 locus, or independent co-expression? (b) NAB2-vs-STAT6
+downstream DE-gene overlap (distinct programs argue against pure STAT6 shadow). Clean results → stronger finding.
 
 **Do not touch**: never commit `.env`, `data/*.csv`, `data/lbd_cache/`, `data/lbd_out/`,
 `.claude/scratch/`, `01-hackaton details/`. The referee lives in `docs/perturbseq-qc_2026-07-07/`.

@@ -172,6 +172,24 @@ The story: *the LBD engine generated 22,039 candidate questions from a dataset t
 the data-referee culled to 30 clean receipt-backed supported; the standout is a near-novel,
 mechanistically-plausible gene→program→specific-disease link (NAB2→Th1/Th2→atopic eczema).*
 
+## Independent NAB2 literature audit (2026-07-08) — novelty verified + a confounder caught
+Built a fresh multi-source literature tool (`src/arbiter/lit/search.py` — Europe PMC + OpenAlex +
+Semantic Scholar, cached, direct-API per §19), pulled a 155-paper NAB2 corpus, and ran a **4-agent
+independent team** (molecular / immunology / disease / genetics). Synthesis:
+`docs/nab2_knowledge_synthesis_2026-07-08.md`. Key results:
+- **NAB2→Th1/Th2 and NAB2→atopic eczema are BOTH genuinely novel — 0 direct papers each** (more
+  novel than the noisy ac_lit=6). NAB2's known T-cell role is *activation* (co-activates IL-2), not
+  lineage polarization; its Th-axis footprint runs through EGR2/EGR3.
+- **Confounder caught: STAT6 adjacency.** NAB2 is ~1.9 kb from STAT6 (master Th2/atopic gene; they
+  fuse in solitary fibrous tumor). The atopic-eczema link may be STAT6's shadow.
+  *Our-data check (partial defense):* NAB2 & STAT6 sit in **different** atopic-eczema clusters
+  (NAB2 74/90 FDR 0.0028/0.0224; STAT6 30 FDR 0.0005), and the KD is NAB2-specific → the functional
+  effect is real NAB2 biology. STAT6 itself is also referee-supported (positive control).
+- **EGR-mediation** mechanism caveat logged. Finding writeup + framing updated accordingly.
+- **Net:** the audit *strengthens* the submission — catching the STAT6 confounder is the project's
+  confident-caveat-aware-verdict thesis in action. Optional next: (a) do the T3 clusters map to the
+  shared 12q13 locus? (b) NAB2-vs-STAT6 downstream DE overlap.
+
 ## Next move
 Lock the NAB2 story with the honest framing above; write the demo-facing finding artifact
 (`docs/lbd_finding_*.md`) + emit is done (`lbd_questions_Stim8hr.json`). Optional bonus: Rest/

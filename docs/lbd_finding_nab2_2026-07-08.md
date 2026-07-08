@@ -36,15 +36,22 @@ score 0.038) that the data **supports with a receipt at every hop**:
 | 3 · disease (exact = atopic eczema) | supported | member of 2 atopic-eczema-enriched clusters: OR 3.90 FDR 0.0028; OR 3.43 FDR 0.0224 |
 
 **Calibrated claim:** *consistent with a re-derived NAB2 → Th1/Th2 → atopic-eczema chain that the
-literature has barely made.* Not "proven," not "discovered."
+literature has not made.* Not "proven," not "discovered."
 
-**Honest caveats (do not overclaim):**
-- **Near-novel, not novel.** ac_lit=6 is a low, un-normalized Europe PMC count — it means *little
-  prior literature*, not "well-established" and not "zero."
+**Honest caveats (do not overclaim) — sharpened by an independent 4-agent literature audit,
+`docs/nab2_knowledge_synthesis_2026-07-08.md`:**
+- **Genuinely novel, but STAT6-confounded.** The audit found **zero papers** directly linking NAB2
+  to Th1/Th2 polarization OR to atopic eczema (more novel than the noisy ac_lit=6 suggested). BUT
+  **NAB2 sits ~1.9 kb from STAT6** on chr12q13.3 — STAT6 being *the* master Th2 / atopic-dermatitis
+  gene (they physically fuse in solitary fibrous tumor). So the disease link may be **STAT6's shadow**
+  via the shared locus. *Partial defense:* NAB2 and STAT6 fall in **different** atopic-eczema clusters
+  (NAB2: 74/90; STAT6: 30), and the knockdown is **NAB2-specific** (on-target, no off-target) — so the
+  *functional* effect is genuinely NAB2's. Present as **novel + STAT6-flagged**, never "clean discovery."
 - **One of two program contrasts** is significant (Ota strong; Hollbacker n.s.) — reported, not hidden.
-- **Mechanistic plausibility is a hypothesis-strengthener, not evidence:** NAB2 is the transcriptional
-  corepressor of EGR2 (this project's independently-validated hero gene). That makes the hypothesis
-  *interesting*; the *finding* is the receipt above, not the EGR2 relationship.
+- **EGR-mediation (mechanism caveat):** NAB2's entire documented T-cell role is as an EGR corepressor;
+  every published Th-relevant effect in this axis runs through EGR1/2/3, not NAB2 as an independent
+  driver. The shift could be EGR-target-mediated. The EGR2–NAB2 relationship is a *hypothesis-
+  strengthener, not referee evidence* — subordinate it to the receipt.
 
 ## The cull is real (honesty examples from the same run)
 - **NUDT1 × type 1 diabetes** — the *only* pure-disjoint (zero-literature) supported hit, but a
