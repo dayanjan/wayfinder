@@ -37,3 +37,6 @@ data/lbd_cache/
 
 # LBD proposer sweep outputs (regenerable)
 data/lbd_out/
+
+# source paper PDF (bioRxiv preprint — referenced/cited, not redistributed)
+references/*.pdf
