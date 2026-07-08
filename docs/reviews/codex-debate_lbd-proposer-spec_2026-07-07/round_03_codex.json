@@ -1,0 +1,60 @@
+{
+  "round_number": 3,
+  "position_summary": "The v2 artifact is build-ready as the shortest correct path to a receipt-backed, condition-specific novel finding by July 13, with one non-blocking wording nit: it says \u201c14 specific diseases\u201d although two of those 14 CSV values are umbrella terms. The constrained pipeline remains genuinely generative under the preserved intent because A is answer-free, novelty is external, `ranked_full` seeding is banned, and the data referee mandatorily culls after question generation.",
+  "findings": [],
+  "escalated_findings": [],
+  "dropped_findings": [
+    {
+      "prior_finding_id": "F-001",
+      "rationale": "Resolved by the mandatory `referee_triple` contract in `docs/lbd-proposer-spec.md:109`, which filters HOP-3 to the exact requested `C_disease` before synthesizing `overall`. This is implementable because `pyzobot_referee.py:70` builds `t3_exploded` with `gene`, `disease`, `gene_set`, `odds_ratio`, and `p_adj_fdr`."
+    },
+    {
+      "prior_finding_id": "F-002",
+      "rationale": "Resolved. A no longer depends on absent `*_regulator_coefficients.csv`; it is derived from existing KD/DE tables in `docs/lbd-proposer-spec.md:28`. The CSV headers confirm the needed fields: `guide_kd_efficiency.suppl_table.csv:1` has `signif_knockdown`, `perturbed_gene_id`, and `culture_condition`; `DE_stats.suppl_table.csv:1` has `culture_condition`, `ontarget_effect_size`, `ontarget_significant`, and `n_downstream`."
+    },
+    {
+      "prior_finding_id": "F-003",
+      "rationale": "Resolved. B is restricted to Th1/Th2 and aging/cytokine programs are explicitly out of scope in `docs/lbd-proposer-spec.md:39`; `pyzobot_join_spec.json` confirms the available T2 substrate is the Th2/Th1 table."
+    },
+    {
+      "prior_finding_id": "F-004",
+      "rationale": "Resolved. The spec limits condition-specific wording to KD/effect/disease hops and states HOP-2 is contrast-based, not condition-resolved, at `docs/lbd-proposer-spec.md:113`."
+    },
+    {
+      "prior_finding_id": "F-005",
+      "rationale": "Resolved. `docs/lbd-proposer-spec.md:117` requires exact disease filtering and verdict synthesis after exact-C HOP-3, addressing the old generic disease pass-through."
+    },
+    {
+      "prior_finding_id": "F-006",
+      "rationale": "Resolved for implementation. The CSV has 14 non-negative-control disease values, including umbrella rows `autoimmune disease` and `inflammatory bowel disease`; the spec lists those as context-only and uses 12 eligible C claims at `docs/lbd-proposer-spec.md:44` and `docs/lbd-proposer-spec.md:53`."
+    },
+    {
+      "prior_finding_id": "F-007",
+      "rationale": "Resolved. The hard disjoint gate is replaced by preflight histograms and a ranked novelty penalty in `docs/lbd-proposer-spec.md:72`."
+    },
+    {
+      "prior_finding_id": "F-008",
+      "rationale": "Resolved. The spec narrows API scope to Europe PMC plus Open Targets and revises effort to ~1\u20131.5 days in `docs/lbd-proposer-spec.md:57` and `docs/lbd-proposer-spec.md:150`."
+    },
+    {
+      "prior_finding_id": "F-009",
+      "rationale": "Resolved. `ranked_full` is explicitly banned from A seeding in `docs/lbd-proposer-spec.md:36`."
+    },
+    {
+      "prior_finding_id": "F-010",
+      "rationale": "Resolved. The artifact itself now contains the accepted fixes across A/B/C source definitions, novelty ranking, exact-C adapter, and effort estimate."
+    },
+    {
+      "prior_finding_id": "F-011",
+      "rationale": "Resolved. The answer leak is closed by banning `pyzobot_referee_ranked_full.csv` from seeding and by making the generative rationale explicit in `docs/lbd-proposer-spec.md:132`."
+    },
+    {
+      "prior_finding_id": "F-012",
+      "rationale": "Resolved. Exact-C HOP-3 semantics are specified at `docs/lbd-proposer-spec.md:117` and match the available `t3_exploded` columns in `pyzobot_referee.py:70`; the original generic HOP-3 behavior at `pyzobot_referee.py:249` is correctly overridden by the adapter."
+    }
+  ],
+  "new_findings": [],
+  "convergence_status": "converged",
+  "convergence_sanding_warning": null,
+  "recommended_next_question": "Before building, pin the 12 eligible disease-to-EFO mappings and Th1/Th2 keyword map, then run the mandatory novelty preflight histogram."
+}

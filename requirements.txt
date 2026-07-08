@@ -1,0 +1,4 @@
+# PyZoBot Arbiter — runtime deps (new-work-only; MIT).
+# CPU-only; no GPU/ML stack. Install: python -m pip install -r requirements.txt
+pandas>=2.0
+requests>=2.31
