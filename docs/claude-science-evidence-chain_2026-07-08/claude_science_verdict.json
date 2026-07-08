@@ -1,0 +1,57 @@
+{
+  "claim": "NAB2 -> Th1/Th2 polarization -> atopic eczema",
+  "condition": "Stim8hr",
+  "hops": [
+    {
+      "hop": 0,
+      "name": "GATE (knockdown efficacy, T4)",
+      "status": "passed",
+      "receipt": "2/2 NAB2 guides signif_knockdown=True; best adj_p=1e-16 (both); guide_mean_expr 0.033 (NAB2-2) & 0.079 (NAB2-1) vs NTC 0.567 -> ~86-94% reduction; t=-67.2/-26.6"
+    },
+    {
+      "hop": 1,
+      "name": "EFFECT (on-target downstream, T1)",
+      "status": "supported",
+      "receipt": "ontarget_significant=True; effect_size=-16.88; n_downstream=301; offtarget_flag=False; crossguide_R=0.741; crossdonor_R=0.736"
+    },
+    {
+      "hop": 2,
+      "name": "PROGRAM (Th1/Th2 shift, T2)",
+      "status": "supported (1 of 2 contrasts)",
+      "receipt": "Ota 2021: log_fc=+0.633, z=7.71, adj_p=1.95e-13 (SIGNIFICANT, Th1-associated). Hollbacker 2021: log_fc=+0.609 (same direction), z=2.39, adj_p=0.205 (NOT significant). Direction concordant, significance in 1/2."
+    },
+    {
+      "hop": 3,
+      "name": "DISEASE (atopic-eczema cluster, T3 downstream_Stim8hr)",
+      "status": "supported",
+      "receipt": "2 of 4 atopic-eczema clusters FDR<0.05: cluster100 OR=3.90 p_adj=0.0028; cluster90 OR=3.43 p_adj=0.022. (cluster74 OR=2.12 p=0.52; cluster98 OR=1.00 p=0.98 n.s.)"
+    }
+  ],
+  "confounder_checks": {
+    "locus": {
+      "status": "cis-artifact WEAKENED",
+      "receipt": "NAB2 sig atopic-eczema clusters span the genome, not 12q13. cluster100={AGO2,NAB2,TBC1D10C,IL18RAP,REL,EGR2,CSF2,ETS1,ADO,BACH2}; cluster90={NSMCE1,IL4,IL22,TESPA1,NAB2,IRF4,IL26,AHI1,BCL2L11}. STAT6 absent from both. Members include BACH2/IRF4/ETS1/REL/IL4 \u2014 genome-wide functional Th2/atopy modules."
+    },
+    "phenocopy": {
+      "status": "cis-artifact WEAKENED",
+      "receipt": "NAB2 Stim8hr clusters {74,90,98,100} vs STAT6 {30,61,85} -> ZERO shared clusters. NAB2-KD does not phenocopy STAT6-KD by perturbation-effect correlation."
+    },
+    "reproducibility": {
+      "status": "cis-artifact WEAKENED / NAB2 clears the bar",
+      "receipt": "NAB2 crossguide_R=0.741 (76th pctile of 1102 populated) >= STAT6 0.514 (53rd pctile); crossdonor_R 0.736 vs 0.739 comparable. NAB2 is at least as reproducible as STAT6."
+    }
+  },
+  "contrast_cases": {
+    "SATB1": {
+      "claim": "SATB1 -> Th1/Th2 -> asthma @ Stim8hr",
+      "status": "UNTESTED",
+      "receipt": "GATE FAILS: 0/2 guides signif_knockdown (SATB1-1 adj_p=0.70, SATB1-2 adj_p=0.75); guide_mean 2.386/2.404 vs NTC 2.349 (NO reduction); T1 ontarget_significant=False, n_downstream=0. T2 Ota shows log_fc=-0.186 z=-3.75 adj_p=9.1e-4 BUT this is uninterpretable \u2014 the perturbation did not take. Verdict UNTESTED, not negative."
+    },
+    "SLC1A5": {
+      "claim": "SLC1A5 -> Th1/Th2 -> asthma @ Stim8hr",
+      "status": "REFUTED (at disease hop)",
+      "receipt": "GATE partial (SLC1A5-1 signif adj_p=0.0092; SLC1A5-2 not, adj_p=0.103). EFFECT weak: ontarget_significant=False, n_downstream=1. DISEASE: SLC1A5 appears in ZERO asthma clusters (downstream_Stim8hr) at any FDR -> no disease membership. Chain refuted at HOP3."
+    }
+  },
+  "overall": "CONSISTENT WITH / SUPPORTED. All 4 hops of the NAB2->Th1/Th2->atopic-eczema chain are supported by data receipts: the knockdown took (gate passed), produced a large reproducible on-target downstream effect, shifted the Th1/Th2 program (Th1-associated, significant in the Ota contrast, concordant-but-n.s. in Hollbacker), and NAB2 is a member of two atopic-eczema-enriched clusters at FDR<0.05. The sharpest confounder \u2014 that this is STAT6's cis shadow (NAB2 sits ~1.9 kb from STAT6) \u2014 is WEAKENED by all three in-data checks: no locus artifact (genome-wide members, STAT6 absent), no phenocopy (zero cluster overlap with STAT6), and reproducibility at/above STAT6's. This aligns with the external genome-wide DE result that STAT6 mRNA is unmoved under NAB2-KD (log2FC +0.09, adj-p 0.79). NOT claimed: causal disease mechanism, in-vivo relevance, or that a single significant contrast constitutes program-level proof."
+}
