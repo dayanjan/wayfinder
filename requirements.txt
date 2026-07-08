@@ -2,3 +2,7 @@
 # CPU-only; no GPU/ML stack. Install: python -m pip install -r requirements.txt
 pandas>=2.0
 requests>=2.31
+
+# optional — the definitive STAT6 cis-check reads the authors deposited DE (public S3)
+h5py>=3.0
+s3fs>=2023.0

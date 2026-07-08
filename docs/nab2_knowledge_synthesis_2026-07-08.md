@@ -10,7 +10,7 @@ Our finding is **more genuinely novel than the ac_lit=6 count suggested — lite
 directly link NAB2 to Th1/Th2 polarization OR to atopic eczema** — and the audit *strengthens*
 the project by surfacing exactly the two skeptical caveats a good referee must flag:
 
-1. **STAT6-adjacency confounder (disease hop) — checked, substantially reduced.** NAB2 sits
+1. **STAT6-adjacency confounder — DEFINITIVELY EXCLUDED (2026-07-08).** The sharpest form (a CRISPRi cis artifact repressing STAT6) was tested against the authors' genome-wide DE data (`docs/nab2_stat6_definitive_check.py`, lazy read of the public S3 `GWCD4i.DE_stats.h5ad`): **under NAB2 knockdown STAT6 is unmoved (log2FC +0.09, adj-p 0.79, not significant; NAB2 own on-target −3.08)** — a cis artifact would push STAT6 down; it doesn't. Additionally: NAB2 sits
    **~1.9 kb from STAT6** on 12q13.3 — STAT6 being *the* master Th2 / atopic-dermatitis / IgE
    transcription factor. Every 12q13 atopy GWAS signal in the literature resolves to STAT6, never
    NAB2. So NAB2's atopic-eczema link could a priori be STAT6's shadow via shared regulation / LD.

@@ -24,3 +24,6 @@ Our NAB2 → Th1/Th2 → atopic-eczema finding rests on these tables. The paper 
 truth for: (1) how the Th1/Th2 program signature was derived, (2) how the autoimmune-disease cluster
 enrichment (our T3) was computed — the load-bearing input to the STAT6-adjacency confounder analysis
 (`docs/nab2_knowledge_synthesis_2026-07-08.md` §1).
+
+## Deposited processed data (public S3, no credentials)
+Biohub Virtual Cells Platform: `s3://genome-scale-tcell-perturb-seq/marson2025_data/` (`aws s3 ls --no-sign-request ...`). Key file for us: **`GWCD4i.DE_stats.h5ad`** (16.8 GB) — the genome-wide per-perturbation x per-gene DE results (`.layers`: log_fc/zscore/adj_p). We read it **lazily** (h5py+s3fs, only the needed chunks — no full download) to run the **definitive STAT6 cis-artifact check** (`docs/nab2_stat6_definitive_check.py`): NAB2 knockdown leaves STAT6 unmoved → cis artifact refuted. Raw single-cell matrices (D*_*.assigned_guide.h5ad, ~140 GB each) are the off-limits large data; the DE results are the CPU-feasible slice.

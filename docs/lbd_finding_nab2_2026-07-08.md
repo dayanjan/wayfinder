@@ -76,23 +76,28 @@ bioRxiv 2025.12.23.696273) sharpened the finding's honesty:
   via **Open Targets *genetic* evidence (GWAS + gene-burden + ClinVar, score ≥0.1), NOT co-expression**,
   and the paper runs **no colocalization / LD control**. So NAB2's atopic-eczema *label* is
   GWAS-locus-based and could in principle be LD-inherited from the STAT6 12q13 atopy locus.
-- **Sharpest concern = a CRISPRi cis artifact**, and we tested it: a guide targeting NAB2 (1.9 kb from
-  STAT6) could cis-repress STAT6. Evidence **against** the artifact (`docs/nab2_cis_artifact_check.py`):
-  (i) NAB2 and STAT6 share **zero** perturbation-effect clusters → NAB2-KD does **not** phenocopy
-  STAT6-KD; (ii) NAB2 clears the paper's own reproducibility bar (**cross-guide R 0.74, cross-donor R
-  0.74**) and is *more* reproducible than STAT6 itself (0.51); (iii) on-target, no off-target flag.
-  **Definitive test not possible from our 4 tables:** does NAB2-KD lower STAT6 mRNA? — needs the
-  deposited per-perturbation×gene DE matrix (authors' repo, `github.com/emdann/GWT_perturbseq_analysis_2025`).
+- **Sharpest concern = a CRISPRi cis artifact** (a guide targeting NAB2, 1.9 kb from STAT6, could
+  cis-repress STAT6) — now **DEFINITIVELY REFUTED** against the authors' genome-wide DE data
+  (`docs/nab2_stat6_definitive_check.py`, read lazily from the public S3 `GWCD4i.DE_stats.h5ad`):
+  **under NAB2 knockdown, STAT6 is unchanged — log2FC +0.09, adj-p 0.79, NOT significant**, ranked
+  ~5,444/10,282 by effect, and NOT among the 302 genes NAB2-KD significantly moves (while NAB2's own
+  on-target log2FC is −3.08). A cis artifact would push STAT6 *down*; it doesn't move. Corroborating:
+  (i) NAB2 & STAT6 share **zero** perturbation-effect clusters (NAB2-KD ≠ STAT6-KD); (ii) NAB2 clears
+  the paper's reproducibility bar (cross-guide/donor R 0.74) and is more reproducible than STAT6; (iii)
+  the authors' own `offtarget_flag` (TSS within 10 kb with significant down-regulation) is **False** for
+  NAB2 — their pipeline already found no cis down-regulation of any 10 kb neighbor, STAT6 included.
 - **Framing = nomination, not causation** (matching the paper, which calls all module→disease
   enrichment "guilt-by-perturbational association … can nominate").
 - **Citation fix:** the CSV's contrast label "Hollbacker 2021" is really **Höllbacher et al. 2020**
   (ImmunoHorizons); "Ota 2021" (Cell) is correct.
 
-**Net honest verdict after the paper read:** a *novel, reproducible* NAB2→Th1/Th2 functional
-**nomination**; the →atopic-eczema disease link is **flagged** — the STAT6 genomic/cis shadow is
-argued-against (non-phenocopy + reproducibility) but **not fully excluded** (the GWAS-locus disease
-label + the missing direct STAT6-mRNA readout). This more-conservative verdict is on-thesis: a
-confident, receipt-backed, caveat-aware call, not an overclaimed discovery.
+**Net honest verdict (after the paper read + the definitive S3 DE check):** a *novel, reproducible,
+NAB2-specific* Th1/Th2 regulator with a receipt-backed link to atopic eczema, and the **STAT6
+cis/shadow confounder is now DEFINITIVELY EXCLUDED** — NAB2 knockdown leaves STAT6 unmoved in the
+authors' own genome-wide DE data. What remains (honestly) is the paper's own framing: module→disease
+enrichment is a **nomination**, not proven causation, and the disease *label* derives from Open Targets
+GWAS-genetic evidence. So: a genuine, novel, NAB2-specific finding with its sharpest confounder closed
+by external gold-standard data — a confident, receipt-backed call that stops exactly where the evidence does.
 
 ## The cull is real (honesty examples from the same run)
 - **NUDT1 × type 1 diabetes** — the *only* pure-disjoint (zero-literature) supported hit, but a
