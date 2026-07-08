@@ -26,12 +26,20 @@ for appendix candidates — Codex said Stim8hr alone is sufficient, do NOT let t
 synthesis_2026-07-08.md`, 4-agent team via new `src/arbiter/lit/`): NAB2→Th1/Th2 and NAB2→atopic eczema
 BOTH **genuinely novel (0 direct papers)**; STAT6-adjacency + EGR-mediation confounders raised, then
 BOTH checked in-data and **rejected** (`docs/nab2_stat6_confounder_check.py`, `docs/nab2_egr_mechanism_
-check.py`). Then a **5-agent independent replication** (3 Opus + 2 Codex, 2 clean-room re-impls;
+check.py`). Then a **5-agent independent replication** (3 Opus + 2 Codex, 2 clean-room re-impls; `docs/replication/` +
 `docs/replication_report_2026-07-08.md`): **UNANIMOUS PASS** — every number reproduced; fixed a
-cluster-ID bug (74→90/100), the "8×"→"~3× on z" wording, and reframed the arguments. Finding is
-thoroughly vetted + demo-ready. HONEST framing to keep: NAB2 = strong novel **co-regulator of the
-type-2/atopic axis STAT6 governs** (not STAT6-independent); the funnel's "43/30" is a joint
+cluster-ID bug (74→90/100), "8×"→"~3× on z", reframed arguments. Then a **source-paper read**
+(`docs/source_paper_read_eczema_2026-07-08.md`): paper never mentions NAB2 (novelty confirmed); disease
+labels are Open Targets **GWAS-genetic** (LD-susceptible, no coloc control); sharpest concern = CRISPRi
+**cis-artifact** (NAB2 guide 1.9kb from STAT6) — tested (`docs/nab2_cis_artifact_check.py`): NAB2 &
+STAT6 don't co-cluster + NAB2 reproducible (R 0.74) → argues against cis; definitive NAB2-KD→STAT6-mRNA
+check needs the **deposited DE matrix** (authors' repo `github.com/emdann/GWT_perturbseq_analysis_2025`,
+recorded in `references/`).
+**HONEST framing to KEEP (this is now the verdict):** NAB2 = a **novel, reproducible NOMINATION**; the
+→atopic-eczema disease link is **FLAGGED** (STAT6 genomic/cis shadow argued-against but NOT fully
+excluded). Frame as nomination not causation (matching the paper). The funnel's "43/30" is a joint
 novelty-gate×referee product; the program hop is a funnel tautology (real in the individual receipt).
+Citation: "Hollbacker 2021" (CSV label) is really **Höllbacher 2020**.
 
 **Open questions / honest-framing guardrails (respect these in the demo)**:
 (1) NAB2→eczema is **novel but STAT6-confounded** — present as "novel + STAT6-flagged," never "clean discovery" or "known/established";

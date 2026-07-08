@@ -5,14 +5,16 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
-**2026-07-08 (autonomous overnight) — M3 DONE; receipt-backed finding LANDED.** The **LBD
-question-proposer is built end-to-end** and a **near-novel finding is locked: NAB2 → Th1/Th2 →
-atopic eczema** (@ Stim8hr, ac_lit=6, full-hop receipt, Codex-vetted keep-with-caveat). Spec hardened
-v1→v2 via a 3-round repo-read codex-debate; fresh tool layer in `src/arbiter/lbd/` (all verified);
-disease ids = **MONDO not EFO** (API-resolved); `referee_triple` exact-disease adapter built; a Codex
-consult fixed a scoring + full-chain bug. Full Stim8hr sweep: **22,039 questions → 30 clean supported**.
-Finding: `docs/lbd_finding_nab2_2026-07-08.md`; process: `docs/lbd-build-log.md`.
-**Next:** M5 (demo video + README-as-paper); optional bonus Rest/Stim48hr sweeps. See `memory/NEXT_SESSION.md`.
+**2026-07-08 — M3+M4 DONE; finding REPLICATED + source-paper-vetted → reframed as a NOMINATION.**
+The LBD question-proposer is built end-to-end (`src/arbiter/lbd/`; spec v2 debate-hardened; disease
+ids MONDO not EFO; `referee_triple` exact-disease adapter; full-chain fix). Full Stim8hr sweep:
+**22,039 questions → 30 clean supported**; headline **NAB2 → Th1/Th2 → atopic eczema**. Then
+**independently replicated** (5-agent lab, 3 Opus + 2 Codex, 2 clean-room re-impls, unanimous PASS —
+`docs/replication/`), **confounders stress-tested** (STAT6-locus, EGR-mediation, CRISPRi cis — all
+argued-against), and **vetted against the source paper** (`docs/source_paper_read_eczema_2026-07-08.md`;
+paper never mentions NAB2 → novelty confirmed; disease labels are GWAS-genetic → STAT6 shadow flagged).
+**Reframed** to a novel, reproducible NOMINATION with the disease link FLAGGED (honest, on-thesis).
+**Next:** M5 (demo + README-as-paper); optional deposited-DE cis-check. See `memory/NEXT_SESSION.md`.
 
 ## Hard constraints (never lose)
 - **NEW WORK ONLY** — every file authored during the event (started 2026-07-07); git history is the compliance proof.
@@ -32,6 +34,7 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 |------|-------|-------------|
 | 2026-07-07 | PM tooling + repo | Session-lifecycle skills + doc scaffold; handoff → `memory/NEXT_SESSION.md`; API key verified active; private repo `dayanjan/pyzobot-arbiter` created & pushed |
 | 2026-07-07 (PM) | Claude Science + Validator | Researcher-track commit; Claude Science installed on WSL + driven via Playwright; QC/join-map + referee (Validator) built through it — YES/UNTESTED/REFUTED demonstrated with receipts; 6 artifacts in `docs/perturbseq-qc_2026-07-07/`; hardware fully characterized; 3-round codex-debate + independent Fable review on the install plan |
-| 2026-07-08 | LBD proposer + finding (autonomous) | Spec hardened v1→v2 (3-round repo-read codex-debate, 9→3→0); fresh tool layer `src/arbiter/lbd/` (verified); disease ids MONDO-resolved; `referee_triple` exact-disease adapter; Codex consult fixed scoring+full-chain bug; full Stim8hr sweep 22,039→30 clean supported; **finding NAB2→Th1/Th2→atopic eczema** (near-novel, receipt-backed); 6 commits |
+| 2026-07-08 | LBD proposer + finding (autonomous) | Spec hardened v1→v2 (3-round repo-read codex-debate, 9→3→0); fresh tool layer `src/arbiter/lbd/` (verified); disease ids MONDO-resolved; `referee_triple` exact-disease adapter; Codex consult fixed scoring+full-chain bug; full Stim8hr sweep 22,039→30 clean supported; **finding NAB2→Th1/Th2→atopic eczema** (near-novel, receipt-backed) |
+| 2026-07-08 | Validation + source-paper vetting | 4-agent literature audit (new `src/arbiter/lit/`) → both links 0-papers novel; STAT6/EGR/cis confounders stress-tested & argued-against; **5-agent independent replication unanimous PASS** (`docs/replication/`); source-paper read → **reframed as novel reproducible NOMINATION, disease link flagged**; paper in `references/` + analysis repo recorded; ~8 commits |
 
-_Last updated: 2026-07-08 (autonomous overnight session)_
+_Last updated: 2026-07-08_
