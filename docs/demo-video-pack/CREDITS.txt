@@ -1,0 +1,14 @@
+Background music
+================
+"Deliberate Thought" — Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+https://creativecommons.org/licenses/by/4.0/
+
+Required attribution (include in the video description / credits when published):
+  Music: "Deliberate Thought" by Kevin MacLeod (incompetech.com),
+  licensed under Creative Commons: By Attribution 4.0.
+
+Muxed as a low bed (-20 dB, 2s fade-in / 2.6s fade-out) under the ElevenLabs
+narration; voice kept at full via ffmpeg amix normalize=0. Verified: the
+transcription gate holds at 94% mean coverage WITH the music, i.e. the bed does
+not degrade voice intelligibility.
