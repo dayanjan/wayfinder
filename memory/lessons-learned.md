@@ -34,3 +34,56 @@ Append-only. What worked / what to improve about the scaffolding, skills, workfl
 
 ### Process
 - **The 3-round codex-debate on the install plan converged (17/17) but its FRAME was too narrow** — it optimized "how to install," never "whether / opportunity cost / track fit." The independent **Fable 5** review caught exactly that (plus systemd over-engineering + missing timebox/exit). Lesson: pair an execution-safety debate with an independent frame-challenging review; convergence inside a narrow frame is not the right call. See [[hardware-and-claude-science-placement]].
+
+## 2026-07-08 — Playbook: multi-model adversarial replication + external-data validation loop
+
+**Category:** finding-validation workflow (reusable across any high-stakes finding — grant, paper, submission).
+
+**The pattern (what to do when a computational finding must survive scrutiny).** After you HAVE a
+finding, do not self-check — run it through an escalating gauntlet where each stage is independent of
+your own code and biased toward *falsification*:
+
+1. **Independent literature audit (multi-agent).** Fan out N cold agents over a real literature corpus
+   (built with a direct multi-source tool — Europe PMC + OpenAlex + Semantic Scholar) to answer "is this
+   actually novel, and what's known?" One agent per facet; a disease/immunology agent tasked to judge
+   novelty. Surfaced the STAT6-adjacency confounder we hadn't seen.
+2. **In-data confounder checks (reproducible scripts).** For every confounder the audit raises, write a
+   committed check script that tests it against your own tables. Each becomes provenance.
+3. **N-agent ADVERSARIAL replication (the core).** Stand up an independent "lab": **cross-model** (Opus
+   AND Codex — a bug both model families miss is rarer than one either misses), against a **frozen claim
+   set** (exact numbers to reproduce), with an **adversarial mandate** ("a refuted claim with evidence is
+   the most valuable output"), and **≥2 clean-room re-implementations** that import NONE of your code (a
+   match is then genuine reproduction, not shared-code tautology). Run them blind/parallel — two agents
+   independently finding the SAME bug is corroboration, not an echo.
+4. **Source-paper read for METHOD provenance.** Have an agent read the dataset's own paper to learn HOW
+   the load-bearing quantities were computed (here: disease labels = Open Targets GWAS-genetic evidence,
+   no LD/coloc control) — this reframes which caveats are real and how to frame the claim (nomination vs
+   causal, matching the authors' own stance).
+5. **Close the last confounder with the AUTHORS' OWN deposited data.** When your in-house data can't
+   settle a confounder, the original paper's deposited processed data usually can. Public repos (found via
+   the GitHub README's "Data pointers") often expose it on a no-creds S3 bucket → **lazy partial read**
+   (h5py+s3fs, anon) of one slice of a 16.8 GB file — no mega-download. Checking a finding against the
+   source authors' gold-standard data is the strongest external validation available.
+6. **Preserve the full raw provenance trail.** Commit the verbatim agent prompts + run-logs + scripts
+   (the raw trace is the proof the work happened); strip third-party copyrighted text (abstracts →
+   metadata only); secret-scan (values + patterns) before commit.
+
+**Why it works.** Cross-model + clean-room independence makes reproduction meaningful; the adversarial
+mandate makes agents *find real errors* instead of rubber-stamping; external gold-standard data closes
+what in-house data cannot; full provenance makes every number auditable back to the run that produced it.
+
+**Empirical result this session (NAB2 finding).** 5-agent replication returned **unanimous PASS** and
+caught real errors a self-review missed (a cluster-ID misalignment found independently by TWO agents; an
+"8×" stat that was effect-size not z; arguments defended with their weakest legs). The literature audit
+surfaced the STAT6 confounder; the source-paper read located it precisely (GWAS-genetic disease labels,
+no LD control); and the definitive check against the **authors' deposited genome-wide DE** moved the
+STAT6 cis/shadow confounder from "flagged" to **DEFINITIVELY EXCLUDED** (NAB2 knockdown leaves STAT6
+unmoved: log2FC +0.09, p 0.79). Net: a finding that survives this gauntlet is submission-grade.
+
+**When to reach for it.** Any finding that will face expert scrutiny. Scale the agent count / round count
+to the stakes. The cross-model + clean-room + adversarial + external-data combination is the load-bearing
+part; the single-model self-check is what it replaces.
+
+**Reusable assets built this session:** `src/arbiter/lit/` (multi-source lit search), the frozen-protocol
+replication harness (`docs/replication/agent-prompts/00_shared_protocol.md`), and the lazy-S3-h5ad read
+recipe (`docs/nab2_stat6_definitive_check.py`). Full record: `docs/replication/`, `docs/provenance/`.
