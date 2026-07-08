@@ -34,3 +34,6 @@ memory/install-audit/
 
 # LBD proposer API cache (raw JSON; reproducible via re-query)
 data/lbd_cache/
+
+# LBD proposer sweep outputs (regenerable)
+data/lbd_out/
