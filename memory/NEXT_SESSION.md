@@ -22,11 +22,16 @@ for appendix candidates — Codex said Stim8hr alone is sufficient, do NOT let t
 **Prerequisites**: `pip install -r requirements.txt` (pandas+requests). API cache in `data/lbd_cache/`
 (gitignored) makes the sweep re-run fast/offline. No GPU/Colab.
 
-**Independent NAB2 audit done (2026-07-08)** — `docs/nab2_knowledge_synthesis_2026-07-08.md` (4-agent
-literature team via new `src/arbiter/lit/` tool). Result: NAB2→Th1/Th2 and NAB2→atopic eczema are BOTH
-**genuinely novel (0 direct papers)** — but **STAT6-confounded** (NAB2 is ~1.9 kb from STAT6, the master
-atopic gene). Partial defense in our data (different clusters; NAB2-specific KD). This STRENGTHENS the
-submission (catching the confounder = the thesis).
+**Independent NAB2 audit + REPLICATION done (2026-07-08).** Literature audit (`docs/nab2_knowledge_
+synthesis_2026-07-08.md`, 4-agent team via new `src/arbiter/lit/`): NAB2→Th1/Th2 and NAB2→atopic eczema
+BOTH **genuinely novel (0 direct papers)**; STAT6-adjacency + EGR-mediation confounders raised, then
+BOTH checked in-data and **rejected** (`docs/nab2_stat6_confounder_check.py`, `docs/nab2_egr_mechanism_
+check.py`). Then a **5-agent independent replication** (3 Opus + 2 Codex, 2 clean-room re-impls;
+`docs/replication_report_2026-07-08.md`): **UNANIMOUS PASS** — every number reproduced; fixed a
+cluster-ID bug (74→90/100), the "8×"→"~3× on z" wording, and reframed the arguments. Finding is
+thoroughly vetted + demo-ready. HONEST framing to keep: NAB2 = strong novel **co-regulator of the
+type-2/atopic axis STAT6 governs** (not STAT6-independent); the funnel's "43/30" is a joint
+novelty-gate×referee product; the program hop is a funnel tautology (real in the individual receipt).
 
 **Open questions / honest-framing guardrails (respect these in the demo)**:
 (1) NAB2→eczema is **novel but STAT6-confounded** — present as "novel + STAT6-flagged," never "clean discovery" or "known/established";

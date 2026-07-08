@@ -45,11 +45,19 @@ literature has not made.* Not "proven," not "discovered."
   ac_lit=6). NAB2 sits **~1.9 kb from STAT6** (the master Th2/atopic gene), so we tested the shadow
   concern (`docs/nab2_knowledge_synthesis_2026-07-08.md` §Bottom-line): (i) NAB2's atopic-eczema
   clusters are **genome-wide functional immune modules, NOT a 12q13 locus artifact** — STAT6 isn't in
-  them, members are FOXP1/GFI1/CD28/IRF4/IL4/IL10/IL22 from across the genome; (ii) NAB2's program
-  effect is **~8× stronger than STAT6's own** (z 7.71 vs 2.66) and the KD is NAB2-specific → a real
-  regulator, not an echo. **Residual caveat:** NAB2 and STAT6 share the identical disease profile
+  them, members (significant clusters 90 & 100) are BACH2/BCL6/IRF4/CD28/IL4/IL10 from across the genome; (ii) NAB2's program
+  effect exceeds STAT6's own (**~8× on effect size / ~3× on z**, 7.71 vs 2.66) and the KD is 2/2
+  on-target → a real regulator, not an echo. **Residual caveat:** NAB2 and STAT6 share the identical disease profile
   ({asthma, atopic eczema}), so frame NAB2 as *"a strong, novel regulator of the same type-2/atopic
   axis STAT6 governs,"* not as a STAT6-independent discovery.
+
+  *(Independently replicated 2026-07-08 by a 5-agent lab — 3 Opus + 2 Codex, two clean-room
+  re-implementations: unanimous PASS; corrected the cluster IDs 74→90/100 and the 8×-vs-3× wording;
+  see docs/replication_report_2026-07-08.md.)*
+- **Funnel-framing honesty:** inside the A universe the PROGRAM hop is a tautology (all A genes pass
+  T2<0.05, so refuted_program=0) — it discriminates in the individual receipt, not in the funnel; and
+  the “30 clean supported” is a joint novelty-gate × referee product (referee alone supports 395/47,220),
+  so read it as “referee-supported among literature-eligible pairs.”
 - **One of two program contrasts** is significant (Ota strong; Hollbacker n.s.) — reported, not hidden.
 - **EGR-mediation (mechanism caveat) — checked, weakened.** NAB2 is an EGR corepressor, so the shift
   could a priori be EGR-mediated. But (i) NAB2-KD moves the program the *same* way as EGR2-KD, not

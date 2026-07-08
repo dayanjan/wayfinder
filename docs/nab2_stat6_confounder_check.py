@@ -29,9 +29,14 @@ def cytobands(symbols):
 
 
 # ---- Check A: locus composition of NAB2's significant atopic-eczema clusters ----
+# DERIVE the significant clusters (do NOT hardcode -- an earlier hardcoded [74,90] tested the
+# non-significant cluster 74; the actually-significant atopic-eczema clusters are 90 & 100).
 print("=" * 70)
 print("CHECK A - are NAB2's atopic-eczema clusters a 12q13 locus artifact?")
-for cl in [74, 90]:
+_nab2_ae = te[(te.gene == "NAB2") & (te.gene_set == gs) & (te.disease == "atopic eczema")]
+SIG_CLUSTERS = sorted(_nab2_ae[_nab2_ae.p_adj_fdr < 0.05].cluster.unique().tolist())
+print(f"NAB2 significant atopic-eczema clusters (FDR<0.05): {SIG_CLUSTERS}")
+for cl in SIG_CLUSTERS:
     genes = sorted(te[(te.cluster == cl) & (te.gene_set == gs)].gene.unique().tolist())
     bands = cytobands(genes)
     on12q13 = [g for g, b in bands.items() if b and b.startswith("12q13")]

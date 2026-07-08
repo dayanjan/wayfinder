@@ -15,38 +15,41 @@ the project by surfacing exactly the two skeptical caveats a good referee must f
    transcription factor. Every 12q13 atopy GWAS signal in the literature resolves to STAT6, never
    NAB2. So NAB2's atopic-eczema link could a priori be STAT6's shadow via shared regulation / LD.
    Two follow-up checks (2026-07-08, `.claude/scratch/lbd-debate/stat6_confounder_checks.py`):
-   - **NOT a genomic-locus artifact.** NAB2's atopic-eczema clusters (74, 90) are **genome-wide
-     functional immune modules**, not 12q13 blocks: of ~67 member genes only NAB2 + TESPA1 are on
-     12q13, **STAT6 is in neither cluster**, and members span the genome (FOXP1 3p13, GFI1 1p22,
-     CD28 2q33, IRF4, IL4, IL10, IL22). NAB2's disease enrichment comes from co-clustering with
-     bona-fide Th-effector genes, not from proximity to STAT6. **This clears the worst version of
-     the confounder.**
-   - **NAB2 is a stronger program regulator than STAT6 itself** (Th1-associated, Ota z=**7.71** vs
-     STAT6 z=2.66; ~8×). A mere proximity-shadow would not exceed the source — this argues NAB2 is a
-     genuine regulator, not an echo. The knockdown is NAB2-specific (on-target, adj-p 1e-16, no
-     off-target), so the functional effect is real NAB2 loss-of-function.
-   - **Residual (honest) caveat:** NAB2 and STAT6 have the **identical disease profile** in this
-     data (both support exactly {asthma, atopic eczema}, same program direction). So we cannot claim
-     NAB2's disease specificity is *distinct* from STAT6's — consistent with NAB2 being a genuine,
-     strong **co-regulator of the same type-2/atopic axis** STAT6 masters (biologically coherent for
-     neighbors), not with a pure artifact. Frame it as "NAB2 is a strong, novel regulator of the
-     atopic/Th axis — the same axis STAT6 governs," not as a STAT6-independent discovery.
+   - **NOT a genomic-locus artifact.** NAB2's **significant** atopic-eczema clusters are **90 and 100**
+     (corrected in replication — an earlier script mislabeled them 74/90; cluster 74 FDR 0.52 is
+     non-significant). Both are **genome-wide functional immune modules**, not 12q13 blocks: **STAT6 is
+     in neither**, only NAB2 (+TESPA1 in cl90) is on 12q13, and members span 16–20 chromosome arms with
+     major immune TFs (cl100: **BACH2, BCL6, IRF4, CD200, CD226**; cl90: CD28, IL4, IL10, IL22, IRF4).
+     NAB2's disease enrichment comes from co-clustering with bona-fide immune regulators, not from
+     proximity to STAT6. **This clears the worst version of the confounder** (verified on the *correct*
+     clusters, 5-agent replication).
+   - **NAB2 is a stronger program regulator than STAT6 itself** — Ota **~8× on effect size** (log_fc
+     0.63 vs 0.08) and **~3× on z** (7.71 vs 2.66). A mere proximity-shadow would not exceed its source.
+     The knockdown is NAB2-specific (2/2 on-target guides, no off-target flag), so the effect is real
+     NAB2 loss-of-function.
+   - **Distinctness rests on co-membership + magnitude + guide-specificity, NOT the disease profile.**
+     NAB2 and STAT6 have the **identical** disease profile ({asthma, atopic eczema}) — which *aids* the
+     confounder, so we do NOT lean on it. The distinctness comes from: STAT6 absent from NAB2's clusters,
+     NAB2's effect exceeding STAT6's, and the on-target NAB2-specific guides. **Residual honest caveat:**
+     present NAB2 as a strong, novel **co-regulator of the same type-2/atopic axis STAT6 governs**, not
+     as a STAT6-independent discovery.
 2. **EGR-mediation caveat (mechanism) — checked, substantially weakened.** NAB2's documented T-cell
    role is as an **EGR corepressor**, so the shift could a priori be EGR-target-mediated. Our-data
    mechanism check (2026-07-08, `docs/nab2_egr_mechanism_check.py`) argues **against** simple
-   EGR-mediation on three independent grounds:
-   - **Wrong direction.** If NAB2-KD worked by de-repressing EGR2 (removing the brake → more EGR2),
-     it should look *opposite* to EGR2-KD. Instead NAB2-KD and EGR2-KD are the **same** direction
-     (both Th1-associated) — inconsistent with NAB2 acting purely as EGR2's brake.
-   - **Different disease specificity.** EGR2-KD is referee-supported for **11/12 diseases** (a broad
-     pan-autoimmune hub — matches EGR2's master-tolerance role, a positive control); NAB2-KD is
-     supported for **only {asthma, atopic eczema}**. An EGR2-mediated effect would inherit EGR2's
-     broad profile; NAB2's is narrowly atopic → a distinct effect.
-   - **NAB2 ≠ its paralog.** NAB1 (the other EGR corepressor) shifts the program the **opposite**
-     way (Th2) and supports 0 diseases — so this is not generic NAB/EGR-corepressor biology.
-   *Caveat on the caveat:* this compares perturbation phenotypes (no direct EGR-activity readout; no
-   downstream gene lists; NAB2 & EGR2 are significant in different reference contrasts). But the
-   disease-specificity divergence is a clean signal that NAB2's effect is not merely EGR2's.
+   EGR-mediation. The **robust** refutation (per adversarial replication):
+   - **NAB2 != its paralog (D3 - the strong argument).** NAB1, the *same-family* EGR corepressor,
+     shifts the program the **opposite** way (Th2), significant in **both** contrasts, and supports 0
+     diseases. If NAB2 merely de-repressed EGR, its same-family paralog would not behave oppositely ->
+     this is not generic NAB/EGR-corepressor biology, and NAB2 never behaves like an EGR de-repressor.
+   Weaker, supporting-only (the finding does NOT lean on these):
+   - *Direction (D2, weak):* NAB2-KD and EGR2-KD share the same sign, but are significant in
+     **mutually exclusive** contrasts (NAB2 in Ota; EGR2 in Hollbacker at a borderline p=0.049) -> a
+     cross-cohort comparison of a solid vs a fragile signal; suggestive, not probative.
+   - *Breadth (D1, cannot refute mediation):* EGR2-KD supports **11/12** diseases (broad pan-autoimmune
+     hub - matches EGR2's master-tolerance role, a positive control); NAB2 only {asthma, atopic eczema}.
+     But a narrow **subset** is exactly what an EGR2-downstream effector would look like -> context, not proof.
+   *Caveat on the caveat:* this compares perturbation phenotypes (no direct EGR-activity readout, no
+   downstream gene lists). The paralog opposition (D3) is the clean signal.
 
 **This is the project's thesis in action:** the tool proposed a genuinely unexplored hypothesis;
 an independent audit confirmed the novelty *and* caught a confounder a naive pipeline would ship

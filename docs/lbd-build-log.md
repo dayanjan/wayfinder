@@ -190,6 +190,18 @@ independent team** (molecular / immunology / disease / genetics). Synthesis:
   confident-caveat-aware-verdict thesis in action. Optional next: (a) do the T3 clusters map to the
   shared 12q13 locus? (b) NAB2-vs-STAT6 downstream DE overlap.
 
+## Independent replication (2026-07-08) — 5-agent lab, UNANIMOUS PASS
+3 Opus + 2 Codex agents, each re-deriving from raw CSVs (adversarial; 2 clean-room re-implementations).
+Full report: `docs/replication_report_2026-07-08.md`. **The finding replicates** — every headline
+number reproduced to the unit (NAB2 receipt; funnel 3,935→22,039→43→30/10/3/1; NUDT1 pure-disjoint);
+code confirmed answer-free + full-chain-correct; STAT6 + EGR confounders could not be made to stick.
+Errors caught & FIXED (why we trust it): (1) cluster-ID misalignment 74→**90/100** (script de-hardcoded,
+re-run confirms genome-wide modules BACH2/BCL6/IRF4/CD28); (2) "8×" is effect-size, **~3× on z**;
+(3) reframed distinctness onto co-membership+magnitude+guide-specificity (not the identical disease
+profile) and anti-EGR onto D3 paralog-opposition (not the weak cross-cohort D2). Framing caveats now
+documented: PROGRAM hop is a funnel tautology (refuted_program≡0 in A); "43" is a joint gate×referee
+product (referee alone supports 395/47,220). Synthesis + finding writeup updated to match.
+
 ## Next move
 Lock the NAB2 story with the honest framing above; write the demo-facing finding artifact
 (`docs/lbd_finding_*.md`) + emit is done (`lbd_questions_Stim8hr.json`). Optional bonus: Rest/
