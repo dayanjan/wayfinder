@@ -10,16 +10,27 @@ Our finding is **more genuinely novel than the ac_lit=6 count suggested — lite
 directly link NAB2 to Th1/Th2 polarization OR to atopic eczema** — and the audit *strengthens*
 the project by surfacing exactly the two skeptical caveats a good referee must flag:
 
-1. **STAT6-adjacency confounder (disease hop).** NAB2 sits **~1.9 kb from STAT6** on 12q13.3 —
-   STAT6 being *the* master Th2 / atopic-dermatitis / IgE transcription factor. Every 12q13 atopy
-   GWAS signal in the literature resolves to STAT6, never NAB2. So NAB2's atopic-eczema link could
-   be STAT6's shadow via shared regulation / LD.
-   *Our-data check (partial defense):* NAB2 and STAT6 land in **different** atopic-eczema-enriched
-   clusters (NAB2: clusters 74/90, FDR 0.0028/0.0224; STAT6: cluster 30, FDR 0.0005) — NAB2's
-   signal is not literally "in STAT6's module." And the perturbation **knocked down NAB2
-   specifically** (on-target, adj-p 1e-16, no off-target), so the *functional* Th1/Th2 effect is a
-   real NAB2 loss-of-function phenotype, not STAT6 bleed. The residual concern is whether the
-   disease-cluster enrichment itself maps to the shared 12q13 locus.
+1. **STAT6-adjacency confounder (disease hop) — checked, substantially reduced.** NAB2 sits
+   **~1.9 kb from STAT6** on 12q13.3 — STAT6 being *the* master Th2 / atopic-dermatitis / IgE
+   transcription factor. Every 12q13 atopy GWAS signal in the literature resolves to STAT6, never
+   NAB2. So NAB2's atopic-eczema link could a priori be STAT6's shadow via shared regulation / LD.
+   Two follow-up checks (2026-07-08, `.claude/scratch/lbd-debate/stat6_confounder_checks.py`):
+   - **NOT a genomic-locus artifact.** NAB2's atopic-eczema clusters (74, 90) are **genome-wide
+     functional immune modules**, not 12q13 blocks: of ~67 member genes only NAB2 + TESPA1 are on
+     12q13, **STAT6 is in neither cluster**, and members span the genome (FOXP1 3p13, GFI1 1p22,
+     CD28 2q33, IRF4, IL4, IL10, IL22). NAB2's disease enrichment comes from co-clustering with
+     bona-fide Th-effector genes, not from proximity to STAT6. **This clears the worst version of
+     the confounder.**
+   - **NAB2 is a stronger program regulator than STAT6 itself** (Th1-associated, Ota z=**7.71** vs
+     STAT6 z=2.66; ~8×). A mere proximity-shadow would not exceed the source — this argues NAB2 is a
+     genuine regulator, not an echo. The knockdown is NAB2-specific (on-target, adj-p 1e-16, no
+     off-target), so the functional effect is real NAB2 loss-of-function.
+   - **Residual (honest) caveat:** NAB2 and STAT6 have the **identical disease profile** in this
+     data (both support exactly {asthma, atopic eczema}, same program direction). So we cannot claim
+     NAB2's disease specificity is *distinct* from STAT6's — consistent with NAB2 being a genuine,
+     strong **co-regulator of the same type-2/atopic axis** STAT6 masters (biologically coherent for
+     neighbors), not with a pure artifact. Frame it as "NAB2 is a strong, novel regulator of the
+     atopic/Th axis — the same axis STAT6 governs," not as a STAT6-independent discovery.
 2. **EGR-mediation caveat (mechanism).** NAB2's entire documented T-cell role is as an **EGR
    corepressor**; every published Th-relevant effect in this axis runs through EGR1/EGR2/EGR3, not
    NAB2 as an independent driver. The observed program shift could be EGR-target-mediated.
@@ -77,11 +88,12 @@ STAT6 adjacency and EGR mediation**, not as a clean discovery.
 - **Do NOT** say NAB2 is "known/established" (it isn't) or imply the EGR2 corepressor mechanism is
   referee evidence.
 
-## 6. Recommended next checks (optional, strengthen the story)
-- Check how the T3 disease clusters map to genomic loci — is NAB2's atopic-eczema enrichment driven
-  by the shared 12q13 locus, or by independent co-expression? (If independent, the finding is stronger.)
-- Compare NAB2 vs STAT6 downstream DE-gene overlap — distinct programs argue against pure STAT6 shadow.
-- If time permits, an EGR-target-overlap check to address the mechanism caveat.
+## 6. Follow-up checks — DONE (2026-07-08)
+- **Locus test:** ✅ done — NAB2's atopic-eczema clusters are genome-wide functional modules, not a
+  12q13 artifact; STAT6 not in them (see caveat 1). **Confounder substantially reduced.**
+- **NAB2 vs STAT6 comparison:** ✅ done — same disease profile + program direction, but NAB2's
+  program effect is ~8× stronger; residual caveat is shared-axis co-regulation, not artifact.
+- **Still optional (mechanism):** an EGR-target-overlap check to address the EGR-mediation caveat.
 
 ## Method & sources
 4 independent Claude agents (molecular / immunology / disease / genetics), each over the 155-paper
