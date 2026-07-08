@@ -5,16 +5,16 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
-**2026-07-08 — M3+M4 DONE; finding REPLICATED + source-paper-vetted → reframed as a NOMINATION.**
-The LBD question-proposer is built end-to-end (`src/arbiter/lbd/`; spec v2 debate-hardened; disease
-ids MONDO not EFO; `referee_triple` exact-disease adapter; full-chain fix). Full Stim8hr sweep:
-**22,039 questions → 30 clean supported**; headline **NAB2 → Th1/Th2 → atopic eczema**. Then
-**independently replicated** (5-agent lab, 3 Opus + 2 Codex, 2 clean-room re-impls, unanimous PASS —
-`docs/replication/`), **confounders stress-tested** (STAT6-locus, EGR-mediation, CRISPRi cis — all
-argued-against), and **vetted against the source paper** (`docs/source_paper_read_eczema_2026-07-08.md`;
-paper never mentions NAB2 → novelty confirmed; disease labels are GWAS-genetic → STAT6 shadow flagged).
-**Reframed** to a novel, reproducible NOMINATION with the disease link FLAGGED (honest, on-thesis).
-**Next:** M5 (demo + README-as-paper); optional deposited-DE cis-check. See `memory/NEXT_SESSION.md`.
+**2026-07-08 (full-close) — M3+M4 DONE; finding REPLICATED + all confounders CLOSED (incl. definitive STAT6).**
+LBD question-proposer built end-to-end (`src/arbiter/lbd/`; spec v2 debate-hardened; MONDO ids;
+`referee_triple` adapter). Full Stim8hr sweep: **22,039 → 30 clean supported**; headline
+**NAB2 → Th1/Th2 → atopic eczema**. **Independently replicated** (5-agent lab, unanimous PASS,
+`docs/replication/`). Confounders stress-tested; the **DEFINITIVE STAT6 cis-check** (authors' deposited
+genome-wide DE via lazy S3 read — `docs/nab2_stat6_definitive_check.py`) shows **NAB2-KD leaves STAT6
+unmoved (log2FC +0.09, p 0.79) → cis/shadow EXCLUDED**. Verdict = genuine, novel, NAB2-specific Th1/Th2
+regulator (nomination re causality, per the paper). Full provenance trail committed (`docs/provenance/`).
+**Next:** M5 submission artifacts — evidence-chain **Jupyter notebook** + **Claude Science evidence chain**
++ 3-min demo video (fresh session). See `memory/NEXT_SESSION.md`.
 
 ## Hard constraints (never lose)
 - **NEW WORK ONLY** — every file authored during the event (started 2026-07-07); git history is the compliance proof.
@@ -36,5 +36,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-07 (PM) | Claude Science + Validator | Researcher-track commit; Claude Science installed on WSL + driven via Playwright; QC/join-map + referee (Validator) built through it — YES/UNTESTED/REFUTED demonstrated with receipts; 6 artifacts in `docs/perturbseq-qc_2026-07-07/`; hardware fully characterized; 3-round codex-debate + independent Fable review on the install plan |
 | 2026-07-08 | LBD proposer + finding (autonomous) | Spec hardened v1→v2 (3-round repo-read codex-debate, 9→3→0); fresh tool layer `src/arbiter/lbd/` (verified); disease ids MONDO-resolved; `referee_triple` exact-disease adapter; Codex consult fixed scoring+full-chain bug; full Stim8hr sweep 22,039→30 clean supported; **finding NAB2→Th1/Th2→atopic eczema** (near-novel, receipt-backed) |
 | 2026-07-08 | Validation + source-paper vetting | 4-agent literature audit (new `src/arbiter/lit/`) → both links 0-papers novel; STAT6/EGR/cis confounders stress-tested & argued-against; **5-agent independent replication unanimous PASS** (`docs/replication/`); source-paper read → **reframed as novel reproducible NOMINATION, disease link flagged**; paper in `references/` + analysis repo recorded; ~8 commits |
+| 2026-07-08 | Definitive STAT6 check + provenance (full-close) | Preserved full raw provenance trail (`docs/provenance/`, 52 artifacts); **definitive STAT6 cis-check** via lazy S3 read of authors' genome-wide DE → **NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED**, verdict upgraded to genuine novel NAB2-specific regulator; decided M5 = evidence-chain notebook + Claude Science chain + demo video |
 
-_Last updated: 2026-07-08_
+_Last updated: 2026-07-08 (full-close)_

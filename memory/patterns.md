@@ -35,3 +35,14 @@ table, driven by `pyzobot_join_spec.json`:
 - **HOP 0 GATE first (T4 knockdown-QC):** pass only if >=1 guide `signif_knockdown=True`. Fail -> whole verdict `untested`, STOP. Never report an absent downstream effect as "no effect" when the knockdown failed. This is the artifact catch / hero feature.
 - HOP 1 EFFECT (T1); HOP 2 PROGRAM (T2, faceted by BOTH Ota & Hollbacker contrasts — never collapsed to one); HOP 3 DISEASE (T3, `intersecting_genes` ast.literal_eval-exploded, negative-control rows excluded, `supported` requires FDR<0.05).
 - Per-hop calibrated status (**supported / refuted / untested / flagged**), each carrying the **exact table value** (OR / p-value / effect size / KD flag) as its receipt. Assert nothing not in the tables. Reference impl: `docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`.
+
+### Close the last confounder with the source authors' own deposited data — Noted: 2026-07-08
+When an in-house dataset can't settle a confounder (we lacked per-gene DE for the STAT6 cis-check), the
+original paper's deposited processed data often can — and public repos (here a no-creds S3 bucket via the
+GitHub README's "Data pointers") make it a lazy partial read, not a mega-download. Checking a finding
+against the source authors' own gold-standard data is the strongest possible external validation.
+
+### Provenance = raw trail + IP-safe stripping — Noted: 2026-07-08
+For a full audit trail, preserve raw agent run-logs/prompts/scripts verbatim (the trace is the proof),
+but strip third-party copyrighted text (paper abstracts) to metadata-only, and secret-scan (values +
+patterns) before committing. See `docs/provenance/`.

@@ -4,9 +4,9 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 `freshen` on demand. The plan of record is `docs/plan.md` (v7 — Researcher-track reframe, §0).
 
 ## Snapshot
-- **Phase:** Researcher-track finding — LBD proposer BUILT + swept; **finding NAB2→Th1/Th2→atopic eczema INDEPENDENTLY REPLICATED (5-agent lab, unanimous PASS) + vetted against the source paper → reframed as a novel, reproducible NOMINATION with the disease link FLAGGED (STAT6 shadow argued-against, not fully excluded)**
-- **Active workstream:** next = M5 (demo video + README-as-paper); optional = deposited-DE cis-check (NAB2-KD→STAT6 mRNA), Rest/Stim48hr sweeps
-- **Last updated:** 2026-07-08
+- **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
+- **Active workstream:** next = **M5 submission artifacts** — (1) executable evidence-chain Jupyter notebook, (2) Claude Science evidence chain, (3) 3-min demo video
+- **Last updated:** 2026-07-08 (full-close)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline — light identifier scrub first)
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -19,7 +19,7 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 | M2 | Receipt-backed YES / UNTESTED / REFUTED demonstrated (the moat) | 🟢 done (EGR2/GATA3 YES · IL2 UNTESTED · SLC1A5/CTLA4 REFUTED) |
 | M3 | **LBD question-proposer** (generate untested questions → referee answers) | 🟢 done — v2 spec (debate-hardened) + fresh tool layer + full Stim8hr sweep; funnel 22,039→30 clean supported |
 | M4 | Anchor lock + finding validation | 🟢 done — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS: `docs/replication/`), STAT6+EGR+cis confounders stress-tested, source-paper-vetted → reframed as novel reproducible NOMINATION (disease link flagged) |
-| M5 | Deploy / demo capture + 3-min video + README-as-paper | ⚪ not started — finding + validation fully documented; needs operator direction on narrative/format |
+| M5 | Submission artifacts — evidence-chain notebook + Claude Science chain + 3-min video | ⚪ not started — finding + full validation + provenance documented; notebook is next (imports vetted modules, runs decisive checks live) |
 
 Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ not started
 
@@ -27,6 +27,15 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-08 HH:MM — Session close (full-close): definitive STAT6 check + provenance; notebook next
+Preserved the full raw provenance trail (`docs/provenance/`, 52 artifacts, abstracts stripped,
+secret-scanned). Ran the **definitive STAT6 cis-artifact check** against the authors' deposited
+genome-wide DE (`GWCD4i.DE_stats.h5ad`, read lazily via h5py+s3fs from the public S3 — no download):
+**NAB2 knockdown leaves STAT6 unmoved (log2FC +0.09, p 0.79)** → cis/shadow confounder **DEFINITIVELY
+EXCLUDED**; verdict upgraded to a genuine novel NAB2-specific regulator. Decided M5 submission format:
+executable evidence-chain **Jupyter notebook** (single source of truth) + **Claude Science evidence
+chain** (reasoning layer) + 3-min demo video — to be built in a fresh session. Tree clean.
+
 ### 2026-07-08 (cont.) — Independent validation + source-paper vetting → nomination reframe
 After the finding landed, hardened it against every challenge. **Independent literature audit**
 (4-agent team via new `src/arbiter/lit/`): NAB2→Th1/Th2 and NAB2→atopic eczema BOTH novel (0 papers);

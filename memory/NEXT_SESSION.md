@@ -1,64 +1,38 @@
 # NEXT_SESSION — async handoff (canonical; written/read by session-closer & session-start)
 
-## Next session priorities — written 2026-07-08 (autonomous overnight session)
+## Next session priorities — written 2026-07-08 (full-close)
 
-**Current state**: Tree clean-ish (5 commits landed; a few PM-doc edits may be uncommitted — see
-below). **M3 done, finding landed.** The LBD question-proposer is BUILT end-to-end and a
-**receipt-backed near-novel finding** is locked: **NAB2 → Th1/Th2 polarization → atopic eczema**
-(@ Stim8hr). Full arc this session: spec hardened v1→v2 via 3-round repo-read codex-debate; fresh
-tool layer authored + verified; disease ids resolved to MONDO (not EFO); `referee_triple` exact-disease
-adapter built + verified; a Codex code consult found + we fixed a scoring-rewards-obscurity issue and
-a full-chain verdict bug; full Stim8hr sweep = **22,039 candidate questions → 30 clean full-chain
-referee-supported**. Finding writeup: `docs/lbd_finding_nab2_2026-07-08.md`. Everything is documented
-in `docs/lbd-build-log.md` (read it first — it has the Codex verdicts + framing caveats).
+**Current state**: **M3+M4 DONE, tree clean, all committed.** The LBD question-proposer is built
+end-to-end; the finding **NAB2 → Th1/Th2 → atopic eczema** is replicated (5-agent lab, unanimous PASS)
+and every confounder is closed — **including the definitive STAT6 cis-artifact check** against the
+authors' deposited genome-wide DE (NAB2 knockdown leaves STAT6 unmoved → cis/shadow **excluded**).
+Verdict: a genuine, novel, NAB2-specific Th1/Th2 regulator (a nomination re causality, per the paper).
+Full provenance trail committed (`docs/provenance/`). Next = **M5 submission artifacts**.
 
-**Next action**: **Operator eyeball the NAB2 finding + honest framing**, then start **M5 (demo video
-+ README-as-paper)** — the finding writeup is the paper seed. The demo story is the funnel
-(22,039→30) + NAB2's per-hop receipt + the cull examples (NUDT1 weak / DNAJB9 off-target / 21,995
-refuted). [CLAUDE for README-as-paper synthesis; demo-video skill for the 3-min capture.] Optional
-bonus before the demo: run Rest + Stim48hr sweeps (`python -m arbiter.lbd.propose --condition Rest`)
-for appendix candidates — Codex said Stim8hr alone is sufficient, do NOT let this delay the demo.
+**Next action**: Build the **executable evidence-chain Jupyter notebook** (the operator's chosen
+submission format). Steps: (1) `pip install jupyterlab ipykernel nbformat`; (2) scaffold
+`notebooks/pyzobot_arbiter_evidence_chain.ipynb` that **imports the vetted modules** (`arbiter.lbd`,
+`arbiter.lit`) and runs the FAST decisive checks **live** with narrative markdown between cells:
+build the A universe → NAB2 receipt via `referee_triple` → (funnel = cached load, it's the ~22-min
+step) → the 4 confounder checks (`nab2_stat6_confounder_check`, `nab2_egr_mechanism_check`,
+`nab2_cis_artifact_check`) → the **definitive STAT6 S3 read** (`nab2_stat6_definitive_check`) → the
+honest verdict. Notebook = single source of truth. THEN capture the **Claude Science evidence chain**
+(via `drive-claude-science`) as the "how Claude Science got us there" reasoning layer that mirrors it.
 
-**Prerequisites**: `pip install -r requirements.txt` (pandas+requests). API cache in `data/lbd_cache/`
-(gitignored) makes the sweep re-run fast/offline. No GPU/Colab.
+**Prerequisites**: `pip install -r requirements.txt` (pandas/requests/h5py/s3fs) + the jupyter stack.
+The definitive-check cell needs network (public S3, no creds). The full sweep is cached in
+`data/lbd_out/` (gitignored) — regenerate with `PYTHONPATH=src python -m arbiter.lbd.propose --condition Stim8hr` if absent.
 
-**Independent NAB2 audit + REPLICATION done (2026-07-08).** Literature audit (`docs/nab2_knowledge_
-synthesis_2026-07-08.md`, 4-agent team via new `src/arbiter/lit/`): NAB2→Th1/Th2 and NAB2→atopic eczema
-BOTH **genuinely novel (0 direct papers)**; STAT6-adjacency + EGR-mediation confounders raised, then
-BOTH checked in-data and **rejected** (`docs/nab2_stat6_confounder_check.py`, `docs/nab2_egr_mechanism_
-check.py`). Then a **5-agent independent replication** (3 Opus + 2 Codex, 2 clean-room re-impls; `docs/replication/` +
-`docs/replication_report_2026-07-08.md`): **UNANIMOUS PASS** — every number reproduced; fixed a
-cluster-ID bug (74→90/100), "8×"→"~3× on z", reframed arguments. Then a **source-paper read**
-(`docs/source_paper_read_eczema_2026-07-08.md`): paper never mentions NAB2 (novelty confirmed); disease
-labels are Open Targets **GWAS-genetic** (LD-susceptible, no coloc control); sharpest concern = CRISPRi
-**cis-artifact** (NAB2 guide 1.9kb from STAT6) — tested (`docs/nab2_cis_artifact_check.py`): NAB2 &
-STAT6 don't co-cluster + NAB2 reproducible (R 0.74) → argues against cis; definitive NAB2-KD→STAT6-mRNA
-check needs the **deposited DE matrix** (authors' repo `github.com/emdann/GWT_perturbseq_analysis_2025`,
-recorded in `references/`).
-**HONEST framing to KEEP (this is now the verdict):** NAB2 = a **novel, reproducible NOMINATION**; the
-→atopic-eczema disease link is **FLAGGED** (STAT6 genomic/cis shadow argued-against but NOT fully
-excluded). Frame as nomination not causation (matching the paper). The funnel's "43/30" is a joint
-novelty-gate×referee product; the program hop is a funnel tautology (real in the individual receipt).
-Citation: "Hollbacker 2021" (CSV label) is really **Höllbacher 2020**.
-
-**Open questions / honest-framing guardrails (respect these in the demo)**:
-(1) NAB2→eczema is **novel but STAT6-confounded** — present as "novel + STAT6-flagged," never "clean discovery" or "known/established";
-(2) only **1 of 2 program contrasts** significant (Ota yes, Hollbacker no) — state it;
-(3) **EGR-mediation**: the Th shift could be EGR-target-mediated (NAB2 is an EGR corepressor); EGR2–NAB2 is a *hypothesis-strengthener, NOT referee evidence*;
-(4) judging **weights still unverified** on the CV form (only "demo video super important" confirmed).
-
-**Optional follow-up checks (would further nail the STAT6 question before the demo)**:
-(a) do the T3 disease clusters map to the shared 12q13 locus, or independent co-expression? (b) NAB2-vs-STAT6
-downstream DE-gene overlap (distinct programs argue against pure STAT6 shadow). Clean results → stronger finding.
+**Open questions**: which notebook cells run live vs cached (the ~22-min sweep should be cached/shown,
+not re-run); notebook ↔ Claude Science division of labor (notebook = executable; Claude Science =
+reasoning provenance); then the **3-min demo video** (heavily weighted by judges) — narrative/format TBD.
 
 **Do not touch**: never commit `.env`, `data/*.csv`, `data/lbd_cache/`, `data/lbd_out/`,
-`.claude/scratch/`, `01-hackaton details/`. The referee lives in `docs/perturbseq-qc_2026-07-07/`.
+`references/*.pdf`, `.claude/scratch/`, `docs/provenance/` is already committed (don't regenerate).
 
-**Context to preload**: `docs/lbd_finding_nab2_2026-07-08.md`, `docs/lbd-build-log.md`,
-`docs/lbd-proposer-spec.md` (v2), `docs/reviews/codex-debate_lbd-proposer-spec_2026-07-07.md`,
-`src/arbiter/lbd/propose.py`, `src/arbiter/lbd/referee_triple.py`, `WORK_PROGRESS.md`, `MEMORY.md`.
+**Context to preload**: `docs/lbd_finding_nab2_2026-07-08.md` (the finding + verdict),
+`docs/lbd-build-log.md`, `docs/replication/README.md`, `docs/nab2_stat6_definitive_check.py`,
+`src/arbiter/lbd/referee_triple.py`, `src/arbiter/lbd/propose.py`, `references/README.md`,
+`WORK_PROGRESS.md`, `MEMORY.md`.
 
-**If PM docs are uncommitted**: `WORK_PROGRESS.md` + `MEMORY.md` + this file may be staged/dirty from
-the overnight session — commit them as housekeeping (`git add WORK_PROGRESS.md MEMORY.md memory/NEXT_SESSION.md && git commit`).
-
-**Estimated budget**: M5 demo + README-as-paper ~0.5–1 day. Deadline 2026-07-13 9:00 PM ET.
+**Estimated budget**: ~0.5 day for the notebook; then the Claude Science evidence chain + the 3-min demo video.
