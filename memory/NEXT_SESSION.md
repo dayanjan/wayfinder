@@ -1,17 +1,41 @@
 # NEXT_SESSION — async handoff (canonical; written/read by session-closer & session-start)
 
-## Next session priorities — written 2026-07-07 19:30
+## Next session priorities — written 2026-07-08 (autonomous overnight session)
 
-**Current state**: Full-close, tree clean, all pushed. Researcher track (plan v7). Referee/Validator BUILT + demonstrated (receipt-backed YES / UNTESTED / REFUTED). Claude Science installed + drivable fully headless (the `drive-claude-science` skill, validated E2E zero-click). Strategic reframe locked: **LBD generates the questions → Claude Science + data answers them**. Anchors ranked but NOT yet biology-vetted.
+**Current state**: Tree clean-ish (5 commits landed; a few PM-doc edits may be uncommitted — see
+below). **M3 done, finding landed.** The LBD question-proposer is BUILT end-to-end and a
+**receipt-backed near-novel finding** is locked: **NAB2 → Th1/Th2 polarization → atopic eczema**
+(@ Stim8hr). Full arc this session: spec hardened v1→v2 via 3-round repo-read codex-debate; fresh
+tool layer authored + verified; disease ids resolved to MONDO (not EFO); `referee_triple` exact-disease
+adapter built + verified; a Codex code consult found + we fixed a scoring-rewards-obscurity issue and
+a full-chain verdict bug; full Stim8hr sweep = **22,039 candidate questions → 30 clean full-chain
+referee-supported**. Finding writeup: `docs/lbd_finding_nab2_2026-07-08.md`. Everything is documented
+in `docs/lbd-build-log.md` (read it first — it has the Codex verdicts + framing caveats).
 
-**Next action**: Explore + build the **thin LBD question-proposer** per `docs/lbd-proposer-spec.md`. Start by pinning the disease→EFO/MeSH and program→keyword maps (the one non-mechanical step), then the API clients (PubTator3 / Europe PMC / OpenAlex + Open Targets / GWAS Catalog exclusion) + the co-occurrence/novelty logic; emit `lbd_questions.json` that the existing referee consumes unchanged. [HYBRID: Claude pins maps + scoring; Codex builds clients/logic; Claude reviews.]
+**Next action**: **Operator eyeball the NAB2 finding + honest framing**, then start **M5 (demo video
++ README-as-paper)** — the finding writeup is the paper seed. The demo story is the funnel
+(22,039→30) + NAB2's per-hop receipt + the cull examples (NUDT1 weak / DNAJB9 off-target / 21,995
+refuted). [CLAUDE for README-as-paper synthesis; demo-video skill for the 3-min capture.] Optional
+bonus before the demo: run Rest + Stim48hr sweeps (`python -m arbiter.lbd.propose --condition Rest`)
+for appendix candidates — Codex said Stim8hr alone is sufficient, do NOT let this delay the demo.
 
-**Prerequisites**: none blocking — CPU/API only, no GPU/Colab. Optional NCBI API key raises PubMed to 10 req/s. Referee already at `docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`.
+**Prerequisites**: `pip install -r requirements.txt` (pandas+requests). API cache in `data/lbd_cache/`
+(gitignored) makes the sweep re-run fast/offline. No GPU/Colab.
 
-**Open questions**: (1) vet the biology on ranked anchor candidates (GATA3/STAT4/ITK known-true; ZBTB25/CRIM1/IGSF9B/SLAMF1/ANXA4 non-obvious) before locking; (2) confirm the judging weights on the CV submit form (currently unverified — only "demo video super important" confirmed); (3) scope discipline vs July 13 — the referee alone is already a complete finding, so keep the LBD proposer thin and let it be the generate→answer upgrade.
+**Open questions / honest-framing guardrails (Codex-vetted — respect these in the demo)**:
+(1) NAB2 is **near-novel, NOT novel** — ac_lit=6 is a low noisy count, never say "known/established";
+(2) only **1 of 2 program contrasts** significant (Ota yes, Hollbacker no) — state it;
+(3) the **EGR2–NAB2 corepressor** link is a *hypothesis-strengthener, NOT referee evidence* — subordinate to the receipt;
+(4) judging **weights still unverified** on the CV form (only "demo video super important" confirmed).
 
-**Do not touch**: never commit `.env`, data CSVs, `01-hackaton details/`, `.claude/scratch/`, `memory/install-audit/`. Claude Science's data dir (`~/.claude-science/.../workspaces/`) is scratch/reference, not the repo.
+**Do not touch**: never commit `.env`, `data/*.csv`, `data/lbd_cache/`, `data/lbd_out/`,
+`.claude/scratch/`, `01-hackaton details/`. The referee lives in `docs/perturbseq-qc_2026-07-07/`.
 
-**Context to preload**: `docs/lbd-proposer-spec.md`, `memory/decisions/lbd-question-engine-reframe.md`, `docs/plan.md` (§0 v7), `docs/perturbseq-qc_2026-07-07/pyzobot_referee_results.md`, `docs/claude-science-capabilities.md`, `memory/decisions/hackathon-track-and-facts.md`, `WORK_PROGRESS.md`, `MEMORY.md`.
+**Context to preload**: `docs/lbd_finding_nab2_2026-07-08.md`, `docs/lbd-build-log.md`,
+`docs/lbd-proposer-spec.md` (v2), `docs/reviews/codex-debate_lbd-proposer-spec_2026-07-07.md`,
+`src/arbiter/lbd/propose.py`, `src/arbiter/lbd/referee_triple.py`, `WORK_PROGRESS.md`, `MEMORY.md`.
 
-**Estimated budget**: ~0.5–1 day for the thin LBD proposer (fresh build; delegatable to Codex after the maps are pinned).
+**If PM docs are uncommitted**: `WORK_PROGRESS.md` + `MEMORY.md` + this file may be staged/dirty from
+the overnight session — commit them as housekeeping (`git add WORK_PROGRESS.md MEMORY.md memory/NEXT_SESSION.md && git commit`).
+
+**Estimated budget**: M5 demo + README-as-paper ~0.5–1 day. Deadline 2026-07-13 9:00 PM ET.
