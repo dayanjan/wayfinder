@@ -40,6 +40,13 @@ def _disease_options():
 def _sweep():
     return json.loads((_FIX / "sweep_Stim8hr.json").read_text())
 
+_CS_DIR = _REPO / "docs" / "claude-science-evidence-chain_2026-07-08"
+_CS_FIG = _CS_DIR / "nab2_evidence_chain.png"
+
+@st.cache_data
+def _cs():
+    return json.loads((_CS_DIR / "claude_science_verdict.json").read_text(encoding="utf-8"))
+
 D = _referee_data()
 GENES = _gene_options()
 DISEASES = _disease_options()
@@ -241,6 +248,22 @@ div[role="radiogroup"] label{margin:0;padding:6px 10px;border-radius:7px;}
 .pz-note2 b{color:var(--warn);}
 .pz-foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink3);line-height:1.5;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
 .pz-foot .mono{font-family:'IBM Plex Mono',monospace;}
+/* claude science (screen 3) */
+.pz-panel{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:20px 22px;height:100%;}
+.pz-cslabel{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px;}
+.pz-csnar{font-size:14px;line-height:1.6;color:var(--ink2);}
+.pz-csnar b{color:var(--ink);}
+.pz-callout{background:var(--ok-bg);border:1px solid var(--ok-line);border-left:4px solid var(--ok);border-radius:12px;padding:14px 16px;margin-top:16px;}
+.pz-callout .k{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ok);font-weight:600;letter-spacing:.08em;}
+.pz-callout .t{font-size:14px;margin-top:5px;color:var(--ink);}
+.pz-hop{display:flex;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);}
+.pz-hop:last-child{border-bottom:none;}
+.pz-htag{flex:none;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--ink3);width:74px;}
+.pz-hrec{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.5;}
+.pz-conf{margin-top:14px;background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+.pz-conf .h{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:8px;}
+.pz-conf .row{font-size:12.5px;color:var(--ink2);line-height:1.55;margin-bottom:5px;}
+.pz-conf .row b{color:var(--ink);}
 </style>
 """
 st.markdown(CSS, unsafe_allow_html=True)
@@ -284,6 +307,8 @@ with st.sidebar:
               type="primary" if ss.screen == "referee" else "secondary", on_click=_go, args=("referee",))
     st.button("Hypothesis Engine", key="nav_eng", use_container_width=True,
               type="primary" if ss.screen == "engine" else "secondary", on_click=_go, args=("engine",))
+    st.button("Claude Science", key="nav_cs", use_container_width=True,
+              type="primary" if ss.screen == "claude" else "secondary", on_click=_go, args=("claude",))
     st.markdown('<div class="pz-note">Calibrated language only — consistent&nbsp;with · re-derived · '
                 'refuted · untested · flagged. Never "proven".</div>', unsafe_allow_html=True)
 
@@ -422,9 +447,69 @@ def render_engine():
                 'obscurity, not importance).</div>', unsafe_allow_html=True)
 
 
+# ------------------------------------------------------------------ screen 3: claude science
+def render_claude():
+    cs = _cs()
+    st.markdown('<div class="pz-h1">Claude Science</div>'
+                '<div class="pz-sub">An <strong>independent</strong> Anthropic scientific agent — given '
+                'only the four public tables and the question, not the answer — reasoned through the same '
+                'evidence chain and arrived, independently, at the same verdict. This is the '
+                '<em>how-we-got-there</em> provenance layer.</div>', unsafe_allow_html=True)
+
+    left, right = st.columns([1.12, 1])
+    with left:
+        # narrative + same-verdict callout + compact hop reasoning
+        hops_html = ""
+        for h in cs.get("hops", []):
+            short = h["name"].split(" (")[0]
+            rec = h["receipt"]
+            rec = rec if len(rec) <= 150 else rec[:148] + "…"
+            hops_html += f'<div class="pz-hop"><span class="pz-htag">{short}</span><span class="pz-hrec">{rec}</span></div>'
+        conf = cs.get("confounder_checks", {})
+        conf_rows = ""
+        for k in ("locus", "phenocopy", "reproducibility"):
+            c = conf.get(k) or {}
+            rec = c.get("receipt", "")
+            rec = rec if len(rec) <= 165 else rec[:163] + "…"
+            conf_rows += f'<div class="row"><b>{k}</b> — {rec}</div>'
+        st.markdown(
+            '<div class="pz-panel"><div class="pz-cslabel">Evidence-chain reasoning</div>'
+            '<div class="pz-csnar">Starting from the raw Perturb-seq tables, the agent verified the '
+            '<b>NAB2 knockdown</b>, confirmed a real on-target effect, traced the shift in the '
+            '<b>Th1/Th2 program</b>, and tested enrichment against the <b>atopic-eczema</b> modules — '
+            'then stress-tested the sharpest confounder (a STAT6 <em>cis</em>-shadow).</div>'
+            '<div class="pz-callout"><div class="k">SAME VERDICT · SUPPORTED</div>'
+            '<div class="t">Consistent with a re-derived NAB2 → Th1/Th2 → atopic-eczema chain.</div></div>'
+            f'<div style="margin-top:16px">{hops_html}</div>'
+            f'<div class="pz-conf"><div class="h">Confounder stress-test — STAT6 cis-artifact</div>{conf_rows}</div>'
+            '</div>', unsafe_allow_html=True)
+    with right:
+        st.markdown('<div class="pz-cslabel">Publication-style figure · 6 panels (its own code)</div>',
+                    unsafe_allow_html=True)
+        if _CS_FIG.exists():
+            st.image(str(_CS_FIG), use_container_width=True)
+        else:
+            st.markdown('<div class="pz-panel">figure not found — see docs/claude-science-evidence-chain_2026-07-08/</div>',
+                        unsafe_allow_html=True)
+
+    # live deep-dive — operator-only stretch (honest; not a simulated run)
+    st.markdown('<div class="pz-lbl" style="margin-top:20px">Live deep-dive</div>', unsafe_allow_html=True)
+    b1, b2 = st.columns([1, 2.2])
+    with b1:
+        st.button("Run a fresh Claude Science analysis", disabled=True, use_container_width=True)
+    with b2:
+        st.markdown('<div style="font-size:12.5px;color:var(--ink3);line-height:1.5;padding-top:6px">'
+                    'Operator-only stretch — drives Claude Science headless (~several minutes) via the '
+                    '<span style="font-family:\'IBM Plex Mono\',monospace">drive-claude-science</span> harness. '
+                    'The reasoning above is a <b style="color:var(--ink2)">completed run</b> (committed provenance); '
+                    'a fresh run reproduces it live.</div>', unsafe_allow_html=True)
+
+
 # ------------------------------------------------------------------ dispatch + footer
 if ss.screen == "engine":
     render_engine()
+elif ss.screen == "claude":
+    render_claude()
 else:
     render_referee()
 

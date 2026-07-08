@@ -31,7 +31,12 @@ gate), **NAB2 → multiple sclerosis = REFUTED** (clean disease-hop NO; same gen
 - **Screen 2 · Hypothesis Engine** — the LBD funnel (3,935 → 22,039 → 43 → 30 + full chain-class
   breakdown) from `app/fixtures/`, the 30-survivor table, and a DOM-clickable "re-adjudicate a survivor"
   control that runs it live in the Referee.
+- **Screen 3 · Claude Science** — renders the pre-computed CS evidence chain (verdict json + the 6-panel
+  figure from `docs/claude-science-evidence-chain_2026-07-08/`) as PROVENANCE: the reasoning narrative,
+  the "SAME VERDICT · SUPPORTED" callout, the 4 hop receipts, and the STAT6 confounder stress-test. The
+  "Run a fresh Claude Science analysis" button is **disabled / operator-only** (honest — the live trigger
+  is the stretch behind the drive-claude-science harness; no simulated run).
 
 ## Not yet built (post-preflight / stretch, per the debate)
-Screen 3 (Claude Science lane — render the pre-computed evidence chain), the light-theme toggle, and the
-operator-only live Claude Science trigger. See `docs/plans/streamlit_workbench_plan_2026-07-08.md`.
+The light-theme toggle, and the operator-only **live** Claude Science trigger (wired to
+drive-claude-science). See `docs/plans/streamlit_workbench_plan_2026-07-08.md`.
