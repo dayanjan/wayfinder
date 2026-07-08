@@ -51,10 +51,13 @@ literature has not made.* Not "proven," not "discovered."
   ({asthma, atopic eczema}), so frame NAB2 as *"a strong, novel regulator of the same type-2/atopic
   axis STAT6 governs,"* not as a STAT6-independent discovery.
 - **One of two program contrasts** is significant (Ota strong; Hollbacker n.s.) — reported, not hidden.
-- **EGR-mediation (mechanism caveat):** NAB2's entire documented T-cell role is as an EGR corepressor;
-  every published Th-relevant effect in this axis runs through EGR1/2/3, not NAB2 as an independent
-  driver. The shift could be EGR-target-mediated. The EGR2–NAB2 relationship is a *hypothesis-
-  strengthener, not referee evidence* — subordinate it to the receipt.
+- **EGR-mediation (mechanism caveat) — checked, weakened.** NAB2 is an EGR corepressor, so the shift
+  could a priori be EGR-mediated. But (i) NAB2-KD moves the program the *same* way as EGR2-KD, not
+  opposite (inconsistent with NAB2 just de-repressing EGR2); (ii) NAB2's disease profile is narrow
+  ({asthma, atopic eczema}) vs EGR2's broad 11/12 — a distinct effect, not inherited from EGR2;
+  (iii) NAB2's paralog NAB1 goes the *opposite* (Th2) way with 0 disease support. So NAB2 looks like
+  a genuine atopy-specific regulator, not an EGR2 proxy (`docs/nab2_egr_mechanism_check.py`). The
+  EGR2–NAB2 relationship remains a *hypothesis-strengthener, not referee evidence*.
 
 ## The cull is real (honesty examples from the same run)
 - **NUDT1 × type 1 diabetes** — the *only* pure-disjoint (zero-literature) supported hit, but a

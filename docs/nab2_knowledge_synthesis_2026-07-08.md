@@ -31,9 +31,22 @@ the project by surfacing exactly the two skeptical caveats a good referee must f
      strong **co-regulator of the same type-2/atopic axis** STAT6 masters (biologically coherent for
      neighbors), not with a pure artifact. Frame it as "NAB2 is a strong, novel regulator of the
      atopic/Th axis — the same axis STAT6 governs," not as a STAT6-independent discovery.
-2. **EGR-mediation caveat (mechanism).** NAB2's entire documented T-cell role is as an **EGR
-   corepressor**; every published Th-relevant effect in this axis runs through EGR1/EGR2/EGR3, not
-   NAB2 as an independent driver. The observed program shift could be EGR-target-mediated.
+2. **EGR-mediation caveat (mechanism) — checked, substantially weakened.** NAB2's documented T-cell
+   role is as an **EGR corepressor**, so the shift could a priori be EGR-target-mediated. Our-data
+   mechanism check (2026-07-08, `docs/nab2_egr_mechanism_check.py`) argues **against** simple
+   EGR-mediation on three independent grounds:
+   - **Wrong direction.** If NAB2-KD worked by de-repressing EGR2 (removing the brake → more EGR2),
+     it should look *opposite* to EGR2-KD. Instead NAB2-KD and EGR2-KD are the **same** direction
+     (both Th1-associated) — inconsistent with NAB2 acting purely as EGR2's brake.
+   - **Different disease specificity.** EGR2-KD is referee-supported for **11/12 diseases** (a broad
+     pan-autoimmune hub — matches EGR2's master-tolerance role, a positive control); NAB2-KD is
+     supported for **only {asthma, atopic eczema}**. An EGR2-mediated effect would inherit EGR2's
+     broad profile; NAB2's is narrowly atopic → a distinct effect.
+   - **NAB2 ≠ its paralog.** NAB1 (the other EGR corepressor) shifts the program the **opposite**
+     way (Th2) and supports 0 diseases — so this is not generic NAB/EGR-corepressor biology.
+   *Caveat on the caveat:* this compares perturbation phenotypes (no direct EGR-activity readout; no
+   downstream gene lists; NAB2 & EGR2 are significant in different reference contrasts). But the
+   disease-specificity divergence is a clean signal that NAB2's effect is not merely EGR2's.
 
 **This is the project's thesis in action:** the tool proposed a genuinely unexplored hypothesis;
 an independent audit confirmed the novelty *and* caught a confounder a naive pipeline would ship
@@ -93,7 +106,9 @@ STAT6 adjacency and EGR mediation**, not as a clean discovery.
   12q13 artifact; STAT6 not in them (see caveat 1). **Confounder substantially reduced.**
 - **NAB2 vs STAT6 comparison:** ✅ done — same disease profile + program direction, but NAB2's
   program effect is ~8× stronger; residual caveat is shared-axis co-regulation, not artifact.
-- **Still optional (mechanism):** an EGR-target-overlap check to address the EGR-mediation caveat.
+- **Mechanism (EGR-mediation):** ✅ done — NAB2-KD is not a simple EGR2 de-repression (wrong
+  direction, distinct narrow-atopic disease profile vs EGR2's broad one, opposite to paralog NAB1).
+  Deeper direct test (EGR-target-DEG overlap) would need per-perturbation gene lists we don't have.
 
 ## Method & sources
 4 independent Claude agents (molecular / immunology / disease / genetics), each over the 155-paper
