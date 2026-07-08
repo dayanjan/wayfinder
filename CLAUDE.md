@@ -1,6 +1,6 @@
 # PyZoBot Arbiter — project map
 
-Hackathon build (*Built with Claude: Life Sciences*, Builder track). A **hypothesis referee**: Claude agents adjudicate a mechanistic T-cell claim and return a verdict with a **receipt for every hop**. Full plan: `docs/plan.md` (v6). This file is the lean map.
+Hackathon build (*Built with Claude: Life Sciences*, **Researcher track — a researcher who also builds**). A **hypothesis referee**: Claude agents adjudicate a mechanistic T-cell claim and return a verdict with a **receipt for every hop**. The framing: a researcher who builds their own instruments — the referee, the LBD question-engine, and the Claude-Science automation are tools built *to ask and answer the research questions*. The deliverable is a **reproducible T-cell finding + how Claude Science reached it**; the tooling is the method/vehicle, and the builder-craft is evidence of a scientist who can build to get the science done. Full plan: `docs/plan.md` (v7). This file is the lean map.
 
 ## The thesis (don't lose this)
 The edge is the **confident, receipt-backed NO** — refuting a plausible claim with a real experimental receipt, and catching artifacts (failed knockdown -> *untested*, not *negative*). Falsification, not confirmation, is the moat. The knockdown-QC gate is a **hero feature**, not a footnote.

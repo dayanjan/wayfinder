@@ -166,9 +166,9 @@ remove inventory deltas; delete the D: data dir. Nothing on D: is created before
 ## 11. Parallel (non-blocking) -- track reconciliation
 
 The operator chose **Researcher-primary** this session (with "do both" = the Arbiter tool as the
-vehicle). `AGENTS.md`, `docs/plan.md`, and `CLAUDE.md` still say Builder-track and MUST be updated
-to reflect Researcher-primary + tool-as-vehicle + Gladstone-Special eligibility. This does not
-block the install but must not be forgotten.
+vehicle). **DONE 2026-07-08:** `CLAUDE.md`, `AGENTS.md`, `docs/plan.md`, and `README.md` updated to
+**Researcher — a researcher who also builds** (tool-as-vehicle + builder-craft as evidence of a
+scientist who builds to get the science done; Gladstone-Special eligibility noted).
 
 ---
 

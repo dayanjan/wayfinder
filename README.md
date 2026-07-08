@@ -2,7 +2,7 @@
 
 **A hypothesis referee for T-cell immunology.** Give it a mechanistic claim — *"gene G regulates T-cell program P implicated in autoimmune disease D"* — and Claude agents adjudicate it: gather the literature evidence, then **validate each hop against real experimental data**, and return a verdict with a **receipt for every hop** — *supported*, *refuted*, or *untested (knockdown failed)*.
 
-> Built for *Built with Claude: Life Sciences* (Anthropic × Gladstone Institutes), July 2026. Builder track.
+> Built for *Built with Claude: Life Sciences* (Anthropic × Gladstone Institutes), July 2026. **Researcher track — a researcher who also builds:** the deliverable is a reproducible T-cell finding reached through Claude Science, and the referee / question-engine are the instruments built to *ask and answer* the research questions.
 
 ## Why this exists
 

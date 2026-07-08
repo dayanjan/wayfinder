@@ -1,6 +1,6 @@
 # AGENTS.md — cross-agent brief (Codex & other agents)
 
-Companion to `CLAUDE.md`. Read both. This project is a hackathon Builder-track entry: **PyZoBot Arbiter**, a hypothesis referee that validates T-cell mechanistic claims against real Perturb-seq data, returning a verdict with a receipt per hop.
+Companion to `CLAUDE.md`. Read both. This project is a hackathon **Researcher-track** entry framed as *a researcher who also builds*: **PyZoBot Arbiter**, a hypothesis referee that validates T-cell mechanistic claims against real Perturb-seq data, returning a verdict with a receipt per hop. The deliverable is a **reproducible finding + how Claude Science reached it**; the referee / LBD engine / Claude-Science automation are instruments the researcher built to *ask and answer* the research questions (the tool is the method/vehicle, not a product to adopt).
 
 ## Stack
 - Python >=3.11. Package/dep tooling: `uv` (or `pip` + venv). Data: `pandas` over local CSVs.

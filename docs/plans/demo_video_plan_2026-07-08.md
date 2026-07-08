@@ -4,14 +4,15 @@
 (*Built with Claude: Life Sciences*). Demo is **30%** of judging (Claude Use 25% · Impact 25% ·
 Depth 20%), so this is the single heaviest-weighted deliverable. Deadline 2026-07-13 9:00 PM ET.
 
-**Track (resolved in debate R2/F-011).** The **committed track is RESEARCHER** — `docs/plan.md` v7
-("Researcher-track pivot, committed 2026-07-07"), `WORK_PROGRESS.md`, and `MEMORY.md` all say so. NOTE:
-`CLAUDE.md:3` and `AGENTS.md:3` still say "Builder track" — they are **stale** (reference plan v6) and
-should be corrected by the operator. Researcher-track framing shapes this video: the deliverable is a
-**reproducible T-cell finding + how Claude Science got us there**, and the referee is the **method/
-vehicle** that produces and stress-tests it — so the narration leads with the *finding and the method's
-rigor* (the confident NO), not "here's a product to adopt." The interactive referee is still the best
-way to *show the method working live*; a Claude Science beat earns the "how CS got us there" credit.
+**Track (resolved in debate R2/F-011; reframed per operator 2026-07-08).** Track = **RESEARCHER, framed
+as *a researcher who also builds*** — a scientist who builds their own instruments (the referee, the LBD
+question-engine, the Claude-Science automation) *to ask and answer the research questions*. The
+deliverable is a **reproducible T-cell finding + how Claude Science got us there**; the tooling is the
+method/vehicle, and the builder-craft is evidence of a researcher who can build to get the science done.
+(`CLAUDE.md` + `AGENTS.md` updated to this framing 2026-07-08.) So the narration leads with the *finding
+and the method's rigor* (the confident NO) and shows the referee working live as the instrument — a
+Claude Science beat earns the "how CS got us there" credit — while the interactive build itself quietly
+demonstrates the "researcher who builds" story.
 
 **Thesis to sell in 3 minutes (do not lose this).** The edge is the **confident, receipt-backed NO** —
 a referee that adjudicates a mechanistic T-cell claim, returns a receipt for every hop, and is willing
@@ -189,5 +190,6 @@ The 3-round codex-debate converged; the decisions above are settled. During prod
    Scene 4 first, never Scene 2).
 4. **Screen-only + calibrated-language gates.** `grep_gate.mjs` (no fetch/API) + the step-2a
    calibrated-language grep both green before recording; transcription gate PASS is the acceptance test.
-5. **Track housekeeping (operator).** Correct `CLAUDE.md:3` + `AGENTS.md:3` "Builder track" → Researcher
-   (stale since the v7 pivot) — independent of the video, but do it before submission.
+5. **Track framing (done 2026-07-08).** `CLAUDE.md` + `AGENTS.md` updated to **Researcher — a researcher
+   who also builds**; the video carries the same framing (finding + method-rigor first; the live build
+   quietly demonstrates the builder-craft).
