@@ -1,0 +1,119 @@
+{
+ "round_number": 2,
+ "position_summary": "Claude\u2019s revision addresses the substantive repo-contract problems: the HOP-0-only branch, full answer taxonomy, funnel numbers, CS figure path, and demo-video harness assumptions check out. I would not force a cold UNTESTED opener: a very short YES-first beat is defensible because it teaches that the same referee can support claims before it refuses them, but only if the handoff artifact stops carrying stale overclaims and the final script gives UNTESTED the first real dwell.",
+ "findings": [
+  {
+   "id": "F-006",
+   "title": "Calibrated-language fix is incomplete in the actual plan artifact",
+   "severity": 4,
+   "likelihood": 4,
+   "blast_radius": 3,
+   "priority": "P1",
+   "evidence": "Claude says the video drops definitive/excluded wording, but the checked-in plan still says the hybrid montage includes \u201cthe definitive STAT6 exclusion\u201d at docs/plans/demo_video_plan_2026-07-08.md:62. Repo memory/work-progress files also still contain \u201cDEFINITIVELY EXCLUDED,\u201d but the demo plan is the production-critical artifact.",
+   "concern_path": "The operator writes narration or on-screen text from the option table instead of the later corrected Scene 5 wording. The final video then violates AGENTS/CLAUDE calibrated-language rules despite the scene paragraph being fixed.",
+   "suggested_action": "Patch the actual demo plan everywhere, not just the scene text: use \u201cSTAT6 confounder check\u201d or \u201ccis-artifact explanation refuted by this check,\u201d and add a final script grep for discovered/proven/definitive/excluded before recording.",
+   "novelty_flag": false,
+   "concern_type": "correctness"
+  },
+  {
+   "id": "F-008",
+   "title": "Input-scope overclaim remains in the recommendation paragraph",
+   "severity": 3,
+   "likelihood": 4,
+   "blast_radius": 3,
+   "priority": "P2",
+   "evidence": "Claude accepted the fix, but docs/plans/demo_video_plan_2026-07-08.md:64-66 still says \u201cType any gene\u2192disease,\u201d while the detailed build step later constrains disease selection to atlas-backed modules and gene selection to the A/measured universe.",
+   "concern_path": "The final narration or UI copy may inherit the broader promise from the recommendation paragraph. That invites judges to expect general-purpose biology adjudication instead of a deterministic referee over this Perturb-seq atlas and eligible disease set.",
+   "suggested_action": "Replace the stale recommendation sentence with \u201cchoose a perturbation gene and an atlas-backed disease module,\u201d matching the UI contract.",
+   "novelty_flag": true,
+   "concern_type": "correctness"
+  },
+  {
+   "id": "F-010",
+   "title": "The revised plan artifact is internally inconsistent with Claude\u2019s accepted fixes",
+   "severity": 4,
+   "likelihood": 4,
+   "blast_radius": 4,
+   "priority": "P1",
+   "evidence": "The actual plan still contains stale production guidance: Option B says the UI renders \u201cthe 4-hop receipt chain\u201d at docs/plans/demo_video_plan_2026-07-08.md:61 even though SATB1 must render one HOP-0 card; Option C still says \u201cdefinitive STAT6 exclusion\u201d at line 62; the recommendation still says \u201cType any gene\u2192disease\u201d at lines 64-66; and the open questions still ask whether \u201cleading with the funnel (Scene 1)\u201d is best at lines 166-167 even though the revised arc no longer leads with a funnel.",
+   "concern_path": "A solo builder under a deadline follows whichever paragraph is nearest while implementing the UI, narration, or scene pack. The result can regress to the pre-debate shape even though Claude\u2019s revision text appears correct.",
+   "suggested_action": "Before round 3 convergence, require one canonical patched plan with stale phrases removed and a single scene order. Treat the prose revision as not production-ready until the file itself is coherent.",
+   "novelty_flag": false,
+   "concern_type": "correctness"
+  },
+  {
+   "id": "F-011",
+   "title": "Builder-track positioning is contradicted by the demo plan\u2019s Researcher-track label",
+   "severity": 3,
+   "likelihood": 3,
+   "blast_radius": 3,
+   "priority": "P2",
+   "evidence": "The user/AGENTS framing says this is a hackathon Builder-track entry, but docs/plans/demo_video_plan_2026-07-08.md:3-4 labels it \u201cResearcher track.\u201d",
+   "concern_path": "The demo strategy may overweight scientific finding exposition and underweight product-building proof. For Builder judging, this strengthens the case for a real interactive referee UI and weakens a notebook-only fallback.",
+   "suggested_action": "Correct the track label and explicitly map the video priorities to Builder scoring: live product interaction first, science depth second.",
+   "novelty_flag": true,
+   "concern_type": "correctness"
+  },
+  {
+   "id": "F-012",
+   "title": "The preflight gate proves one pass, but not repeatability under Streamlit reruns",
+   "severity": 3,
+   "likelihood": 4,
+   "blast_radius": 3,
+   "priority": "P2",
+   "evidence": "The demo-video skill emphasizes fixture re-runnability and real screen-only actions; harness.mjs supports visible locator actions via act() at lines 178-184 and timing via sceneStart/untilT/sceneEnd at lines 114-128, while grep_gate.mjs forbids fetch/page.request/API shortcuts at lines 19-25. Claude\u2019s preflight requires a Playwright smoke script clicking all three cases once, but does not require a second clean run or explicit waits for Streamlit rerun completion/results text.",
+   "concern_path": "A Streamlit widget change reruns the page; a one-pass smoke can pass while the actual recording captures stale or loading state. This is the remaining demo-production risk after the contract fixes.",
+   "suggested_action": "Make preflight require two consecutive screen-only smoke runs from a fresh browser context, with waits on visible result text for supported, untested, and refuted_for_c before recording.",
+   "novelty_flag": true,
+   "concern_type": "correctness"
+  }
+ ],
+ "escalated_findings": [
+  {
+   "prior_finding_id": "F-006",
+   "rationale": "Claude fixed the intended Scene 5 wording, but not all production-facing wording in the actual plan artifact; the stale \u201cdefinitive STAT6 exclusion\u201d phrase remains in the recommended surface table."
+  },
+  {
+   "prior_finding_id": "F-008",
+   "rationale": "Claude accepted the narrower input-scope language, but the checked-in plan still says \u201cType any gene\u2192disease\u201d in the recommendation paragraph."
+  }
+ ],
+ "dropped_findings": [
+  {
+   "prior_finding_id": "F-001",
+   "rationale": "Adequately addressed with a defensible nuance. I would keep the fast YES opener, because a refusal is more persuasive after the same live referee demonstrates it can support a real signal. The non-negotiable is that Scene 2 must be the first long interaction and the title card must prime refusal upfront."
+  },
+  {
+   "prior_finding_id": "F-002",
+   "rationale": "Adequately addressed in the detailed UI contract: repo verification confirms SATB1/asthma returns answer='untested' with one HOP-0 hop, and the revised plan specifies the halted-chain branch."
+  },
+  {
+   "prior_finding_id": "F-003",
+   "rationale": "Adequately addressed. The revised taxonomy matches referee_triple.py lines 121-132: supported, supported_weak, supported_flagged, untested, untested_for_c, refuted_for_c, refuted_effect, and refuted_program."
+  },
+  {
+   "prior_finding_id": "F-004",
+   "rationale": "Adequately addressed. The plan now routes Scene 5 to the pre-rendered CS figure, whose PNG path exists, and avoids live S3 execution during recording."
+  },
+  {
+   "prior_finding_id": "F-005",
+   "rationale": "Adequately addressed. The revised funnel narration matches data/lbd_out/sweep_Stim8hr.json: 3,935 A genes, 22,039 eligible pairs, 43 disease-C-supported, 30 clean supported, 10 weak, 3 flagged, 1 refuted_effect, and 21,995 refuted_for_c."
+  },
+  {
+   "prior_finding_id": "F-007",
+   "rationale": "Adequately addressed at the planning level: the revised preflight explicitly adds streamlit, launches the app, verifies three live triples, and requires a Playwright smoke script. Implementation is still pending, but that is no longer a plan-quality defect."
+  },
+  {
+   "prior_finding_id": "F-009",
+   "rationale": "Adequately addressed in principle and folded into the preflight. Harness verification confirms screen-only locator-driven interactions are supported and API shortcuts are grep-gated."
+  }
+ ],
+ "new_findings": [
+  "F-010",
+  "F-011",
+  "F-012"
+ ],
+ "convergence_status": "still iterating",
+ "convergence_sanding_warning": null,
+ "recommended_next_question": "For final round 3, Claude should settle the canonical production plan: patch the stale artifact text, explicitly choose YES-first versus cold-UNTESTED, and define the repeatable two-run Streamlit preflight that must pass before recording."
+}

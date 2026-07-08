@@ -1,0 +1,47 @@
+{
+ "round_number": 3,
+ "position_summary": "The repo checks mostly support Claude's round-3 claims: the high-risk stale phrases around \u201cany gene\u201d and \u201c4-hop receipt chain renders\u201d are gone, the Researcher-track pivot is real in `docs/plan.md`, and the planned UI branches match the current `referee_triple` answer taxonomy. One production-facing inconsistency remains in the actual demo-plan artifact: it still carries obsolete debate-open-question text after Claude says the arc is settled.",
+ "findings": [
+  {
+   "id": "F-010",
+   "title": "Canonical plan still contains stale open-question text after the arc was supposedly settled",
+   "severity": 3,
+   "likelihood": 4,
+   "blast_radius": 3,
+   "priority": "P2",
+   "evidence": "`docs/plans/demo_video_plan_2026-07-08.md` still says \u201cOpen question still on the table (debate R2)\u201d at line 118 and still asks whether \u201cleading with the funnel (Scene 1)\u201d is best at line 182, even though the chosen arc no longer leads with a funnel and Claude's round-3 position explicitly settles fast YES-first over cold-UNTESTED.",
+   "concern_path": "During production, the operator may treat the plan as unresolved or may waste time revisiting a decision the debate already settled; worse, the stale \u201cleading with the funnel (Scene 1)\u201d wording points at an obsolete scene order and weakens the final pre-production handoff.",
+   "suggested_action": "Remove the debate-open-question block and replace section 6 with final production watchpoints only: Streamlit-vs-notebook fallback trigger, 180s timing, and screen-only two-run preflight. State fast YES-first + long UNTESTED dwell as the settled arc.",
+   "novelty_flag": false,
+   "concern_type": "correctness"
+  }
+ ],
+ "escalated_findings": [
+  {
+   "prior_finding_id": "F-010",
+   "rationale": "Partially addressed but not fully: the most dangerous stale surface claims were removed, but the canonical artifact still contains obsolete open-question text that contradicts Claude's claimed settled arc."
+  }
+ ],
+ "dropped_findings": [
+  {
+   "prior_finding_id": "F-006",
+   "rationale": "The stale \u201cdefinitive STAT6 exclusion\u201d production wording is gone. Remaining `definitive/definitively/excluded` hits are deliberate examples inside the language rule and grep gate, not the narration recommendation."
+  },
+  {
+   "prior_finding_id": "F-008",
+   "rationale": "The recommendation now scopes inputs to a perturbation gene and an atlas-backed disease module; the old \u201cType any gene\u2192disease\u201d overclaim is absent."
+  },
+  {
+   "prior_finding_id": "F-011",
+   "rationale": "Repo verification supports Claude's correction: `docs/plan.md` v7 commits to RESEARCHER, while `CLAUDE.md:3` and `AGENTS.md:3` still say Builder and are stale. The video plan correctly flags this."
+  },
+  {
+   "prior_finding_id": "F-012",
+   "rationale": "The plan now requires visible-text assertions and two consecutive smoke runs from a fresh browser context before recording."
+  }
+ ],
+ "new_findings": [],
+ "convergence_status": "still iterating",
+ "convergence_sanding_warning": null,
+ "recommended_next_question": "the single thing to watch during production: does the recorded cut preserve the falsification spine by giving UNTESTED the first long dwell and making the refusal visibly live, not just narrated?"
+}
