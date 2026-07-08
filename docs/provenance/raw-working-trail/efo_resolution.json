@@ -1,0 +1,128 @@
+[
+  {
+    "disease": "asthma",
+    "my_draft": "EFO_0000270",
+    "opentargets_id": "MONDO_0004979",
+    "opentargets_name": "asthma",
+    "ols_id": "MONDO:0004979",
+    "ols_label": "asthma",
+    "match": "DIFF"
+  },
+  {
+    "disease": "Crohn's disease",
+    "my_draft": "EFO_0000384",
+    "opentargets_id": "MONDO_0005011",
+    "opentargets_name": "Crohn disease",
+    "ols_id": "MONDO:0005011",
+    "ols_label": "Crohn disease",
+    "match": "DIFF"
+  },
+  {
+    "disease": "ulcerative colitis",
+    "my_draft": "EFO_0000729",
+    "opentargets_id": "MONDO_0005101",
+    "opentargets_name": "ulcerative colitis",
+    "ols_id": "MONDO:0005101",
+    "ols_label": "ulcerative colitis",
+    "match": "DIFF"
+  },
+  {
+    "disease": "rheumatoid arthritis",
+    "my_draft": "EFO_0000685",
+    "opentargets_id": "MONDO_0008383",
+    "opentargets_name": "rheumatoid arthritis",
+    "ols_id": "MONDO:0008383",
+    "ols_label": "rheumatoid arthritis",
+    "match": "DIFF"
+  },
+  {
+    "disease": "systemic lupus erythematosus",
+    "my_draft": "EFO_0002690",
+    "opentargets_id": "MONDO_0007915",
+    "opentargets_name": "systemic lupus erythematosus",
+    "ols_id": "MONDO:0007915",
+    "ols_label": "systemic lupus erythematosus",
+    "match": "DIFF"
+  },
+  {
+    "disease": "psoriasis",
+    "my_draft": "EFO_0000676",
+    "opentargets_id": "MONDO_0005083",
+    "opentargets_name": "psoriasis",
+    "ols_id": "MONDO:0005083",
+    "ols_label": "psoriasis",
+    "match": "DIFF"
+  },
+  {
+    "disease": "multiple sclerosis",
+    "my_draft": "EFO_0003885",
+    "opentargets_id": "MONDO_0005301",
+    "opentargets_name": "multiple sclerosis",
+    "ols_id": "MONDO:0005301",
+    "ols_label": "multiple sclerosis",
+    "match": "DIFF"
+  },
+  {
+    "disease": "type 1 diabetes mellitus",
+    "my_draft": "EFO_0001359",
+    "opentargets_id": "MONDO_0005147",
+    "opentargets_name": "type 1 diabetes mellitus",
+    "ols_id": "MONDO:0005147",
+    "ols_label": "type 1 diabetes mellitus",
+    "match": "DIFF"
+  },
+  {
+    "disease": "celiac disease",
+    "my_draft": "EFO_0001060",
+    "opentargets_id": "MONDO_0005130",
+    "opentargets_name": "celiac disease",
+    "ols_id": "MONDO:0005130",
+    "ols_label": "celiac disease",
+    "match": "DIFF"
+  },
+  {
+    "disease": "ankylosing spondylitis",
+    "my_draft": "EFO_0003898",
+    "opentargets_id": "MONDO_0005306",
+    "opentargets_name": "ankylosing spondylitis",
+    "ols_id": "MONDO:0005306",
+    "ols_label": "ankylosing spondylitis",
+    "match": "DIFF"
+  },
+  {
+    "disease": "atopic eczema",
+    "my_draft": "EFO_0000274",
+    "opentargets_id": "MONDO_0004980",
+    "opentargets_name": "atopic eczema",
+    "ols_id": "MONDO:0004980",
+    "ols_label": "atopic eczema",
+    "match": "DIFF"
+  },
+  {
+    "disease": "Hashimoto's thyroiditis",
+    "my_draft": "EFO_1001459",
+    "opentargets_id": "MONDO_0007699",
+    "opentargets_name": "Hashimoto thyroiditis",
+    "ols_id": "MONDO:0007699",
+    "ols_label": "Hashimoto thyroiditis",
+    "match": "DIFF"
+  },
+  {
+    "disease": "autoimmune disease",
+    "my_draft": "EFO_0005140",
+    "opentargets_id": "MONDO_0007179",
+    "opentargets_name": "autoimmune disease",
+    "ols_id": "MONDO:0007179",
+    "ols_label": "autoimmune disease",
+    "match": "DIFF"
+  },
+  {
+    "disease": "inflammatory bowel disease",
+    "my_draft": "EFO_0003767",
+    "opentargets_id": "MONDO_0005265",
+    "opentargets_name": "inflammatory bowel disease",
+    "ols_id": "MONDO:0005265",
+    "ols_label": "inflammatory bowel disease",
+    "match": "DIFF"
+  }
+]

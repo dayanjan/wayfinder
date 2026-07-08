@@ -1,0 +1,657 @@
+Reading prompt from stdin...
+OpenAI Codex v0.141.0
+--------
+workdir: C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f4119-b5b5-7270-ba2c-997d1413928b
+--------
+user
+You are an INDEPENDENT lab, read-only in this repo, RE-IMPLEMENTING another lab's key result FROM
+SCRATCH to see if it reproduces. No cutting corners — write your OWN fresh analysis; do NOT import
+their `arbiter.lbd` modules for the numbers.
+
+Read first: `.claude/scratch/lbd-debate/REPLICATION_TARGETS.md` (claims A–E + raw-data schema).
+
+Repo path has spaces — quote it. pandas is installed. You are read-only (read CSVs, print to stdout;
+no file writes needed).
+
+## Task 1 — re-derive the NAB2 receipt (CLAIM SET A) with your OWN pandas code
+Load the four raw CSVs directly and independently compute, for NAB2 @ Stim8hr:
+- GATE (T4): how many NAB2 guides have signif_knockdown=True, best adj_p, mean guide vs NTC expr.
+- EFFECT (T1): ontarget_significant, ontarget_effect_size, n_downstream, offtarget_flag.
+- PROGRAM (T2): NAB2's log_fc/zscore/adj_p in BOTH contrasts; which are significant + direction.
+- DISEASE (T3): explode intersecting_genes; find NAB2's rows for disease=="atopic eczema" AND
+  gene_set=="downstream_Stim8hr"; report every (cluster, odds_ratio, p_adj_fdr); is ≥1 FDR<0.05?
+Report PASS/FAIL vs claims A1–A4 with YOUR exact numbers.
+
+## Task 2 — re-implement the full-chain classifier (CLAIM SET B3) FROM SCRATCH
+Write your own function that, for a (gene, disease, condition) triple, returns one of
+{supported, supported_weak(effect n_downstream==0), supported_flagged(offtarget), refuted_effect,
+refuted_program, refuted_for_c, untested} using ONLY the raw CSVs and the same rules (gate: ≥1
+signif guide; effect: ontarget_significant OR n_downstream>0, flagged if offtarget; program: ≥1 T2
+contrast adj_p<0.05; disease: exact disease FDR<0.05). Then build the A universe yourself (KD-gate ∩
+effect ∩ program-significant T2 adj_p<0.05), run your classifier over A × the 12 eligible diseases
+(read the 12 from T3, excluding the 2 umbrella terms "autoimmune disease" + "inflammatory bowel
+disease"), and report YOUR chain-class counts. Compare to claim B3 (43 disease-C-supported; 30 clean;
+10 weak; 3 flagged; 1 refuted-effect). Note: for the disease-C gate you can consider ALL A genes ×
+12 diseases (skip the literature/OpenTargets pre-gate) — so your disease-C-supported total may be
+LARGER than 43; what matters is whether the CLEAN-vs-weak-vs-flagged PROPORTIONS and the NAB2 result
+reproduce.
+
+## Task 3 — sanity the novelty framing (CLAIM SET E, light)
+Confirm NAB2 & STAT6 genomic adjacency (E3): note chr12q13.3 for both. (You need not re-run the full
+literature audit; just state whether the "0 direct papers" claim is plausible given NAB2's known
+role.)
+
+OUTPUT (plain prose, tight): PASS/FAIL/PARTIAL per claim set with YOUR numbers beside the claim; any
+place your independent re-implementation DISAGREES with theirs (most valuable); and a final verdict:
+does the NAB2 receipt + the funnel proportions reproduce under a clean-room re-implementation?
+codex
+I’ll treat this as a clean-room replication and only read the target brief plus raw CSVs. Since the workspace is read-only, I’ll run standalone pandas code from the shell and report the computed numbers without touching repo files.
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content -LiteralPath '.claude/scratch/lbd-debate/REPLICATION_TARGETS.md'" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 1835ms:
+# Independent replication targets - pressure-test these exact claims
+
+You are an independent lab. Treat every number below as a CLAIM to be reproduced or refuted from
+the **raw data**, not trusted. Re-derive independently. Report matches AND mismatches. No cutting
+corners: if you can't reproduce a number, say so and show what you got instead.
+
+## Raw data (the ground truth - compute from THESE, not from our claims)
+- `data/guide_kd_efficiency.suppl_table.csv` (T4) - guide x condition; `signif_knockdown`, `perturbed_gene_id` (ENSG), `culture_condition`, `guide_mean_expr`, `ntc_mean_expr`, `adj_p_value`.
+- `data/DE_stats.suppl_table.csv` (T1) - perturbation x condition; `target_contrast_gene_name` (SYMBOL), `target_contrast` (ENSG), `culture_condition`, `ontarget_significant`, `ontarget_effect_size`, `n_downstream`, `offtarget_flag`.
+- `data/Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv` (T2) - gene(`variable`) x `contrast`; `log_fc`, `zscore`, `adj_p_value`. Contrasts: "Th2_vs_Th1 (Ota 2021)", "Th2_vs_Th1 (Hollbacker 2021)".
+- `data/cluster_autoimmune_enrichment_results.suppl_table.csv` (T3) - `cluster` x `disease` x `gene_set`; `odds_ratio`, `p_adj_fdr`, `intersecting_genes` (stringified python list - ast.literal_eval), `negative_control_disease`.
+- Condition of record: **Stim8hr**. Disease gene_set suffix: `downstream_<condition>`. Significance: FDR/adj-p < 0.05.
+
+## CLAIM SET A - the NAB2 headline receipt (NAB2 x atopic eczema @ Stim8hr)
+- A1 GATE: NAB2 has **2/2 guides** with signif_knockdown=True, best guide adj_p ÷ **1e-16**; mean guide expr ÷ **0.056** vs NTC ÷ **0.567**.
+- A2 EFFECT: NAB2 `ontarget_significant`=True, `ontarget_effect_size` ÷ **-16.9**, `n_downstream` = **301**, `offtarget_flag`=False.
+- A3 PROGRAM: NAB2 in T2 - Ota 2021 `log_fc` ÷ +0.63, `zscore` ÷ **+7.71**, adj_p ÷ **1.96e-13** (significant, Th1-associated); Hollbacker 2021 NOT significant (adj_p ÷ 0.20).
+- A4 DISEASE: NAB2 in atopic-eczema-enriched clusters with **OR ÷ 3.90, FDR ÷ 0.0028** AND **OR ÷ 3.43, FDR ÷ 0.0224** (ò1 cluster FDR<0.05  disease supported for atopic eczema specifically).
+
+## CLAIM SET B - the funnel (Stim8hr)
+- B1 A universe (KD-gate ï effect ï program-significant T2 adj_p<0.05) ÷ **3,935 genes**.
+- B2 candidate (genexdisease) pairs after gate [abòab_gate(50th pct) AND bcò3 AND OpenTargets-knownó0.1] ÷ **22,039**. (ab/bc are Europe PMC co-mention counts; you may take our cached values as given for B2, but re-derive the referee side below independently.)
+- B3 referee **disease-C-supported** survivors = **43**; of which **CLEAN full-chain supported (gate+effect+program+disease-C all hold, n_downstream>0) = 30**; supported_weak(n_downstream=0)=**10**; supported_flagged(offtarget)=**3**; refuted_effect=**1**; refuted_for_c=**21,995**.
+- B4 pure-disjoint (ac_lit=0) among clean supported = **1** (NUDT1 x type 1 diabetes, effect=4).
+
+## CLAIM SET C - STAT6 confounder checks
+- C1 NAB2's atopic-eczema clusters are **74 and 90**; STAT6 is in **neither**; of ~67 member genes only NAB2+TESPA1 are on 12q13  genome-wide functional modules, NOT a 12q13 locus artifact.
+- C2 NAB2 program shift z ÷ **+7.71** (Ota) vs STAT6 z ÷ **+2.66** (Ota)  NAB2 ~8x stronger; both Th1-associated.
+- C3 NAB2 referee-supported disease profile = **{asthma, atopic eczema}**; STAT6 = **{asthma, atopic eczema}** (identical).
+
+## CLAIM SET D - EGR mechanism check
+- D1 EGR2 referee-supported for **11/12** diseases (broad); NAB2 for **2** (narrow atopic); NAB1 and EGR1 and EGR3 for **0**.
+- D2 NAB2-KD program direction (Th1) is the **same** as EGR2-KD (not opposite)  inconsistent with NAB2 acting purely as EGR2's de-repressor.
+- D3 NAB1 (paralog corepressor) program direction is **Th2** (opposite NAB2), 0 diseases.
+
+## CLAIM SET E - novelty (literature)
+- E1 **Zero** papers directly link NAB2 to Th1/Th2 polarization.
+- E2 **Zero** papers directly link NAB2 to atopic dermatitis/eczema.
+- E3 NAB2 sits **~1.9 kb from STAT6** on chr12q13.3 (the atopic/Th2 master gene).
+
+## Rules of engagement (no corner-cutting)
+1. Re-derive from the RAW CSVs. You MAY read our code (`src/arbiter/lbd/`) to understand the claimed method, but the numbers you report must be YOUR independent computation.
+2. Adversarial: actively try to break each claim. A refuted claim with evidence is the most valuable output.
+3. Report EXACT numbers you obtained next to the claim, and PASS / FAIL / PARTIAL per item.
+4. Flag any statistical or logical error in the method (multiple-testing, FDR application, answer-leakage into the A universe, the ab-gate, the full-chain definition).
+5. State your overall verdict: does the finding replicate, and where is it fragile?
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+I’ve loaded the replication target. Next I’m checking the CSV schemas and row counts so the reimplementation uses the raw columns exactly as specified, especially the T3 list parsing and condition-specific gene set.
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-ChildItem -LiteralPath 'data' | Select-Object Name,Length" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "@'
+import pandas as pd
+for f in ['guide_kd_efficiency.suppl_table.csv','DE_stats.suppl_table.csv','Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv','cluster_autoimmune_enrichment_results.suppl_table.csv']:
+    p='data/'+f
+    df=pd.read_csv(p, nrows=3)
+    print('\\n'+f)
+    print(df.shape)
+    print(list(df.columns))
+    print(df.head(2).to_string())
+'@ | python -" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 2417ms:
+
+[32;1mName                                                          [0m[32;1m Length[0m
+[32;1m----                                                          [0m [32;1m------[0m
+lbd_cache                                                      
+lbd_out                                                        
+cluster_autoimmune_enrichment_results.suppl_table.csv          975501
+DE_stats.suppl_table.csv                                       5341369
+fetch_data.sh                                                  573
+guide_kd_efficiency.suppl_table.csv                            13319852
+README.md                                                      1080
+Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv 6155771
+
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 3923ms:
+
+guide_kd_efficiency.suppl_table.csv
+(3, 15)
+['Unnamed: 0', 'guide_mean_expr', 'guide_std_expr', 'guide_n', 'ntc_mean_expr', 'ntc_std_expr', 'ntc_n', 't_statistic', 'p_value', 'adj_p_value', 'signif_knockdown', 'perturbed_gene_id', 'rank', 'high_confidence_no_effect_guides', 'culture_condition']
+  Unnamed: 0  guide_mean_expr  guide_std_expr  guide_n  ntc_mean_expr  ntc_std_expr     ntc_n  t_statistic   p_value  adj_p_value  signif_knockdown perturbed_gene_id   rank  high_confidence_no_effect_guides culture_condition
+0     A1BG-2              0.0            0.01    367.0       0.000000      0.000000  313989.0     0.000000  1.000000          1.0             False   ENSG00000121410  323.0                             False              Rest
+1      A2M-2              0.0            0.01    283.0       0.000005      0.001824  313989.0    -0.007742  0.993828          1.0             False   ENSG00000175899  805.0                             False              Rest
+
+DE_stats.suppl_table.csv
+(3, 20)
+['Unnamed: 0', 'index', 'target_contrast_gene_name', 'culture_condition', 'target_contrast', 'chunk', 'n_cells_target', 'n_up_genes', 'n_down_genes', 'n_total_de_genes', 'ontarget_effect_size', 'ontarget_significant', 'target_baseMean', 'offtarget_flag', 'n_total_genes_category', 'ontarget_effect_category', 'n_downstream', 'crossdonor_correlation_mean', 'crossdonor_correlation_min', 'crossguide_correlation']
+   Unnamed: 0                     index target_contrast_gene_name culture_condition  target_contrast  chunk  n_cells_target  n_up_genes  n_down_genes  n_total_de_genes  ontarget_effect_size  ontarget_significant  target_baseMean  offtarget_flag n_total_genes_category ontarget_effect_category  n_downstream  crossdonor_correlation_mean  crossdonor_correlation_min  crossguide_correlation
+0           0      ENSG00000121410_Rest                      A1BG              Rest  ENSG00000121410    530           734.0           1             0                 1                   0.0                 False              NaN           False              1 DE gene          no on-target KD             1                          NaN                         NaN                     NaN
+1           1  ENSG00000121410_Stim48hr                      A1BG          Stim48hr  ENSG00000121410    166           825.0           0             0                 0                   0.0                 False              NaN           False              no effect          no on-target KD             0                          NaN                         NaN                     NaN
+
+Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv
+(3, 9)
+['variable', 'baseMean', 'log_fc', 'lfcSE', 'stat', 'p_value', 'adj_p_value', 'contrast', 'zscore']
+  variable     baseMean    log_fc     lfcSE       stat  p_value  adj_p_value               contrast     zscore
+0   TMEM62   155.340971 -2.032439  0.053194 -38.207854      0.0          0.0  Th2_vs_Th1 (Ota 2021) -38.207854
+1     STOM  1518.826775 -3.762299  0.073999 -50.842774      0.0          0.0  Th2_vs_Th1 (Ota 2021) -50.842774
+
+cluster_autoimmune_enrichment_results.suppl_table.csv
+(3, 15)
+['cluster', 'disease', 'gene_set', 'odds_ratio', 'ci_low', 'ci_high', 'p_value', 'p_adj_fdr', 'cluster_size', 'in_cluster_in_disease', 'in_cluster_not_disease', 'not_cluster_in_disease', 'not_cluster_not_disease', 'intersecting_genes', 'negative_control_disease']
+   cluster             disease            gene_set  odds_ratio    ci_low    ci_high       p_value  p_adj_fdr  cluster_size  in_cluster_in_disease  in_cluster_not_disease  not_cluster_in_disease  not_cluster_not_disease                                                                                                                                                                                                                                                                                                                                                                          intersecting_genes  negative_control_disease
+0       89  autoimmune disease  downstream_Stim8hr    3.040523  1.969155   4.656896  2.970369e-07   0.000005           100                   41.0                    59.0                   591.0                   2587.0  ['TMEM50A', 'ATP8B4', 'PHLDA1', 'TYMP', 'UBASH3B', 'TRAT1', 'P4HA2', 'GRAMD1B', 'CRIM1', 'DOT1L', 'IGSF9B', 'STAT1', 'GPR183', 'FYB1', 'SMAD3', 'GZMB', 'KLF3', 'AHI1', 'CSF2', 'ALPK1', 'ADGRG5', 'RASA3', 'GATA3', 'FUT8', 'EDARADD', 'ITPR1', 'CALHM6', 'SF3A3', 'PRPF40A', 'SEPTIN9', 'VEGFB', 'PTGIR', 'JARID2', 'ATP8B2', 'IFI30', 'NLRC5', 'IL7R', 'ADA2', 'CDK6', 'MYB', 'ORMDL3']                     False
+1      110              asthma  downstream_Stim8hr   20.424028  5.526675  82.341144  2.924264e-06   0.000050            12                    7.0                     5.0                   209.0                   3057.0                                                                                                                                                                                                                                                                                                                                  ['ITK', 'EAF2', 'CHD7', 'ZBTB25', 'EGR2', 'NFKBIA', 'ADO']                     False
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+The schemas match the brief. I’m now running a single clean pandas script that builds the NAB2 receipt, then constructs the Stim8hr A universe and applies a fresh classifier over all A genes by eligible disease.
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "@'
+import pandas as pd
+import ast
+from collections import Counter, defaultdict
+
+T4 = pd.read_csv('data/guide_kd_efficiency.suppl_table.csv')
+T1 = pd.read_csv('data/DE_stats.suppl_table.csv')
+T2 = pd.read_csv('data/Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv')
+T3 = pd.read_csv('data/cluster_autoimmune_enrichment_results.suppl_table.csv')
+
+cond='Stim8hr'
+alpha=0.05
+
+# symbol -> ENSG map from T1
+stim_t1 = T1[T1['culture_condition'].eq(cond)].copy()
+sym_to_ensg = (stim_t1[['target_contrast_gene_name','target_contrast']]
+               .dropna().drop_duplicates().set_index('target_contrast_gene_name')['target_contrast'].to_dict())
+ensg_to_sym = (stim_t1[['target_contrast_gene_name','target_contrast']]
+               .dropna().drop_duplicates().set_index('target_contrast')['target_contrast_gene_name'].to_dict())
+
+nab2_ensg = sym_to_ensg['NAB2']
+print('NAB2 ENSG', nab2_ensg)
+
+# A1 Gate
+nab2_t4 = T4[(T4['culture_condition'].eq(cond)) & (T4['perturbed_gene_id'].eq(nab2_ensg))].copy()
+print('\\nA1 NAB2 T4 rows')
+print(nab2_t4[['Unnamed: 0','signif_knockdown','adj_p_value','guide_mean_expr','ntc_mean_expr']].to_string(index=False))
+print('A1 summary', {
+    'n_guides': int(len(nab2_t4)),
+    'n_signif': int(nab2_t4['signif_knockdown'].fillna(False).astype(bool).sum()),
+    'best_adj_p': float(nab2_t4['adj_p_value'].min()),
+    'mean_guide_expr': float(nab2_t4['guide_mean_expr'].mean()),
+    'mean_ntc_expr': float(nab2_t4['ntc_mean_expr'].mean()),
+})
+
+# A2 Effect
+nab2_t1 = stim_t1[stim_t1['target_contrast_gene_name'].eq('NAB2')].copy()
+print('\\nA2 NAB2 T1')
+print(nab2_t1[['target_contrast_gene_name','target_contrast','ontarget_significant','ontarget_effect_size','n_downstream','offtarget_flag']].to_string(index=False))
+
+# A3 Program
+nab2_t2 = T2[T2['variable'].eq('NAB2')].copy()
+print('\\nA3 NAB2 T2')
+print(nab2_t2[['contrast','log_fc','zscore','adj_p_value']].to_string(index=False))
+
+# A4 Disease: parse exact rows where NAB2 intersects
+stim_gene_set = f'downstream_{cond}'
+t3_stim = T3[T3['gene_set'].eq(stim_gene_set)].copy()
+# parse lists once
+
+def parse_genes(x):
+    if pd.isna(x): return []
+    return ast.literal_eval(x)
+
+t3_stim['genes_list'] = t3_stim['intersecting_genes'].map(parse_genes)
+nab2_disease = t3_stim[(t3_stim['disease'].eq('atopic eczema')) & (t3_stim['genes_list'].map(lambda xs: 'NAB2' in xs))]
+print('\\nA4 NAB2 atopic eczema T3 rows')
+print(nab2_disease[['cluster','disease','gene_set','odds_ratio','p_adj_fdr','intersecting_genes']].to_string(index=False))
+print('A4 any_fdr_lt_0.05', bool((nab2_disease['p_adj_fdr'] < alpha).any()))
+
+# Build independent classifier inputs
+# KD gate: >=1 signif guide at Stim8hr
+stim_t4 = T4[T4['culture_condition'].eq(cond)].copy()
+kd_by_ensg = stim_t4.groupby('perturbed_gene_id')['signif_knockdown'].apply(lambda s: bool(s.fillna(False).astype(bool).any()))
+kd_symbols = {ensg_to_sym[e] for e, ok in kd_by_ensg.items() if ok and e in ensg_to_sym}
+
+# effect rows by symbol. Use one row per gene for Stim8hr (assert duplicates if any)
+dup_effect = stim_t1['target_contrast_gene_name'].value_counts()
+print('\\nDuplicate T1 Stim8hr genes >1:', int((dup_effect>1).sum()))
+effect_by_gene = {}
+for _, r in stim_t1.dropna(subset=['target_contrast_gene_name']).iterrows():
+    g = r['target_contrast_gene_name']
+    effect_by_gene[g] = {
+        'ontarget_significant': bool(r['ontarget_significant']),
+        'ontarget_effect_size': float(r['ontarget_effect_size']) if pd.notna(r['ontarget_effect_size']) else None,
+        'n_downstream': int(r['n_downstream']) if pd.notna(r['n_downstream']) else 0,
+        'offtarget_flag': bool(r['offtarget_flag']),
+        'effect_pass': bool(r['ontarget_significant']) or (pd.notna(r['n_downstream']) and int(r['n_downstream']) > 0),
+    }
+effect_symbols = {g for g, v in effect_by_gene.items() if v['effect_pass']}
+
+# program significant: any T2 contrast adj_p<0.05
+program_by_gene = T2.groupby('variable')['adj_p_value'].apply(lambda s: bool((s < alpha).any())).to_dict()
+program_symbols = {g for g, ok in program_by_gene.items() if ok}
+
+A = sorted(kd_symbols & effect_symbols & program_symbols)
+print('\\nA universe counts', {
+    'kd_gate_symbols': len(kd_symbols),
+    'effect_symbols': len(effect_symbols),
+    'program_symbols': len(program_symbols),
+    'A_intersection': len(A),
+    'NAB2_in_A': 'NAB2' in A,
+})
+
+# Diseases: T3 diseases excluding umbrella terms
+umbrella = {'autoimmune disease','inflammatory bowel disease'}
+diseases = sorted(d for d in t3_stim['disease'].dropna().unique() if d not in umbrella)
+print('Eligible diseases', len(diseases), diseases)
+
+# Build disease support lookup by exact disease where gene in intersecting_genes and p_adj_fdr<0.05
+support_rows = defaultdict(list)
+for _, r in t3_stim.iterrows():
+    d = r['disease']
+    if d in umbrella:
+        continue
+    sig = bool(r['p_adj_fdr'] < alpha)
+    for g in r['genes_list']:
+        support_rows[(g,d)].append({
+            'cluster': int(r['cluster']),
+            'p_adj_fdr': float(r['p_adj_fdr']),
+            'odds_ratio': float(r['odds_ratio']),
+            'sig': sig,
+        })
+
+def classify(g, d, condition=cond):
+    # raw-data classifier with deterministic gates
+    if g not in sym_to_ensg:
+        return 'untested'
+    ensg = sym_to_ensg[g]
+    if not bool(kd_by_ensg.get(ensg, False)):
+        return 'untested'
+    ev = effect_by_gene.get(g)
+    if ev is None or not ev['effect_pass']:
+        return 'refuted_effect'
+    if not bool(program_by_gene.get(g, False)):
+        return 'refuted_program'
+    rows = support_rows.get((g,d), [])
+    disease_ok = any(r['sig'] for r in rows)
+    if not disease_ok:
+        return 'refuted_for_c'
+    if ev['offtarget_flag']:
+        return 'supported_flagged'
+    if ev['n_downstream'] == 0:
+        return 'supported_weak'
+    return 'supported'
+
+counts = Counter()
+by_gene_supported = defaultdict(list)
+for g in A:
+    for d in diseases:
+        c = classify(g,d)
+        counts[c] += 1
+        if c.startswith('supported'):
+            by_gene_supported[g].append((d,c))
+print('\\nB3 classifier counts over A x 12')
+print(dict(counts))
+print('supported_total', sum(v for k,v in counts.items() if k.startswith('supported')))
+print('clean weak flagged', counts['supported'], counts['supported_weak'], counts['supported_flagged'])
+print('NAB2 supported diseases', by_gene_supported.get('NAB2'))
+
+# additional: status of NAB2 x atopic eczema
+print('NAB2_atopic_classifier', classify('NAB2','atopic eczema'))
+
+# proportions among disease-supported
+sup_total=sum(v for k,v in counts.items() if k.startswith('supported'))
+if sup_total:
+    print('supported proportions', {k: counts[k]/sup_total for k in ['supported','supported_weak','supported_flagged']})
+
+# Genes with supported counts maybe inspect flagged/weak examples and refuted_effect sanity
+print('number genes with >=1 disease support', len(by_gene_supported))
+print('top supported genes', sorted(((g,len(v),v[:5]) for g,v in by_gene_supported.items()), key=lambda x: (-x[1], x[0]))[:10])
+
+# Check if any non-A gene disease-supported but classifier refuted_effect among all KD+program? optional candidate-free sanity
+all_symbols = sorted((set(sym_to_ensg) & set(program_by_gene)))
+all_counts = Counter(classify(g,d) for g in all_symbols for d in diseases)
+print('\\nAll mapped program symbols x 12 counts (context)', dict(all_counts))
+
+# STAT6 / adjacency simple data presence and T2 z check
+print('\\nSTAT6 T2')
+print(T2[T2['variable'].eq('STAT6')][['contrast','log_fc','zscore','adj_p_value']].to_string(index=False))
+print('STAT6 supported diseases', [(d, classify('STAT6', d)) for d in diseases if classify('STAT6', d).startswith('supported')])
+'@ | python -" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 9124ms:
+NAB2 ENSG ENSG00000166886
+
+A1 NAB2 T4 rows
+Unnamed: 0  signif_knockdown  adj_p_value  guide_mean_expr  ntc_mean_expr
+    NAB2-2              True 1.000000e-16         0.033153       0.567194
+    NAB2-1              True 1.000000e-16         0.078906       0.567194
+A1 summary {'n_guides': 2, 'n_signif': 2, 'best_adj_p': 1e-16, 'mean_guide_expr': 0.056029523473686754, 'mean_ntc_expr': 0.5671943752018408}
+
+A2 NAB2 T1
+target_contrast_gene_name target_contrast  ontarget_significant  ontarget_effect_size  n_downstream  offtarget_flag
+                     NAB2 ENSG00000166886                  True            -16.881586           301           False
+
+A3 NAB2 T2
+                    contrast   log_fc   zscore  adj_p_value
+       Th2_vs_Th1 (Ota 2021) 0.633190 7.707704 1.954765e-13
+Th2_vs_Th1 (Hollbacker 2021) 0.608529 2.390554 2.046207e-01
+
+A4 NAB2 atopic eczema T3 rows
+ cluster       disease           gene_set  odds_ratio  p_adj_fdr                                                                     intersecting_genes
+     100 atopic eczema downstream_Stim8hr    3.898532   0.002832 ['AGO2', 'NAB2', 'TBC1D10C', 'IL18RAP', 'REL', 'EGR2', 'CSF2', 'ETS1', 'ADO', 'BACH2']
+      90 atopic eczema downstream_Stim8hr    3.430399   0.022385         ['NSMCE1', 'IL4', 'IL22', 'TESPA1', 'NAB2', 'IRF4', 'IL26', 'AHI1', 'BCL2L11']
+      74 atopic eczema downstream_Stim8hr    2.117170   0.520791                                ['SLAMF6', 'TESPA1', 'NAB2', 'GPR132', 'GFI1', 'FOXP1']
+      98 atopic eczema downstream_Stim8hr    1.003689   0.975382                                                           ['LAYN', 'TBC1D10C', 'NAB2']
+A4 any_fdr_lt_0.05 True
+
+Duplicate T1 Stim8hr genes >1: 0
+
+A universe counts {'kd_gate_symbols': 9501, 'effect_symbols': 9672, 'program_symbols': 7919, 'A_intersection': 3935, 'NAB2_in_A': True}
+Eligible diseases 15 ["Crohn's disease", "Hashimoto's thyroiditis", 'age-related macular degeneration', 'ankylosing spondylitis', 'asthma', 'atopic eczema', 'celiac disease', 'chronic kidney disease', 'coronary artery disease', 'multiple sclerosis', 'psoriasis', 'rheumatoid arthritis', 'systemic lupus erythematosus', 'type 1 diabetes mellitus', 'ulcerative colitis']
+
+B3 classifier counts over A x 12
+{'refuted_for_c': 58614, 'supported': 312, 'supported_weak': 87, 'supported_flagged': 12}
+supported_total 411
+clean weak flagged 312 87 12
+NAB2 supported diseases [('asthma', 'supported'), ('atopic eczema', 'supported')]
+NAB2_atopic_classifier supported
+supported proportions {'supported': 0.7591240875912408, 'supported_weak': 0.2116788321167883, 'supported_flagged': 0.029197080291970802}
+number genes with >=1 disease support 173
+top supported genes [('BACH2', 11, [("Crohn's disease", 'supported'), ("Hashimoto's thyroiditis", 'supported'), ('ankylosing spondylitis', 'supported'), ('asthma', 'supported'), ('atopic eczema', 'supported')]), ('EGR2', 11, [("Crohn's disease", 'supported'), ('ankylosing spondylitis', 'supported'), ('asthma', 'supported'), ('atopic eczema', 'supported'), ('celiac disease', 'supported')]), ('IL7R', 10, [("Crohn's disease", 'supported'), ("Hashimoto's thyroiditis", 'supported'), ('ankylosing spondylitis', 'supported'), ('asthma', 'supported'), ('atopic eczema', 'supported')]), ('TNFAIP3', 10, [("Crohn's disease", 'supported'), ('ankylosing spondylitis', 'supported'), ('asthma', 'supported'), ('atopic eczema', 'supported'), ('celiac disease', 'supported')]), ('IRF4', 9, [("Crohn's disease", 'supported'), ("Hashimoto's thyroiditis", 'supported'), ('asthma', 'supported'), ('atopic eczema', 'supported'), ('celiac disease', 'supported')]), ('PTPN22', 9, [("Crohn's disease", 'supported_weak'), ("Hashimoto's thyroiditis", 'supported_weak'), ('ankylosing spondylitis', 'supported_weak'), ('celiac disease', 'supported_weak'), ('multiple sclerosis', 'supported_weak')]), ('CD28', 8, [("Crohn's disease", 'supported'), ('ankylosing spondylitis', 'supported'), ('asthma', 'supported'), ('celiac disease', 'supported'), ('multiple sclerosis', 'supported')]), ('IL2RA', 8, [("Crohn's disease", 'supported'), ('asthma', 'supported'), ('atopic eczema', 'supported'), ('celiac disease', 'supported'), ('multiple sclerosis', 'supported')]), ('SMAD3', 8, [("Crohn's disease", 'supported'), ('ankylosing spondylitis', 'supported'), ('asthma', 'supported'), ('atopic eczema', 'supported'), ('celiac disease', 'supported')]), ('IL10', 7, [("Crohn's disease", 'supported_weak'), ('ankylosing spondylitis', 'supported_weak'), ('psoriasis', 'supported_weak'), ('rheumatoid arthritis', 'supported_weak'), ('systemic lupus erythematosus', 'supported_weak')])]
+
+All mapped program symbols x 12 counts (context) {'untested': 18885, 'refuted_for_c': 58614, 'refuted_program': 63825, 'refuted_effect': 12975, 'supported': 312, 'supported_weak': 87, 'supported_flagged': 12}
+
+STAT6 T2
+                    contrast   log_fc   zscore  adj_p_value
+       Th2_vs_Th1 (Ota 2021) 0.080294 2.658878     0.026752
+Th2_vs_Th1 (Hollbacker 2021) 0.097034 0.820595     0.881356
+STAT6 supported diseases [('asthma', 'supported'), ('atopic eczema', 'supported')]
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+One discrepancy surfaced immediately: the T3 file contains 17 diseases total, so excluding only the two umbrella terms leaves 15, not 12. I’m checking whether three of those are marked as negative-control diseases; that likely explains the “12 eligible” wording and affects the funnel denominator/counts.
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "@'
+import pandas as pd
+T3=pd.read_csv('data/cluster_autoimmune_enrichment_results.suppl_table.csv')
+t=T3[T3['gene_set'].eq('downstream_Stim8hr')]
+print(t.groupby(['disease','negative_control_disease']).size().reset_index(name='rows').to_string(index=False))
+print('unique diseases', t['disease'].nunique())
+print('excluding umbrella', sorted(set(t['disease'])-{'autoimmune disease','inflammatory bowel disease'}), len(set(t['disease'])-{'autoimmune disease','inflammatory bowel disease'}))
+print('excluding umbrella and negative controls', sorted(set(t.loc[~t['negative_control_disease'],'disease'])-{'autoimmune disease','inflammatory bowel disease'}), len(set(t.loc[~t['negative_control_disease'],'disease'])-{'autoimmune disease','inflammatory bowel disease'}))
+'@ | python -" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 1969ms:
+                         disease  negative_control_disease  rows
+                 Crohn's disease                     False    77
+         Hashimoto's thyroiditis                     False    77
+age-related macular degeneration                      True    77
+          ankylosing spondylitis                     False    77
+                          asthma                     False    77
+                   atopic eczema                     False    77
+              autoimmune disease                     False    77
+                  celiac disease                     False    77
+          chronic kidney disease                      True    77
+         coronary artery disease                      True    77
+      inflammatory bowel disease                     False    77
+              multiple sclerosis                     False    77
+                       psoriasis                     False    77
+            rheumatoid arthritis                     False    77
+    systemic lupus erythematosus                     False    77
+        type 1 diabetes mellitus                     False    77
+              ulcerative colitis                     False    77
+unique diseases 17
+excluding umbrella ["Crohn's disease", "Hashimoto's thyroiditis", 'age-related macular degeneration', 'ankylosing spondylitis', 'asthma', 'atopic eczema', 'celiac disease', 'chronic kidney disease', 'coronary artery disease', 'multiple sclerosis', 'psoriasis', 'rheumatoid arthritis', 'systemic lupus erythematosus', 'type 1 diabetes mellitus', 'ulcerative colitis'] 15
+excluding umbrella and negative controls ["Crohn's disease", "Hashimoto's thyroiditis", 'ankylosing spondylitis', 'asthma', 'atopic eczema', 'celiac disease', 'multiple sclerosis', 'psoriasis', 'rheumatoid arthritis', 'systemic lupus erythematosus', 'type 1 diabetes mellitus', 'ulcerative colitis'] 12
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+The 12-disease set is T3 with umbrella terms and negative-control diseases removed. I’m rerunning the classifier on that set and keeping the 15-disease result as a method-sensitivity note, since the written instruction only named the umbrella exclusions.
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "@'
+import pandas as pd, ast
+from collections import Counter, defaultdict
+T4=pd.read_csv('data/guide_kd_efficiency.suppl_table.csv')
+T1=pd.read_csv('data/DE_stats.suppl_table.csv')
+T2=pd.read_csv('data/Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv')
+T3=pd.read_csv('data/cluster_autoimmune_enrichment_results.suppl_table.csv')
+cond='Stim8hr'; alpha=0.05
+stim_t1=T1[T1.culture_condition.eq(cond)]
+sym_to_ensg=stim_t1[['target_contrast_gene_name','target_contrast']].dropna().drop_duplicates().set_index('target_contrast_gene_name')['target_contrast'].to_dict()
+ensg_to_sym=stim_t1[['target_contrast_gene_name','target_contrast']].dropna().drop_duplicates().set_index('target_contrast')['target_contrast_gene_name'].to_dict()
+stim_t4=T4[T4.culture_condition.eq(cond)]
+kd_by_ensg=stim_t4.groupby('perturbed_gene_id')['signif_knockdown'].apply(lambda s: bool(s.fillna(False).astype(bool).any()))
+kd_symbols={ensg_to_sym[e] for e, ok in kd_by_ensg.items() if ok and e in ensg_to_sym}
+effect_by_gene={}
+for _,r in stim_t1.dropna(subset=['target_contrast_gene_name']).iterrows():
+    nd=int(r.n_downstream) if pd.notna(r.n_downstream) else 0
+    effect_by_gene[r.target_contrast_gene_name]={'ontarget_significant':bool(r.ontarget_significant),'n_downstream':nd,'offtarget_flag':bool(r.offtarget_flag),'effect_pass':bool(r.ontarget_significant) or nd>0}
+effect_symbols={g for g,v in effect_by_gene.items() if v['effect_pass']}
+program_by_gene=T2.groupby('variable')['adj_p_value'].apply(lambda s: bool((s<alpha).any())).to_dict()
+program_symbols={g for g,ok in program_by_gene.items() if ok}
+A=sorted(kd_symbols & effect_symbols & program_symbols)
+t3=T3[T3.gene_set.eq(f'downstream_{cond}')].copy()
+t3['genes_list']=t3.intersecting_genes.map(lambda x: ast.literal_eval(x) if pd.notna(x) else [])
+umbrella={'autoimmune disease','inflammatory bowel disease'}
+d12=sorted(d for d in t3.loc[~t3.negative_control_disease,'disease'].dropna().unique() if d not in umbrella)
+d15=sorted(d for d in t3['disease'].dropna().unique() if d not in umbrella)
+
+def make_support(disease_set):
+    support=defaultdict(list)
+    for _,r in t3[t3.disease.isin(disease_set)].iterrows():
+        for g in r.genes_list:
+            support[(g,r.disease)].append((int(r.cluster),float(r.odds_ratio),float(r.p_adj_fdr),bool(r.p_adj_fdr<alpha)))
+    return support
+
+def counts_for(diseases):
+    support=make_support(set(diseases))
+    def classify(g,d):
+        if g not in sym_to_ensg: return 'untested'
+        if not bool(kd_by_ensg.get(sym_to_ensg[g],False)): return 'untested'
+        ev=effect_by_gene.get(g)
+        if ev is None or not ev['effect_pass']: return 'refuted_effect'
+        if not bool(program_by_gene.get(g,False)): return 'refuted_program'
+        if not any(x[3] for x in support.get((g,d),[])): return 'refuted_for_c'
+        if ev['offtarget_flag']: return 'supported_flagged'
+        if ev['n_downstream']==0: return 'supported_weak'
+        return 'supported'
+    c=Counter(); by=defaultdict(list)
+    for g in A:
+        for d in diseases:
+            s=classify(g,d); c[s]+=1
+            if s.startswith('supported'): by[g].append((d,s))
+    return c,by, classify
+
+for name, diseases in [('12_nonneg_nonumbrella',d12),('15_nonumbrella_including_negctrl',d15)]:
+    c, by, classify = counts_for(diseases)
+    print('\\n', name, len(diseases), diseases)
+    print('pairs', len(A)*len(diseases))
+    print(dict(c))
+    print('supported_total', sum(v for k,v in c.items() if k.startswith('supported')))
+    print('clean weak flagged', c['supported'], c['supported_weak'], c['supported_flagged'])
+    print('NAB2', by.get('NAB2'))
+    print('NAB2 atopic', classify('NAB2','atopic eczema') if 'atopic eczema' in diseases else None)
+    total=sum(v for k,v in c.items() if k.startswith('supported'))
+    print('props', {k: (c[k]/total if total else None) for k in ['supported','supported_weak','supported_flagged']})
+
+# disease support exact rows for NAB2 in d12 including nonsig rows
+nab2_rows=t3[(t3.disease.eq('atopic eczema')) & (t3.genes_list.map(lambda xs:'NAB2' in xs))]
+print('\\nNAB2 atopic rows compact')
+print(nab2_rows[['cluster','odds_ratio','p_adj_fdr']].sort_values('p_adj_fdr').to_string(index=False))
+'@ | python -" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 10249ms:
+
+ 12_nonneg_nonumbrella 12 ["Crohn's disease", "Hashimoto's thyroiditis", 'ankylosing spondylitis', 'asthma', 'atopic eczema', 'celiac disease', 'multiple sclerosis', 'psoriasis', 'rheumatoid arthritis', 'systemic lupus erythematosus', 'type 1 diabetes mellitus', 'ulcerative colitis']
+pairs 47220
+{'refuted_for_c': 46814, 'supported': 309, 'supported_weak': 85, 'supported_flagged': 12}
+supported_total 406
+clean weak flagged 309 85 12
+NAB2 [('asthma', 'supported'), ('atopic eczema', 'supported')]
+NAB2 atopic supported
+props {'supported': 0.7610837438423645, 'supported_weak': 0.20935960591133004, 'supported_flagged': 0.029556650246305417}
+
+ 15_nonumbrella_including_negctrl 15 ["Crohn's disease", "Hashimoto's thyroiditis", 'age-related macular degeneration', 'ankylosing spondylitis', 'asthma', 'atopic eczema', 'celiac disease', 'chronic kidney disease', 'coronary artery disease', 'multiple sclerosis', 'psoriasis', 'rheumatoid arthritis', 'systemic lupus erythematosus', 'type 1 diabetes mellitus', 'ulcerative colitis']
+pairs 59025
+{'refuted_for_c': 58614, 'supported': 312, 'supported_weak': 87, 'supported_flagged': 12}
+supported_total 411
+clean weak flagged 312 87 12
+NAB2 [('asthma', 'supported'), ('atopic eczema', 'supported')]
+NAB2 atopic supported
+props {'supported': 0.7591240875912408, 'supported_weak': 0.2116788321167883, 'supported_flagged': 0.029197080291970802}
+
+NAB2 atopic rows compact
+ cluster  odds_ratio  p_adj_fdr
+     100    3.898532   0.002832
+      90    3.430399   0.022385
+      74    2.117170   0.520791
+      98    1.003689   0.975382
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+web search: 
+web search: NCBI Gene NAB2 STAT6 chromosome 12q13.3
+web search: 
+web search: site:ncbi.nlm.nih.gov/gene NAB2 Gene chromosome 12q13.3 STAT6
+web search: 
+web search: "The Nab2 and Stat6 genes share a common transcription termination region" 1.9 kb
+web search: 
+web search: PubMed The Nab2 and Stat6 genes share a common transcription termination region
+codex
+**Claim Set A: PASS**
+
+Clean-room pandas over raw CSVs reproduces the NAB2 receipt.
+
+A1 GATE: PASS. NAB2 ENSG `ENSG00000166886`; Stim8hr has `2/2` guides significant. Best guide adj-p `1e-16`. Mean guide expr `0.0560295`; NTC expr `0.5671944`.
+
+A2 EFFECT: PASS. `ontarget_significant=True`, `ontarget_effect_size=-16.881586`, `n_downstream=301`, `offtarget_flag=False`.
+
+A3 PROGRAM: PASS on numbers.  
+Ota 2021: `log_fc=0.633190`, `zscore=7.707704`, `adj_p=1.954765e-13`, significant.  
+Hollbacker 2021: `log_fc=0.608529`, `zscore=2.390554`, `adj_p=0.204621`, not significant.  
+Caution: from the raw contrast label `Th2_vs_Th1`, the positive-sign biological direction needs documented sign convention; I would not independently call it “Th1-associated” from the CSV alone.
+
+A4 DISEASE: PASS on support, with an extra correction. NAB2 appears in atopic eczema rows:
+
+```text
+cluster 100: OR=3.898532, FDR=0.002832
+cluster  90: OR=3.430399, FDR=0.022385
+cluster  74: OR=2.117170, FDR=0.520791
+cluster  98: OR=1.003689, FDR=0.975382
+```
+
+At least one exact atopic eczema row is FDR < 0.05: yes. The significant clusters are `100` and `90`, not `74` and `90`.
+
+**Claim Set B3: PARTIAL**
+
+A universe reproduced exactly: KD gate ∩ effect ∩ program-significant = `3,935` genes; NAB2 is in A.
+
+The “12 eligible diseases” required excluding both umbrella terms and the three `negative_control_disease=True` diseases. Using that 12-disease universe over all `A × disease` pairs:
+
+```text
+total pairs:          47,220
+refuted_for_c:        46,814
+disease-C-supported:     406
+  supported clean:       309
+  supported_weak:         85
+  supported_flagged:      12
+refuted_effect:            0
+```
+
+NAB2 result reproduces: `NAB2 × asthma = supported`; `NAB2 × atopic eczema = supported`.
+
+Compared with claim B3’s literature-gated numbers `43 total / 30 clean / 10 weak / 3 flagged / 1 refuted_effect`, the unfiltered A×12 run is much larger as expected. Proportions are directionally similar for clean and weak but not exact:
+
+```text
+mine:  76.1% clean, 20.9% weak, 3.0% flagged
+claim: 69.8% clean, 23.3% weak, 7.0% flagged
+```
+
+The claimed `refuted_effect=1` cannot occur when classifying only the A universe, because A already requires the effect gate.
+
+**Claim Set E: PARTIAL / plausible only**
+
+E3 adjacency is plausible: NAB2 and STAT6 are both at chr12q13/12q13.3 and are known adjacent/fusion partners; STAT6 is the established IL-4/IL-13 Th2 pathway gene. I did not rerun a full literature audit, but the “0 direct NAB2 papers for Th1/Th2 or eczema” framing is plausible because NAB2’s standard role is EGR/NAB transcriptional coregulation and the prominent NAB2-STAT6 link is tumor fusion biology, not T-cell polarization. Sources checked: [NAB2](https://en.wikipedia.org/wiki/NAB2), [STAT6](https://en.wikipedia.org/wiki/STAT6).
+
+**Final verdict**
+
+The NAB2 receipt reproduces strongly from raw data. The A universe also reproduces exactly. The full-chain funnel reproduces qualitatively under the clean-room A×12 classifier, and NAB2’s supported asthma/atopic eczema result holds, but the unfiltered disease-C counts are `406` rather than `43`, and the clean/weak/flagged proportions are only partial matches. The main concrete disagreement I found is the atopic eczema significant cluster claim: raw T3 supports clusters `100` and `90`; cluster `74` contains NAB2 but is not FDR-significant.
+tokens used
+49,820
+**Claim Set A: PASS**
+
+Clean-room pandas over raw CSVs reproduces the NAB2 receipt.
+
+A1 GATE: PASS. NAB2 ENSG `ENSG00000166886`; Stim8hr has `2/2` guides significant. Best guide adj-p `1e-16`. Mean guide expr `0.0560295`; NTC expr `0.5671944`.
+
+A2 EFFECT: PASS. `ontarget_significant=True`, `ontarget_effect_size=-16.881586`, `n_downstream=301`, `offtarget_flag=False`.
+
+A3 PROGRAM: PASS on numbers.  
+Ota 2021: `log_fc=0.633190`, `zscore=7.707704`, `adj_p=1.954765e-13`, significant.  
+Hollbacker 2021: `log_fc=0.608529`, `zscore=2.390554`, `adj_p=0.204621`, not significant.  
+Caution: from the raw contrast label `Th2_vs_Th1`, the positive-sign biological direction needs documented sign convention; I would not independently call it “Th1-associated” from the CSV alone.
+
+A4 DISEASE: PASS on support, with an extra correction. NAB2 appears in atopic eczema rows:
+
+```text
+cluster 100: OR=3.898532, FDR=0.002832
+cluster  90: OR=3.430399, FDR=0.022385
+cluster  74: OR=2.117170, FDR=0.520791
+cluster  98: OR=1.003689, FDR=0.975382
+```
+
+At least one exact atopic eczema row is FDR < 0.05: yes. The significant clusters are `100` and `90`, not `74` and `90`.
+
+**Claim Set B3: PARTIAL**
+
+A universe reproduced exactly: KD gate ∩ effect ∩ program-significant = `3,935` genes; NAB2 is in A.
+
+The “12 eligible diseases” required excluding both umbrella terms and the three `negative_control_disease=True` diseases. Using that 12-disease universe over all `A × disease` pairs:
+
+```text
+total pairs:          47,220
+refuted_for_c:        46,814
+disease-C-supported:     406
+  supported clean:       309
+  supported_weak:         85
+  supported_flagged:      12
+refuted_effect:            0
+```
+
+NAB2 result reproduces: `NAB2 × asthma = supported`; `NAB2 × atopic eczema = supported`.
+
+Compared with claim B3’s literature-gated numbers `43 total / 30 clean / 10 weak / 3 flagged / 1 refuted_effect`, the unfiltered A×12 run is much larger as expected. Proportions are directionally similar for clean and weak but not exact:
+
+```text
+mine:  76.1% clean, 20.9% weak, 3.0% flagged
+claim: 69.8% clean, 23.3% weak, 7.0% flagged
+```
+
+The claimed `refuted_effect=1` cannot occur when classifying only the A universe, because A already requires the effect gate.
+
+**Claim Set E: PARTIAL / plausible only**
+
+E3 adjacency is plausible: NAB2 and STAT6 are both at chr12q13/12q13.3 and are known adjacent/fusion partners; STAT6 is the established IL-4/IL-13 Th2 pathway gene. I did not rerun a full literature audit, but the “0 direct NAB2 papers for Th1/Th2 or eczema” framing is plausible because NAB2’s standard role is EGR/NAB transcriptional coregulation and the prominent NAB2-STAT6 link is tumor fusion biology, not T-cell polarization. Sources checked: [NAB2](https://en.wikipedia.org/wiki/NAB2), [STAT6](https://en.wikipedia.org/wiki/STAT6).
+
+**Final verdict**
+
+The NAB2 receipt reproduces strongly from raw data. The A universe also reproduces exactly. The full-chain funnel reproduces qualitatively under the clean-room A×12 classifier, and NAB2’s supported asthma/atopic eczema result holds, but the unfiltered disease-C counts are `406` rather than `43`, and the clean/weak/flagged proportions are only partial matches. The main concrete disagreement I found is the atopic eczema significant cluster claim: raw T3 supports clusters `100` and `90`; cluster `74` contains NAB2 but is not FDR-significant.

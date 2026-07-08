@@ -1,0 +1,36 @@
+[sweep] condition=Stim8hr genes=3935 diseases=12
+[sweep] bc + known maps done
+[sweep] ab 250/3935
+[sweep] ab 500/3935
+[sweep] ab 750/3935
+[sweep] ab 1000/3935
+[sweep] ab 1250/3935
+[sweep] ab 1500/3935
+[sweep] ab 1750/3935
+[sweep] ab 2000/3935
+[sweep] ab 2250/3935
+[sweep] ab 2500/3935
+[sweep] ab 2750/3935
+[sweep] ab 3000/3935
+[sweep] ab 3250/3935
+[sweep] ab 3500/3935
+[sweep] ab 3750/3935
+[sweep] ab done; ab_gate(0.5)=26
+[sweep] eligible pairs (pre-referee): 22039
+[sweep] chain classes: {'refuted_for_c': 21995, 'supported': 30, 'supported_weak': 10, 'supported_flagged': 3, 'refuted_effect': 1}
+[sweep] disease-C-supported survivors (clean+flagged+weak): 43
+[sweep] scored 43 disease-C-supported survivors
+FUNNEL Stim8hr: a_genes 3935 -> eligible 22039 -> disease-C-supported 43 -> CLEAN full-chain 30 (pure-disjoint clean 1)
+chain classes: {'refuted_for_c': 21995, 'supported': 30, 'supported_weak': 10, 'supported_flagged': 3, 'refuted_effect': 1}
+TOP 10 CLEAN supported (ranked by novelty):
+  UFM1     x multiple sclerosis         s=-0.807 ab=   29 ac_lit=  43 ac_known=0.062 eff= 2278
+  BHLHE40  x ankylosing spondylitis     s= -0.94 ab=  507 ac_lit=  26 ac_known=0.071 eff= 1996
+  NUDT1    x type 1 diabetes mellitus   s=-1.102 ab=   26 ac_lit=   0 ac_known=0.068 eff=    4
+  NAB2     x atopic eczema              s=-1.137 ab=   66 ac_lit=   6 ac_known=0.038 eff=  301
+  TUFM     x Crohn's disease            s=-1.219 ab=   38 ac_lit=  31 ac_known=0.050 eff=  651
+  NAB2     x asthma                     s=-1.974 ab=   66 ac_lit=  76 ac_known=0.052 eff=  301
+  EGR2     x ankylosing spondylitis     s=-2.121 ab=  662 ac_lit=  50 ac_known=0.099 eff=  854
+  EGR2     x celiac disease             s=-2.195 ab=  662 ac_lit=  67 ac_known=0.048 eff=  854
+  EGR2     x type 1 diabetes mellitus   s= -2.26 ab=  662 ac_lit=  55 ac_known=0.049 eff=  854
+  NUDT1    x Crohn's disease            s=-2.527 ab=   26 ac_lit=   7 ac_known=0.061 eff=    4
+wrote sweep_Stim8hr.json + lbd_questions_Stim8hr.json

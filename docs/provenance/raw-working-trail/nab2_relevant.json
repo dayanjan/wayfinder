@@ -1,0 +1,1246 @@
+{
+ "n": 155,
+ "records": [
+  {
+   "title": "Identification of recurrent NAB2-STAT6 gene fusions in solitary fibrous tumor by integrative sequencing",
+   "year": 2013,
+   "citations": 820,
+   "venue": "Nature Genetics",
+   "doi": "10.1038/ng.2509",
+   "url": "https://openalex.org/W1995826067"
+  },
+  {
+   "title": "Whole-exome sequencing identifies a recurrent NAB2-STAT6 fusion in solitary fibrous tumors",
+   "year": 2013,
+   "citations": 596,
+   "venue": "Nature Genetics",
+   "doi": "10.1038/ng.2522",
+   "url": "https://openalex.org/W2170565367"
+  },
+  {
+   "title": "Identification and Rescue of \u03b1-Synuclein Toxicity in Parkinson Patient\u2013Derived Neurons",
+   "year": 2013,
+   "citations": 461,
+   "venue": "Science",
+   "doi": "10.1126/science.1245296",
+   "url": "https://openalex.org/W2143515674"
+  },
+  {
+   "title": "Meningeal hemangiopericytoma and solitary fibrous tumors carry the NAB2-STAT6 fusion and can be diagnosed by nuclear expression of STAT6 protein",
+   "year": 2013,
+   "citations": 383,
+   "venue": "Acta Neuropathologica",
+   "doi": "10.1007/s00401-013-1117-6",
+   "url": "https://openalex.org/W2099140506"
+  },
+  {
+   "title": "STAT6 Immunohistochemistry Is Helpful in the Diagnosis of Solitary Fibrous Tumors",
+   "year": 2014,
+   "citations": 363,
+   "venue": "The American Journal of Surgical Pathology",
+   "doi": "10.1097/pas.0000000000000137",
+   "url": "https://openalex.org/W2031490307"
+  },
+  {
+   "title": "A Discriminating Messenger RNA Signature for Bipolar Disorder Formed by an Aberrant Expression of Inflammatory Genes in Monocytes",
+   "year": 2008,
+   "citations": 338,
+   "venue": "Archives of General Psychiatry",
+   "doi": "10.1001/archpsyc.65.4.395",
+   "url": "https://openalex.org/W2159838806"
+  },
+  {
+   "title": "NAB2, a corepressor of NGFI-A (Egr-1) and Krox20, is induced by proliferative and differentiative stimuli.",
+   "year": "1996",
+   "citations": 293,
+   "venue": null,
+   "doi": "10.1128/mcb.16.7.3545",
+   "url": "https://europepmc.org/article/MED/8668170"
+  },
+  {
+   "title": "Comprehensive genetic analysis identifies a pathognomonic <i>NAB2/STAT6</i> fusion gene, nonrandom secondary genomic imbalances, and a characteristic gene expression profile in solitary fibrous tumor",
+   "year": 2013,
+   "citations": 277,
+   "venue": "Genes Chromosomes and Cancer",
+   "doi": "10.1002/gcc.22083",
+   "url": "https://openalex.org/W2149233274"
+  },
+  {
+   "title": "Clusterin regulates \u03b2-amyloid toxicity via Dickkopf-1-driven induction of the wnt\u2013PCP\u2013JNK pathway",
+   "year": 2012,
+   "citations": 235,
+   "venue": "Molecular Psychiatry",
+   "doi": "10.1038/mp.2012.163",
+   "url": "https://openalex.org/W2046422248"
+  },
+  {
+   "title": "Solitary Fibrous Tumors/Hemangiopericytomas with Different Variants of the NAB2-STAT6 Gene Fusion Are Characterized by Specific Histomorphology and Distinct Clinicopathological Features",
+   "year": 2014,
+   "citations": 234,
+   "venue": "American Journal Of Pathology",
+   "doi": "10.1016/j.ajpath.2013.12.016",
+   "url": "https://openalex.org/W2082449381"
+  },
+  {
+   "title": "Oxidized phospholipids stimulate tissue factor expression in human endothelial cells via activation of ERK/EGR-1 and Ca++/NFAT",
+   "year": 2002,
+   "citations": 200,
+   "venue": "Blood",
+   "doi": "10.1182/blood.v99.1.199",
+   "url": "https://openalex.org/W2068425507"
+  },
+  {
+   "title": "Nab2p Is Required for Poly(A) RNA Export in Saccharomyces cerevisiae and Is Regulated by Arginine Methylation via Hmt1p",
+   "year": 2002,
+   "citations": 196,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m110053200",
+   "url": "https://openalex.org/W2023090650"
+  },
+  {
+   "title": "Solitary fibrous tumor",
+   "year": 2018,
+   "citations": 194,
+   "venue": "Translational Gastroenterology and Hepatology",
+   "doi": "10.21037/tgh.2018.11.02",
+   "url": "https://openalex.org/W2901113468"
+  },
+  {
+   "title": "The use of exome capture RNA-seq for highly degraded RNA with application to clinical cancer sequencing",
+   "year": 2015,
+   "citations": 191,
+   "venue": "Genome Research",
+   "doi": "10.1101/gr.189621.115",
+   "url": "https://openalex.org/W2104806879"
+  },
+  {
+   "title": "The Current Status of Solitary Fibrous Tumor",
+   "year": 2016,
+   "citations": 189,
+   "venue": "International Journal of Surgical Pathology",
+   "doi": "10.1177/1066896915627485",
+   "url": "https://openalex.org/W2375796226"
+  },
+  {
+   "title": "Maternal licking regulates hippocampal glucocorticoid receptor transcription through a thyroid hormone\u2013serotonin\u2013NGFI-A signalling cascade",
+   "year": 2012,
+   "citations": 176,
+   "venue": "Philosophical Transactions of the Royal Society B Biological Sciences",
+   "doi": "10.1098/rstb.2012.0223",
+   "url": "https://openalex.org/W2005902017"
+  },
+  {
+   "title": "A Comprehensive Review on Solitary Fibrous Tumor: New Insights for New Horizons.",
+   "year": "2021",
+   "citations": 167,
+   "venue": null,
+   "doi": "10.3390/cancers13122913",
+   "url": "https://europepmc.org/article/MED/34200924"
+  },
+  {
+   "title": "NAB2\u2013STAT6 fusion types account for clinicopathological variations in solitary fibrous tumors",
+   "year": 2015,
+   "citations": 160,
+   "venue": "Modern Pathology",
+   "doi": "10.1038/modpathol.2015.90",
+   "url": "https://openalex.org/W1551318775"
+  },
+  {
+   "title": "Transcription factor EGR-1 suppresses the growth and transformation of human HT-1080 fibrosarcoma cells by induction of transforming growth factor beta 1.",
+   "year": 1996,
+   "citations": 156,
+   "venue": "Proceedings of the National Academy of Sciences",
+   "doi": "10.1073/pnas.93.21.11831",
+   "url": "https://openalex.org/W2039462089"
+  },
+  {
+   "title": "Inflammatory gene expression in monocytes of patients with schizophrenia: overlap and difference with bipolar disorder. A study in naturalistically treated patients",
+   "year": 2010,
+   "citations": 151,
+   "venue": "The International Journal of Neuropsychopharmacology",
+   "doi": "10.1017/s1461145710000799",
+   "url": "https://openalex.org/W2149368476"
+  },
+  {
+   "title": "Distinct clinicopathological features of NAB2-STAT6 fusion gene variants in solitary fibrous tumor with emphasis on the acquisition of highly malignant potential",
+   "year": 2014,
+   "citations": 144,
+   "venue": "Human Pathology",
+   "doi": "10.1016/j.humpath.2014.11.018",
+   "url": "https://openalex.org/W1973061598"
+  },
+  {
+   "title": "Egr1 Promotes Growth and Survival of Prostate Cancer Cells",
+   "year": 2003,
+   "citations": 142,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m210279200",
+   "url": "https://openalex.org/W2003448771"
+  },
+  {
+   "title": "Egr-1: new conductor for the tissue repair orchestra directs harmony (regeneration) or cacophony (fibrosis).",
+   "year": "2013",
+   "citations": 141,
+   "venue": null,
+   "doi": "10.1002/path.4131",
+   "url": "https://europepmc.org/article/MED/23132749"
+  },
+  {
+   "title": "Solitary fibrous tumor \u2013 clinicopathologic, immunohistochemical and molecular analysis of 28 cases",
+   "year": 2014,
+   "citations": 116,
+   "venue": "Diagnostic Pathology",
+   "doi": "10.1186/s13000-014-0224-6",
+   "url": "https://openalex.org/W2147372043"
+  },
+  {
+   "title": "Opposing regulation of T cell function by Egr\u20101/NAB2 and Egr\u20102/Egr\u20103",
+   "year": 2008,
+   "citations": 110,
+   "venue": "European Journal of Immunology",
+   "doi": "10.1002/eji.200737157",
+   "url": "https://openalex.org/W1996493268"
+  },
+  {
+   "title": "NAB2 Represses Transcription by Interacting with the CHD4 Subunit of the Nucleosome Remodeling and Deacetylase (NuRD) Complex",
+   "year": 2006,
+   "citations": 110,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m600775200",
+   "url": "https://openalex.org/W2065010411"
+  },
+  {
+   "title": "Transcription factor EGR3 is involved in the estrogen-signaling pathway in breast cancer cells",
+   "year": 2004,
+   "citations": 109,
+   "venue": "Journal of Molecular Endocrinology",
+   "doi": "10.1677/jme.0.0320649",
+   "url": "https://openalex.org/W2169110289"
+  },
+  {
+   "title": "Egr-1 Induces the Expression of Its Corepressor Nab2 by Activation of the Nab2 Promoter Thereby Establishing a Negative Feedback Loop",
+   "year": 2005,
+   "citations": 98,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m511079200",
+   "url": "https://openalex.org/W2029537608"
+  },
+  {
+   "title": "NAB2, a Corepressor of EGR-1, Inhibits Vascular Endothelial Growth Factor-mediated Gene Induction and Angiogenic Responses of Endothelial Cells",
+   "year": 2003,
+   "citations": 96,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m204937200",
+   "url": "https://openalex.org/W2109356886"
+  },
+  {
+   "title": "Pulse sensitivity of the luteinizing hormone beta promoter is determined by a negative feedback loop Involving early growth response-1 and Ngfi-A binding protein 1 and 2.",
+   "year": "2007",
+   "citations": 90,
+   "venue": null,
+   "doi": "10.1210/me.2006-0392",
+   "url": "https://europepmc.org/article/MED/17299135"
+  },
+  {
+   "title": "A Novel Activation Function for NAB Proteins in EGR-dependent Transcription of the Luteinizing Hormone \u03b2 Gene",
+   "year": 2000,
+   "citations": 90,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.275.13.9749",
+   "url": "https://openalex.org/W2000045473"
+  },
+  {
+   "title": "Functional Significance of the Interaction between the mRNA-binding Protein, Nab2, and the Nuclear Pore-associated Protein, Mlp1, in mRNA Export",
+   "year": 2008,
+   "citations": 87,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m803649200",
+   "url": "https://openalex.org/W2066377184"
+  },
+  {
+   "title": "The impact of histopathology and NAB2\u2013STAT6 fusion subtype in classification and grading of meningeal solitary fibrous tumor/hemangiopericytoma",
+   "year": 2018,
+   "citations": 83,
+   "venue": "Acta Neuropathologica",
+   "doi": "10.1007/s00401-018-1952-6",
+   "url": "https://openalex.org/W2905816708"
+  },
+  {
+   "title": "Evolutionarily Conserved Polyadenosine RNA Binding Protein Nab2 Cooperates with Splicing Machinery To Regulate the Fate of Pre-mRNA",
+   "year": 2016,
+   "citations": 82,
+   "venue": "Molecular and Cellular Biology",
+   "doi": "10.1128/mcb.00402-16",
+   "url": "https://openalex.org/W2509514499"
+  },
+  {
+   "title": "Early stimulation and late inhibition of peroxisome proliferator-activated receptor gamma (PPARgamma) gene expression by transforming growth factor beta in human aortic smooth muscle cells: role of early growth-response factor-1 (Egr-1), activator protein 1 (AP1) and Smads",
+   "year": 2003,
+   "citations": 80,
+   "venue": "Biochemical Journal",
+   "doi": "10.1042/bj20021503",
+   "url": "https://openalex.org/W2084634578"
+  },
+  {
+   "title": "Discovering biomarkers from gene expression data for predicting cancer subgroups using neural networks and relational fuzzy clustering",
+   "year": 2007,
+   "citations": 79,
+   "venue": "BMC Bioinformatics",
+   "doi": "10.1186/1471-2105-8-5",
+   "url": "https://openalex.org/W1480911578"
+  },
+  {
+   "title": "<i>NAB2-STAT6</i>Gene Fusion in Meningeal Hemangiopericytoma and Solitary Fibrous Tumor",
+   "year": 2016,
+   "citations": 74,
+   "venue": "Journal of Neuropathology & Experimental Neurology",
+   "doi": "10.1093/jnen/nlv026",
+   "url": "https://openalex.org/W2284521624"
+  },
+  {
+   "title": "Immunohistochemical detection of STAT6, CD34, CD99 and BCL-2 for diagnosing solitary fibrous tumors/hemangiopericytomas.",
+   "year": 2015,
+   "citations": 71,
+   "venue": "PubMed",
+   "doi": null,
+   "url": "https://openalex.org/W2413747644"
+  },
+  {
+   "title": "EGR1, EGR2, and EGR3 activate the expression of their coregulator NAB2 establishing a negative feedback loop in cells of neuroectodermal and epithelial origin.",
+   "year": "2010",
+   "citations": 70,
+   "venue": null,
+   "doi": "10.1002/jcb.22690",
+   "url": "https://europepmc.org/article/MED/20506119"
+  },
+  {
+   "title": "Solitary fibrous tumor: An evolving and unifying entity with unsettled issues.",
+   "year": 2019,
+   "citations": 70,
+   "venue": "PubMed",
+   "doi": "10.14670/hh-18-064",
+   "url": "https://openalex.org/W2941684975"
+  },
+  {
+   "title": "Active Gene Repression by the Egr2\u00b7NAB Complex during Peripheral Nerve Myelination",
+   "year": 2008,
+   "citations": 69,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m803330200",
+   "url": "https://openalex.org/W1775113439"
+  },
+  {
+   "title": "Differential diagnosis of solitary fibrous tumors: A study of 454 soft tissue tumors indicating the diagnostic value of nuclear STAT6 relocation and ALDH1 expression combined with in situ proximity ligation assay",
+   "year": 2015,
+   "citations": 69,
+   "venue": "International Journal of Oncology",
+   "doi": "10.3892/ijo.2015.2975",
+   "url": "https://openalex.org/W1968486512"
+  },
+  {
+   "title": "A PY-NLS Nuclear Targeting Signal Is Required for Nuclear Localization and Function of the Saccharomyces cerevisiae mRNA-binding Protein Hrp1",
+   "year": 2008,
+   "citations": 67,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m800898200",
+   "url": "https://openalex.org/W2054739800"
+  },
+  {
+   "title": "Identification and Functional Characterization of a Novel Nuclear Localization Signal Present in the Yeast Nab2 Poly(A) <sup>+</sup> RNA Binding Protein",
+   "year": 1998,
+   "citations": 64,
+   "venue": "Molecular and Cellular Biology",
+   "doi": "10.1128/mcb.18.3.1449",
+   "url": "https://openalex.org/W1865611186"
+  },
+  {
+   "title": "Frequent and early loss of the EGR1 corepressor NAB2 in human prostate carcinoma",
+   "year": 2001,
+   "citations": 64,
+   "venue": "Human Pathology",
+   "doi": "10.1053/hupa.2001.27102",
+   "url": "https://openalex.org/W1969526312"
+  },
+  {
+   "title": "Analysis of NAB2-STAT6 Gene Fusion in 17 Cases of Meningeal Solitary Fibrous Tumor/Hemangiopericytoma",
+   "year": 2016,
+   "citations": 61,
+   "venue": "The American Journal of Surgical Pathology",
+   "doi": "10.1097/pas.0000000000000625",
+   "url": "https://openalex.org/W2288690383"
+  },
+  {
+   "title": "Clinical and molecular implications of NAB2-STAT6 fusion variants in solitary fibrous tumour",
+   "year": 2021,
+   "citations": 60,
+   "venue": "Pathology",
+   "doi": "10.1016/j.pathol.2020.11.010",
+   "url": "https://openalex.org/W3139351109"
+  },
+  {
+   "title": "Targeted Enhancer Activation by a Subunit of the Integrator Complex.",
+   "year": "2018",
+   "citations": 59,
+   "venue": null,
+   "doi": "10.1016/j.molcel.2018.05.031",
+   "url": "https://europepmc.org/article/MED/30008316"
+  },
+  {
+   "title": "Gene Expression in Solitary Fibrous Tumors (SFTs) Correlates with Anatomic Localization and NAB2-STAT6 Gene Fusion Variants",
+   "year": 2021,
+   "citations": 54,
+   "venue": "American Journal Of Pathology",
+   "doi": "10.1016/j.ajpath.2020.12.015",
+   "url": "https://openalex.org/W3122057310"
+  },
+  {
+   "title": "Regulation of Lhb and Egr1 Gene Expression by GNRH Pulses in Rat Pituitaries Is Both c-Jun N-Terminal Kinase (JNK)- and Extracellular Signal-Regulated Kinase (ERK)-Dependent1",
+   "year": 2009,
+   "citations": 54,
+   "venue": "Biology of Reproduction",
+   "doi": "10.1095/biolreprod.109.079426",
+   "url": "https://openalex.org/W2125736798"
+  },
+  {
+   "title": "<i>NAB2\u2010STAT6</i> gene fusion and STAT6 immunoexpression in extrathoracic solitary fibrous tumors: the association between fusion variants and locations",
+   "year": 2016,
+   "citations": 50,
+   "venue": "Pathology International",
+   "doi": "10.1111/pin.12408",
+   "url": "https://openalex.org/W2471071064"
+  },
+  {
+   "title": "Vascular Smooth Muscle Cells Express the Transcriptional Corepressor NAB2 in Response to Injury",
+   "year": 1999,
+   "citations": 48,
+   "venue": "American Journal Of Pathology",
+   "doi": "10.1016/s0002-9440(10)65233-9",
+   "url": "https://openalex.org/W1982724357"
+  },
+  {
+   "title": "The transcriptional corepressor NAB2 inhibits NGF-induced differentiation of PC12 cells.",
+   "year": "1998",
+   "citations": 47,
+   "venue": null,
+   "doi": "10.1083/jcb.142.4.1075",
+   "url": "https://europepmc.org/article/MED/9722618"
+  },
+  {
+   "title": "Cutting Edge: TCR-Induced NAB2 Enhances T Cell Function by Coactivating IL-2 Transcription",
+   "year": 2006,
+   "citations": 43,
+   "venue": "The Journal of Immunology",
+   "doi": "10.4049/jimmunol.177.12.8301",
+   "url": "https://openalex.org/W2144639141"
+  },
+  {
+   "title": "Type I IFNs downregulate myeloid cell IFN-\u03b3 receptor by inducing recruitment of an early growth response 3/NGFI-A binding protein 1 complex that silences ifngr1 transcription.",
+   "year": "2013",
+   "citations": 43,
+   "venue": null,
+   "doi": "10.4049/jimmunol.1203510",
+   "url": "https://europepmc.org/article/MED/23935197"
+  },
+  {
+   "title": "Placenta Growth Factor-induced Early Growth Response 1 (Egr-1) Regulates Hypoxia-inducible Factor-1\u03b1 (HIF-1\u03b1) in Endothelial Cells",
+   "year": 2010,
+   "citations": 43,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m110.119495",
+   "url": "https://openalex.org/W2137102515"
+  },
+  {
+   "title": "Dynamics of Protein Expression Reveals Primary Targets and Secondary Messengers of Estrogen Receptor Alpha Signaling in MCF-7 Breast Cancer Cells",
+   "year": 2016,
+   "citations": 43,
+   "venue": "Molecular & Cellular Proteomics",
+   "doi": "10.1074/mcp.m115.057257",
+   "url": "https://openalex.org/W2314170505"
+  },
+  {
+   "title": "Potential Salivary mRNA Biomarkers for Early Detection of Oral Cancer.",
+   "year": "2020",
+   "citations": 42,
+   "venue": null,
+   "doi": "10.3390/jcm9010243",
+   "url": "https://europepmc.org/article/MED/31963366"
+  },
+  {
+   "title": "Clinicopathological differences between variants of the NAB2\u2013STAT6 fusion gene in solitary fibrous tumors of the meninges and extra-central nervous system",
+   "year": 2016,
+   "citations": 42,
+   "venue": "Brain Tumor Pathology",
+   "doi": "10.1007/s10014-016-0264-6",
+   "url": "https://openalex.org/W2467042268"
+  },
+  {
+   "title": "Structure\u2013function relationships in the Nab2 polyadenosine\u2010RNA binding Zn finger protein family",
+   "year": 2018,
+   "citations": 37,
+   "venue": "Protein Science",
+   "doi": "10.1002/pro.3565",
+   "url": "https://openalex.org/W2906605452"
+  },
+  {
+   "title": "Whole-exome mutational landscape of neuroendocrine carcinomas of the gallbladder",
+   "year": 2021,
+   "citations": 35,
+   "venue": "Signal Transduction and Targeted Therapy",
+   "doi": "10.1038/s41392-020-00412-3",
+   "url": "https://openalex.org/W3128880478"
+  },
+  {
+   "title": "Immediate Early Genes Anchor a Biological Pathway of Proteins Required for Memory Formation, Long-Term Depression and Risk for Schizophrenia.",
+   "year": "2018",
+   "citations": 34,
+   "venue": null,
+   "doi": "10.3389/fnbeh.2018.00023",
+   "url": "https://europepmc.org/article/MED/29520222"
+  },
+  {
+   "title": "Nuclear Export of the Yeast mRNA-binding Protein Nab2 Is Linked to a Direct Interaction with Gfd1 and to Gle1 Function",
+   "year": 2004,
+   "citations": 34,
+   "venue": "Journal of Biological Chemistry",
+   "doi": "10.1074/jbc.m402044200",
+   "url": "https://openalex.org/W2048323987"
+  },
+  {
+   "title": "The NAB2\u2013STAT6 gene fusion in solitary fibrous tumor can be reliably detected by anchored multiplexed PCR for targeted next-generation sequencing",
+   "year": 2016,
+   "citations": 34,
+   "venue": "Cancer Genetics",
+   "doi": "10.1016/j.cancergen.2016.05.071",
+   "url": "https://openalex.org/W2406571454"
+  },
+  {
+   "title": "Enhanced EGR1 activity promotes the growth of prostate cancer cells in an androgen\u2010depleted environment",
+   "year": 2005,
+   "citations": 34,
+   "venue": "Journal of Cellular Biochemistry",
+   "doi": "10.1002/jcb.20736",
+   "url": "https://openalex.org/W1983918795"
+  },
+  {
+   "title": "NAB2-STAT6 fusion protein mediates cell proliferation and oncogenic progression via EGR-1 regulation",
+   "year": 2020,
+   "citations": 32,
+   "venue": "Biochemical and Biophysical Research Communications",
+   "doi": "10.1016/j.bbrc.2020.03.090",
+   "url": "https://openalex.org/W3012808987"
+  },
+  {
+   "title": "The Transcriptional Cofactor Nab2 Is Induced by TGF-\u03b2 and Suppresses Fibroblast Activation: Physiological Roles and Impaired Expression in Scleroderma",
+   "year": 2009,
+   "citations": 29,
+   "venue": "PLoS ONE",
+   "doi": "10.1371/journal.pone.0007620",
+   "url": "https://openalex.org/W2015184095"
+  },
+  {
+   "title": "Nab2 regulates secondary CD8+ T-cell responses through control of TRAIL expression",
+   "year": 2011,
+   "citations": 28,
+   "venue": "Blood",
+   "doi": "10.1182/blood-2011-08-373910",
+   "url": "https://openalex.org/W1999169434"
+  },
+  {
+   "title": "Prognostic significance of NAB2\u2013STAT6 fusion variants and TERT promotor mutations in solitary fibrous tumors/hemangiopericytomas of the CNS: not (yet) clear",
+   "year": 2019,
+   "citations": 26,
+   "venue": "Acta Neuropathologica",
+   "doi": "10.1007/s00401-019-01968-3",
+   "url": "https://openalex.org/W2914026985"
+  },
+  {
+   "title": "Differential regulation of NAB corepressor genes in Schwann cells.",
+   "year": "2007",
+   "citations": 25,
+   "venue": null,
+   "doi": "10.1186/1471-2199-8-117",
+   "url": "https://europepmc.org/article/MED/18096076"
+  },
+  {
+   "title": "Advances in the molecular biology of the solitary fibrous tumor and potential impact on clinical applications.",
+   "year": "2024",
+   "citations": 24,
+   "venue": null,
+   "doi": "10.1007/s10555-024-10204-8",
+   "url": "https://europepmc.org/article/MED/39120790"
+  },
+  {
+   "title": "Regulation of p130(Cas)/BCAR1 expression in tamoxifen-sensitive and tamoxifen-resistant breast cancer cells by EGR1 and NAB2.",
+   "year": "2012",
+   "citations": 23,
+   "venue": null,
+   "doi": "10.1593/neo.111760",
+   "url": "https://europepmc.org/article/MED/22431919"
+  },
+  {
+   "title": "Recurrent Sinonasal CD34-Negative Malignant Solitary Fibrous Tumor Diagnosed on STAT6 Immunohistochemistry and NAB2-STAT6 Fusion",
+   "year": 2019,
+   "citations": 23,
+   "venue": "Head and Neck Pathology",
+   "doi": "10.1007/s12105-018-00999-8",
+   "url": "https://openalex.org/W2910840144"
+  },
+  {
+   "title": "Glucose stress causes mRNA retention in nuclear Nab2 condensates",
+   "year": 2023,
+   "citations": 23,
+   "venue": "Cell Reports",
+   "doi": "10.1016/j.celrep.2023.113593",
+   "url": "https://openalex.org/W4389888712"
+  },
+  {
+   "title": "Evaluation of NAB2-STAT6 Fusion Variants and Other Molecular Alterations as Prognostic Biomarkers in a Case Series of 83 Solitary Fibrous Tumors",
+   "year": 2021,
+   "citations": 20,
+   "venue": "Cancers",
+   "doi": "10.3390/cancers13205237",
+   "url": "https://openalex.org/W3206919466"
+  },
+  {
+   "title": "\u2018Papillary\u2019 solitary fibrous tumor/hemangiopericytoma with nuclear STAT6 expression and NAB2-STAT6 fusion",
+   "year": 2016,
+   "citations": 18,
+   "venue": "Brain Tumor Pathology",
+   "doi": "10.1007/s10014-015-0247-z",
+   "url": "https://openalex.org/W2231440554"
+  },
+  {
+   "title": "NAB2\u2013STAT6 fusion gene analysis in two cases of meningeal solitary fibrous tumor/hemangiopericytoma with late distant metastases",
+   "year": 2015,
+   "citations": 18,
+   "venue": "Brain Tumor Pathology",
+   "doi": "10.1007/s10014-015-0220-x",
+   "url": "https://openalex.org/W1985734771"
+  },
+  {
+   "title": "Solitary Fibrous Tumor of the Vulva: Report of 2 Cases, Including a De Novo Dedifferentiated Solitary Fibrous Tumor Diagnosed After Molecular Demonstration of NAB2-STAT6 Gene Fusion",
+   "year": 2017,
+   "citations": 18,
+   "venue": "International Journal of Gynecological Pathology",
+   "doi": "10.1097/pgp.0000000000000464",
+   "url": "https://openalex.org/W2757887788"
+  },
+  {
+   "title": "NAB2 and EGR-1 exert opposite roles in regulating TRAIL expression in human Natural Killer cells",
+   "year": 2013,
+   "citations": 17,
+   "venue": "Immunology Letters",
+   "doi": "10.1016/j.imlet.2013.02.001",
+   "url": "https://openalex.org/W2121550515"
+  },
+  {
+   "title": "Dbp5 associates with RNA-bound Mex67 and Nab2 and its localization at the nuclear pore complex is sufficient for mRNP export and cell viability",
+   "year": 2020,
+   "citations": 17,
+   "venue": "PLoS Genetics",
+   "doi": "10.1371/journal.pgen.1009033",
+   "url": "https://openalex.org/W3091376540"
+  },
+  {
+   "title": "Characterization of neutralizing antibodies reacting with the 213-224 amino-acid segment of human galectin-9.",
+   "year": "2018",
+   "citations": 16,
+   "venue": null,
+   "doi": "10.1371/journal.pone.0202512",
+   "url": "https://europepmc.org/article/MED/30204750"
+  },
+  {
+   "title": "Yeast Virus-Derived Stimulator of the Innate Immune System Augments the Efficacy of Virus Vector-Based Immunotherapy",
+   "year": 2014,
+   "citations": 16,
+   "venue": "Journal of Virology",
+   "doi": "10.1128/jvi.03819-13",
+   "url": "https://openalex.org/W2013326148"
+  },
+  {
+   "title": "NAB2: A Transcriptional Brake for Activated Gene Expression in the Vessel Wall?",
+   "year": 1999,
+   "citations": 15,
+   "venue": "American Journal Of Pathology",
+   "doi": "10.1016/s0002-9440(10)65200-5",
+   "url": "https://openalex.org/W2072432914"
+  },
+  {
+   "title": "Inversion-mediated gene fusions involving NAB2-STAT6 in an unusual malignant meningioma",
+   "year": 2013,
+   "citations": 15,
+   "venue": "British Journal of Cancer",
+   "doi": "10.1038/bjc.2013.395",
+   "url": "https://openalex.org/W2094523058"
+  },
+  {
+   "title": "The disease-associated proteins <i>Drosophila</i> Nab2 and Ataxin-2 interact with shared RNAs and coregulate neuronal morphology",
+   "year": 2021,
+   "citations": 14,
+   "venue": "Genetics",
+   "doi": "10.1093/genetics/iyab175",
+   "url": "https://openalex.org/W3213864090"
+  },
+  {
+   "title": "Lipomatous Solitary Fibrous Tumors Harbor Rare NAB2-STAT6 Fusion Variants and Show Up-Regulation of the Gene PPARG, Encoding for a Regulator of Adipocyte Differentiation",
+   "year": 2021,
+   "citations": 13,
+   "venue": "American Journal Of Pathology",
+   "doi": "10.1016/j.ajpath.2021.03.012",
+   "url": "https://openalex.org/W3152810321"
+  },
+  {
+   "title": "A GRIA2 and PAX8-positive renal solitary fibrous tumor with NAB2-STAT6 gene fusion",
+   "year": 2015,
+   "citations": 13,
+   "venue": "Diagnostic Pathology",
+   "doi": "10.1186/s13000-015-0386-x",
+   "url": "https://openalex.org/W2102449319"
+  },
+  {
+   "title": "Papillary Solitary Fibrous Tumor/Hemangiopericytoma: An Uncommon Morphological Form With NAB2-STAT6 Gene Fusion",
+   "year": 2019,
+   "citations": 13,
+   "venue": "Journal of Neuropathology & Experimental Neurology",
+   "doi": "10.1093/jnen/nlz053",
+   "url": "https://openalex.org/W2963965947"
+  },
+  {
+   "title": "Reduction of Tumor Growth with RNA-Targeting Treatment of the NAB2\u2013STAT6 Fusion Transcript in Solitary Fibrous Tumor Models",
+   "year": 2023,
+   "citations": 13,
+   "venue": "Cancers",
+   "doi": "10.3390/cancers15123127",
+   "url": "https://openalex.org/W4380083018"
+  },
+  {
+   "title": "Induction of DARPP-32 by brain-derived neurotrophic factor in striatal neurons in vitro is modified by histone deacetylase inhibitors and Nab2.",
+   "year": "2013",
+   "citations": 12,
+   "venue": null,
+   "doi": "10.1371/journal.pone.0076842",
+   "url": "https://europepmc.org/article/MED/24204683"
+  },
+  {
+   "title": "Inducible CRISPR Epigenome Systems Mimic Cocaine Induced Bidirectional Regulation of Nab2 and Egr3",
+   "year": 2023,
+   "citations": 10,
+   "venue": "Journal of Neuroscience",
+   "doi": "10.1523/jneurosci.1802-22.2022",
+   "url": "https://openalex.org/W4322490205"
+  },
+  {
+   "title": "Determination of biological behavior of solitary fibrous tumors: correlation of expression of Ki-67, TPX2 and TERT mRNA subunit level and NAB2-STAT6 fusion compared to morphological aspects of SFTs",
+   "year": 2021,
+   "citations": 10,
+   "venue": "Neoplasma",
+   "doi": "10.4149/neo_2021_210511n642",
+   "url": "https://openalex.org/W3216290591"
+  },
+  {
+   "title": "Trabectedin Is Active against Two Novel, Patient-Derived Solitary Fibrous Pleural Tumor Cell Lines and Synergizes with Ponatinib.",
+   "year": "2022",
+   "citations": 9,
+   "venue": null,
+   "doi": "10.3390/cancers14225602",
+   "url": "https://europepmc.org/article/MED/36428694"
+  },
+  {
+   "title": "Risk factors for recurrent disease after resection of solitary fibrous tumor: a systematic review.",
+   "year": "2024",
+   "citations": 9,
+   "venue": null,
+   "doi": "10.3389/fsurg.2024.1332421",
+   "url": "https://europepmc.org/article/MED/38357190"
+  },
+  {
+   "title": "Search for mutations in the EGR2 corepressor proteins, NAB1 and NAB2, in human peripheral neuropathies.",
+   "year": "2002",
+   "citations": 8,
+   "venue": null,
+   "doi": "10.1007/s10048-001-0124-2",
+   "url": "https://europepmc.org/article/MED/12030330"
+  },
+  {
+   "title": "A Novel <i>NFIX-STAT6</i> Gene Fusion in Solitary Fibrous Tumor: A Case Report.",
+   "year": "2021",
+   "citations": 8,
+   "venue": null,
+   "doi": "10.3390/ijms22147514",
+   "url": "https://europepmc.org/article/MED/34299133"
+  },
+  {
+   "title": "NAB2 is a novel immune stimulator of MDA-5 that promotes a strong type I interferon response.",
+   "year": "2018",
+   "citations": 6,
+   "venue": null,
+   "doi": "10.18632/oncotarget.23725",
+   "url": "https://europepmc.org/article/MED/29464024"
+  },
+  {
+   "title": "NAB2::STAT6 fusions and genome-wide DNA methylation profiling: Predictors of patient outcomes in meningeal solitary fibrous tumors.",
+   "year": "2024",
+   "citations": 6,
+   "venue": null,
+   "doi": "10.1111/bpa.13256",
+   "url": "https://europepmc.org/article/MED/38523251"
+  },
+  {
+   "title": "NGFI-A Binding Protein 2 Promotes EGF-Dependent HNSCC Cell Invasion",
+   "year": 2019,
+   "citations": 5,
+   "venue": "Cancers",
+   "doi": "10.3390/cancers11030315",
+   "url": "https://openalex.org/W2920667738"
+  },
+  {
+   "title": "Recurrent and novel fusions detected by targeted RNA sequencing as part of the diagnostic workflow of soft tissue and bone tumours.",
+   "year": "2024",
+   "citations": 5,
+   "venue": null,
+   "doi": "10.1002/2056-4538.12376",
+   "url": "https://europepmc.org/article/MED/38738521"
+  },
+  {
+   "title": "Integration of Orthogonal Signaling by the Notch and Dpp Pathways in Drosophila.",
+   "year": "2016",
+   "citations": 4,
+   "venue": null,
+   "doi": "10.1534/genetics.116.186791",
+   "url": "https://europepmc.org/article/MED/26975664"
+  },
+  {
+   "title": "NAB2-STAT6 drives an EGR1-dependent neuroendocrine program in Solitary Fibrous Tumors",
+   "year": 2024,
+   "citations": 3,
+   "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+   "doi": "10.1101/2024.04.15.589533",
+   "url": "https://openalex.org/W4394988404"
+  },
+  {
+   "title": "Unveiling migraine subtype heterogeneity and risk loci: integrated genome-wide association study and single-cell transcriptomics discovery.",
+   "year": "2025",
+   "citations": 3,
+   "venue": null,
+   "doi": "10.1186/s10194-025-02128-7",
+   "url": "https://europepmc.org/article/MED/40826382"
+  },
+  {
+   "title": "NAB2-STAT6 drives an EGR1-dependent neuroendocrine program in solitary fibrous tumors.",
+   "year": "2025",
+   "citations": 2,
+   "venue": null,
+   "doi": "10.7554/elife.98072",
+   "url": "https://europepmc.org/article/MED/40875449"
+  },
+  {
+   "title": "The transcriptional coregulator <i>NAB2</i> is a target gene for the Wilms' tumor gene 1 protein (WT1) in leukemic cells.",
+   "year": "2017",
+   "citations": 2,
+   "venue": null,
+   "doi": "10.18632/oncotarget.19896",
+   "url": "https://europepmc.org/article/MED/29152069"
+  },
+  {
+   "title": "Solitary Fibrous Tumors",
+   "year": "2026",
+   "citations": 2,
+   "venue": null,
+   "doi": null,
+   "url": "https://europepmc.org/article/MED/36251813"
+  },
+  {
+   "title": "Molecular landscape, subtypes, and therapeutic vulnerabilities of central nervous system solitary fibrous tumors.",
+   "year": "2025",
+   "citations": 2,
+   "venue": null,
+   "doi": "10.1038/s41467-025-63039-4",
+   "url": "https://europepmc.org/article/MED/40849425"
+  },
+  {
+   "title": "Case report: Solitary fibrous tumor of the kidney with a NAB2-STAT6 fusion gene.",
+   "year": "2022",
+   "citations": 2,
+   "venue": null,
+   "doi": "10.3389/fonc.2022.1045238",
+   "url": "https://europepmc.org/article/MED/36465355"
+  },
+  {
+   "title": "Immunological Tumor Microenvironment of Solitary Fibrous Tumors-Associating Immune Infiltrate with Variables of Prognostic Significance.",
+   "year": "2024",
+   "citations": 2,
+   "venue": null,
+   "doi": "10.3390/cancers16183222",
+   "url": "https://europepmc.org/article/MED/39335193"
+  },
+  {
+   "title": "Solitary fibrous tumor of the prostate with accompanying low-grade prostate cancer.",
+   "year": "2024",
+   "citations": 2,
+   "venue": null,
+   "doi": "10.1016/j.eucr.2024.102879",
+   "url": "https://europepmc.org/article/MED/39583332"
+  },
+  {
+   "title": "Solitary fibrous tumour: histological discoveries, behavioural aspects, risk assessment and therapeutical approaches.",
+   "year": "2025",
+   "citations": 1,
+   "venue": null,
+   "doi": "10.1177/17588359251367320",
+   "url": "https://europepmc.org/article/MED/41164203"
+  },
+  {
+   "title": "Identification of BET inhibitors (BETi) against solitary fibrous tumor (SFT) through high-throughput screening (HTS).",
+   "year": "2025",
+   "citations": 1,
+   "venue": null,
+   "doi": "10.1016/j.neo.2025.101244",
+   "url": "https://europepmc.org/article/MED/41166819"
+  },
+  {
+   "title": "A kinetic ruler controls mRNA poly(A) tail length.",
+   "year": "2025",
+   "citations": 1,
+   "venue": null,
+   "doi": "10.1101/gad.352912.125",
+   "url": "https://europepmc.org/article/MED/40846642"
+  },
+  {
+   "title": "Establishment and characterization of NCC-SFT1-C1: a novel patient-derived cell line of solitary fibrous tumor.",
+   "year": "2025",
+   "citations": 1,
+   "venue": null,
+   "doi": "10.1007/s13577-025-01175-1",
+   "url": "https://europepmc.org/article/MED/39904835"
+  },
+  {
+   "title": "Global changes in synthesis rates and mRNA stabilities during adaptive responses to cell wall stress in yeast.",
+   "year": "2025",
+   "citations": 1,
+   "venue": null,
+   "doi": "10.1038/s41598-025-08815-4",
+   "url": "https://europepmc.org/article/MED/40651991"
+  },
+  {
+   "title": "Epithelioid solitary fibrous tumors from CNS and soft tissues: an unusual morphologic variant.",
+   "year": "2024",
+   "citations": 1,
+   "venue": null,
+   "doi": "10.1186/s13000-024-01564-4",
+   "url": "https://europepmc.org/article/MED/39456068"
+  },
+  {
+   "title": "SUMO2/3 modification of transcription-associated proteins controls cell viability in response to oxygen and glucose deprivation-mediated stress.",
+   "year": "2025",
+   "citations": 1,
+   "venue": null,
+   "doi": "10.1038/s41420-025-02513-w",
+   "url": "https://europepmc.org/article/MED/40348773"
+  },
+  {
+   "title": "Solitary fibrous tumor of the prostate: a case report and the systematic review of 74 published cases.",
+   "year": "2025",
+   "citations": 1,
+   "venue": null,
+   "doi": "10.3389/fonc.2025.1593184",
+   "url": "https://europepmc.org/article/MED/41079073"
+  },
+  {
+   "title": "EGR1 mediates neuronal damage via suppressing HIF1A-induced mitophagy following traumatic brain injury.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1080/15548627.2026.2693261",
+   "url": "https://europepmc.org/article/MED/42323821"
+  },
+  {
+   "title": "Solitary Fibrous Tumor of the Nasal Vestibule: A Case Report.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.7759/cureus.99763",
+   "url": "https://europepmc.org/article/MED/41431481"
+  },
+  {
+   "title": "Primary Hepatic Solitary Fibrous Tumour: A Rare Mesenchymal Entity with Distinct Histopathologic and Molecular Features.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.3390/diagnostics16091276",
+   "url": "https://europepmc.org/article/MED/42121980"
+  },
+  {
+   "title": "An Uncommon Thyroid Tumor: The Diagnostic Challenge of Solitary Fibrous Tumors.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.3390/biomedicines14040803",
+   "url": "https://europepmc.org/article/MED/42072345"
+  },
+  {
+   "title": "Hippo signalling pathway mediates oncogenic properties of NAB2::STAT6 in solitary fibrous tumour.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1007/s13402-026-01173-x",
+   "url": "https://europepmc.org/article/MED/41665771"
+  },
+  {
+   "title": "High-Throughput Hybridization Assay as First-Line Diagnostic Test for Sarcomas: Clinical Assessment in a Tertiary Referral Center.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.5858/arpa.2024-0202-oa",
+   "url": "https://europepmc.org/article/MED/39384185"
+  },
+  {
+   "title": "Solitary fibrous tumor of the central nervous system with epithelioid neuroendocrine \"Transdedifferentiation\": A case report and review of the literatures.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1111/neup.13022",
+   "url": "https://europepmc.org/article/MED/39686547"
+  },
+  {
+   "title": "Repression of EGR target genes by NAB2 and the NuRD complex",
+   "year": 2008,
+   "citations": 0,
+   "venue": "The FASEB Journal",
+   "doi": "10.1096/fasebj.22.1_supplement.782.24",
+   "url": "https://openalex.org/W155985239"
+  },
+  {
+   "title": "Repression of Egr2 target genes by the NuRD complex",
+   "year": 2006,
+   "citations": 0,
+   "venue": "The FASEB Journal",
+   "doi": "10.1096/fasebj.20.5.a944-e",
+   "url": "https://openalex.org/W156936415"
+  },
+  {
+   "title": "Characterizing Nab2 Phosphorylation and its Role in Regulating Egr Transcription Factors",
+   "year": 2018,
+   "citations": 0,
+   "venue": "Journal of international women's studies",
+   "doi": null,
+   "url": "https://openalex.org/W2895995174"
+  },
+  {
+   "title": "Intracranial Solitary Fibrous Tumors With Glandular and Papillary Structures: A Case Report.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1002/ccr3.72746",
+   "url": "https://europepmc.org/article/MED/42256992"
+  },
+  {
+   "title": "Solitary Fibrous Tumor Arising in Thyroid Follicular Nodular Disease: A Case Report.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1159/000553118",
+   "url": "https://europepmc.org/article/MED/42319882"
+  },
+  {
+   "title": "An elevated level of the mRNA exporter Mex67-Mtr2 in nuclear mRNPs impairs nuclear mRNA export.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1093/nar/gkag025",
+   "url": "https://europepmc.org/article/MED/41574433"
+  },
+  {
+   "title": "CPF-CF-terminated snoRNAs shuttle through the cytoplasm via an mRNA guard protein-mediated surveillance mechanism.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1038/s41467-026-70373-8",
+   "url": "https://europepmc.org/article/MED/41786729"
+  },
+  {
+   "title": "Comprehensive Genomic Profiling of Acral Melanoma: Insights From the AACR Project GENIE Database.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1097/dad.0000000000003237",
+   "url": "https://europepmc.org/article/MED/41650285"
+  },
+  {
+   "title": "A kinetic ruler controls mRNA poly(A) tail length",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1101/2025.05.01.651612",
+   "url": "https://europepmc.org/article/PPR/PPR1013104"
+  },
+  {
+   "title": "Beyond the Globe: Molecular Diagnostics of Optic Nerve, Orbital, and Adnexal Neoplasms.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1167/tvst.15.3.3",
+   "url": "https://europepmc.org/article/MED/41769942"
+  },
+  {
+   "title": "NAB2::STAT6 Rearranged Carcinoma of the Parotid Gland with Sebaceous Differentiation: A Case Report.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1007/s12105-024-01733-3",
+   "url": "https://europepmc.org/article/MED/39804544"
+  },
+  {
+   "title": "Clinicopathological and genetic analysis of orbital solitary fibrous tumors.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1186/s12886-025-04223-4",
+   "url": "https://europepmc.org/article/MED/40660115"
+  },
+  {
+   "title": "Solitary Fibrous Tumor of the Mesentery of the Small Intestine: A Rare Case Report.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.23922/jarc.2025-049",
+   "url": "https://europepmc.org/article/MED/41180798"
+  },
+  {
+   "title": "[Solitary fibrous tumor in a\u00a0thyroid follicular adenoma].",
+   "year": "2024",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1007/s00292-024-01353-2",
+   "url": "https://europepmc.org/article/MED/39264448"
+  },
+  {
+   "title": "NAB2::STAT6 fusion proteins drive nuclear condensate formation and transcriptional reprogramming in solitary fibrous tumors.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1016/j.canlet.2026.218608",
+   "url": "https://europepmc.org/article/MED/42176797"
+  },
+  {
+   "title": "Spinal solitary fibrous tumor metastatic to the fourth ventricle: illustrative case.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.3171/case25414",
+   "url": "https://europepmc.org/article/MED/42372303"
+  },
+  {
+   "title": "Radiological misdiagnosis of intracranial solitary fibrous tumor: a case report STAT6 immunohistochemistry resolves the diagnostic challenge.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1097/ms9.0000000000005007",
+   "url": "https://europepmc.org/article/MED/42254181"
+  },
+  {
+   "title": "Diagnosis and treatment of solitary fibrous tumors of the thyroid gland: the importance of an appropriate diagnostic approach.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1016/j.endien.2026.501744",
+   "url": "https://europepmc.org/article/MED/41881771"
+  },
+  {
+   "title": "Myxoid Solitary Fibrous Tumor of the Vulva: A Diagnostic Pitfall.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1097/pgp.0000000000001171",
+   "url": "https://europepmc.org/article/MED/41747176"
+  },
+  {
+   "title": "[Moderate to high-risk primary malignant solitary fibrous tumor of the kidney: a clinicopathological and molecular analysis of five cases].",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.3760/cma.j.cn112151-20250910-00606",
+   "url": "https://europepmc.org/article/MED/41956742"
+  },
+  {
+   "title": "Intraosseous Solitary Fibrous Tumor of the Maxilla: A Report of an Unusual Case.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.7759/cureus.103820",
+   "url": "https://europepmc.org/article/MED/41869210"
+  },
+  {
+   "title": "Pancreatic Solitary Fibrous Tumor: A Common Tumor Occurring in a Rare Location.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.12659/ajcr.950097",
+   "url": "https://europepmc.org/article/MED/41913448"
+  },
+  {
+   "title": "Malignant solitary fibrous tumor of the temporal bone with NAB2 ex6::STAT6 ex16 fusion: a case report with literature review.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1186/s12957-025-04160-y",
+   "url": "https://europepmc.org/article/MED/41413814"
+  },
+  {
+   "title": "Periprosthetic Solitary Fibrous Tumor of the Proximal Femur: A Case Report.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.2106/jbjs.cc.25.00087",
+   "url": "https://europepmc.org/article/MED/41481885"
+  },
+  {
+   "title": "[Renal solitary fibrous tumors: a clinicopathological analysis of five cases].",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.3760/cma.j.cn112151-20250604-00386",
+   "url": "https://europepmc.org/article/MED/41355106"
+  },
+  {
+   "title": "Solitary fibrous tumor: an updated review.",
+   "year": "2026",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.4132/jptm.2025.10.08",
+   "url": "https://europepmc.org/article/MED/41531321"
+  },
+  {
+   "title": "Malignant metastatising solitary fibrous tumor of the ovary with additional dedifferentiation and osteoid deposition: an unusual presentation, with a brief description of a diagnostic alghoritm.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.32074/1591-951x-n1180",
+   "url": "https://europepmc.org/article/MED/41454769"
+  },
+  {
+   "title": "Solitary Fibrous Tumours of the Orbit - Clinical Pathology, Therapy and Prognosis.",
+   "year": "2024",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1055/a-2165-6550",
+   "url": "https://europepmc.org/article/MED/37967817"
+  },
+  {
+   "title": "Alveolar solitary fibrous tumor: an uncommon morphological form.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.1186/s13000-025-01698-z",
+   "url": "https://europepmc.org/article/MED/40859272"
+  },
+  {
+   "title": "Case Report: Retroperitoneal dedifferentiated solitary fibrous tumor with unexpected Pax-2 expression, mimicking high grade clear cell renal cell carcinoma.",
+   "year": "2025",
+   "citations": 0,
+   "venue": null,
+   "doi": "10.3389/fonc.2025.1569160",
+   "url": "https://europepmc.org/article/MED/40432917"
+  }
+ ],
+ "_note": "abstracts stripped for provenance (third-party copyrighted text not redistributed); regenerate via src/arbiter/lit/search.py"
+}

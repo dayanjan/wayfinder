@@ -1,0 +1,34 @@
+======================================================================
+CHECK A - are NAB2's atopic-eczema clusters a 12q13 locus artifact?
+
+cluster 74: 30 genes, 30 mapped
+  on 12q13 (STAT6's band): ['NAB2', 'TESPA1']
+  anywhere on chr12: ['MAPKAPK5', 'NAB2', 'TESPA1']
+  STAT6 present: False
+  example bands: [('ADAT2', '6q24.2'), ('BCL3', '19q13.32'), ('CD109', '6q13'), ('CNN2', '19p13.3'), ('CTSW', '11q13.1'), ('EMB', '5q11.1'), ('FOXP1', '3p13'), ('GFI1', '1p22.1')]
+
+cluster 90: 37 genes, 37 mapped
+  on 12q13 (STAT6's band): ['NAB2', 'TESPA1']
+  anywhere on chr12: ['IL22', 'IL26', 'M6PR', 'NAB2', 'PHC1', 'TESPA1']
+  STAT6 present: False
+  example bands: [('AHI1', '6q23.3'), ('ANXA11', '10q22.3'), ('ARHGEF3', '3p14.3'), ('BCL2L11', '2q13'), ('CD28', '2q33.2'), ('COPRS', '17q11.2'), ('EMB', '5q11.1'), ('FAM184A', '6q22.31')]
+
+======================================================================
+CHECK B - do NAB2 and STAT6 have distinct programs / disease profiles?
+
+NAB2 Th1/Th2 program shift (T2):
+  Th2_vs_Th1 (Ota 2021)        log_fc=+0.633 z=+7.71 adjp=1.95e-13 -> Th1-assoc
+  Th2_vs_Th1 (Hollbacker 2021) log_fc=+0.609 z=+2.39 adjp=2.05e-01 -> n.s.
+
+STAT6 Th1/Th2 program shift (T2):
+  Th2_vs_Th1 (Ota 2021)        log_fc=+0.080 z=+2.66 adjp=2.68e-02 -> Th1-assoc
+  Th2_vs_Th1 (Hollbacker 2021) log_fc=+0.097 z=+0.82 adjp=8.81e-01 -> n.s.
+
+NAB2 referee-supported diseases (2): ['asthma', 'atopic eczema']
+
+STAT6 referee-supported diseases (2): ['asthma', 'atopic eczema']
+
+shared diseases: ['asthma', 'atopic eczema']
+NAB2-only: []
+STAT6-only: []
+Jaccard(disease profiles) = 1.00  (low = distinct biology)

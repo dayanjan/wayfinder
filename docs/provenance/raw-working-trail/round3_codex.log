@@ -1,0 +1,1036 @@
+Reading prompt from stdin...
+OpenAI Codex v0.141.0
+--------
+workdir: C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f3f06-052a-7d02-b67b-2f2a1246b068
+--------
+user
+You are continuing an iterative cross-model debate on an implementation-plan artifact.
+This is round 3 (the FINAL round) and it is the ACCEPTANCE GATE. Between round 2 and now,
+Claude REWROTE the artifact `docs/lbd-proposer-spec.md` to v2 to land the accepted findings
+(this directly addresses your round-2 P0 F-010). Your job: verify the REVISED artifact
+against the repo. ESCALATE anything still wrong, DROP what is now fixed, SURFACE any NEW
+gap the rewrite introduced, and decide convergence.
+
+# CRITICAL: repo-read acceptance gate — verify the REVISED artifact against the code
+
+You are READ-ONLY inside the target repo. The artifact below is the NEW v2 text (re-read it
+fresh; do not rely on your memory of v1). Open referenced files to confirm the rewrite is
+faithful. Specifically:
+- `data/guide_kd_efficiency.suppl_table.csv` and `data/DE_stats.suppl_table.csv` headers —
+  does A ("KD-gated significant regulators") actually derive from these? Do they carry a
+  `signif_knockdown`-style gate column and a significance/effect column?
+- `docs/perturbseq-qc_2026-07-07/pyzobot_referee.py` lines ~70-74 (`t3_exploded`) and the
+  HOP-3 logic — is the v2 `referee_triple` HOP-3 override (filter on
+  `disease==C_disease AND gene_set==downstream_<condition>`, supported iff FDR<0.05,
+  else refuted-for-C) faithfully specified against the real code?
+- `data/cluster_autoimmune_enrichment_results.suppl_table.csv` — are the 14 diseases and the
+  two excluded umbrella terms correct?
+- Grep the v2 artifact for any RESIDUAL v1 claim that should have been removed (absent
+  `*_regulator_coefficients.csv`; aging/cytokine programs as in-scope; "referee consumes it
+  unchanged"; hard `max_ac=0` gate; ~17 diseases; 0.5-1 day).
+
+# Framing question
+
+Is the REVISED v2 `docs/lbd-proposer-spec.md` now build-ready — the shortest CORRECT path to
+a receipt-backed, condition-specific NOVEL finding by July 13, faithful to the repo? And is
+the constrained pipeline still a genuinely GENERATIVE LBD engine (Claude argues yes; take a
+final position)?
+
+# Preserve-intent directive
+
+Novel claim: "LBD as a QUESTION-GENERATION engine whose output is MANDATORILY culled by a
+data-referee." v2 closes the answer-leak path (bans `ranked_full` seeding). Confirm the claim
+is intact and not sanded; if you think the constrained substrate is too thin to be generative,
+say so as an open question rather than agreeing by default.
+
+# Round history
+
+## Round 1 — Codex findings (ids): F-001..F-009 (see prior). All accepted by Claude conceptually.
+## Round 2 — Codex: DROPPED F-004, F-006; ESCALATED F-001/2/3/5/7/8/9 because the artifact was
+unedited; NEW F-010 (P0 fixes-didn't-land), F-011 (ranked_full answer-conditioned at row level —
+all 602 rows disease_status=supported), F-012 (adapter needs exact-C verdict semantics).
+
+## Round 2 — Codex findings (verbatim JSON)
+[
+ {
+  "id": "F-010",
+  "title": "Accepted fixes did not land in the implementation-plan artifact",
+  "severity": 5,
+  "likelihood": 5,
+  "blast_radius": 5,
+  "priority": "P0",
+  "evidence": "`docs/lbd-proposer-spec.md:17-27` still names absent `*_regulator_coefficients.csv`, aging/cytokine programs, ~17 diseases, and a 3 programs x 3 conditions matrix; `docs/lbd-proposer-spec.md:46-47` still uses a hard `max_ac=0` candidate gate; `docs/lbd-proposer-spec.md:74-76` still says no referee changes are needed and to call `referee(A_gene, condition_hint...)`; `docs/lbd-proposer-spec.md:94` still claims ~0.5-1 day fresh effort.",
+  "concern_path": "A builder following the artifact, rather than Claude\u2019s prose disposition, will implement the already-rejected plan: wrong source tables, unsupported B programs, generic gene-condition referee calls, hard disjoint filtering, and the old time estimate. This reintroduces the round-1 correctness failures despite Claude accepting them conceptually.",
+  "suggested_action": "Revise `docs/lbd-proposer-spec.md` itself before implementation: A from KD/DE/T2 only, B = Th1/Th2 only, exact CSV-derived disease list with umbrella exclusion, ranked novelty not hard zero, and mandatory `referee_triple(A,B,C,condition)`.",
+  "novelty_flag": false,
+  "concern_type": "correctness"
+ },
+ {
+  "id": "F-011",
+  "title": "`ranked_full` is answer-conditioned even if only gene/condition columns are read",
+  "severity": 4,
+  "likelihood": 5,
+  "blast_radius": 4,
+  "priority": "P1",
+  "evidence": "`docs/perturbseq-qc_2026-07-07/pyzobot_referee_ranked_full.csv:1` contains answer fields including `top_disease`, `overall_status`, `disease_OR`, `disease_FDR`, `chain_score`, and statuses. CSV inspection showed 602 rows, 457 genes, all rows `disease_status=supported`, with 350 rows already labelled as validated chains plus 15 caveated validated chains.",
+  "concern_path": "Even selecting only `gene,ensg,condition` from this file biases the proposer toward genes already passing HOP-3 disease support. The LBD layer then becomes a literature novelty sorter over pre-survived referee outputs, which weakens the generate-then-cull claim and makes generated-vs-culled counts misleading.",
+  "suggested_action": "Do not seed A from `ranked_full`. Build A directly from `guide_kd_efficiency.suppl_table.csv`, `DE_stats.suppl_table.csv`, and optionally T2 membership, then let the referee determine disease support after question generation.",
+  "novelty_flag": true,
+  "concern_type": "novelty"
+ },
+ {
+  "id": "F-012",
+  "title": "The adapter is thin for C, but the artifact still lacks the exact verdict semantics",
+  "severity": 4,
+  "likelihood": 4,
+  "blast_radius": 4,
+  "priority": "P1",
+  "evidence": "`docs/perturbseq-qc_2026-07-07/pyzobot_referee.py:70-74` builds `t3_exploded` with `gene`, `cluster`, `disease`, and `gene_set`, so exact C filtering is small. But `_hop3` logic at `pyzobot_referee.py:251-266` supports any significant disease after filtering only `gene` and `gene_set`, and `docs/lbd-proposer-spec.md:74-76` still claims the existing `referee(A_gene, condition)` already checks disease C.",
+  "concern_path": "If the adapter is not specified precisely, implementers may only post-filter the receipt after `overall` has already been synthesized. That can leave inconsistent verdicts where `overall` says supported while exact C is refuted or untested.",
+  "suggested_action": "Specify `referee_triple` as a first-class contract that computes exact-C HOP-3 status before synthesizing the triple verdict, including what happens when the gene appears in other diseases but not requested C.",
+  "novelty_flag": true,
+  "concern_type": "correctness"
+ }
+]
+
+## Round 3 — Claude's revision: REWROTE the artifact to v2. F-010 resolved (spec rewritten);
+F-011 accepted+hardened (ranked_full fully banned from seeding; A from raw KD/DE/T2 only);
+F-012 accepted (referee_triple exact-C contract specified). Position on the generative-vs-lookup
+tension: stays generative (A from answer-free tables; novelty from external lit; referee culls
+after generation), with a documented fallback if no disjoint survivor exists.
+
+# Claude's round 3 position (full text follows)
+
+# Round 3 — Claude's final position (the artifact is now rewritten)
+
+The round-2 P0 was correct and decisive: my accept/reject was prose; the **artifact**
+still encoded the rejected v1 design. I have now **rewritten `docs/lbd-proposer-spec.md`
+to v2**, landing every accepted finding into the spec a builder actually follows. This
+round is the acceptance gate: verify the *revised* artifact against the repo.
+
+## Disposition on round-2 findings
+- **F-010 (P0, fixes didn't land in the artifact) — RESOLVED.** The spec is rewritten.
+  A now derives from `guide_kd_efficiency` + `DE_stats` (+ optional T2), not the absent
+  `*_regulator_coefficients.csv`; B = Th1/Th2 only; C = 14 CSV-read diseases with the two
+  umbrella terms excluded; the disjoint hard-gate is now a ranked novelty score with a
+  mandatory preflight histogram; "referee unchanged" is replaced by the mandatory
+  `referee_triple` adapter; effort revised to ~1–1.5 days. See the v2 banner + §1–§6.
+- **F-011 (P1, ranked_full is answer-conditioned at the row level) — ACCEPT, HARDENED.**
+  You're right that all 602 rows are `disease_status=supported`, so even reading only
+  `gene`/`condition` biases A. v2 **bans `ranked_full` from seeding entirely** (§1, bold)
+  and builds A only from raw KD/DE/T2 tables that contain no disease answer. The
+  "generative not lookup" rationale is now written into §3.
+- **F-012 (P1, adapter needs exact verdict semantics) — ACCEPT.** §3 now specifies
+  `referee_triple` as a first-class contract: HOP-3 filters `t3_exploded` on
+  `disease==C_disease AND gene_set==downstream_<condition>`; supported iff that exact row
+  FDR<0.05; "gene in other diseases but not C" → **refuted-for-C**; the triple `overall`
+  is synthesized **after** exact-C HOP-3, so it can never say supported while C is refuted.
+- **F-004 / F-006 (dropped in round 2) — stay resolved** in the rewrite (condition
+  wording names only KD/effect/disease hops; 14 diseases read from CSV, umbrellas excluded).
+
+## Position on the round-2 generative-vs-lookup tension
+The constrained pipeline **remains a generative LBD engine**, and v2 §3 states why:
+(1) A is built from raw KD/DE tables with no disease answer in them; (2) the A–C novelty
+signal comes from *external* literature (Europe PMC / Open Targets), independent of the
+referee; (3) the referee runs *after* generation and can refute. The generated-vs-survived
+counts are the falsifiable proof of independence. The single-program substrate is a real
+limit, so v2 documents the honest fallback (§6): if the preflight histogram shows no
+disjoint survivor, widen the band or demo `referee_triple` on 2–3 hand-built triples — the
+pipeline stays the method. I do NOT think the honest move is to drop the proposer: the
+generate-then-cull loop with reported counts is the thesis, and it survives the constraints.
+
+## Preserve-intent check (final)
+The novel claim — **LBD generates questions, a data-referee mandatorily culls them** — is
+intact and now *more* defensible, because the answer-leak path (ranked_full seeding) that
+would have quietly turned it into a re-ranker is explicitly closed.
+
+## What round 3 should verify
+Read the **rewritten** `docs/lbd-proposer-spec.md` against the repo and confirm: (a) A is
+now derivable from the named existing tables (check `guide_kd_efficiency` /`DE_stats`
+headers carry the needed gate/significance columns); (b) the `referee_triple` HOP-3
+override is faithfully specified against `pyzobot_referee.py:70-74` / `:251-266`; (c) no
+residual v1 claim survived the rewrite. Flag anything still inconsistent, or confirm the
+spec is build-ready.
+
+
+# Artifact (REVISED v2 — read fresh)
+
+## FILE: docs/lbd-proposer-spec.md
+
+# LBD Question-Proposer — thin build spec (v2, fresh, new-work-only)
+
+**Purpose.** Fill the Researcher-track **cold-start gap**: rich dataset, no question. This component
+uses literature-based discovery (Swanson **ABC**) to *generate* the highest-value **untested**
+questions the CD4+ T-cell Perturb-seq dataset can resolve, then hands each to a thin
+**`referee_triple` adapter** over the already-built **referee**
+(`docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`) which answers it against the data.
+Motivation + strategy: `memory/decisions/lbd-question-engine-reframe.md`.
+
+**Compute:** laptop CPU + web APIs only. No GPU, no Colab. **Compliance:** all fresh code; public
+data/APIs; git history is the proof.
+
+> **v2 (hardened via 3-round repo-read codex-debate, 2026-07-07** —
+> `docs/reviews/codex-debate_lbd-proposer-spec_2026-07-07.md`). Changes from v1, each repo-verified:
+> A no longer keys off absent `*_regulator_coefficients.csv` (F-002) and is **not** seeded from the
+> answer-conditioned `pyzobot_referee_ranked_full.csv` (F-009/F-011); B is **Th1/Th2 only** because no
+> aging/cytokine receipt table exists in the substrate (F-003); "referee unchanged" is replaced by a
+> **mandatory `referee_triple` adapter** that checks the *exact* requested disease C (F-001/F-005/F-012);
+> the disjoint gate is a **ranked novelty score**, not a hard `ac_lit≤0` filter (F-007); C is the **14
+> specific diseases** read from the CSV with umbrella terms excluded (F-006); "condition-specific" is
+> claimed **only for the KD/effect/disease hops**, never the program hop (F-004).
+
+---
+
+## 1. Entities (bounded by the dataset — this is what keeps it thin)
+Dataset = Zhu/Dann/Pritchard/Marson genome-scale CD4+ T-cell Perturb-seq (bioRxiv 2025.12.23.696273).
+
+- **A = KD-gated significant regulators.** Derived **deterministically from tables that exist in
+  `data/`**, independent of any disease answer (this is what keeps the proposer *generative*, F-011):
+  1. **KD gate** — from `guide_kd_efficiency.suppl_table.csv`: keep genes with ≥1 guide
+     `signif_knockdown=True` (same gate the referee's HOP-0 uses).
+  2. **Significant effect** — from `DE_stats.suppl_table.csv`: keep genes with a significant on-target
+     KD and/or ≥1 significant downstream DE gene.
+  3. Optionally intersect with **T2 program membership**
+     (`Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv`, `variable` column).
+  Target set ≈ 200–450 genes. **Do NOT seed A from `pyzobot_referee_ranked_full.csv`** — all 602 of its
+  rows are already `disease_status=supported`, so seeding from it (even reading only `gene`/`condition`)
+  biases A toward pre-survived referee winners and collapses the proposer into a re-ranker (F-011).
+- **B = Th1/Th2 polarization program only.** The substrate has exactly one program receptor table
+  (`pyzobot_join_spec.json` → `T2_Th2_Th1`; contrasts `Th2_vs_Th1 (Ota 2021)` and
+  `Th2_vs_Th1 (Hollbacker 2021)`). **Aging and cytokine-production programs are OUT of v1 scope** —
+  there is no receipt table for them, so a referee could not answer those questions (F-003). Condition
+  ∈ {Rest, Stim8hr, Stim48hr} remains first-class for the KD / effect / disease hops (see §3).
+- **C = 14 specific autoimmune diseases**, read from
+  `cluster_autoimmune_enrichment_results.suppl_table.csv` at build time (F-006). The non-negative-control
+  values are: ankylosing spondylitis, asthma, atopic eczema, celiac disease, Crohn's disease,
+  Hashimoto's thyroiditis, multiple sclerosis, psoriasis, rheumatoid arthritis, systemic lupus
+  erythematosus, type 1 diabetes mellitus, ulcerative colitis, **plus** the umbrella rows
+  "autoimmune disease" and "inflammatory bowel disease" — which are **context only, NOT eligible C
+  claims** (a novel-link claim must land on a specific disease). Read the list from the CSV; do not
+  hardcode.
+
+Matrix ≈ (200–450 A) × (1 program × 3 conditions B) × (12 eligible C) — small, computable in pandas.
+
+## 2. Pipeline (3 stages, all CPU/API)
+
+### Stage 1 — gather link evidence (API; cache everything to `data/lbd_cache/`, gitignored)
+For each entity pair, get literature/DB co-mention counts. Prefer pre-computed resources over any NLP.
+**v1 uses ONE co-mention source (Europe PMC, no key needed) + Open Targets for the known A–C set**
+(F-008 — keep the API surface small; cache to fixtures so the demo is offline-reproducible):
+
+| Link | v1 source (query) | Optional later |
+|---|---|---|
+| **A–B** gene↔program | Europe PMC co-mention count for gene × Th1/Th2 program-terms (Th2:"Th2 cells","GATA3","type 2 immunity"; Th1:"Th1 cells","IFN-gamma"). | PubTator3 `/relations`; OpenAlex count |
+| **B–C** program↔disease | Europe PMC co-mention count for program-terms × disease name (+ synonyms). | PubTator3; OpenAlex |
+| **A–C** gene↔disease (the KNOWN set to exclude) | **Open Targets GraphQL** association score for (gene, disease-EFO) + Europe PMC gene×disease lit co-mention count. | GWAS Catalog REST; DisGeNET |
+
+Normalization: gene symbol→Ensembl/aliases via **MyGene**; disease→EFO via a small **static hand-pinned
+map** built once from the 14 CSV disease names (this is the one non-mechanical step — pin + eyeball it).
+NCBI API key → PubMed 10 req/s; 1 req/s politeness otherwise.
+
+### Stage 2 — rank novel A–C candidates (pandas, milliseconds)
+**Preflight (mandatory before committing the demo claim, F-007):** compute a histogram of `ac_lit` and
+`ac_known` (Open Targets score) over the whole A universe, so we know empirically how many strict-disjoint
+candidates exist before promising one.
+
+For every (A, B, C) triple with C in the 12 eligible diseases:
+- `ab = cooccur(A,B)`, `bc = cooccur(B,C)`, `ac_lit = cooccur(A,C)`, `ac_known = OpenTargets_score(A,C)`.
+- **Novelty score (ranked, NOT a hard gate):**
+  `score = zscore(ab) + zscore(bc) − w·ac_lit − w2·ac_known`, higher = more novel-yet-literature-bridged.
+  Keep the top N (e.g. 25). A soft eligibility band (`ab≥min_ab AND bc≥min_bc`) ensures both bridges
+  exist; **`ac_lit` and `ac_known` push the rank DOWN rather than hard-excluding**, so "most novel
+  available" always returns candidates even if strict-zero is empty. Defaults `min_ab=min_bc=3`, tuned
+  from the preflight histogram.
+
+### Stage 3 — emit questions (JSON handed to the adapter)
+Each surviving triple → one question object (schema below), phrased in plain English so it reads as a
+real research question, not a tuple.
+
+## 3. Output contract → the `referee_triple` adapter (v1-MANDATORY, thin)
+`lbd_questions.json`: a ranked list of:
+```json
+{
+  "hypothesis_id": "H001",
+  "question": "In CD4+ T cells, does perturbing <A> shift the Th1/Th2 polarization program, and is <A> a receipt-backed novel link to <C> — specifically in the <condition> state?",
+  "A_gene": "GATA3",
+  "B_program": "Th1_Th2_polarization",
+  "C_disease": "asthma",
+  "condition": "Stim8hr",
+  "novelty": {
+    "ab_cooccur": 41, "bc_cooccur": 120, "ac_lit_cooccur": 0,
+    "ac_known_opentargets": 0.03, "is_disjoint": true
+  },
+  "score": 3.87,
+  "sources": ["europepmc:...","opentargets:ENSG..-EFO_.."]
+}
+```
+
+### The adapter contract (F-001 / F-005 / F-012 — the referee CORE is unchanged; this is a thin wrapper)
+`referee_triple(A_gene, B_program, C_disease, condition)` — the deterministic map from a full triple to a
+verdict **on that exact triple**. It reuses the referee's HOP-0/1/2 unchanged and **overrides only HOP-3**:
+
+- **HOP-0 (gate) / HOP-1 (effect)** — as in `pyzobot_referee.py`, filtered by `condition` (condition-specific).
+- **HOP-2 (program)** — Th1/Th2 shift across the Ota/Hollbacker contrasts. **This hop is contrast-based,
+  NOT condition-resolved** (T2 grain is gene×contrast; F-004). The verdict text must NOT call the program
+  shift condition-specific.
+- **HOP-3 (exact disease C)** — filter `t3_exploded` (which already carries `gene`, `disease`, `gene_set`
+  per `pyzobot_referee.py:70-74`) to `gene==A_gene AND disease==C_disease AND gene_set==downstream_<condition>`.
+  - row exists AND `p_adj_fdr < 0.05` → **HOP-3 supported for C**.
+  - gene appears in other diseases but the C row is absent or `FDR ≥ 0.05` → **HOP-3 refuted for C**
+    (this is the case the generic referee would wrongly pass).
+  - gate/effect failed upstream → **untested** (halt, per the hero-feature QC rule).
+- **Triple verdict is synthesized AFTER exact-C HOP-3**, so `overall` can never report supported while C
+  is refuted. Every status carries its receipt value, as the referee already does.
+
+Then classify the *answer to the LBD question*:
+- **disjoint in lit + `referee_triple` = supported on the specific C** → **receipt-backed NOVEL hypothesis**
+  (the money shot: a gene→*specific-disease* link the literature never made, that the data supports).
+- **`referee_triple` = untested** → knockdown failed the gate; unanswerable here (honest).
+- **`referee_triple` = refuted for C** → LBD proposed it, data killed it (the cull; the R01 answer in action).
+
+**Why this stays a GENERATIVE engine, not a lookup (round-2 tension, F-011):** A is built from raw
+KD/DE tables with no disease answer in them; the A–C novelty signal comes from *external* literature
+(Europe PMC / Open Targets), not from the referee's own outputs; and the referee runs *after* generation
+and can **refute**. The generated-vs-survived counts are the evidence of independence — report them.
+
+## 4. Demo scope (thin, for the video)
+1. Run the proposer over the bounded entity set → `lbd_questions.json` (ranked untested questions the
+   *dataset itself* suggested — "here's what to ask when you didn't have a question"). Show the
+   **generated-vs-survived** counts.
+2. `referee_triple` adjudicates the top few, live.
+3. Land on ONE **disjoint-in-literature + data-supported specific-disease** result → the receipt-backed
+   novel finding. Show one **refuted-for-C** to prove the cull is real.
+
+## 5. Build notes
+- New files only: `src/arbiter/lbd/` (`sources.py` Europe PMC + Open Targets clients, `entities.py` build
+  A/B/C from the CSVs, `cooccur.py` set/score logic, `propose.py` orchestrator, `emit.py`) **plus** the
+  thin `referee_triple` adapter (add to the referee module or a new `adapter.py` next to it). Third-party
+  libs OK (`requests`/`httpx`, `pandas`, `pydantic`). Cache raw API JSON under gitignored `data/lbd_cache/`.
+- **Effort: ~1–1.5 days fresh** (revised up from 0.5–1: MyGene alias resolution, disease→EFO map,
+  Europe PMC + Open Targets clients, caching, the adapter, and the preflight are more than trivial pandas;
+  F-008). Delegatable to Codex once this spec + the disease→EFO and program→keyword maps are pinned.
+  Tag: `[HYBRID]` (Claude pins the entity/keyword maps + scoring + adapter semantics; Codex builds the
+  clients/logic; Claude reviews). **The referee finding is already a complete submission — keep the LBD
+  layer thin and protect demo-video time** (judges weight the demo heavily).
+
+## 6. Risks
+- **Generative-vs-lookup collapse (F-011)** — mitigated: A from raw KD/DE tables only; `ranked_full`
+  banned from seeding; novelty from external literature; report generated-vs-survived counts as the proof.
+- **Disease-specificity correctness (F-001/F-012)** — mitigated: `referee_triple` checks the exact C
+  before synthesizing `overall`; umbrella diseases excluded as claims.
+- **Overproduction** — mitigated: the referee is the mandatory cull; report generated-vs-survived.
+- **Disease/program → keyword/EFO mapping quality** drives everything — pin these maps by hand (12
+  diseases + 1 program) and eyeball them; the one non-mechanical step.
+- **No disjoint survivor exists** (preflight shows zero) — fallback: widen the novelty band and rank, or
+  demo `referee_triple` on 2–3 hand-built disjoint triples; the pipeline remains the method either way.
+- **API rate limits** (not compute) — cache aggressively; NCBI key; one source in v1 keeps call volume low.
+
+
+# Output requirements
+
+Return JSON conforming to the supplied schema. round_number=3. findings = current-round set. escalated_findings = prior F-ids still wrong (rationale). dropped_findings = prior F-ids now fixed by the rewrite (rationale). new_findings = F-ids first surfaced this round. convergence_status = "converged" if new_findings empty AND >=80%% of prior findings addressed, else "still iterating". convergence_sanding_warning: set only if converged AND novel claim sanded, else null. recommended_next_question = the single most important thing to do before building (or "debate concluded"). Cite file:line for any repo-verified finding. Begin.
+
+codex
+{"round_number":3,"position_summary":"I’m re-reading the revised spec against the actual CSV headers and referee implementation before accepting the gate. I’ll verify the data-derived entity claims, the exact-C HOP-3 adapter semantics, and residual v1 wording with direct repo evidence.","findings":[],"escalated_findings":[],"dropped_findings":[],"new_findings":[],"convergence_status":"still iterating","convergence_sanding_warning":null,"recommended_next_question":"verification in progress"}
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content -Path 'data/DE_stats.suppl_table.csv' -TotalCount 1" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content -Path 'docs/lbd-proposer-spec.md'" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content -Path 'data/guide_kd_efficiency.suppl_table.csv' -TotalCount 1" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content -Path 'data/cluster_autoimmune_enrichment_results.suppl_table.csv' -TotalCount 5" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 843ms:
+,index,target_contrast_gene_name,culture_condition,target_contrast,chunk,n_cells_target,n_up_genes,n_down_genes,n_total_de_genes,ontarget_effect_size,ontarget_significant,target_baseMean,offtarget_flag,n_total_genes_category,ontarget_effect_category,n_downstream,crossdonor_correlation_mean,crossdonor_correlation_min,crossguide_correlation
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 839ms:
+cluster,disease,gene_set,odds_ratio,ci_low,ci_high,p_value,p_adj_fdr,cluster_size,in_cluster_in_disease,in_cluster_not_disease,not_cluster_in_disease,not_cluster_not_disease,intersecting_genes,negative_control_disease
+89,autoimmune disease,downstream_Stim8hr,3.0405225358384027,1.9691552104741554,4.65689611021601,2.970369035926655e-07,5.049627361075314e-06,100,41.0,59.0,591.0,2587.0,"['TMEM50A', 'ATP8B4', 'PHLDA1', 'TYMP', 'UBASH3B', 'TRAT1', 'P4HA2', 'GRAMD1B', 'CRIM1', 'DOT1L', 'IGSF9B', 'STAT1', 'GPR183', 'FYB1', 'SMAD3', 'GZMB', 'KLF3', 'AHI1', 'CSF2', 'ALPK1', 'ADGRG5', 'RASA3', 'GATA3', 'FUT8', 'EDARADD', 'ITPR1', 'CALHM6', 'SF3A3', 'PRPF40A', 'SEPTIN9', 'VEGFB', 'PTGIR', 'JARID2', 'ATP8B2', 'IFI30', 'NLRC5', 'IL7R', 'ADA2', 'CDK6', 'MYB', 'ORMDL3']",False
+110,asthma,downstream_Stim8hr,20.424027847445146,5.526674839070344,82.34114433983439,2.9242644442248613e-06,4.971249555182264e-05,12,7.0,5.0,209.0,3057.0,"['ITK', 'EAF2', 'CHD7', 'ZBTB25', 'EGR2', 'NFKBIA', 'ADO']",False
+78,Crohn's disease,downstream_Rest,4.650951748172822,2.408148197316022,8.466730884244956,7.218316163144861e-06,0.00012271137477346263,100,15.0,85.0,102.0,2691.0,"['PRKCB', 'PTPN22', 'PGAP3', 'MSRA', 'IKZF1', 'B3GNT2', 'BCL2L11', 'GPR18', 'LGALS9', 'NCOR2', 'RNASET2', 'CD244', 'TNFRSF14', 'SATB1', 'CYLD']",False
+110,atopic eczema,downstream_Stim8hr,24.268941989334316,5.958756741545584,90.71572463344071,1.446682696579037e-05,0.00012296802920921815,12,5.0,7.0,93.0,3173.0,"['CHD7', 'ZBTB25', 'EGR2', 'NFKBIA', 'ADO']",False
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 846ms:
+,guide_mean_expr,guide_std_expr,guide_n,ntc_mean_expr,ntc_std_expr,ntc_n,t_statistic,p_value,adj_p_value,signif_knockdown,perturbed_gene_id,rank,high_confidence_no_effect_guides,culture_condition
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 869ms:
+# LBD Question-Proposer - thin build spec (v2, fresh, new-work-only)
+
+**Purpose.** Fill the Researcher-track **cold-start gap**: rich dataset, no question. This component
+uses literature-based discovery (Swanson **ABC**) to *generate* the highest-value **untested**
+questions the CD4+ T-cell Perturb-seq dataset can resolve, then hands each to a thin
+**`referee_triple` adapter** over the already-built **referee**
+(`docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`) which answers it against the data.
+Motivation + strategy: `memory/decisions/lbd-question-engine-reframe.md`.
+
+**Compute:** laptop CPU + web APIs only. No GPU, no Colab. **Compliance:** all fresh code; public
+data/APIs; git history is the proof.
+
+> **v2 (hardened via 3-round repo-read codex-debate, 2026-07-07** -
+> `docs/reviews/codex-debate_lbd-proposer-spec_2026-07-07.md`). Changes from v1, each repo-verified:
+> A no longer keys off absent `*_regulator_coefficients.csv` (F-002) and is **not** seeded from the
+> answer-conditioned `pyzobot_referee_ranked_full.csv` (F-009/F-011); B is **Th1/Th2 only** because no
+> aging/cytokine receipt table exists in the substrate (F-003); "referee unchanged" is replaced by a
+> **mandatory `referee_triple` adapter** that checks the *exact* requested disease C (F-001/F-005/F-012);
+> the disjoint gate is a **ranked novelty score**, not a hard `ac_litó0` filter (F-007); C is the **14
+> specific diseases** read from the CSV with umbrella terms excluded (F-006); "condition-specific" is
+> claimed **only for the KD/effect/disease hops**, never the program hop (F-004).
+
+---
+
+## 1. Entities (bounded by the dataset - this is what keeps it thin)
+Dataset = Zhu/Dann/Pritchard/Marson genome-scale CD4+ T-cell Perturb-seq (bioRxiv 2025.12.23.696273).
+
+- **A = KD-gated significant regulators.** Derived **deterministically from tables that exist in
+  `data/`**, independent of any disease answer (this is what keeps the proposer *generative*, F-011):
+  1. **KD gate** - from `guide_kd_efficiency.suppl_table.csv`: keep genes with ò1 guide
+     `signif_knockdown=True` (same gate the referee's HOP-0 uses).
+  2. **Significant effect** - from `DE_stats.suppl_table.csv`: keep genes with a significant on-target
+     KD and/or ò1 significant downstream DE gene.
+  3. Optionally intersect with **T2 program membership**
+     (`Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv`, `variable` column).
+  Target set ÷ 200-450 genes. **Do NOT seed A from `pyzobot_referee_ranked_full.csv`** - all 602 of its
+  rows are already `disease_status=supported`, so seeding from it (even reading only `gene`/`condition`)
+  biases A toward pre-survived referee winners and collapses the proposer into a re-ranker (F-011).
+- **B = Th1/Th2 polarization program only.** The substrate has exactly one program receptor table
+  (`pyzobot_join_spec.json`  `T2_Th2_Th1`; contrasts `Th2_vs_Th1 (Ota 2021)` and
+  `Th2_vs_Th1 (Hollbacker 2021)`). **Aging and cytokine-production programs are OUT of v1 scope** -
+  there is no receipt table for them, so a referee could not answer those questions (F-003). Condition
+  ? {Rest, Stim8hr, Stim48hr} remains first-class for the KD / effect / disease hops (see 3).
+- **C = 14 specific autoimmune diseases**, read from
+  `cluster_autoimmune_enrichment_results.suppl_table.csv` at build time (F-006). The non-negative-control
+  values are: ankylosing spondylitis, asthma, atopic eczema, celiac disease, Crohn's disease,
+  Hashimoto's thyroiditis, multiple sclerosis, psoriasis, rheumatoid arthritis, systemic lupus
+  erythematosus, type 1 diabetes mellitus, ulcerative colitis, **plus** the umbrella rows
+  "autoimmune disease" and "inflammatory bowel disease" - which are **context only, NOT eligible C
+  claims** (a novel-link claim must land on a specific disease). Read the list from the CSV; do not
+  hardcode.
+
+Matrix ÷ (200-450 A) x (1 program x 3 conditions B) x (12 eligible C) - small, computable in pandas.
+
+## 2. Pipeline (3 stages, all CPU/API)
+
+### Stage 1 - gather link evidence (API; cache everything to `data/lbd_cache/`, gitignored)
+For each entity pair, get literature/DB co-mention counts. Prefer pre-computed resources over any NLP.
+**v1 uses ONE co-mention source (Europe PMC, no key needed) + Open Targets for the known A-C set**
+(F-008 - keep the API surface small; cache to fixtures so the demo is offline-reproducible):
+
+| Link | v1 source (query) | Optional later |
+|---|---|---|
+| **A-B** geneprogram | Europe PMC co-mention count for gene x Th1/Th2 program-terms (Th2:"Th2 cells","GATA3","type 2 immunity"; Th1:"Th1 cells","IFN-gamma"). | PubTator3 `/relations`; OpenAlex count |
+| **B-C** programdisease | Europe PMC co-mention count for program-terms x disease name (+ synonyms). | PubTator3; OpenAlex |
+| **A-C** genedisease (the KNOWN set to exclude) | **Open Targets GraphQL** association score for (gene, disease-EFO) + Europe PMC genexdisease lit co-mention count. | GWAS Catalog REST; DisGeNET |
+
+Normalization: gene symbolEnsembl/aliases via **MyGene**; diseaseEFO via a small **static hand-pinned
+map** built once from the 14 CSV disease names (this is the one non-mechanical step - pin + eyeball it).
+NCBI API key  PubMed 10 req/s; 1 req/s politeness otherwise.
+
+### Stage 2 - rank novel A-C candidates (pandas, milliseconds)
+**Preflight (mandatory before committing the demo claim, F-007):** compute a histogram of `ac_lit` and
+`ac_known` (Open Targets score) over the whole A universe, so we know empirically how many strict-disjoint
+candidates exist before promising one.
+
+For every (A, B, C) triple with C in the 12 eligible diseases:
+- `ab = cooccur(A,B)`, `bc = cooccur(B,C)`, `ac_lit = cooccur(A,C)`, `ac_known = OpenTargets_score(A,C)`.
+- **Novelty score (ranked, NOT a hard gate):**
+  `score = zscore(ab) + zscore(bc) - wúac_lit - w2úac_known`, higher = more novel-yet-literature-bridged.
+  Keep the top N (e.g. 25). A soft eligibility band (`abòmin_ab AND bcòmin_bc`) ensures both bridges
+  exist; **`ac_lit` and `ac_known` push the rank DOWN rather than hard-excluding**, so "most novel
+  available" always returns candidates even if strict-zero is empty. Defaults `min_ab=min_bc=3`, tuned
+  from the preflight histogram.
+
+### Stage 3 - emit questions (JSON handed to the adapter)
+Each surviving triple  one question object (schema below), phrased in plain English so it reads as a
+real research question, not a tuple.
+
+## 3. Output contract  the `referee_triple` adapter (v1-MANDATORY, thin)
+`lbd_questions.json`: a ranked list of:
+```json
+{
+  "hypothesis_id": "H001",
+  "question": "In CD4+ T cells, does perturbing <A> shift the Th1/Th2 polarization program, and is <A> a receipt-backed novel link to <C> - specifically in the <condition> state?",
+  "A_gene": "GATA3",
+  "B_program": "Th1_Th2_polarization",
+  "C_disease": "asthma",
+  "condition": "Stim8hr",
+  "novelty": {
+    "ab_cooccur": 41, "bc_cooccur": 120, "ac_lit_cooccur": 0,
+    "ac_known_opentargets": 0.03, "is_disjoint": true
+  },
+  "score": 3.87,
+  "sources": ["europepmc:...","opentargets:ENSG..-EFO_.."]
+}
+```
+
+### The adapter contract (F-001 / F-005 / F-012 - the referee CORE is unchanged; this is a thin wrapper)
+`referee_triple(A_gene, B_program, C_disease, condition)` - the deterministic map from a full triple to a
+verdict **on that exact triple**. It reuses the referee's HOP-0/1/2 unchanged and **overrides only HOP-3**:
+
+- **HOP-0 (gate) / HOP-1 (effect)** - as in `pyzobot_referee.py`, filtered by `condition` (condition-specific).
+- **HOP-2 (program)** - Th1/Th2 shift across the Ota/Hollbacker contrasts. **This hop is contrast-based,
+  NOT condition-resolved** (T2 grain is genexcontrast; F-004). The verdict text must NOT call the program
+  shift condition-specific.
+- **HOP-3 (exact disease C)** - filter `t3_exploded` (which already carries `gene`, `disease`, `gene_set`
+  per `pyzobot_referee.py:70-74`) to `gene==A_gene AND disease==C_disease AND gene_set==downstream_<condition>`.
+  - row exists AND `p_adj_fdr < 0.05`  **HOP-3 supported for C**.
+  - gene appears in other diseases but the C row is absent or `FDR ò 0.05`  **HOP-3 refuted for C**
+    (this is the case the generic referee would wrongly pass).
+  - gate/effect failed upstream  **untested** (halt, per the hero-feature QC rule).
+- **Triple verdict is synthesized AFTER exact-C HOP-3**, so `overall` can never report supported while C
+  is refuted. Every status carries its receipt value, as the referee already does.
+
+Then classify the *answer to the LBD question*:
+- **disjoint in lit + `referee_triple` = supported on the specific C**  **receipt-backed NOVEL hypothesis**
+  (the money shot: a gene*specific-disease* link the literature never made, that the data supports).
+- **`referee_triple` = untested**  knockdown failed the gate; unanswerable here (honest).
+- **`referee_triple` = refuted for C**  LBD proposed it, data killed it (the cull; the R01 answer in action).
+
+**Why this stays a GENERATIVE engine, not a lookup (round-2 tension, F-011):** A is built from raw
+KD/DE tables with no disease answer in them; the A-C novelty signal comes from *external* literature
+(Europe PMC / Open Targets), not from the referee's own outputs; and the referee runs *after* generation
+and can **refute**. The generated-vs-survived counts are the evidence of independence - report them.
+
+## 4. Demo scope (thin, for the video)
+1. Run the proposer over the bounded entity set  `lbd_questions.json` (ranked untested questions the
+   *dataset itself* suggested - "here's what to ask when you didn't have a question"). Show the
+   **generated-vs-survived** counts.
+2. `referee_triple` adjudicates the top few, live.
+3. Land on ONE **disjoint-in-literature + data-supported specific-disease** result  the receipt-backed
+   novel finding. Show one **refuted-for-C** to prove the cull is real.
+
+## 5. Build notes
+- New files only: `src/arbiter/lbd/` (`sources.py` Europe PMC + Open Targets clients, `entities.py` build
+  A/B/C from the CSVs, `cooccur.py` set/score logic, `propose.py` orchestrator, `emit.py`) **plus** the
+  thin `referee_triple` adapter (add to the referee module or a new `adapter.py` next to it). Third-party
+  libs OK (`requests`/`httpx`, `pandas`, `pydantic`). Cache raw API JSON under gitignored `data/lbd_cache/`.
+- **Effort: ~1-1.5 days fresh** (revised up from 0.5-1: MyGene alias resolution, diseaseEFO map,
+  Europe PMC + Open Targets clients, caching, the adapter, and the preflight are more than trivial pandas;
+  F-008). Delegatable to Codex once this spec + the diseaseEFO and programkeyword maps are pinned.
+  Tag: `[HYBRID]` (Claude pins the entity/keyword maps + scoring + adapter semantics; Codex builds the
+  clients/logic; Claude reviews). **The referee finding is already a complete submission - keep the LBD
+  layer thin and protect demo-video time** (judges weight the demo heavily).
+
+## 6. Risks
+- **Generative-vs-lookup collapse (F-011)** - mitigated: A from raw KD/DE tables only; `ranked_full`
+  banned from seeding; novelty from external literature; report generated-vs-survived counts as the proof.
+- **Disease-specificity correctness (F-001/F-012)** - mitigated: `referee_triple` checks the exact C
+  before synthesizing `overall`; umbrella diseases excluded as claims.
+- **Overproduction** - mitigated: the referee is the mandatory cull; report generated-vs-survived.
+- **Disease/program  keyword/EFO mapping quality** drives everything - pin these maps by hand (12
+  diseases + 1 program) and eyeball them; the one non-mechanical step.
+- **No disjoint survivor exists** (preflight shows zero) - fallback: widen the novelty band and rank, or
+  demo `referee_triple` on 2-3 hand-built disjoint triples; the pipeline remains the method either way.
+- **API rate limits** (not compute) - cache aggressively; NCBI key; one source in v1 keeps call volume low.
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+{"round_number":3,"position_summary":"The revised A-source claim is mostly supported: the KD table has `signif_knockdown`, and the DE table has condition, on-target significance/effect, and downstream-count columns. I’m checking the disease universe and referee code now because those determine whether the exact-C adapter is faithful enough for build acceptance.","findings":[],"escalated_findings":[],"dropped_findings":[],"new_findings":[],"convergence_status":"still iterating","convergence_sanding_warning":null,"recommended_next_question":"verification in progress"}
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "@'
+import pandas as pd
+p='data/cluster_autoimmune_enrichment_results.suppl_table.csv'
+df=pd.read_csv(p)
+vals=sorted(df.loc[df['negative_control_disease'].astype(str).str.lower().eq('false'),'disease'].dropna().unique())
+print(len(vals))
+for v in vals: print(v)
+print('negative controls:')
+for v in sorted(df.loc[df['negative_control_disease'].astype(str).str.lower().eq('true'),'disease'].dropna().unique()): print(v)
+'@ | python -" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$i=0; Get-Content -Path '"'docs/perturbseq-qc_2026-07-07/pyzobot_referee.py' | ForEach-Object { "'$i++; if (($i -ge 60 -and $i -le 85) -or ($i -ge 235 -and $i -le 275)) { '"'{0,4}: {1}' -f "'$i, $_ } }' in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "rg -n \"regulator_coefficients|aging|cytokine|max_ac|ac_lit.?[<≤=]+.?0|17 diseases|0\\.5.?-?1|referee consumes it unchanged|referee\\(A_gene|ranked_full\" docs/lbd-proposer-spec.md" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$i=0; Get-Content -Path '"'docs/lbd-proposer-spec.md' | ForEach-Object { "'$i++; if ($i -le 170) { '"'{0,4}: {1}' -f "'$i, $_ } }' in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 769ms:
+15:> A no longer keys off absent `*_regulator_coefficients.csv` (F-002) and is **not** seeded from the
+16:> answer-conditioned `pyzobot_referee_ranked_full.csv` (F-009/F-011); B is **Th1/Th2 only** because no
+17:> aging/cytokine receipt table exists in the substrate (F-003); "referee unchanged" is replaced by a
+19:> the disjoint gate is a **ranked novelty score**, not a hard `ac_lit≤0` filter (F-007); C is the **14
+36:  Target set ≈ 200–450 genes. **Do NOT seed A from `pyzobot_referee_ranked_full.csv`** — all 602 of its
+41:  `Th2_vs_Th1 (Hollbacker 2021)`). **Aging and cytokine-production programs are OUT of v1 scope** —
+150:- **Effort: ~1–1.5 days fresh** (revised up from 0.5–1: MyGene alias resolution, disease→EFO map,
+158:- **Generative-vs-lookup collapse (F-011)** — mitigated: A from raw KD/DE tables only; `ranked_full`
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 856ms:
+  60:                              mean_guide_expr=("guide_mean_expr", "mean"),
+  61:                              mean_ntc_expr=("ntc_mean_expr", "mean"))
+  62:                         .reset_index())
+  63:         self.gate["gate_pass"] = self.gate.n_signif > 0
+  64: 
+  65:         # HOP 3: explode T3 intersecting_genes (real diseases only), keep neg-controls aside
+  66:         self.t3_real = self.t3[~self.t3.negative_control_disease].copy()
+  67:         rows = []
+  68:         for _, r in self.t3_real.iterrows():
+  69:             for g in self._parse_list(r.intersecting_genes):
+  70:                 rows.append((g, r.cluster, r.disease, r.gene_set,
+  71:                              r.odds_ratio, r.p_adj_fdr, r.cluster_size))
+  72:         self.t3_exploded = pd.DataFrame(
+  73:             rows, columns=["gene", "cluster", "disease", "gene_set",
+  74:                            "odds_ratio", "p_adj_fdr", "cluster_size"])
+  75: 
+  76:     @staticmethod
+  77:     def _parse_list(s):
+  78:         try:
+  79:             return ast.literal_eval(s) if isinstance(s, str) else []
+  80:         except (ValueError, SyntaxError):
+  81:             return []
+  82: 
+  83:     def resolve(self, gene: str):
+  84:         """Accept a SYMBOL or an ENSG; return (symbol, ensg) or (None, None)."""
+  85:         if gene in self.sym2ens:
+ 235:             any_sig = any_sig or sig
+ 236:             direction = ("Th2-associated" if row.log_fc < 0 else "Th1-associated") \
+ 237:                 if sig else "no significant shift"
+ 238:             facets[row.contrast] = {
+ 239:                 "log_fc": _fmt(row.log_fc), "zscore": _fmt(row.zscore),
+ 240:                 "adj_p_value": _fmt(row.adj_p_value),
+ 241:                 "significant": bool(sig), "direction": direction,
+ 242:             }
+ 243:         status = "supported" if any_sig else "refuted"
+ 244:         claim = ("gene shifts the Th1/Th2 program in >=1 reference contrast"
+ 245:                  if any_sig else
+ 246:                  "gene does not significantly shift the Th1/Th2 program in either contrast")
+ 247:         v.hops.append(Hop(2, "PROGRAM", status, claim, receipt=facets))
+ 248: 
+ 249:     # ---------------------------------------------------------------- HOP 3: DISEASE (T3)
+ 250:     gs = f"downstream_{condition}"
+ 251:     sub = data.t3_exploded[(data.t3_exploded.gene == sym) &
+ 252:                            (data.t3_exploded.gene_set == gs)]
+ 253:     if len(sub) == 0:
+ 254:         # also report if the gene appears in ANY condition's set, as a caveat
+ 255:         anysub = data.t3_exploded[data.t3_exploded.gene == sym]
+ 256:         cav = ([f"appears in other gene_sets: "
+ 257:                 f"{sorted(anysub.gene_set.unique())}"] if len(anysub) else [])
+ 258:         v.hops.append(Hop(3, "DISEASE", "untested" if len(anysub) else "refuted",
+ 259:             "gene is not a member of any disease-cluster gene-set for this condition",
+ 260:             receipt={"gene_set_checked": gs}, caveats=cav))
+ 261:     else:
+ 262:         sig = sub[sub.p_adj_fdr < SIG_ALPHA]
+ 263:         if len(sig):
+ 264:             top = sig.sort_values("p_adj_fdr")
+ 265:             rc = {"n_significant_disease_clusters": int(len(sig)),
+ 266:                   "diseases": sorted(sig.disease.unique()),
+ 267:                   "top_hits": [
+ 268:                       {"disease": r.disease, "cluster": int(r.cluster),
+ 269:                        "odds_ratio": _fmt(r.odds_ratio), "p_adj_fdr": _fmt(r.p_adj_fdr)}
+ 270:                       for _, r in top.head(5).iterrows()]}
+ 271:             v.hops.append(Hop(3, "DISEASE", "supported",
+ 272:                 "gene is a member of >=1 autoimmune-disease-enriched cluster",
+ 273:                 receipt=rc))
+ 274:         else:
+ 275:             best = sub.sort_values("p_adj_fdr").iloc[0]
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+2026-07-08T00:00:19.572737Z ERROR codex_core::tools::router: error=Exit code: 1
+Wall time: 0.9 seconds
+Output:
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'pandas'
+
+ exited 1 in 886ms:
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'pandas'
+
+ succeeded in 868ms:
+   1: # LBD Question-Proposer - thin build spec (v2, fresh, new-work-only)
+   2: 
+   3: **Purpose.** Fill the Researcher-track **cold-start gap**: rich dataset, no question. This component
+   4: uses literature-based discovery (Swanson **ABC**) to *generate* the highest-value **untested**
+   5: questions the CD4+ T-cell Perturb-seq dataset can resolve, then hands each to a thin
+   6: **`referee_triple` adapter** over the already-built **referee**
+   7: (`docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`) which answers it against the data.
+   8: Motivation + strategy: `memory/decisions/lbd-question-engine-reframe.md`.
+   9: 
+  10: **Compute:** laptop CPU + web APIs only. No GPU, no Colab. **Compliance:** all fresh code; public
+  11: data/APIs; git history is the proof.
+  12: 
+  13: > **v2 (hardened via 3-round repo-read codex-debate, 2026-07-07** -
+  14: > `docs/reviews/codex-debate_lbd-proposer-spec_2026-07-07.md`). Changes from v1, each repo-verified:
+  15: > A no longer keys off absent `*_regulator_coefficients.csv` (F-002) and is **not** seeded from the
+  16: > answer-conditioned `pyzobot_referee_ranked_full.csv` (F-009/F-011); B is **Th1/Th2 only** because no
+  17: > aging/cytokine receipt table exists in the substrate (F-003); "referee unchanged" is replaced by a
+  18: > **mandatory `referee_triple` adapter** that checks the *exact* requested disease C (F-001/F-005/F-012);
+  19: > the disjoint gate is a **ranked novelty score**, not a hard `ac_litó0` filter (F-007); C is the **14
+  20: > specific diseases** read from the CSV with umbrella terms excluded (F-006); "condition-specific" is
+  21: > claimed **only for the KD/effect/disease hops**, never the program hop (F-004).
+  22: 
+  23: ---
+  24: 
+  25: ## 1. Entities (bounded by the dataset - this is what keeps it thin)
+  26: Dataset = Zhu/Dann/Pritchard/Marson genome-scale CD4+ T-cell Perturb-seq (bioRxiv 2025.12.23.696273).
+  27: 
+  28: - **A = KD-gated significant regulators.** Derived **deterministically from tables that exist in
+  29:   `data/`**, independent of any disease answer (this is what keeps the proposer *generative*, F-011):
+  30:   1. **KD gate** - from `guide_kd_efficiency.suppl_table.csv`: keep genes with ò1 guide
+  31:      `signif_knockdown=True` (same gate the referee's HOP-0 uses).
+  32:   2. **Significant effect** - from `DE_stats.suppl_table.csv`: keep genes with a significant on-target
+  33:      KD and/or ò1 significant downstream DE gene.
+  34:   3. Optionally intersect with **T2 program membership**
+  35:      (`Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv`, `variable` column).
+  36:   Target set ÷ 200-450 genes. **Do NOT seed A from `pyzobot_referee_ranked_full.csv`** - all 602 of its
+  37:   rows are already `disease_status=supported`, so seeding from it (even reading only `gene`/`condition`)
+  38:   biases A toward pre-survived referee winners and collapses the proposer into a re-ranker (F-011).
+  39: - **B = Th1/Th2 polarization program only.** The substrate has exactly one program receptor table
+  40:   (`pyzobot_join_spec.json`  `T2_Th2_Th1`; contrasts `Th2_vs_Th1 (Ota 2021)` and
+  41:   `Th2_vs_Th1 (Hollbacker 2021)`). **Aging and cytokine-production programs are OUT of v1 scope** -
+  42:   there is no receipt table for them, so a referee could not answer those questions (F-003). Condition
+  43:   ? {Rest, Stim8hr, Stim48hr} remains first-class for the KD / effect / disease hops (see 3).
+  44: - **C = 14 specific autoimmune diseases**, read from
+  45:   `cluster_autoimmune_enrichment_results.suppl_table.csv` at build time (F-006). The non-negative-control
+  46:   values are: ankylosing spondylitis, asthma, atopic eczema, celiac disease, Crohn's disease,
+  47:   Hashimoto's thyroiditis, multiple sclerosis, psoriasis, rheumatoid arthritis, systemic lupus
+  48:   erythematosus, type 1 diabetes mellitus, ulcerative colitis, **plus** the umbrella rows
+  49:   "autoimmune disease" and "inflammatory bowel disease" - which are **context only, NOT eligible C
+  50:   claims** (a novel-link claim must land on a specific disease). Read the list from the CSV; do not
+  51:   hardcode.
+  52: 
+  53: Matrix ÷ (200-450 A) x (1 program x 3 conditions B) x (12 eligible C) - small, computable in pandas.
+  54: 
+  55: ## 2. Pipeline (3 stages, all CPU/API)
+  56: 
+  57: ### Stage 1 - gather link evidence (API; cache everything to `data/lbd_cache/`, gitignored)
+  58: For each entity pair, get literature/DB co-mention counts. Prefer pre-computed resources over any NLP.
+  59: **v1 uses ONE co-mention source (Europe PMC, no key needed) + Open Targets for the known A-C set**
+  60: (F-008 - keep the API surface small; cache to fixtures so the demo is offline-reproducible):
+  61: 
+  62: | Link | v1 source (query) | Optional later |
+  63: |---|---|---|
+  64: | **A-B** geneprogram | Europe PMC co-mention count for gene x Th1/Th2 program-terms (Th2:"Th2 cells","GATA3","type 2 immunity"; Th1:"Th1 cells","IFN-gamma"). | PubTator3 `/relations`; OpenAlex count |
+  65: | **B-C** programdisease | Europe PMC co-mention count for program-terms x disease name (+ synonyms). | PubTator3; OpenAlex |
+  66: | **A-C** genedisease (the KNOWN set to exclude) | **Open Targets GraphQL** association score for (gene, disease-EFO) + Europe PMC genexdisease lit co-mention count. | GWAS Catalog REST; DisGeNET |
+  67: 
+  68: Normalization: gene symbolEnsembl/aliases via **MyGene**; diseaseEFO via a small **static hand-pinned
+  69: map** built once from the 14 CSV disease names (this is the one non-mechanical step - pin + eyeball it).
+  70: NCBI API key  PubMed 10 req/s; 1 req/s politeness otherwise.
+  71: 
+  72: ### Stage 2 - rank novel A-C candidates (pandas, milliseconds)
+  73: **Preflight (mandatory before committing the demo claim, F-007):** compute a histogram of `ac_lit` and
+  74: `ac_known` (Open Targets score) over the whole A universe, so we know empirically how many strict-disjoint
+  75: candidates exist before promising one.
+  76: 
+  77: For every (A, B, C) triple with C in the 12 eligible diseases:
+  78: - `ab = cooccur(A,B)`, `bc = cooccur(B,C)`, `ac_lit = cooccur(A,C)`, `ac_known = OpenTargets_score(A,C)`.
+  79: - **Novelty score (ranked, NOT a hard gate):**
+  80:   `score = zscore(ab) + zscore(bc) - wúac_lit - w2úac_known`, higher = more novel-yet-literature-bridged.
+  81:   Keep the top N (e.g. 25). A soft eligibility band (`abòmin_ab AND bcòmin_bc`) ensures both bridges
+  82:   exist; **`ac_lit` and `ac_known` push the rank DOWN rather than hard-excluding**, so "most novel
+  83:   available" always returns candidates even if strict-zero is empty. Defaults `min_ab=min_bc=3`, tuned
+  84:   from the preflight histogram.
+  85: 
+  86: ### Stage 3 - emit questions (JSON handed to the adapter)
+  87: Each surviving triple  one question object (schema below), phrased in plain English so it reads as a
+  88: real research question, not a tuple.
+  89: 
+  90: ## 3. Output contract  the `referee_triple` adapter (v1-MANDATORY, thin)
+  91: `lbd_questions.json`: a ranked list of:
+  92: ```json
+  93: {
+  94:   "hypothesis_id": "H001",
+  95:   "question": "In CD4+ T cells, does perturbing <A> shift the Th1/Th2 polarization program, and is <A> a receipt-backed novel link to <C> - specifically in the <condition> state?",
+  96:   "A_gene": "GATA3",
+  97:   "B_program": "Th1_Th2_polarization",
+  98:   "C_disease": "asthma",
+  99:   "condition": "Stim8hr",
+ 100:   "novelty": {
+ 101:     "ab_cooccur": 41, "bc_cooccur": 120, "ac_lit_cooccur": 0,
+ 102:     "ac_known_opentargets": 0.03, "is_disjoint": true
+ 103:   },
+ 104:   "score": 3.87,
+ 105:   "sources": ["europepmc:...","opentargets:ENSG..-EFO_.."]
+ 106: }
+ 107: ```
+ 108: 
+ 109: ### The adapter contract (F-001 / F-005 / F-012 - the referee CORE is unchanged; this is a thin wrapper)
+ 110: `referee_triple(A_gene, B_program, C_disease, condition)` - the deterministic map from a full triple to a
+ 111: verdict **on that exact triple**. It reuses the referee's HOP-0/1/2 unchanged and **overrides only HOP-3**:
+ 112: 
+ 113: - **HOP-0 (gate) / HOP-1 (effect)** - as in `pyzobot_referee.py`, filtered by `condition` (condition-specific).
+ 114: - **HOP-2 (program)** - Th1/Th2 shift across the Ota/Hollbacker contrasts. **This hop is contrast-based,
+ 115:   NOT condition-resolved** (T2 grain is genexcontrast; F-004). The verdict text must NOT call the program
+ 116:   shift condition-specific.
+ 117: - **HOP-3 (exact disease C)** - filter `t3_exploded` (which already carries `gene`, `disease`, `gene_set`
+ 118:   per `pyzobot_referee.py:70-74`) to `gene==A_gene AND disease==C_disease AND gene_set==downstream_<condition>`.
+ 119:   - row exists AND `p_adj_fdr < 0.05`  **HOP-3 supported for C**.
+ 120:   - gene appears in other diseases but the C row is absent or `FDR ò 0.05`  **HOP-3 refuted for C**
+ 121:     (this is the case the generic referee would wrongly pass).
+ 122:   - gate/effect failed upstream  **untested** (halt, per the hero-feature QC rule).
+ 123: - **Triple verdict is synthesized AFTER exact-C HOP-3**, so `overall` can never report supported while C
+ 124:   is refuted. Every status carries its receipt value, as the referee already does.
+ 125: 
+ 126: Then classify the *answer to the LBD question*:
+ 127: - **disjoint in lit + `referee_triple` = supported on the specific C**  **receipt-backed NOVEL hypothesis**
+ 128:   (the money shot: a gene*specific-disease* link the literature never made, that the data supports).
+ 129: - **`referee_triple` = untested**  knockdown failed the gate; unanswerable here (honest).
+ 130: - **`referee_triple` = refuted for C**  LBD proposed it, data killed it (the cull; the R01 answer in action).
+ 131: 
+ 132: **Why this stays a GENERATIVE engine, not a lookup (round-2 tension, F-011):** A is built from raw
+ 133: KD/DE tables with no disease answer in them; the A-C novelty signal comes from *external* literature
+ 134: (Europe PMC / Open Targets), not from the referee's own outputs; and the referee runs *after* generation
+ 135: and can **refute**. The generated-vs-survived counts are the evidence of independence - report them.
+ 136: 
+ 137: ## 4. Demo scope (thin, for the video)
+ 138: 1. Run the proposer over the bounded entity set  `lbd_questions.json` (ranked untested questions the
+ 139:    *dataset itself* suggested - "here's what to ask when you didn't have a question"). Show the
+ 140:    **generated-vs-survived** counts.
+ 141: 2. `referee_triple` adjudicates the top few, live.
+ 142: 3. Land on ONE **disjoint-in-literature + data-supported specific-disease** result  the receipt-backed
+ 143:    novel finding. Show one **refuted-for-C** to prove the cull is real.
+ 144: 
+ 145: ## 5. Build notes
+ 146: - New files only: `src/arbiter/lbd/` (`sources.py` Europe PMC + Open Targets clients, `entities.py` build
+ 147:   A/B/C from the CSVs, `cooccur.py` set/score logic, `propose.py` orchestrator, `emit.py`) **plus** the
+ 148:   thin `referee_triple` adapter (add to the referee module or a new `adapter.py` next to it). Third-party
+ 149:   libs OK (`requests`/`httpx`, `pandas`, `pydantic`). Cache raw API JSON under gitignored `data/lbd_cache/`.
+ 150: - **Effort: ~1-1.5 days fresh** (revised up from 0.5-1: MyGene alias resolution, diseaseEFO map,
+ 151:   Europe PMC + Open Targets clients, caching, the adapter, and the preflight are more than trivial pandas;
+ 152:   F-008). Delegatable to Codex once this spec + the diseaseEFO and programkeyword maps are pinned.
+ 153:   Tag: `[HYBRID]` (Claude pins the entity/keyword maps + scoring + adapter semantics; Codex builds the
+ 154:   clients/logic; Claude reviews). **The referee finding is already a complete submission - keep the LBD
+ 155:   layer thin and protect demo-video time** (judges weight the demo heavily).
+ 156: 
+ 157: ## 6. Risks
+ 158: - **Generative-vs-lookup collapse (F-011)** - mitigated: A from raw KD/DE tables only; `ranked_full`
+ 159:   banned from seeding; novelty from external literature; report generated-vs-survived counts as the proof.
+ 160: - **Disease-specificity correctness (F-001/F-012)** - mitigated: `referee_triple` checks the exact C
+ 161:   before synthesizing `overall`; umbrella diseases excluded as claims.
+ 162: - **Overproduction** - mitigated: the referee is the mandatory cull; report generated-vs-survived.
+ 163: - **Disease/program  keyword/EFO mapping quality** drives everything - pin these maps by hand (12
+ 164:   diseases + 1 program) and eyeball them; the one non-mechanical step.
+ 165: - **No disjoint survivor exists** (preflight shows zero) - fallback: widen the novelty band and rank, or
+ 166:   demo `referee_triple` on 2-3 hand-built disjoint triples; the pipeline remains the method either way.
+ 167: - **API rate limits** (not compute) - cache aggressively; NCBI key; one source in v1 keeps call volume low.
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$rows = Import-Csv -Path '"'data/cluster_autoimmune_enrichment_results.suppl_table.csv'; "'$real = $rows | Where-Object { $_.negative_control_disease -eq '"'False' } | Select-Object -ExpandProperty disease -Unique | Sort-Object; "'$real.Count; $real; '"'negative controls:'; ("'$rows | Where-Object { $_.negative_control_disease -eq '"'True' } | Select-Object -ExpandProperty disease -Unique | Sort-Object)" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$i=0; Get-Content -Path '"'docs/perturbseq-qc_2026-07-07/pyzobot_referee.py' | ForEach-Object { "'$i++; if ($i -ge 249 -and $i -le 288) { '"'{0,4}: {1}' -f "'$i, $_ } }' in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content -Path 'data/Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv' -TotalCount 1" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content -Path 'docs/perturbseq-qc_2026-07-07/pyzobot_join_spec.json'" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 816ms:
+variable,baseMean,log_fc,lfcSE,stat,p_value,adj_p_value,contrast,zscore
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 834ms:
+{
+  "tables": {
+    "T1_DE_stats": {
+      "file": "DE_stats.suppl_table.csv",
+      "rows": 33983,
+      "grain": "perturbation(ENSG) x culture_condition",
+      "id_cols": [
+        "target_contrast (ENSG)",
+        "target_contrast_gene_name (SYMBOL)",
+        "culture_condition"
+      ],
+      "semantic": "gene -> EFFECT (on-target KD + downstream count + reproducibility)"
+    },
+    "T2_Th2_Th1": {
+      "file": "Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv",
+      "rows": 37288,
+      "grain": "gene(SYMBOL) x contrast",
+      "id_cols": [
+        "variable (SYMBOL)",
+        "contrast"
+      ],
+      "semantic": "gene -> PROGRAM shift (Th1<->Th2 log_fc/zscore)"
+    },
+    "T3_cluster_enrichment": {
+      "file": "cluster_autoimmune_enrichment_results.suppl_table.csv",
+      "rows": 5236,
+      "grain": "cluster x disease x gene_set",
+      "id_cols": [
+        "cluster",
+        "disease",
+        "gene_set",
+        "intersecting_genes (list of SYMBOL)"
+      ],
+      "semantic": "program/cluster -> DISEASE odds ratio + member genes"
+    },
+    "T4_guide_kd": {
+      "file": "guide_kd_efficiency.suppl_table.csv",
+      "rows": 73765,
+      "grain": "guide x culture_condition",
+      "id_cols": [
+        "Unnamed: 0 (guide id)",
+        "perturbed_gene_id (ENSG)",
+        "culture_condition"
+      ],
+      "semantic": "guide -> KNOCKDOWN QC gate (signif_knockdown)"
+    }
+  },
+  "joins": [
+    {
+      "name": "gate",
+      "left": "T4",
+      "right": "T1",
+      "on_left": [
+        "perturbed_gene_id",
+        "culture_condition"
+      ],
+      "on_right": [
+        "target_contrast",
+        "culture_condition"
+      ],
+      "key_type": "ENSG + condition",
+      "note": "aggregate T4 to gene x condition (any signif_knockdown) before joining; 11,422 ENSG shared"
+    },
+    {
+      "name": "effect_to_program",
+      "left": "T1",
+      "right": "T2",
+      "on_left": [
+        "target_contrast_gene_name"
+      ],
+      "on_right": [
+        "variable"
+      ],
+      "key_type": "gene SYMBOL",
+      "note": "T2 has 2 rows/gene (Ota & Hollbacker contrasts) - pick or facet by contrast; 10,422 symbols shared"
+    },
+    {
+      "name": "program_to_disease",
+      "left": "T2",
+      "right": "T3",
+      "on_left": [
+        "variable"
+      ],
+      "on_right": [
+        "intersecting_genes (exploded)"
+      ],
+      "key_type": "gene SYMBOL in list",
+      "note": "explode T3.intersecting_genes; align T3.gene_set suffix to culture_condition; 1,748 of 1,814 T3 genes in T2"
+    },
+    {
+      "name": "gene_to_disease_direct",
+      "left": "T1",
+      "right": "T3",
+      "on_left": [
+        "target_contrast_gene_name"
+      ],
+      "on_right": [
+        "intersecting_genes (exploded)"
+      ],
+      "key_type": "gene SYMBOL in list",
+      "note": "shortcut for the referee: does a perturbed gene appear in a disease-enriched cluster? 1,692 shared"
+    }
+  ],
+  "condition_vocab": [
+    "Rest",
+    "Stim8hr",
+    "Stim48hr"
+  ],
+  "qc_flags": {
+    "T1": {
+      "offtarget_flag_true": 2837,
+      "crossdonor_corr_missing_frac": 0.859,
+      "crossguide_corr_missing_frac": 0.912,
+      "note": "reproducibility cols only populated for perturbations with multi-donor/guide data"
+    },
+    "T2": {
+      "duplicate_symbols": 11616,
+      "reason": "two contrasts (Ota 2021, Hollbacker 2021) - NOT a defect",
+      "adj_p_missing_frac": 0.013
+    },
+    "T3": {
+      "intersecting_genes": "stringified python list - must ast.literal_eval",
+      "negative_control_disease_rows": 924
+    },
+    "T4": {
+      "perturbed_gene_id_missing_frac": 0.013,
+      "note": "~1.3% guides lack ENSG mapping - drop before gating"
+    }
+  }
+}
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 864ms:
+ 249:     # ---------------------------------------------------------------- HOP 3: DISEASE (T3)
+ 250:     gs = f"downstream_{condition}"
+ 251:     sub = data.t3_exploded[(data.t3_exploded.gene == sym) &
+ 252:                            (data.t3_exploded.gene_set == gs)]
+ 253:     if len(sub) == 0:
+ 254:         # also report if the gene appears in ANY condition's set, as a caveat
+ 255:         anysub = data.t3_exploded[data.t3_exploded.gene == sym]
+ 256:         cav = ([f"appears in other gene_sets: "
+ 257:                 f"{sorted(anysub.gene_set.unique())}"] if len(anysub) else [])
+ 258:         v.hops.append(Hop(3, "DISEASE", "untested" if len(anysub) else "refuted",
+ 259:             "gene is not a member of any disease-cluster gene-set for this condition",
+ 260:             receipt={"gene_set_checked": gs}, caveats=cav))
+ 261:     else:
+ 262:         sig = sub[sub.p_adj_fdr < SIG_ALPHA]
+ 263:         if len(sig):
+ 264:             top = sig.sort_values("p_adj_fdr")
+ 265:             rc = {"n_significant_disease_clusters": int(len(sig)),
+ 266:                   "diseases": sorted(sig.disease.unique()),
+ 267:                   "top_hits": [
+ 268:                       {"disease": r.disease, "cluster": int(r.cluster),
+ 269:                        "odds_ratio": _fmt(r.odds_ratio), "p_adj_fdr": _fmt(r.p_adj_fdr)}
+ 270:                       for _, r in top.head(5).iterrows()]}
+ 271:             v.hops.append(Hop(3, "DISEASE", "supported",
+ 272:                 "gene is a member of >=1 autoimmune-disease-enriched cluster",
+ 273:                 receipt=rc))
+ 274:         else:
+ 275:             best = sub.sort_values("p_adj_fdr").iloc[0]
+ 276:             v.hops.append(Hop(3, "DISEASE", "refuted",
+ 277:                 "gene appears in disease cluster gene-sets but NONE reach FDR<0.05 - "
+ 278:                 "the disease link is not supported by the enrichment",
+ 279:                 receipt={"n_appearances": int(len(sub)),
+ 280:                          "best_p_adj_fdr": _fmt(best.p_adj_fdr),
+ 281:                          "best_odds_ratio": _fmt(best.odds_ratio),
+ 282:                          "best_disease": best.disease}))
+ 283: 
+ 284:     v.overall = _synthesize_overall(v)
+ 285:     return v
+ 286: 
+ 287: 
+ 288: # ----------------------------------------------------------------------------- helpers
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1097ms:
+14
+ankylosing spondylitis
+asthma
+atopic eczema
+autoimmune disease
+celiac disease
+Crohn's disease
+Hashimoto's thyroiditis
+inflammatory bowel disease
+multiple sclerosis
+psoriasis
+rheumatoid arthritis
+systemic lupus erythematosus
+type 1 diabetes mellitus
+ulcerative colitis
+negative controls:
+age-related macular degeneration
+chronic kidney disease
+coronary artery disease
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+{"round_number":3,"position_summary":"The core v2 rewrite is now faithful to the repo: A can be built from answer-free KD/DE/T2 tables, the HOP-3 exact-C wrapper is implementable from `t3_exploded`, and the banned `ranked_full` path is explicit. I found only a small wording/count ambiguity around saying “14 specific diseases” while two of the 14 non-control rows are umbrella terms; because the spec also correctly excludes those two from eligible C and uses a 12-disease matrix, I am not treating that as a blocking finding.","findings":[],"escalated_findings":[],"dropped_findings":[{"prior_finding_id":"F-001","rationale":"Resolved by the mandatory `referee_triple` contract in `docs/lbd-proposer-spec.md:109-124`, which filters HOP-3 to the exact requested `C_disease` before synthesizing `overall`. This is implementable because `pyzobot_referee.py:70-74` builds `t3_exploded` with `gene`, `disease`, `gene_set`, `odds_ratio`, and `p_adj_fdr`."},{"prior_finding_id":"F-002","rationale":"Resolved. The spec no longer depends on absent `*_regulator_coefficients.csv`; A is derived from existing `data/guide_kd_efficiency.suppl_table.csv` and `data/DE_stats.suppl_table.csv` in `docs/lbd-proposer-spec.md:28-35`. The CSV headers confirm the required fields: `guide_kd_efficiency.suppl_table.csv:1` has `signif_knockdown`, `perturbed_gene_id`, and `culture_condition`; `DE_stats.suppl_table.csv:1` has `target_contrast_gene_name`, `culture_condition`, `n_total_de_genes`, `ontarget_effect_size`, `ontarget_significant`, and `n_downstream`."},{"prior_finding_id":"F-003","rationale":"Resolved. The spec restricts B to the Th1/Th2 polarization program and explicitly excludes aging/cytokine programs as out of scope in `docs/lbd-proposer-spec.md:39-43`; `docs/perturbseq-qc_2026-07-07/pyzobot_join_spec.json` confirms the available T2 program table is `Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv` with gene-symbol-by-contrast grain."},{"prior_finding_id":"F-004","rationale":"Remains resolved. The spec says condition-specificity applies to KD/effect/disease hops and explicitly says HOP-2 is contrast-based, not condition-resolved, in `docs/lbd-proposer-spec.md:113-116`."},{"prior_finding_id":"F-005","rationale":"Resolved. `docs/lbd-proposer-spec.md:117-124` requires exact disease filtering and post-filter verdict synthesis, addressing the prior generic-referee disease pass-through risk. The original referee supports only any significant disease after filtering gene and gene_set at `pyzobot_referee.py:249-282`, so the specified override is the right thin adapter."},{"prior_finding_id":"F-006","rationale":"Resolved enough for build. The CSV has 14 non-negative-control disease values, including umbrella rows `autoimmune disease` and `inflammatory bowel disease`, and negative controls are separate (`age-related macular degeneration`, `chronic kidney disease`, `coronary artery disease`). The spec lists the 12 eligible specific diseases plus those two umbrellas as context-only in `docs/lbd-proposer-spec.md:44-53`."},{"prior_finding_id":"F-007","rationale":"Resolved. The hard disjoint gate is replaced with preflight histograms and a ranked novelty penalty in `docs/lbd-proposer-spec.md:72-84`; strict-zero is no longer required to return candidates."},{"prior_finding_id":"F-008","rationale":"Resolved. The spec narrows external evidence to Europe PMC co-mention plus Open Targets for A-C knownness and acknowledges the non-trivial client/cache/mapping work with a revised effort estimate in `docs/lbd-proposer-spec.md:57-70` and `docs/lbd-proposer-spec.md:145-155`."},{"prior_finding_id":"F-009","rationale":"Resolved. `ranked_full` is explicitly banned from seeding A in `docs/lbd-proposer-spec.md:36-38` and only appears as a warning/mitigation, not as an input source."},{"prior_finding_id":"F-010","rationale":"Resolved. The artifact itself was rewritten and now carries the accepted corrections in the executable build sections, not just in debate prose: A sources at `docs/lbd-proposer-spec.md:28-38`, B scope at `39-43`, C eligibility at `44-53`, ranked novelty at `72-84`, adapter contract at `109-124`, and revised effort at `145-155`."},{"prior_finding_id":"F-011","rationale":"Resolved. The spec closes the row-level answer leak by banning `pyzobot_referee_ranked_full.csv` as an A seed in `docs/lbd-proposer-spec.md:36-38` and restates the generative rationale in `docs/lbd-proposer-spec.md:132-135`: A comes from raw KD/DE, novelty from external literature, and the referee runs after generation."},{"prior_finding_id":"F-012","rationale":"Resolved. `docs/lbd-proposer-spec.md:117-124` defines exact-C semantics before final verdict synthesis: filter `t3_exploded` by `gene==A_gene`, `disease==C_disease`, and `gene_set==downstream_<condition>`, support only on `p_adj_fdr < 0.05`, otherwise refute for C after upstream pass. This matches the available columns in `pyzobot_referee.py:70-74` and fixes the generic HOP-3 behavior at `pyzobot_referee.py:249-282`."}],"new_findings":[],"convergence_status":"converged","convergence_sanding_warning":null,"recommended_next_question":"Before building, pin the 12 eligible disease-to-EFO mappings and Th1/Th2 keyword map, then run the mandatory novelty preflight histogram."}
+codex
+{"round_number":3,"position_summary":"The v2 artifact is build-ready as the shortest correct path to a receipt-backed, condition-specific novel finding by July 13, with one non-blocking wording nit: it says “14 specific diseases” although two of those 14 CSV values are umbrella terms. The constrained pipeline remains genuinely generative under the preserved intent because A is answer-free, novelty is external, `ranked_full` seeding is banned, and the data referee mandatorily culls after question generation.","findings":[],"escalated_findings":[],"dropped_findings":[{"prior_finding_id":"F-001","rationale":"Resolved by the mandatory `referee_triple` contract in `docs/lbd-proposer-spec.md:109`, which filters HOP-3 to the exact requested `C_disease` before synthesizing `overall`. This is implementable because `pyzobot_referee.py:70` builds `t3_exploded` with `gene`, `disease`, `gene_set`, `odds_ratio`, and `p_adj_fdr`."},{"prior_finding_id":"F-002","rationale":"Resolved. A no longer depends on absent `*_regulator_coefficients.csv`; it is derived from existing KD/DE tables in `docs/lbd-proposer-spec.md:28`. The CSV headers confirm the needed fields: `guide_kd_efficiency.suppl_table.csv:1` has `signif_knockdown`, `perturbed_gene_id`, and `culture_condition`; `DE_stats.suppl_table.csv:1` has `culture_condition`, `ontarget_effect_size`, `ontarget_significant`, and `n_downstream`."},{"prior_finding_id":"F-003","rationale":"Resolved. B is restricted to Th1/Th2 and aging/cytokine programs are explicitly out of scope in `docs/lbd-proposer-spec.md:39`; `pyzobot_join_spec.json` confirms the available T2 substrate is the Th2/Th1 table."},{"prior_finding_id":"F-004","rationale":"Resolved. The spec limits condition-specific wording to KD/effect/disease hops and states HOP-2 is contrast-based, not condition-resolved, at `docs/lbd-proposer-spec.md:113`."},{"prior_finding_id":"F-005","rationale":"Resolved. `docs/lbd-proposer-spec.md:117` requires exact disease filtering and verdict synthesis after exact-C HOP-3, addressing the old generic disease pass-through."},{"prior_finding_id":"F-006","rationale":"Resolved for implementation. The CSV has 14 non-negative-control disease values, including umbrella rows `autoimmune disease` and `inflammatory bowel disease`; the spec lists those as context-only and uses 12 eligible C claims at `docs/lbd-proposer-spec.md:44` and `docs/lbd-proposer-spec.md:53`."},{"prior_finding_id":"F-007","rationale":"Resolved. The hard disjoint gate is replaced by preflight histograms and a ranked novelty penalty in `docs/lbd-proposer-spec.md:72`."},{"prior_finding_id":"F-008","rationale":"Resolved. The spec narrows API scope to Europe PMC plus Open Targets and revises effort to ~1–1.5 days in `docs/lbd-proposer-spec.md:57` and `docs/lbd-proposer-spec.md:150`."},{"prior_finding_id":"F-009","rationale":"Resolved. `ranked_full` is explicitly banned from A seeding in `docs/lbd-proposer-spec.md:36`."},{"prior_finding_id":"F-010","rationale":"Resolved. The artifact itself now contains the accepted fixes across A/B/C source definitions, novelty ranking, exact-C adapter, and effort estimate."},{"prior_finding_id":"F-011","rationale":"Resolved. The answer leak is closed by banning `pyzobot_referee_ranked_full.csv` from seeding and by making the generative rationale explicit in `docs/lbd-proposer-spec.md:132`."},{"prior_finding_id":"F-012","rationale":"Resolved. Exact-C HOP-3 semantics are specified at `docs/lbd-proposer-spec.md:117` and match the available `t3_exploded` columns in `pyzobot_referee.py:70`; the original generic HOP-3 behavior at `pyzobot_referee.py:249` is correctly overridden by the adapter."}],"new_findings":[],"convergence_status":"converged","convergence_sanding_warning":null,"recommended_next_question":"Before building, pin the 12 eligible disease-to-EFO mappings and Th1/Th2 keyword map, then run the mandatory novelty preflight histogram."}
+tokens used
+37,025
+{"round_number":3,"position_summary":"The v2 artifact is build-ready as the shortest correct path to a receipt-backed, condition-specific novel finding by July 13, with one non-blocking wording nit: it says “14 specific diseases” although two of those 14 CSV values are umbrella terms. The constrained pipeline remains genuinely generative under the preserved intent because A is answer-free, novelty is external, `ranked_full` seeding is banned, and the data referee mandatorily culls after question generation.","findings":[],"escalated_findings":[],"dropped_findings":[{"prior_finding_id":"F-001","rationale":"Resolved by the mandatory `referee_triple` contract in `docs/lbd-proposer-spec.md:109`, which filters HOP-3 to the exact requested `C_disease` before synthesizing `overall`. This is implementable because `pyzobot_referee.py:70` builds `t3_exploded` with `gene`, `disease`, `gene_set`, `odds_ratio`, and `p_adj_fdr`."},{"prior_finding_id":"F-002","rationale":"Resolved. A no longer depends on absent `*_regulator_coefficients.csv`; it is derived from existing KD/DE tables in `docs/lbd-proposer-spec.md:28`. The CSV headers confirm the needed fields: `guide_kd_efficiency.suppl_table.csv:1` has `signif_knockdown`, `perturbed_gene_id`, and `culture_condition`; `DE_stats.suppl_table.csv:1` has `culture_condition`, `ontarget_effect_size`, `ontarget_significant`, and `n_downstream`."},{"prior_finding_id":"F-003","rationale":"Resolved. B is restricted to Th1/Th2 and aging/cytokine programs are explicitly out of scope in `docs/lbd-proposer-spec.md:39`; `pyzobot_join_spec.json` confirms the available T2 substrate is the Th2/Th1 table."},{"prior_finding_id":"F-004","rationale":"Resolved. The spec limits condition-specific wording to KD/effect/disease hops and states HOP-2 is contrast-based, not condition-resolved, at `docs/lbd-proposer-spec.md:113`."},{"prior_finding_id":"F-005","rationale":"Resolved. `docs/lbd-proposer-spec.md:117` requires exact disease filtering and verdict synthesis after exact-C HOP-3, addressing the old generic disease pass-through."},{"prior_finding_id":"F-006","rationale":"Resolved for implementation. The CSV has 14 non-negative-control disease values, including umbrella rows `autoimmune disease` and `inflammatory bowel disease`; the spec lists those as context-only and uses 12 eligible C claims at `docs/lbd-proposer-spec.md:44` and `docs/lbd-proposer-spec.md:53`."},{"prior_finding_id":"F-007","rationale":"Resolved. The hard disjoint gate is replaced by preflight histograms and a ranked novelty penalty in `docs/lbd-proposer-spec.md:72`."},{"prior_finding_id":"F-008","rationale":"Resolved. The spec narrows API scope to Europe PMC plus Open Targets and revises effort to ~1–1.5 days in `docs/lbd-proposer-spec.md:57` and `docs/lbd-proposer-spec.md:150`."},{"prior_finding_id":"F-009","rationale":"Resolved. `ranked_full` is explicitly banned from A seeding in `docs/lbd-proposer-spec.md:36`."},{"prior_finding_id":"F-010","rationale":"Resolved. The artifact itself now contains the accepted fixes across A/B/C source definitions, novelty ranking, exact-C adapter, and effort estimate."},{"prior_finding_id":"F-011","rationale":"Resolved. The answer leak is closed by banning `pyzobot_referee_ranked_full.csv` from seeding and by making the generative rationale explicit in `docs/lbd-proposer-spec.md:132`."},{"prior_finding_id":"F-012","rationale":"Resolved. Exact-C HOP-3 semantics are specified at `docs/lbd-proposer-spec.md:117` and match the available `t3_exploded` columns in `pyzobot_referee.py:70`; the original generic HOP-3 behavior at `pyzobot_referee.py:249` is correctly overridden by the adapter."}],"new_findings":[],"convergence_status":"converged","convergence_sanding_warning":null,"recommended_next_question":"Before building, pin the 12 eligible disease-to-EFO mappings and Th1/Th2 keyword map, then run the mandatory novelty preflight histogram."}

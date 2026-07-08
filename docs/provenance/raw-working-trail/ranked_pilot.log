@@ -1,0 +1,20 @@
+=== RANKED PILOT FUNNEL ===
+generated 240 -> disjoint 75 -> top-culled 12 -> referee-SUPPORTED 0
+ab_gate value = 597
+
+=== top culled candidates (gene x disease | score | ab bc ac_lit ac_known effect | referee) ===
+  CD247    x Crohn's disease            | s=-3.149 | ab=  597 bc=  8319 acL=  30 acK=0.000 eff= 4329 | refuted_for_c
+  ZAP70    x atopic eczema              | s=-3.705 | ab= 1832 bc=  2184 acL=  19 acK=0.003 eff= 5021 | refuted_for_c
+  CD3E     x atopic eczema              | s=-3.739 | ab= 3521 bc=  2184 acL=  21 acK=0.002 eff= 5710 | refuted_for_c
+  CD247    x ulcerative colitis         | s=-3.785 | ab=  597 bc= 18677 acL=  96 acK=0.000 eff= 4329 | refuted_for_c
+  ITK      x atopic eczema              | s=-3.864 | ab= 1265 bc=  2184 acL=  18 acK=0.013 eff= 3392 | refuted_for_c
+  CD247    x ankylosing spondylitis     | s= -4.09 | ab=  597 bc=  4773 acL=  50 acK=0.002 eff= 4329 | refuted_for_c
+  CD3E     x Hashimoto's thyroiditis    | s=-4.261 | ab= 3521 bc=   928 acL=  18 acK=0.000 eff= 5710 | refuted_for_c
+  CD247    x type 1 diabetes mellitus   | s=-4.273 | ab=  597 bc=  3725 acL=  43 acK=0.047 eff= 4329 | refuted_for_c
+  ZAP70    x Crohn's disease            | s= -4.33 | ab= 1832 bc=  8319 acL=  89 acK=0.061 eff= 5021 | refuted_for_c
+  CD247    x psoriasis                  | s=-4.364 | ab=  597 bc= 23239 acL= 172 acK=0.000 eff= 4329 | refuted_for_c
+  CD247    x multiple sclerosis         | s=-4.538 | ab=  597 bc= 34422 acL= 205 acK=0.000 eff= 4329 | refuted_for_c
+  CD3E     x ankylosing spondylitis     | s= -4.62 | ab= 3521 bc=  4773 acL=  98 acK=0.000 eff= 5710 | refuted_for_c
+
+=== MONEY SHOTS (disjoint in lit + referee-supported on the specific disease) ===
+  (none in this sample -- expected; strong regulators are usually already known)

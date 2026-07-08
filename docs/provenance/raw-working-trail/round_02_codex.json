@@ -1,0 +1,93 @@
+{
+  "round_number": 2,
+  "position_summary": "Claude\u2019s conceptual revision accepts the right repo-verified constraints, and the proposed HOP-3 disease adapter is genuinely small because `t3_exploded` already carries `disease` per gene. But the supplied artifact has not actually been revised to those decisions, and Claude\u2019s new allowance to use `ranked_full` as an A seed is still risky because the file is already answer-conditioned.",
+  "findings": [
+    {
+      "id": "F-010",
+      "title": "Accepted fixes did not land in the implementation-plan artifact",
+      "severity": 5,
+      "likelihood": 5,
+      "blast_radius": 5,
+      "priority": "P0",
+      "evidence": "`docs/lbd-proposer-spec.md:17-27` still names absent `*_regulator_coefficients.csv`, aging/cytokine programs, ~17 diseases, and a 3 programs x 3 conditions matrix; `docs/lbd-proposer-spec.md:46-47` still uses a hard `max_ac=0` candidate gate; `docs/lbd-proposer-spec.md:74-76` still says no referee changes are needed and to call `referee(A_gene, condition_hint...)`; `docs/lbd-proposer-spec.md:94` still claims ~0.5-1 day fresh effort.",
+      "concern_path": "A builder following the artifact, rather than Claude\u2019s prose disposition, will implement the already-rejected plan: wrong source tables, unsupported B programs, generic gene-condition referee calls, hard disjoint filtering, and the old time estimate. This reintroduces the round-1 correctness failures despite Claude accepting them conceptually.",
+      "suggested_action": "Revise `docs/lbd-proposer-spec.md` itself before implementation: A from KD/DE/T2 only, B = Th1/Th2 only, exact CSV-derived disease list with umbrella exclusion, ranked novelty not hard zero, and mandatory `referee_triple(A,B,C,condition)`.",
+      "novelty_flag": false,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-011",
+      "title": "`ranked_full` is answer-conditioned even if only gene/condition columns are read",
+      "severity": 4,
+      "likelihood": 5,
+      "blast_radius": 4,
+      "priority": "P1",
+      "evidence": "`docs/perturbseq-qc_2026-07-07/pyzobot_referee_ranked_full.csv:1` contains answer fields including `top_disease`, `overall_status`, `disease_OR`, `disease_FDR`, `chain_score`, and statuses. CSV inspection showed 602 rows, 457 genes, all rows `disease_status=supported`, with 350 rows already labelled as validated chains plus 15 caveated validated chains.",
+      "concern_path": "Even selecting only `gene,ensg,condition` from this file biases the proposer toward genes already passing HOP-3 disease support. The LBD layer then becomes a literature novelty sorter over pre-survived referee outputs, which weakens the generate-then-cull claim and makes generated-vs-culled counts misleading.",
+      "suggested_action": "Do not seed A from `ranked_full`. Build A directly from `guide_kd_efficiency.suppl_table.csv`, `DE_stats.suppl_table.csv`, and optionally T2 membership, then let the referee determine disease support after question generation.",
+      "novelty_flag": true,
+      "concern_type": "novelty"
+    },
+    {
+      "id": "F-012",
+      "title": "The adapter is thin for C, but the artifact still lacks the exact verdict semantics",
+      "severity": 4,
+      "likelihood": 4,
+      "blast_radius": 4,
+      "priority": "P1",
+      "evidence": "`docs/perturbseq-qc_2026-07-07/pyzobot_referee.py:70-74` builds `t3_exploded` with `gene`, `cluster`, `disease`, and `gene_set`, so exact C filtering is small. But `_hop3` logic at `pyzobot_referee.py:251-266` supports any significant disease after filtering only `gene` and `gene_set`, and `docs/lbd-proposer-spec.md:74-76` still claims the existing `referee(A_gene, condition)` already checks disease C.",
+      "concern_path": "If the adapter is not specified precisely, implementers may only post-filter the receipt after `overall` has already been synthesized. That can leave inconsistent verdicts where `overall` says supported while exact C is refuted or untested.",
+      "suggested_action": "Specify `referee_triple` as a first-class contract that computes exact-C HOP-3 status before synthesizing the triple verdict, including what happens when the gene appears in other diseases but not requested C.",
+      "novelty_flag": true,
+      "concern_type": "correctness"
+    }
+  ],
+  "escalated_findings": [
+    {
+      "prior_finding_id": "F-001",
+      "rationale": "Conceptually accepted, but the artifact still says the existing referee checks disease C with no changes. Escalated through F-010/F-012."
+    },
+    {
+      "prior_finding_id": "F-002",
+      "rationale": "Conceptually accepted, but `docs/lbd-proposer-spec.md:17-20` still points to absent regulator coefficient files. Escalated through F-010."
+    },
+    {
+      "prior_finding_id": "F-003",
+      "rationale": "Conceptually accepted, but `docs/lbd-proposer-spec.md:21-27` and `:101-102` still specify aging/cytokine and 3 programs. Escalated through F-010."
+    },
+    {
+      "prior_finding_id": "F-005",
+      "rationale": "Conceptually accepted, but `docs/lbd-proposer-spec.md:74-76` still uses `referee(A_gene, condition)` rather than the full triple contract. Escalated through F-010/F-012."
+    },
+    {
+      "prior_finding_id": "F-007",
+      "rationale": "Conceptually accepted, but `docs/lbd-proposer-spec.md:46-47` still makes `ac_lit <= max_ac` with default `max_ac=0` a candidate gate. Escalated through F-010."
+    },
+    {
+      "prior_finding_id": "F-008",
+      "rationale": "Conceptually accepted, but `docs/lbd-proposer-spec.md:36-38` still lists multiple API sources and `:94` still claims ~0.5-1 day. Escalated through F-010."
+    },
+    {
+      "prior_finding_id": "F-009",
+      "rationale": "Claude added a guardrail, but repo inspection shows `ranked_full` is entirely disease-supported rows, so even gene/condition seeding leaks survivor selection. Escalated as F-011."
+    }
+  ],
+  "dropped_findings": [
+    {
+      "prior_finding_id": "F-004",
+      "rationale": "Claude\u2019s revised position correctly limits condition-specificity to KD/effect/disease hops and stops claiming HOP-2 is condition-resolved, though the artifact still needs the global rewrite covered by F-010."
+    },
+    {
+      "prior_finding_id": "F-006",
+      "rationale": "Claude\u2019s revised position correctly reads C from the CSV and treats umbrella rows as context only; CSV inspection confirms 14 real disease labels."
+    }
+  ],
+  "new_findings": [
+    "F-010",
+    "F-011",
+    "F-012"
+  ],
+  "convergence_status": "still iterating",
+  "convergence_sanding_warning": null,
+  "recommended_next_question": "Before round 3, Claude should rewrite the actual `docs/lbd-proposer-spec.md` to match the accepted repo constraints and decide whether `ranked_full` is completely banned from proposer seeding; otherwise the plan still reads as the rejected round-1 design."
+}

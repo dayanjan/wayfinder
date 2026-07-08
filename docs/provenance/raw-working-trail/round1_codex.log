@@ -1,0 +1,1052 @@
+Reading prompt from stdin...
+OpenAI Codex v0.141.0
+--------
+workdir: C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f3efd-09c5-7682-b098-a0a89e0d99ff
+--------
+user
+You are a hostile senior reviewer running an iterative cross-model debate on an
+implementation-plan artifact authored by an Anthropic-trained collaborator. This is
+round 1. Your job is to surface every plausible concern with the position below,
+scored and prioritized. You are NOT redesigning the artifact — you are critiquing it
+from a hostile-but-informed stance.
+
+# CRITICAL: this is a REPO-READ debate — verify claims against the actual code
+
+You are running READ-ONLY inside the target git repository. The artifact is an
+implementation PLAN, and plans drift from reality. You MAY and SHOULD open any file
+referenced below to verify the plan's claims against what the repo actually contains.
+**Verifying claimed facts against the repo is highly valued** — a finding backed by
+"I opened X and it does not say what the plan claims" is worth far more than a
+speculative one. In particular, please actually open and check:
+
+- `docs/perturbseq-qc_2026-07-07/pyzobot_referee.py` — the already-built referee the
+  plan says it will reuse "unchanged". Read what `referee()` / `referee_json()`
+  actually return, especially HOP-3 (disease). Does the returned verdict let a caller
+  assert a link to ONE specific disease C, or only to "some enriched autoimmune
+  diseases"? Does `condition` thread through to a condition-specific verdict?
+- `docs/perturbseq-qc_2026-07-07/pyzobot_join_spec.json` — the join contract (4 tables).
+- `data/` — the actual CSVs present. The plan's entity-A definition (spec §1) keys off
+  `polarization_prediction...regulator_coefficients.csv` and
+  `aging_prediction...regulator_coefficients.csv`. Check whether those files exist in
+  `data/` at all, and if not, what the plan should key off instead. Read the header of
+  `data/cluster_autoimmune_enrichment_results.suppl_table.csv` to confirm the ~17
+  disease list and column names the plan assumes.
+- `docs/perturbseq-qc_2026-07-07/pyzobot_referee_ranked_full.csv` — the batch-ranked
+  gene output the plan's entity-A set could reuse.
+
+# Framing question
+
+Is `docs/lbd-proposer-spec.md` the shortest CORRECT path to a receipt-backed,
+condition-specific NOVEL finding by the July 13 deadline — and do its load-bearing
+claims (entity-A source tables; "referee consumes it unchanged"; the disjoint-set
+candidate gate; condition first-classness) hold up against the actual referee code
+and CSVs in this repo? Secondary: is the plan thin enough to build in ~0.5–1 day
+solo while leaving time for the demo video (which the judges weight heavily)?
+
+# Preserve-intent directive
+
+The artifact's NOVEL claim is: **"LBD used as a QUESTION-GENERATION engine (not a
+discovery engine), whose generated questions are then MANDATORILY culled by a
+data-referee."** Do not drift toward consensus that sands this into a generic "just
+run LBD" or "just run the referee". Critique the EXECUTION of the generate-then-cull
+loop; prefer "open question" over "we agreed" on the novel claim itself.
+
+# Claude's opening position
+
+(Below is Claude's round-1 statement of the artifact's position and the load-bearing
+assumptions Claude already wants verified.)
+
+# Round 1 — Claude's opening position
+
+## Framing question
+Is `docs/lbd-proposer-spec.md` the shortest *correct* path to a receipt-backed,
+condition-specific **novel** finding by July 13 — and do its load-bearing claims
+(entity-A source tables, "referee consumes it unchanged", the disjoint-set gate)
+hold up against the actual referee code + CSVs already in this repo?
+
+## The position the spec takes
+1. **The reframe is the moat.** LBD (Swanson ABC) is used as a *question-generation*
+   engine, not a discovery engine: it mines literature for the highest-value
+   **untested** A(gene)→B(program×condition)→C(disease) triples the CD4+ T-cell
+   Perturb-seq dataset is uniquely positioned to resolve. Each survivor is handed to
+   the **already-built referee** (`docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`),
+   which answers it against the four tables. This fills the Researcher-track cold-start
+   gap ("rich dataset, no question") that Claude Science structurally cannot fill
+   itself, and answers the dead-R01 critique one level up: LBD proposes, the data
+   referee culls.
+2. **Thin + bounded.** Entities are bounded by the dataset (A≈200–500 regulators,
+   B = 3 programs × 3 conditions, C ≈ 17 diseases read from
+   `cluster_autoimmune_enrichment_results.suppl_table.csv`), so the whole matrix is
+   pandas-computable. Pipeline is 3 stages: gather co-mention counts via APIs
+   (PubTator3 / Europe PMC / OpenAlex + Open Targets / GWAS Catalog for the known
+   A–C set) → compute disjoint novel candidates → emit `lbd_questions.json`.
+3. **Referee unchanged for v1.** The spec claims no referee code changes are needed;
+   the referee's existing gene+condition verdict is sufficient to answer each LBD
+   question.
+4. **The money shot** is one *disjoint-in-literature + data-supported + condition-
+   specific* triple; one *refuted* triple proves the cull is real.
+
+## Load-bearing assumptions I want stress-tested (verify against the repo)
+- **A-source mismatch.** The spec restricts A to genes significant in
+  `polarization_prediction...regulator_coefficients.csv` /
+  `aging_prediction...regulator_coefficients.csv`. Those files are **not** in `data/`
+  (which has `DE_stats`, `guide_kd_efficiency`, `Th2_Th1_polarization_signature_DE`,
+  and the cluster enrichment table). Does the entity-A definition rest on data that
+  doesn't exist here?
+- **Referee disease-specificity gap.** The LBD question targets ONE disease C, but the
+  referee's HOP-3 returns membership across ALL enriched clusters (EGR2 → 13 diseases;
+  SLC1A5 → 9). Read `pyzobot_referee.py` HOP-3: does the returned verdict let you
+  assert "gene → *asthma* specifically", or only "gene → some autoimmune diseases"?
+  If the latter, "referee unchanged" is false for a disease-specific claim.
+- **Disjoint gate too tight?** Candidate iff `ab≥3 AND bc≥3 AND ac_lit≤0 AND NOT
+  ac_known`. Requiring zero A–C co-mentions AND passing KD AND significant program
+  shift AND significant *specific*-disease enrichment is a narrow needle — is landing
+  even one survivor realistic, or does the demo hinge on tuning `max_ac` up?
+- **Condition first-classness.** B is program×condition; does the referee's
+  condition handling actually thread through to a condition-specific verdict, or does
+  condition get averaged somewhere?
+
+## Preserve-intent (do NOT sand this off)
+The novel claim is **"LBD as a question-GENERATION engine (not discovery), whose
+output is mandatorily culled by a data-referee."** Critique its execution, but do not
+converge it back into a generic "just run LBD" or "just run the referee" — the
+generation-then-cull loop is the thesis.
+
+
+# Artifact
+
+## FILE: docs/lbd-proposer-spec.md
+
+# LBD Question-Proposer — thin build spec (fresh, new-work-only)
+
+**Purpose.** Fill the Researcher-track **cold-start gap**: rich dataset, no question. This component
+uses literature-based discovery (Swanson **ABC**) to *generate* the highest-value **untested**
+questions the CD4+ T-cell Perturb-seq dataset can resolve, then hands each to the already-built
+**referee** (`docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`) which answers it against the data.
+Motivation + strategy: `memory/decisions/lbd-question-engine-reframe.md`.
+
+**Compute:** laptop CPU + web APIs only. No GPU, no Colab. **Compliance:** all fresh code; public
+data/APIs; git history is the proof.
+
+---
+
+## 1. Entities (bounded by the dataset — this is what keeps it thin)
+Dataset = Zhu/Dann/Pritchard/Marson genome-scale CD4+ T-cell Perturb-seq (bioRxiv 2025.12.23.696273).
+
+- **A = regulators (genes).** NOT all ~11.5k perturbed genes — restrict to **significant regulators
+  of the measured programs**: genes with (a) a passing knockdown gate and (b) a significant coefficient
+  in `polarization_prediction...regulator_coefficients.csv` / `aging_prediction...regulator_coefficients.csv`,
+  OR a significant on-target DE effect. Target set ≈ 200–500 genes.
+- **B = programs × condition.** The named axes: `Th1_Th2_polarization`, `aging`, `cytokine_production`,
+  each crossed with `condition ∈ {Rest, Stim8hr, Stim48hr}`. (Condition is first-class — the paper's
+  headline is context-specificity.)
+- **C = autoimmune diseases.** The ~17 diseases in `cluster_autoimmune_enrichment_results.suppl_table.csv`
+  (asthma, T1D, Crohn's, RA, MS, SLE, atopic eczema, …). Read the exact list from that CSV at build time.
+
+Matrix ≈ (200–500 A) × (3 programs × 3 conditions B) × (~17 C) — small, computable in pandas.
+
+## 2. Pipeline (3 stages, all CPU/API)
+
+### Stage 1 — gather link evidence (API; cache everything to `data/lbd_cache/`, gitignored)
+For each entity pair, get literature/DB co-mention counts. Prefer pre-computed resources over any NLP:
+
+| Link | Primary source (query) | Fallback |
+|---|---|---|
+| **A–B** gene↔program | Map program→MeSH/keyword set (Th2:"Th2 cells","GATA3","type 2 immunity"; aging:"immunosenescence","T cell aging"; cytokine:"cytokine production"). PubTator3 `/relations` or Europe PMC co-mention count for gene × program-terms. | OpenAlex `works?filter=title_and_abstract.search:"<gene>" "<program-term>"` count |
+| **B–C** program↔disease | Europe PMC / PubTator3 co-mention count for program-terms × disease name (+ synonyms via MeSH/EFO). | OpenAlex search count |
+| **A–C** gene↔disease (the KNOWN set to exclude) | **Open Targets GraphQL** `associationDatatypes` for (gene, disease EFO) → association score + literature evidence count; **GWAS Catalog** REST for gene-near loci of the disease; PubTator3 gene×disease co-mention count. | DisGeNET if reachable |
+
+Normalization: gene symbol→Ensembl/aliases via **MyGene**; disease→EFO/MeSH via a small static map built
+once from the enrichment table's disease names. NCBI API key → PubMed 10 req/s; 1 req/s politeness otherwise.
+
+### Stage 2 — compute the disjoint (novel) A–C candidates (pandas, milliseconds)
+For every (A, B, C) triple:
+- `ab = cooccur(A,B)`, `bc = cooccur(B,C)`, `ac_lit = cooccur(A,C)`, `ac_known = OpenTargets_score(A,C) > τ OR gwas_hit(A,C)`.
+- **Candidate hypothesis** iff `ab ≥ min_ab AND bc ≥ min_bc AND ac_lit ≤ max_ac AND NOT ac_known`.
+  (Defaults: `min_ab=min_bc=3` co-mentions, `max_ac=0`, `τ=0.1`. Tune from the data.)
+- **Novelty/interest score:** `score = zscore(ab) + zscore(bc) − w·ac_lit − w2·OpenTargets_score`, higher = more
+  novel-yet-literature-bridged. Rank descending. Keep top N (e.g. 25).
+
+### Stage 3 — emit questions (JSON handed to the referee)
+Each surviving triple → one question object (schema below), phrased in plain English so it reads as a real
+research question, not a tuple.
+
+## 3. Output contract → the referee
+`lbd_questions.json`: a ranked list of:
+```json
+{
+  "hypothesis_id": "H001",
+  "question": "In CD4+ T cells, does perturbing GATA3 shift the Th2 polarization program and thereby link to asthma risk — and is that link specific to the Stim8hr state?",
+  "A_gene": "GATA3",
+  "B_program": "Th1_Th2_polarization",
+  "C_disease": "asthma",
+  "condition_hint": "Stim8hr",
+  "novelty": {
+    "ab_cooccur": 41, "bc_cooccur": 120, "ac_lit_cooccur": 0,
+    "ac_known_opentargets": 0.03, "ac_gwas_hit": false, "is_disjoint": true
+  },
+  "score": 3.87,
+  "sources": ["europepmc:...","opentargets:ENSG..-EFO_..","gwascatalog:..."]
+}
+```
+
+### How the referee consumes it (already built — no referee changes needed for v1)
+For each question: call `referee(A_gene, condition_hint or each condition)`. The verdict already traces:
+HOP-0 KD gate → HOP-1 effect → **HOP-2 does it shift program B** → **HOP-3 does its cluster enrich for disease C**.
+Then classify the *answer to the LBD question*:
+- **disjoint in lit + referee = supported** → **receipt-backed NOVEL hypothesis** (the money shot: a gene→disease
+  link the literature never made, that the data supports — bonus if condition-specific).
+- **referee = untested** → knockdown failed; question unanswerable here (honest).
+- **referee = refuted** → LBD proposed it, data killed it (the cull; the R01 answer in action).
+
+## 4. Demo scope (thin, for the video)
+1. Run the proposer over the bounded entity set → `lbd_questions.json` (25 ranked untested questions the
+   *dataset itself* suggested — "here's what to ask when you didn't have a question").
+2. Referee adjudicates the top few, live.
+3. Land on ONE **disjoint-in-literature + data-supported + condition-specific** result → the receipt-backed
+   novel finding. Show one **refuted** to prove the cull is real.
+
+## 5. Build notes
+- New files only: `src/arbiter/lbd/` (`sources.py` API clients, `cooccur.py` set logic, `propose.py` orchestrator,
+  `emit.py`). Third-party libs OK (`requests`/`httpx`, `pandas`, `pydantic`). Cache raw API JSON under gitignored
+  `data/lbd_cache/`.
+- Effort: ~0.5–1 day fresh. Delegatable to Codex once this spec + the disease/program keyword maps are pinned
+  (mechanical API-client + pandas work). Tag: `[HYBRID]` (Claude pins the entity/keyword maps + scoring; Codex
+  builds the clients/logic; Claude reviews).
+- Optional richer variant (still no GPU): Voyage-embed abstracts for *semantic* co-occurrence — API, off critical path.
+
+## 6. Risks
+- **Overproduction returns** — mitigated: the referee is the mandatory cull; report generated-vs-survived counts.
+- **Disease/program → keyword mapping quality** drives everything — pin these maps by hand (small, ~17 diseases +
+  3 programs) and eyeball them; this is the one non-mechanical step.
+- **API rate limits** (not compute) — cache aggressively; NCBI key; bounded entity set keeps call volume low.
+
+
+# Output requirements
+
+Return JSON conforming to the supplied schema. round_number=1; findings ordered by priority (F-001, F-002, ...); each with severity/likelihood/blast_radius (1-5), priority (P0/P1/P2/accepted-risk), evidence (cite the file you opened), concern_path, suggested_action (one line), novelty_flag, concern_type (correctness|novelty). escalated_findings/dropped_findings/new_findings empty. convergence_status="round 1 — no prior position to converge with". convergence_sanding_warning=null. recommended_next_question = what Claude must address most in round 2. Begin.
+
+codex
+{"round_number":1,"position_summary":"I’ll verify the plan’s load-bearing claims directly against the repo before scoring concerns. The highest-value checks are whether the existing referee is actually disease- and condition-specific, and whether the proposed entity sources exist.","findings":[],"escalated_findings":[],"dropped_findings":[],"new_findings":[],"convergence_status":"round 1 — no prior position to converge with","convergence_sanding_warning":null,"recommended_next_question":"in progress"}
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command 'Get-ChildItem -Force' in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command 'Get-ChildItem -Force data' in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content docs\\lbd-proposer-spec.md" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-ChildItem -Force docs\\perturbseq-qc_2026-07-07" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 994ms:
+# LBD Question-Proposer - thin build spec (fresh, new-work-only)
+
+**Purpose.** Fill the Researcher-track **cold-start gap**: rich dataset, no question. This component
+uses literature-based discovery (Swanson **ABC**) to *generate* the highest-value **untested**
+questions the CD4+ T-cell Perturb-seq dataset can resolve, then hands each to the already-built
+**referee** (`docs/perturbseq-qc_2026-07-07/pyzobot_referee.py`) which answers it against the data.
+Motivation + strategy: `memory/decisions/lbd-question-engine-reframe.md`.
+
+**Compute:** laptop CPU + web APIs only. No GPU, no Colab. **Compliance:** all fresh code; public
+data/APIs; git history is the proof.
+
+---
+
+## 1. Entities (bounded by the dataset - this is what keeps it thin)
+Dataset = Zhu/Dann/Pritchard/Marson genome-scale CD4+ T-cell Perturb-seq (bioRxiv 2025.12.23.696273).
+
+- **A = regulators (genes).** NOT all ~11.5k perturbed genes - restrict to **significant regulators
+  of the measured programs**: genes with (a) a passing knockdown gate and (b) a significant coefficient
+  in `polarization_prediction...regulator_coefficients.csv` / `aging_prediction...regulator_coefficients.csv`,
+  OR a significant on-target DE effect. Target set ÷ 200-500 genes.
+- **B = programs x condition.** The named axes: `Th1_Th2_polarization`, `aging`, `cytokine_production`,
+  each crossed with `condition ? {Rest, Stim8hr, Stim48hr}`. (Condition is first-class - the paper's
+  headline is context-specificity.)
+- **C = autoimmune diseases.** The ~17 diseases in `cluster_autoimmune_enrichment_results.suppl_table.csv`
+  (asthma, T1D, Crohn's, RA, MS, SLE, atopic eczema, .). Read the exact list from that CSV at build time.
+
+Matrix ÷ (200-500 A) x (3 programs x 3 conditions B) x (~17 C) - small, computable in pandas.
+
+## 2. Pipeline (3 stages, all CPU/API)
+
+### Stage 1 - gather link evidence (API; cache everything to `data/lbd_cache/`, gitignored)
+For each entity pair, get literature/DB co-mention counts. Prefer pre-computed resources over any NLP:
+
+| Link | Primary source (query) | Fallback |
+|---|---|---|
+| **A-B** geneprogram | Map programMeSH/keyword set (Th2:"Th2 cells","GATA3","type 2 immunity"; aging:"immunosenescence","T cell aging"; cytokine:"cytokine production"). PubTator3 `/relations` or Europe PMC co-mention count for gene x program-terms. | OpenAlex `works?filter=title_and_abstract.search:"<gene>" "<program-term>"` count |
+| **B-C** programdisease | Europe PMC / PubTator3 co-mention count for program-terms x disease name (+ synonyms via MeSH/EFO). | OpenAlex search count |
+| **A-C** genedisease (the KNOWN set to exclude) | **Open Targets GraphQL** `associationDatatypes` for (gene, disease EFO)  association score + literature evidence count; **GWAS Catalog** REST for gene-near loci of the disease; PubTator3 genexdisease co-mention count. | DisGeNET if reachable |
+
+Normalization: gene symbolEnsembl/aliases via **MyGene**; diseaseEFO/MeSH via a small static map built
+once from the enrichment table's disease names. NCBI API key  PubMed 10 req/s; 1 req/s politeness otherwise.
+
+### Stage 2 - compute the disjoint (novel) A-C candidates (pandas, milliseconds)
+For every (A, B, C) triple:
+- `ab = cooccur(A,B)`, `bc = cooccur(B,C)`, `ac_lit = cooccur(A,C)`, `ac_known = OpenTargets_score(A,C) > ç OR gwas_hit(A,C)`.
+- **Candidate hypothesis** iff `ab ò min_ab AND bc ò min_bc AND ac_lit ó max_ac AND NOT ac_known`.
+  (Defaults: `min_ab=min_bc=3` co-mentions, `max_ac=0`, `ç=0.1`. Tune from the data.)
+- **Novelty/interest score:** `score = zscore(ab) + zscore(bc) - wúac_lit - w2úOpenTargets_score`, higher = more
+  novel-yet-literature-bridged. Rank descending. Keep top N (e.g. 25).
+
+### Stage 3 - emit questions (JSON handed to the referee)
+Each surviving triple  one question object (schema below), phrased in plain English so it reads as a real
+research question, not a tuple.
+
+## 3. Output contract  the referee
+`lbd_questions.json`: a ranked list of:
+```json
+{
+  "hypothesis_id": "H001",
+  "question": "In CD4+ T cells, does perturbing GATA3 shift the Th2 polarization program and thereby link to asthma risk - and is that link specific to the Stim8hr state?",
+  "A_gene": "GATA3",
+  "B_program": "Th1_Th2_polarization",
+  "C_disease": "asthma",
+  "condition_hint": "Stim8hr",
+  "novelty": {
+    "ab_cooccur": 41, "bc_cooccur": 120, "ac_lit_cooccur": 0,
+    "ac_known_opentargets": 0.03, "ac_gwas_hit": false, "is_disjoint": true
+  },
+  "score": 3.87,
+  "sources": ["europepmc:...","opentargets:ENSG..-EFO_..","gwascatalog:..."]
+}
+```
+
+### How the referee consumes it (already built - no referee changes needed for v1)
+For each question: call `referee(A_gene, condition_hint or each condition)`. The verdict already traces:
+HOP-0 KD gate  HOP-1 effect  **HOP-2 does it shift program B**  **HOP-3 does its cluster enrich for disease C**.
+Then classify the *answer to the LBD question*:
+- **disjoint in lit + referee = supported**  **receipt-backed NOVEL hypothesis** (the money shot: a genedisease
+  link the literature never made, that the data supports - bonus if condition-specific).
+- **referee = untested**  knockdown failed; question unanswerable here (honest).
+- **referee = refuted**  LBD proposed it, data killed it (the cull; the R01 answer in action).
+
+## 4. Demo scope (thin, for the video)
+1. Run the proposer over the bounded entity set  `lbd_questions.json` (25 ranked untested questions the
+   *dataset itself* suggested - "here's what to ask when you didn't have a question").
+2. Referee adjudicates the top few, live.
+3. Land on ONE **disjoint-in-literature + data-supported + condition-specific** result  the receipt-backed
+   novel finding. Show one **refuted** to prove the cull is real.
+
+## 5. Build notes
+- New files only: `src/arbiter/lbd/` (`sources.py` API clients, `cooccur.py` set logic, `propose.py` orchestrator,
+  `emit.py`). Third-party libs OK (`requests`/`httpx`, `pandas`, `pydantic`). Cache raw API JSON under gitignored
+  `data/lbd_cache/`.
+- Effort: ~0.5-1 day fresh. Delegatable to Codex once this spec + the disease/program keyword maps are pinned
+  (mechanical API-client + pandas work). Tag: `[HYBRID]` (Claude pins the entity/keyword maps + scoring; Codex
+  builds the clients/logic; Claude reviews).
+- Optional richer variant (still no GPU): Voyage-embed abstracts for *semantic* co-occurrence - API, off critical path.
+
+## 6. Risks
+- **Overproduction returns** - mitigated: the referee is the mandatory cull; report generated-vs-survived counts.
+- **Disease/program  keyword mapping quality** drives everything - pin these maps by hand (small, ~17 diseases +
+  3 programs) and eyeball them; this is the one non-mechanical step.
+- **API rate limits** (not compute) - cache aggressively; NCBI key; bounded entity set keeps call volume low.
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 996ms:
+
+    Directory: C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter\data
+
+[32;1mMode   [0m[32;1m              LastWriteTime[0m[32;1m         Length[0m[32;1m Name[0m
+[32;1m----   [0m [32;1m             -------------[0m [32;1m        ------[0m [32;1m----[0m
+-a---            7/7/2026 11:21 AM         975501 cluster_autoimmune_enrichment_results.suppl_table.csv
+-a---            7/7/2026 11:21 AM        5341369 DE_stats.suppl_table.csv
+-a---            7/7/2026 11:25 AM            573 fetch_data.sh
+-a---            7/7/2026 11:21 AM       13319852 guide_kd_efficiency.suppl_table.csv
+-a---            7/7/2026 11:25 AM           1080 README.md
+-a---            7/7/2026 11:21 AM        6155771 Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv
+
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1000ms:
+
+    Directory: C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 
+PyZoBot-Arbiter\docs\perturbseq-qc_2026-07-07
+
+[32;1mMode   [0m[32;1m              LastWriteTime[0m[32;1m         Length[0m[32;1m Name[0m
+[32;1m----   [0m [32;1m             -------------[0m [32;1m        ------[0m [32;1m----[0m
+-a---            7/7/2026  3:36 PM         181922 pyzobot_join_schema.png
+-a---            7/7/2026  3:36 PM           3703 pyzobot_join_spec.json
+-a---            7/7/2026  3:36 PM           3749 pyzobot_qc_join_report.md
+-a---            7/7/2026  4:31 PM           4189 pyzobot_referee_batch_results.md
+-a---            7/7/2026  4:29 PM           7794 pyzobot_referee_batch.py
+-a---            7/7/2026  3:44 PM           6564 pyzobot_referee_demo_verdicts.json
+-a---            7/7/2026  4:29 PM         157534 pyzobot_referee_ranked_full.csv
+-a---            7/7/2026  4:29 PM          93780 pyzobot_referee_ranked.csv
+-a---            7/7/2026  3:44 PM           3853 pyzobot_referee_results.md
+-a---            7/7/2026  3:44 PM          15121 pyzobot_referee.py
+
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1009ms:
+
+    Directory: C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+
+[32;1mMode   [0m[32;1m              LastWriteTime[0m [32;1;3m        Length[0m[32;1m Name[0m
+[32;1m----   [0m [32;1m             -------------[0m [32;1m        ------[0m [32;1m----[0m
+d----            7/7/2026  2:09 PM                [44;1m.claude[0m
+d--h-            7/7/2026  7:43 PM                [44;1m.git[0m
+d----            7/7/2026 12:36 PM                [44;1m01-hackaton details[0m
+d----            7/7/2026 11:25 AM                [44;1mdata[0m
+d----            7/7/2026  7:14 PM                [44;1mdocs[0m
+d----            7/7/2026  7:31 PM                [44;1mmemory[0m
+d----            7/7/2026 11:21 AM                [44;1msrc[0m
+d----            7/7/2026 11:21 AM                [44;1mtests[0m
+-a---            7/7/2026  2:13 PM            636 .env
+-a---            7/7/2026  2:19 PM            498 .gitignore
+-a---            7/7/2026 12:48 PM           1726 AGENTS.md
+-a---            7/7/2026 12:48 PM           3341 CLAUDE.md
+-a---            7/7/2026 11:25 AM           1079 LICENSE
+-a---            7/7/2026  7:32 PM           3059 MEMORY.md
+-a---            7/7/2026 12:48 PM            264 NEXT.md
+-a---            7/7/2026 11:24 AM           2785 README.md
+-a---            7/7/2026  7:30 PM           3582 WORK_PROGRESS.md
+
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+{"round_number":1,"position_summary":"The repo shape already contradicts part of the plan: the named coefficient CSVs are absent from `data/`. I’m now checking the actual referee contract, because that determines whether the generated disease-specific questions can be answered unchanged.","findings":[],"escalated_findings":[],"dropped_findings":[],"new_findings":[],"convergence_status":"round 1 — no prior position to converge with","convergence_sanding_warning":null,"recommended_next_question":"in progress"}
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Select-String -Path docs\\perturbseq-qc_2026-07-07\\pyzobot_referee.py -Pattern \"def referee|def referee_json|HOP|condition|disease|verdict|cluster\" -Context 3,5" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content data\\cluster_autoimmune_enrichment_results.suppl_table.csv -TotalCount 3" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content docs\\perturbseq-qc_2026-07-07\\pyzobot_join_spec.json" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content docs\\perturbseq-qc_2026-07-07\\pyzobot_referee_ranked_full.csv -TotalCount 5" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 890ms:
+cluster,disease,gene_set,odds_ratio,ci_low,ci_high,p_value,p_adj_fdr,cluster_size,in_cluster_in_disease,in_cluster_not_disease,not_cluster_in_disease,not_cluster_not_disease,intersecting_genes,negative_control_disease
+89,autoimmune disease,downstream_Stim8hr,3.0405225358384027,1.9691552104741554,4.65689611021601,2.970369035926655e-07,5.049627361075314e-06,100,41.0,59.0,591.0,2587.0,"['TMEM50A', 'ATP8B4', 'PHLDA1', 'TYMP', 'UBASH3B', 'TRAT1', 'P4HA2', 'GRAMD1B', 'CRIM1', 'DOT1L', 'IGSF9B', 'STAT1', 'GPR183', 'FYB1', 'SMAD3', 'GZMB', 'KLF3', 'AHI1', 'CSF2', 'ALPK1', 'ADGRG5', 'RASA3', 'GATA3', 'FUT8', 'EDARADD', 'ITPR1', 'CALHM6', 'SF3A3', 'PRPF40A', 'SEPTIN9', 'VEGFB', 'PTGIR', 'JARID2', 'ATP8B2', 'IFI30', 'NLRC5', 'IL7R', 'ADA2', 'CDK6', 'MYB', 'ORMDL3']",False
+110,asthma,downstream_Stim8hr,20.424027847445146,5.526674839070344,82.34114433983439,2.9242644442248613e-06,4.971249555182264e-05,12,7.0,5.0,209.0,3057.0,"['ITK', 'EAF2', 'CHD7', 'ZBTB25', 'EGR2', 'NFKBIA', 'ADO']",False
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 888ms:
+gene,ensg,condition,top_disease,overall_status,kd_ok,ontarget_significant,effect_size,n_downstream,program_contrast,program_adj_p,n_program_contrasts_sig,disease_OR,disease_FDR,n_disease_clusters,effect_term,program_term,disease_term,novelty_bonus,chain_score,effect_status,program_status,disease_status
+ITK,ENSG00000113263,Stim8hr,asthma,consistent with a validated gene -> program -> disease chain re-derived from the tables,1,True,-2.7816,3392.0,Th2_vs_Th1 (Ota 2021),2.125e-81,1,20.424,4.971e-05,1,1.3301,20.0,6.504,0.3,36.1844,supported,supported,supported
+ZBTB25,ENSG00000089775,Stim8hr,asthma,consistent with a validated gene -> program -> disease chain re-derived from the tables (with caveats),1,True,-10.4949,20.0,Th2_vs_Th1 (Ota 2021),2.699e-36,1,20.424,4.971e-05,2,2.4419,20.0,6.504,0.25,36.1823,flagged,supported,supported
+CHD7,ENSG00000171316,Stim8hr,asthma,consistent with a validated gene -> program -> disease chain re-derived from the tables,1,True,-15.6679,2277.0,Th2_vs_Th1 (Ota 2021),3.099e-49,1,20.424,4.971e-05,3,2.5649,20.0,6.504,0.2,34.8827,supported,supported,supported
+TRAT1,ENSG00000163519,Stim8hr,autoimmune disease,consistent with a validated gene -> program -> disease chain re-derived from the tables,1,True,-13.9348,2.0,Th2_vs_Th1 (Ota 2021),2.265e-61,1,3.0405,5.05e-06,1,2.5649,20.0,4.2527,0.3,34.8629,supported,supported,supported
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 911ms:
+{
+  "tables": {
+    "T1_DE_stats": {
+      "file": "DE_stats.suppl_table.csv",
+      "rows": 33983,
+      "grain": "perturbation(ENSG) x culture_condition",
+      "id_cols": [
+        "target_contrast (ENSG)",
+        "target_contrast_gene_name (SYMBOL)",
+        "culture_condition"
+      ],
+      "semantic": "gene -> EFFECT (on-target KD + downstream count + reproducibility)"
+    },
+    "T2_Th2_Th1": {
+      "file": "Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv",
+      "rows": 37288,
+      "grain": "gene(SYMBOL) x contrast",
+      "id_cols": [
+        "variable (SYMBOL)",
+        "contrast"
+      ],
+      "semantic": "gene -> PROGRAM shift (Th1<->Th2 log_fc/zscore)"
+    },
+    "T3_cluster_enrichment": {
+      "file": "cluster_autoimmune_enrichment_results.suppl_table.csv",
+      "rows": 5236,
+      "grain": "cluster x disease x gene_set",
+      "id_cols": [
+        "cluster",
+        "disease",
+        "gene_set",
+        "intersecting_genes (list of SYMBOL)"
+      ],
+      "semantic": "program/cluster -> DISEASE odds ratio + member genes"
+    },
+    "T4_guide_kd": {
+      "file": "guide_kd_efficiency.suppl_table.csv",
+      "rows": 73765,
+      "grain": "guide x culture_condition",
+      "id_cols": [
+        "Unnamed: 0 (guide id)",
+        "perturbed_gene_id (ENSG)",
+        "culture_condition"
+      ],
+      "semantic": "guide -> KNOCKDOWN QC gate (signif_knockdown)"
+    }
+  },
+  "joins": [
+    {
+      "name": "gate",
+      "left": "T4",
+      "right": "T1",
+      "on_left": [
+        "perturbed_gene_id",
+        "culture_condition"
+      ],
+      "on_right": [
+        "target_contrast",
+        "culture_condition"
+      ],
+      "key_type": "ENSG + condition",
+      "note": "aggregate T4 to gene x condition (any signif_knockdown) before joining; 11,422 ENSG shared"
+    },
+    {
+      "name": "effect_to_program",
+      "left": "T1",
+      "right": "T2",
+      "on_left": [
+        "target_contrast_gene_name"
+      ],
+      "on_right": [
+        "variable"
+      ],
+      "key_type": "gene SYMBOL",
+      "note": "T2 has 2 rows/gene (Ota & Hollbacker contrasts) - pick or facet by contrast; 10,422 symbols shared"
+    },
+    {
+      "name": "program_to_disease",
+      "left": "T2",
+      "right": "T3",
+      "on_left": [
+        "variable"
+      ],
+      "on_right": [
+        "intersecting_genes (exploded)"
+      ],
+      "key_type": "gene SYMBOL in list",
+      "note": "explode T3.intersecting_genes; align T3.gene_set suffix to culture_condition; 1,748 of 1,814 T3 genes in T2"
+    },
+    {
+      "name": "gene_to_disease_direct",
+      "left": "T1",
+      "right": "T3",
+      "on_left": [
+        "target_contrast_gene_name"
+      ],
+      "on_right": [
+        "intersecting_genes (exploded)"
+      ],
+      "key_type": "gene SYMBOL in list",
+      "note": "shortcut for the referee: does a perturbed gene appear in a disease-enriched cluster? 1,692 shared"
+    }
+  ],
+  "condition_vocab": [
+    "Rest",
+    "Stim8hr",
+    "Stim48hr"
+  ],
+  "qc_flags": {
+    "T1": {
+      "offtarget_flag_true": 2837,
+      "crossdonor_corr_missing_frac": 0.859,
+      "crossguide_corr_missing_frac": 0.912,
+      "note": "reproducibility cols only populated for perturbations with multi-donor/guide data"
+    },
+    "T2": {
+      "duplicate_symbols": 11616,
+      "reason": "two contrasts (Ota 2021, Hollbacker 2021) - NOT a defect",
+      "adj_p_missing_frac": 0.013
+    },
+    "T3": {
+      "intersecting_genes": "stringified python list - must ast.literal_eval",
+      "negative_control_disease_rows": 924
+    },
+    "T4": {
+      "perturbed_gene_id_missing_frac": 0.013,
+      "note": "~1.3% guides lack ENSG mapping - drop before gating"
+    }
+  }
+}
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1042ms:
+
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:3:==========================================
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:4:
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:5:Traces one CD4+ T-cell gene through a 4-table Perturb-seq 
+evidence chain and
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:6:returns a STRUCTURED [7mVERDICT [0m[7m[0min [0m[7m[0mwhich [0m[7m[0mevery [0m[7m[0mstatus [0m[7m[0mis [0m[7m[0mbacked [0m[7m[0mby [0m
+[7m[0man [0m[7m[0mexplicit[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:7:data receipt. Join contract is read from `pyzobot_join_spec.json`.[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:8:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:9:Chain:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:10:  [7mHOP [0m[7m[0m0 [0m[7m [0m[7m[0mknockdown-QC [0m[7m[0mGATE [0m[7m[0m(T4) [0m[7m [0m[7m[0m-- [0m[7m[0mis [0m[7m[0mthe [0m[7m[0mperturbation [0m[7m[0mvalid [0m[7m[0mat [0m
+[7m[0mall?[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:11:  [7mHOP [0m[7m[0m1 [0m[7m [0m[7m[0mgene [0m[7m[0m-> [0m[7m[0mEFFECT [0m[7m[0m(T1) [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m-- [0m[7m[0mon-target [0m[7m[0mKD [0m[7m[0m+ [0m[7m[0mdownstream [0m
+[7m[0meffect[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:12:  [7mHOP [0m[7m[0m2 [0m[7m [0m[7m[0meffect [0m[7m[0m-> [0m[7m[0mPROGRAM [0m[7m[0m(T2) [0m[7m [0m[7m[0m-- [0m[7m[0mTh1/Th2 [0m[7m[0mshift, [0m[7m[0mfaceted [0m[7m[0mby [0m
+[7m[0mcontrast[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:13:  [7mHOP [0m[7m[0m3 [0m[7m [0m[7m[0mprogram [0m[7m[0m-> [0m[7m[0mDISEASE [0m[7m[0m(T3) [0m[7m[0m-- [0m[7m[0mmembership [0m[7m[0min [0m
+[7m[0mdisease-enriched [0m[7m[0mclusters[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:14:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:15:Calibrated status vocabulary ONLY (never "proven"/"discovered"):[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:16: [0m[7m [0m[7m[0msupported [0m[7m [0m[7m [0m[7m[0m-- [0m[7m[0ma [0m[7m[0mreceipt [0m[7m[0min [0m[7m[0mthe [0m[7m[0mtables [0m[7m[0mis [0m[7m[0mconsistent [0m[7m[0mwith [0m[7m[0mthe [0m
+[7m[0mclaim[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:17:  refuted     -- a receipt in the tables contradicts the claim[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:18: [0m[7m [0m[7m[0muntested [0m[7m [0m[7m [0m[7m [0m[7m[0m-- [0m[7m[0mthe [0m[7m[0mperturbation [0m[7m[0mis [0m[7m[0minvalid/absent; [0m[7m[0mclaim [0m
+[7m[0mcannot [0m[7m[0mbe [0m[7m[0mevaluated[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:19:  flagged     -- a caveat (off-target, low reproducibility, 
+missing mapping)
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:20:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:21:Design rule (the hero feature): [7mHOP [0m[7m[0m0 [0m[7m[0mruns [0m[7m[0mFIRST. [0m[7m[0mIf [0m[7m[0mthe [0m
+[7m[0mknockdown [0m[7m[0mfailed,[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:22:downstream nulls are UNTESTED, never "no effect".[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:23:"""[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:24:from __future__ import annotations[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:25:import os, ast, json[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:26:from dataclasses import dataclass, field, asdict[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:31:# 
+----------------------------------------------------------------------------- config
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:32:DEFAULT_DATA_DIR = "/home/dayanjan/pyzobot-data"
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:33:DEFAULT_SPEC     = "pyzobot_join_spec.json"
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:34:[7mCONDITION[0mS       = ("Rest", "Stim8hr", "Stim48hr")[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:35:SIG_ALPHA        = 0.05   # adj-p / FDR threshold used throughout[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:36:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:37:[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:38:# [0m
+[7m[0m----------------------------------------------------------------------------- [0m[7m[0mdata [0m[7m[0mholder[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:39:class RefereeData:[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:44:        f = {k: v["file"] for k, v in 
+self.spec["tables"].items()}
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:45:        self.t1 = pd.read_csv(os.path.join(data_dir, 
+f["T1_DE_stats"]))
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:46:        self.t2 = pd.read_csv(os.path.join(data_dir, 
+f["T2_Th2_Th1"]))
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:47:        self.t3 = pd.read_csv(os.path.join(data_dir, 
+f["T3_[7mcluster[0m_enrichment"]))[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:48: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mself.t4 [0m[7m[0m= [0m[7m[0mpd.read_csv(os.path.join(data_dir, [0m
+[7m[0mf["T4_guide_kd"]))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:49:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:50:        # ENSG <-> SYMBOL (T1 is 1:1 and carries both)[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:51: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mself.sym2ens [0m[7m[0m= [0m
+[7m[0mdict(zip(self.t1.target_contrast_gene_name, [0m[7m[0mself.t1.target_contrast))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:52:        self.ens2sym = {v: k for k, v in self.sym2ens.items()}[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:53:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:54:        # [7mHOP [0m[7m[0m0 [0m[7m[0mgate: [0m[7m[0maggregate [0m[7m[0mguides [0m[7m[0m-> [0m[7m[0mgene [0m[7m[0mx [0m[7m[0mcondition [0m[7m[0m(spec [0m
+[7m[0mjoin [0m[7m[0m"gate")[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:55:        t4v = self.t4.dropna(subset=["perturbed_gene_id"])[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:56:        self.gate = (t4v.groupby(["perturbed_gene_id", 
+"culture_[7mcondition[0m"])[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:57: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m.agg(n_guides=("signif_knockdown", [0m
+[7m[0m"size"),[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:58: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mn_signif=("signif_knockdown", [0m
+[7m[0m"sum"),[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:59:                             best_adj_p=("adj_p_value", "min"),[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:60: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mmean_guide_expr=("guide_mean_expr", [0m
+[7m[0m"mean"),[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:61: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mmean_ntc_expr=("ntc_mean_expr", [0m
+[7m[0m"mean"))[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:62:                        .reset_index())
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:63:        self.gate["gate_pass"] = self.gate.n_signif > 0
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:64:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:65:        # [7mHOP [0m[7m[0m3: [0m[7m[0mexplode [0m[7m[0mT3 [0m[7m[0mintersecting_genes [0m[7m[0m(real [0m[7m[0mdiseases [0m
+[7m[0monly), [0m[7m[0mkeep [0m[7m[0mneg-controls [0m[7m[0maside[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:66:        self.t3_real = 
+self.t3[~self.t3.negative_control_[7mdisease[0m].copy()[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:67:        rows = [][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:68:        for _, r in self.t3_real.iterrows():[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:69:            for g in self._parse_list(r.intersecting_genes):[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:70:                rows.append((g, r.[7mcluster[0m, r.disease, r.gene_set,
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:71:                             r.odds_ratio, r.p_adj_fdr, 
+r.[7mcluster[0m_size))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:72:        self.t3_exploded = pd.DataFrame([0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:73:            rows, columns=["gene", "[7mcluster[0m", [0m[7m[0m"disease", [0m
+[7m[0m"gene_set",[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:74:                           "odds_ratio", "p_adj_fdr", 
+"[7mcluster[0m_size"])[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:75:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:76:    @staticmethod[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:77:    def _parse_list(s):[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:78:        try:[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:79: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mreturn [0m[7m[0mast.literal_eval(s) [0m[7m[0mif [0m[7m[0misinstance(s, [0m[7m[0mstr) [0m
+[7m[0melse [0m[7m[0m[][0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:93:        return None, None
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:94:
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:95:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:96:# 
+----------------------------------------------------------------------------- [7mverdict [0m[7m[0mschema[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:97:@dataclass[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:98:class [7mHop[0m:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:99:    [7mhop[0m: int[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:100:    name: str[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:101: [0m[7m [0m[7m [0m[7m [0m[7m[0mstatus: [0m[7m[0mstr [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m# [0m[7m[0msupported [0m[7m[0m| [0m[7m[0mrefuted [0m[7m[0m| [0m
+[7m[0muntested [0m[7m[0m| [0m[7m[0mflagged[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:102:    claim: str[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:103: [0m[7m [0m[7m [0m[7m [0m[7m[0mreceipt: [0m[7m[0mdict [0m[7m[0m= [0m[7m[0mfield(default_factory=dict) [0m[7m [0m[7m [0m[7m[0m# [0m[7m[0mthe [0m[7m[0mexact [0m
+[7m[0mtable [0m[7m[0mvalues[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:104:    caveats: list = field(default_factory=list)[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:105:
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:106:
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:107:@dataclass
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:108:class [7mVerdict[0m:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:109:    gene_symbol: Optional[str][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:110:    gene_ensg: Optional[str][0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:111:    [7mcondition[0m: str[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:112:    overall: str                      # calibrated one-liner[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:113:    gate_pass: bool[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:114:    [7mhop[0ms: list = field(default_factory=list)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:115:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:116:    def to_dict(self):[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:117:        d = asdict(self)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:118:        return d[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:119:[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:120:    def summary(self) -> str:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:121:        lines = [f"REFEREE [7mVERDICT [0m[7m [0m[7m[0m{self.gene_symbol [0m[7m[0mor [0m[7m[0m'?'} [0m
+[7m[0m({self.gene_ensg [0m[7m[0mor [0m[7m[0m'?'}) [0m[7m [0m[7m[0m@ [0m[7m[0m{self.condition}",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:122:                 f"  overall: {self.overall}"][0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:123:        for h in self.[7mhop[0ms:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:124:            lines.append(f"  [7mHOP [0m[7m[0m{h.hop} [0m[7m[0m{h.name:<16} [0m
+[7m[0m[{h.status:^9}] [0m[7m[0m{h.claim}")[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:125:            for k, v in h.receipt.items():[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:126:                lines.append(f"        - {k}: {v}")[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:127:            for c in h.caveats:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:128:                lines.append(f"        ! {c}")[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:129:        return "\n".join(lines)[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:130:
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:131:
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:132:# 
+----------------------------------------------------------------------------- the referee
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:133:[7mdef [0m[7mreferee[0m(gene: [0m[7m[0mstr, [0m[7m[0mcondition: [0m[7m[0mstr, [0m[7m[0mdata: [0m[7m[0mRefereeData) [0m[7m[0m-> [0m
+[7m[0mVerdict:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:134:    """Trace `gene` (SYMBOL or ENSG) at `[7mcondition[0m` [0m[7m[0mthrough [0m[7m[0mthe [0m
+[7m[0mevidence [0m[7m[0mchain."""[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:135:    if [7mcondition[0m not in CONDITIONS:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:136:        raise ValueError(f"[7mcondition [0m[7m[0mmust [0m[7m[0mbe [0m[7m[0mone [0m[7m[0mof [0m
+[7m[0m{CONDITIONS}, [0m[7m[0mgot [0m[7m[0m{condition!r}")[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:137:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:138:    sym, ens = data.resolve(gene)[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:139:    v = [7mVerdict[0m(gene_symbol=sym, [0m[7m[0mgene_ensg=ens, [0m
+[7m[0mcondition=condition,[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:140:                overall="", gate_pass=False)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:141:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:142:    if sym is None:[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:143: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mv.overall [0m[7m[0m= [0m[7m[0m"untested [0m[7m[0m- [0m[7m[0mgene [0m[7m[0midentifier [0m[7m[0mnot [0m[7m[0mfound [0m[7m[0min [0m
+[7m[0mthe [0m[7m[0mperturbation [0m[7m[0mpanel"[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:144:        v.[7mhop[0ms.append(Hop(0, "GATE", "untested",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:145:                          "gene not in dataset",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:146:                          receipt={"query": gene}))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:147:        return v[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:148:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:149:    # 
+---------------------------------------------------------------- [7mHOP [0m[7m[0m0: [0m[7m[0mGATE [0m[7m[0m(T4)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:150:    gp = data.gate[(data.gate.perturbed_gene_id == ens) &[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:151:                   (data.gate.culture_[7mcondition[0m == condition)][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:152:    if len(gp) == 0:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:153:        v.[7mhop[0ms.append(Hop(0, "GATE", "untested",
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:154:            "no guides for this gene x [7mcondition [0m[7m[0min [0m[7m[0mthe [0m[7m[0mKD-QC [0m
+[7m[0mtable",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:155:            receipt={"n_guides": 0}))[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:156:        v.overall = "untested - no knockdown data for this gene 
+at this [7mcondition[0m"[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:157:        return v[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:158:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:159:    gp = gp.iloc[0][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:160:    v.gate_pass = bool(gp.gate_pass)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:161:    gate_receipt = {[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:169:        # THE HERO FEATURE: failed KD => everything downstream 
+is UNTESTED
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:170:        cav = []
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:171:        if gp.mean_guide_expr <= gp.mean_ntc_expr * 1.0 and 
+gp.mean_ntc_expr < 0.05:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:172:            cav.append("target barely expressed at this 
+[7mcondition [0m[7m[0m- [0m[7m[0mnothing [0m[7m[0mto [0m[7m[0mknock [0m[7m[0mdown")[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:173:        v.[7mhop[0ms.append(Hop(0, "GATE", "untested",[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:174: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m"knockdown [0m[7m[0mdid [0m[7m[0mNOT [0m[7m[0mreach [0m[7m[0msignificance [0m[7m[0mfor [0m[7m[0many [0m[7m[0mguide [0m
+[7m[0m- [0m[7m[0m"[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:175: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m"downstream [0m[7m[0mabsence [0m[7m[0mof [0m[7m[0meffect [0m[7m[0mis [0m[7m[0mUNINTERPRETABLE, [0m
+[7m[0mnot [0m[7m[0m'no [0m[7m[0meffect'",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:176:            receipt=gate_receipt, caveats=cav))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:177:        v.overall = ("untested - knockdown failed the QC gate; "[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:178: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m"any [0m[7m[0mnull [0m[7m[0mdownstream [0m[7m[0mresult [0m[7m[0mcannot [0m[7m[0mbe [0m[7m[0mread [0m
+[7m[0mas [0m[7m[0ma [0m[7m[0mnegative")[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:179:        return v
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:180:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:181:    v.[7mhop[0ms.append(Hop(0, "GATE", "supported",[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:182: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mf"knockdown [0m[7m[0mvalidated: [0m
+[7m[0m{int(gp.n_signif)}/{int(gp.n_guides)} [0m[7m[0mguides [0m[7m[0m"[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:183:        f"significant (best adj-p {_fmt(gp.best_adj_p)})",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:184:        receipt=gate_receipt))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:185:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:186:    # 
+---------------------------------------------------------------- [7mHOP [0m[7m[0m1: [0m[7m[0mEFFECT [0m[7m[0m(T1)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:187:    t1r = data.t1[(data.t1.target_contrast == ens) &[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:188:                  (data.t1.culture_[7mcondition[0m == condition)][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:189:    if len(t1r) == 0:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:190:        v.[7mhop[0ms.append(Hop(1, "EFFECT", "untested",
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:191:            "gene absent from DE_stats at this [7mcondition[0m", [0m
+[7m[0mreceipt={}))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:192:    else:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:193:        r = t1r.iloc[0][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:194:        rc = {[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:195: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m"ontarget_significant": [0m
+[7m[0mbool(r.ontarget_significant),[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:196: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m"ontarget_effect_size": [0m
+[7m[0m_fmt(r.ontarget_effect_size),[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:219:            status = "refuted"     # KD validated by gate but 
+T1 sees no on-target effect
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:220:        claim = ("perturbation produces a downstream 
+transcriptional effect"
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:221:                 if r.n_downstream > 0 else
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:222:                 "on-target KD detected but no downstream DE 
+genes at this [7mcondition[0m")[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:223:        v.[7mhop[0ms.append(Hop(1, [0m[7m[0m"EFFECT", [0m[7m[0mstatus, [0m[7m[0mclaim, [0m
+[7m[0mreceipt=rc, [0m[7m[0mcaveats=cav))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:224:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:225:    # 
+---------------------------------------------------------------- [7mHOP [0m[7m[0m2: [0m[7m[0mPROGRAM [0m[7m[0m(T2)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:226:    t2r = data.t2[data.t2.variable == sym][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:227:    if len(t2r) == 0:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:228:        v.[7mhop[0ms.append(Hop(2, "PROGRAM", "untested",[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:229: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m"gene [0m[7m[0mnot [0m[7m[0mmeasured [0m[7m[0min [0m[7m[0mthe [0m[7m[0mTh1/Th2 [0m[7m[0mpolarization [0m
+[7m[0mcontrast", [0m[7m[0mreceipt={}))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:230:    else:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:231:        facets = {}[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:232:        any_sig = False[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:233:        for _, row in t2r.iterrows():[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:244:        claim = ("gene shifts the Th1/Th2 program in >=1 
+reference contrast"
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:245:                 if any_sig else
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:246:                 "gene does not significantly shift the Th1/Th2 
+program in either contrast")
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:247:        v.[7mhop[0ms.append(Hop(2, [0m[7m[0m"PROGRAM", [0m[7m[0mstatus, [0m[7m[0mclaim, [0m
+[7m[0mreceipt=facets))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:248:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:249:    # 
+---------------------------------------------------------------- [7mHOP [0m[7m[0m3: [0m[7m[0mDISEASE [0m[7m[0m(T3)[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:250:    gs = f"downstream_{[7mcondition[0m}"[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:251:    sub = data.t3_exploded[(data.t3_exploded.gene == sym) &[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:252:                           (data.t3_exploded.gene_set == gs)][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:253:    if len(sub) == 0:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:254:        # also report if the gene appears in ANY [7mcondition[0m's [0m
+[7m[0mset, [0m[7m[0mas [0m[7m[0ma [0m[7m[0mcaveat[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:255:        anysub = data.t3_exploded[data.t3_exploded.gene == sym][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:256:        cav = ([f"appears in other gene_sets: "[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:257: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mf"{sorted(anysub.gene_set.unique())}"] [0m[7m[0mif [0m
+[7m[0mlen(anysub) [0m[7m[0melse [0m[7m[0m[])[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:258:        v.[7mhop[0ms.append(Hop(3, [0m[7m[0m"DISEASE", [0m[7m[0m"untested" [0m[7m[0mif [0m
+[7m[0mlen(anysub) [0m[7m[0melse [0m[7m[0m"refuted",[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:259:            "gene is not a member of any [7mdisease[0m-cluster [0m
+[7m[0mgene-set [0m[7m[0mfor [0m[7m[0mthis [0m[7m[0mcondition",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:260:            receipt={"gene_set_checked": gs}, caveats=cav))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:261:    else:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:262:        sig = sub[sub.p_adj_fdr < SIG_ALPHA][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:263:        if len(sig):[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:264:            top = sig.sort_values("p_adj_fdr")[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:265:            rc = {"n_significant_[7mdisease[0m_clusters": [0m
+[7m[0mint(len(sig)),[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:266:                  "[7mdisease[0ms": sorted(sig.disease.unique()),[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:267:                  "top_hits": [[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:268:                      {"[7mdisease[0m": [0m[7m[0mr.disease, [0m[7m[0m"cluster": [0m
+[7m[0mint(r.cluster),[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:269: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m"odds_ratio": [0m[7m[0m_fmt(r.odds_ratio), [0m
+[7m[0m"p_adj_fdr": [0m[7m[0m_fmt(r.p_adj_fdr)}[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:270:                      for _, r in top.head(5).iterrows()]}[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:271:            v.[7mhop[0ms.append(Hop(3, "DISEASE", "supported",
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:272:                "gene is a member of >=1 
+autoimmune-[7mdisease[0m-enriched [0m[7m[0mcluster",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:273:                receipt=rc))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:274:        else:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:275:            best = sub.sort_values("p_adj_fdr").iloc[0][0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:276:            v.[7mhop[0ms.append(Hop(3, "DISEASE", "refuted",
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:277:                "gene appears in [7mdisease [0m[7m[0mcluster [0m[7m[0mgene-sets [0m[7m[0mbut [0m
+[7m[0mNONE [0m[7m[0mreach [0m[7m[0mFDR<0.05 [0m[7m[0m- [0m[7m[0m"[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:278:                "the [7mdisease [0m[7m[0mlink [0m[7m[0mis [0m[7m[0mnot [0m[7m[0msupported [0m[7m[0mby [0m[7m[0mthe [0m
+[7m[0menrichment",[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:279:                receipt={"n_appearances": int(len(sub)),[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:280:                         "best_p_adj_fdr": _fmt(best.p_adj_fdr),[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:281: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0m"best_odds_ratio": [0m
+[7m[0m_fmt(best.odds_ratio),[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:282:                         "best_[7mdisease[0m": best.disease}))[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:283:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:284:    v.overall = _synthesize_overall(v)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:285:    return v[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:286:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:287:[0m
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:297:    return x
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:298:
+  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:299:
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:300:def _synthesize_overall(v: [7mVerdict[0m) -> str:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:301:    """One calibrated sentence from the [7mhop [0m[7m[0mstatuses [0m[7m[0m(never [0m
+[7m[0m'proven')."""[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:302:    hs = {h.name: h.status for h in v.[7mhop[0ms}[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:303:    if not v.gate_pass:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:304:        return "untested - knockdown failed QC gate"[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:305:    eff = hs.get("EFFECT"); prog = hs.get("PROGRAM"); dis = 
+hs.get("[7mDISEASE[0m")[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:306: [0m[7m [0m[7m [0m[7m [0m[7m[0mif [0m[7m[0meff [0m[7m[0min [0m[7m[0m("supported", [0m[7m[0m"flagged") [0m[7m[0mand [0m[7m[0mprog [0m[7m[0m== [0m[7m[0m"supported" [0m
+[7m[0mand [0m[7m[0mdis [0m[7m[0m== [0m[7m[0m"supported":[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:307:        tail = " (with caveats)" if eff == "flagged" else ""[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:308:        return ("consistent with a validated gene -> program -> 
+[7mdisease [0m[7m[0mchain [0m[7m[0m"[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:309:                "re-derived from the tables" + tail)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:310:    if dis == "refuted":[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:311:        return "gene->[7mdisease [0m[7m[0mlink [0m[7m[0mrefuted: [0m[7m[0mgene [0m[7m[0min [0m[7m[0mcluster [0m
+[7m[0mgene-sets [0m[7m[0mbut [0m[7m[0menrichment [0m[7m[0mnot [0m[7m[0msignificant"[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:312:    if prog == "refuted":[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:313: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mreturn [0m[7m[0m"program [0m[7m[0mlink [0m[7m[0mrefuted: [0m[7m[0mknockdown [0m[7m[0mvalid [0m[7m[0mbut [0m[7m[0mno [0m
+[7m[0msignificant [0m[7m[0mTh1/Th2 [0m[7m[0mshift"[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:314:    if eff == "refuted":[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:315: [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mreturn [0m[7m[0m"effect [0m[7m[0mrefuted: [0m[7m[0mknockdown [0m[7m[0mvalid [0m[7m[0mby [0m[7m[0mgate [0m[7m[0mbut [0m
+[7m[0mDE_stats [0m[7m[0mshows [0m[7m[0mno [0m[7m[0mon-target [0m[7m[0meffect"[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:316:    parts = [f"{h.name.lower()}:{h.status}" for h in v.[7mhop[0ms [0m[7m[0mif [0m
+[7m[0mh.hop [0m[7m[0m> [0m[7m[0m0][0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:317:    return "partial chain - " + ", ".join(parts)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:318:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:319:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:320:[7mdef [0m[7mreferee[0m_json(gene: [0m[7m[0mstr, [0m[7m[0mcondition: [0m[7m[0mstr, [0m[7m[0mdata: [0m[7m[0mRefereeData) [0m
+[7m[0m-> [0m[7m[0mstr:[0m
+> docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:321:    return json.dumps(referee(gene, [7mcondition[0m, [0m[7m[0mdata).to_dict(), [0m
+[7m[0mindent=2, [0m[7m[0mdefault=str)[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:322:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:323:[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:324:if __name__ == "__main__":[0m
+[7m[0m  docs\perturbseq-qc_2026-07-07\pyzobot_referee.py:325:    d = RefereeData()[0m
+[7m [0m[7m [0m[7m[0mdocs\perturbseq-qc_2026-07-07\pyzobot_referee.py:326: [0m[7m [0m[7m [0m[7m [0m[7m[0mfor [0m[7m[0mg, [0m[7m[0mc [0m[7m[0min [0m[7m[0m[("EGR2", [0m[7m[0m"Stim8hr"), [0m[7m[0m("IL2", [0m[7m[0m"Rest"), [0m
+[7m[0m("SLC1A5", [0m[7m[0m"Stim8hr")]:[0m
+
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+{"round_number":1,"position_summary":"HOP-3 is condition-scoped by `gene_set = downstream_<condition>`, but it is not parameterized by the requested disease C; it supports “any significant autoimmune-disease cluster” and merely returns the diseases it found. I’m checking whether the available batch-ranked CSV can cover the missing A-source and how many diseases/programs are actually represented.","findings":[],"escalated_findings":[],"dropped_findings":[],"new_findings":[],"convergence_status":"round 1 — no prior position to converge with","convergence_sanding_warning":null,"recommended_next_question":"in progress"}
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$csv = Import-Csv data'"\\cluster_autoimmune_enrichment_results.suppl_table.csv; "'$csv | Where-Object { $_.negative_control_disease -eq '"'False' } | Select-Object -ExpandProperty disease -Unique | Sort-Object" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$csv = Import-Csv data'"\\cluster_autoimmune_enrichment_results.suppl_table.csv; ("'$csv | Where-Object { $_.negative_control_disease -eq '"'False' } | Select-Object -ExpandProperty disease -Unique).Count" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content data\\DE_stats.suppl_table.csv -TotalCount 1; Get-Content data\\Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv -TotalCount 1; Get-Content data\\guide_kd_efficiency.suppl_table.csv -TotalCount 1" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command "Get-Content docs\\perturbseq-qc_2026-07-07\\pyzobot_referee.py | Select-Object -Skip 224 -First 61" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 918ms:
+,index,target_contrast_gene_name,culture_condition,target_contrast,chunk,n_cells_target,n_up_genes,n_down_genes,n_total_de_genes,ontarget_effect_size,ontarget_significant,target_baseMean,offtarget_flag,n_total_genes_category,ontarget_effect_category,n_downstream,crossdonor_correlation_mean,crossdonor_correlation_min,crossguide_correlation
+variable,baseMean,log_fc,lfcSE,stat,p_value,adj_p_value,contrast,zscore
+,guide_mean_expr,guide_std_expr,guide_n,ntc_mean_expr,ntc_std_expr,ntc_n,t_statistic,p_value,adj_p_value,signif_knockdown,perturbed_gene_id,rank,high_confidence_no_effect_guides,culture_condition
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 994ms:
+    # ---------------------------------------------------------------- HOP 2: PROGRAM (T2)
+    t2r = data.t2[data.t2.variable == sym]
+    if len(t2r) == 0:
+        v.hops.append(Hop(2, "PROGRAM", "untested",
+            "gene not measured in the Th1/Th2 polarization contrast", receipt={}))
+    else:
+        facets = {}
+        any_sig = False
+        for _, row in t2r.iterrows():
+            sig = pd.notna(row.adj_p_value) and row.adj_p_value < SIG_ALPHA
+            any_sig = any_sig or sig
+            direction = ("Th2-associated" if row.log_fc < 0 else "Th1-associated") \
+                if sig else "no significant shift"
+            facets[row.contrast] = {
+                "log_fc": _fmt(row.log_fc), "zscore": _fmt(row.zscore),
+                "adj_p_value": _fmt(row.adj_p_value),
+                "significant": bool(sig), "direction": direction,
+            }
+        status = "supported" if any_sig else "refuted"
+        claim = ("gene shifts the Th1/Th2 program in >=1 reference contrast"
+                 if any_sig else
+                 "gene does not significantly shift the Th1/Th2 program in either contrast")
+        v.hops.append(Hop(2, "PROGRAM", status, claim, receipt=facets))
+
+    # ---------------------------------------------------------------- HOP 3: DISEASE (T3)
+    gs = f"downstream_{condition}"
+    sub = data.t3_exploded[(data.t3_exploded.gene == sym) &
+                           (data.t3_exploded.gene_set == gs)]
+    if len(sub) == 0:
+        # also report if the gene appears in ANY condition's set, as a caveat
+        anysub = data.t3_exploded[data.t3_exploded.gene == sym]
+        cav = ([f"appears in other gene_sets: "
+                f"{sorted(anysub.gene_set.unique())}"] if len(anysub) else [])
+        v.hops.append(Hop(3, "DISEASE", "untested" if len(anysub) else "refuted",
+            "gene is not a member of any disease-cluster gene-set for this condition",
+            receipt={"gene_set_checked": gs}, caveats=cav))
+    else:
+        sig = sub[sub.p_adj_fdr < SIG_ALPHA]
+        if len(sig):
+            top = sig.sort_values("p_adj_fdr")
+            rc = {"n_significant_disease_clusters": int(len(sig)),
+                  "diseases": sorted(sig.disease.unique()),
+                  "top_hits": [
+                      {"disease": r.disease, "cluster": int(r.cluster),
+                       "odds_ratio": _fmt(r.odds_ratio), "p_adj_fdr": _fmt(r.p_adj_fdr)}
+                      for _, r in top.head(5).iterrows()]}
+            v.hops.append(Hop(3, "DISEASE", "supported",
+                "gene is a member of >=1 autoimmune-disease-enriched cluster",
+                receipt=rc))
+        else:
+            best = sub.sort_values("p_adj_fdr").iloc[0]
+            v.hops.append(Hop(3, "DISEASE", "refuted",
+                "gene appears in disease cluster gene-sets but NONE reach FDR<0.05 - "
+                "the disease link is not supported by the enrichment",
+                receipt={"n_appearances": int(len(sub)),
+                         "best_p_adj_fdr": _fmt(best.p_adj_fdr),
+                         "best_odds_ratio": _fmt(best.odds_ratio),
+                         "best_disease": best.disease}))
+
+    v.overall = _synthesize_overall(v)
+    return v
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1182ms:
+ankylosing spondylitis
+asthma
+atopic eczema
+autoimmune disease
+celiac disease
+Crohn's disease
+Hashimoto's thyroiditis
+inflammatory bowel disease
+multiple sclerosis
+psoriasis
+rheumatoid arthritis
+systemic lupus erythematosus
+type 1 diabetes mellitus
+ulcerative colitis
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1185ms:
+14
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command 'Get-ChildItem -Recurse -File data | Where-Object { $_.Name -match '"'polarization_prediction|aging_prediction|cytokine|regulator_coefficients' } | Select-Object FullName" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$csv=Import-Csv docs'"\\perturbseq-qc_2026-07-07\\pyzobot_referee_ranked_full.csv; \"rows="'$($csv.Count)"; "genes=$(( $csv | Select-Object -ExpandProperty gene -Unique).Count)"; "conditions=$(( $csv | Select-Object -ExpandProperty condition -Unique | Sort-Object) -join '"',')\"; \"diseases="'$(( $csv | Select-Object -ExpandProperty top_disease -Unique | Sort-Object) -join '"'|')\"" in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$csv=Import-Csv data'"\\Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv; "'$csv | Select-Object -ExpandProperty contrast -Unique | Sort-Object' in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+exec
+"C:\\Program Files\\PowerShell\\7\\pwsh.exe" -Command '$csv=Import-Csv data'"\\cluster_autoimmune_enrichment_results.suppl_table.csv; "'$csv | Select-Object -ExpandProperty gene_set -Unique | Sort-Object' in C:\Users\wijesingheds\Documents\04 Fun with Coding\2026-07-07 PyZoBot-Arbiter
+ succeeded in 990ms:
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1029ms:
+rows=602
+genes=457
+conditions=Rest,Stim48hr,Stim8hr
+diseases=ankylosing spondylitis|asthma|atopic eczema|autoimmune disease|celiac disease|Crohn's disease|Hashimoto's thyroiditis|inflammatory bowel disease|multiple sclerosis|psoriasis|rheumatoid arthritis|systemic lupus erythematosus|type 1 diabetes mellitus|ulcerative colitis
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1035ms:
+downstream_Rest
+downstream_Stim48hr
+downstream_Stim8hr
+regulators
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+ succeeded in 1766ms:
+Th2_vs_Th1 (Hollbacker 2021)
+Th2_vs_Th1 (Ota 2021)
+[31;1mMicrosoft.PowerShell_profile.ps1: [31;1mCannot dot-source this command because it was defined in a different language mode. To invoke this command without importing its contents, omit the '.' operator.[0m
+
+codex
+{"round_number":1,"position_summary":"Claude's high-level preserve-intent thesis is coherent, but the concrete spec does not currently match the repo. The two biggest repo-verified failures are that the planned A-source files do not exist and the already-built referee cannot answer a specific requested disease C or arbitrary B_program unchanged.","findings":[{"id":"F-001","title":"Existing referee cannot adjudicate the requested disease C unchanged","severity":5,"likelihood":5,"blast_radius":5,"priority":"P0","evidence":"In docs/perturbseq-qc_2026-07-07/pyzobot_referee.py, referee(gene, condition, data) accepts only gene and condition. HOP-3 filters only by gene and gene_set == downstream_<condition>, then marks DISEASE supported if the gene is in >=1 significant disease cluster and returns receipt.diseases/top_hits. It never takes C_disease and never checks that the requested disease is present. The claim text is 'gene is a member of >=1 autoimmune-disease-enriched cluster'.","concern_path":"An LBD question can ask GATA3 -> asthma, but referee(A_gene, Stim8hr) may return supported because GATA3 appears in some other significant disease cluster. The caller would then overclaim a condition-specific, disease-specific novel finding that the referee did not actually test.","suggested_action":"Make the plan require a thin wrapper or referee extension that filters HOP-3 receipts by C_disease and returns supported/refuted for that exact disease.","novelty_flag":true,"concern_type":"correctness"},{"id":"F-002","title":"Planned regulator coefficient source tables are absent from data/","severity":5,"likelihood":5,"blast_radius":4,"priority":"P0","evidence":"data/ contains only cluster_autoimmune_enrichment_results.suppl_table.csv, DE_stats.suppl_table.csv, guide_kd_efficiency.suppl_table.csv, fetch_data.sh, README.md, and Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv. A recursive search for polarization_prediction, aging_prediction, cytokine, and regulator_coefficients returned no files. docs/perturbseq-qc_2026-07-07/pyzobot_referee_ranked_full.csv exists with 602 rows, 457 genes, and all three conditions.","concern_path":"Stage 1 cannot build A as specified. A solo 0.5-1 day build will immediately stall or silently redefine A, making the spec's bounded matrix and novelty claims non-reproducible.","suggested_action":"Revise A to use existing deterministic tables: KD gate + DE_stats/T2 membership, or explicitly reuse pyzobot_referee_ranked_full.csv only as an A universe, not as answer labels.","novelty_flag":false,"concern_type":"correctness"},{"id":"F-003","title":"The repo does not support B = 3 programs x 3 conditions as specified","severity":5,"likelihood":5,"blast_radius":5,"priority":"P0","evidence":"pyzobot_join_spec.json has T2_Th2_Th1 only, with semantic 'gene -> PROGRAM shift (Th1<->Th2 log_fc/zscore)'. The T2 CSV header is variable,baseMean,log_fc,...,contrast,zscore, and its only contrast values are 'Th2_vs_Th1 (Hollbacker 2021)' and 'Th2_vs_Th1 (Ota 2021)'. No aging or cytokine production table is present in data/.","concern_path":"The proposer may emit aging or cytokine_production questions, but the existing referee has no corresponding HOP-2 evidence table. Those questions cannot be receipt-backed by the current four-table substrate.","suggested_action":"Constrain v1 B_program to Th1_Th2_polarization, or add explicit new receipt tables and referee logic before claiming 3 programs.","novelty_flag":false,"concern_type":"correctness"},{"id":"F-004","title":"Condition is only partially first-class; HOP-2 program verdict is not condition-specific","severity":4,"likelihood":5,"blast_radius":4,"priority":"P1","evidence":"In pyzobot_referee.py, HOP-0 and HOP-1 filter by culture_condition, and HOP-3 checks gene_set = downstream_<condition>. But HOP-2 uses t2r = data.t2[data.t2.variable == sym] with no condition field, then reports significance across the two literature reference contrasts. The join spec also says T2 grain is gene(SYMBOL) x contrast, not gene x condition.","concern_path":"A final claim can say 'specific to Stim8hr', but the program-shift hop is shared across conditions. The condition-specificity is coming from KD/effect and disease gene_set, not from the program B evidence itself.","suggested_action":"Downgrade the plan's condition-specific wording or define condition-specificity as HOP-0/HOP-1/HOP-3 only; do not claim HOP-2 is condition-specific without new data.","novelty_flag":true,"concern_type":"correctness"},{"id":"F-005","title":"Referee output contract is incompatible with lbd_questions.json as written","severity":4,"likelihood":5,"blast_radius":4,"priority":"P1","evidence":"The planned JSON includes A_gene, B_program, C_disease, and condition_hint. pyzobot_referee.referee_json(gene, condition, data) serializes only referee(gene, condition, data). There is no parameter or branch for B_program or C_disease; HOP-2 is hardwired to Th1/Th2 and HOP-3 is hardwired to any significant autoimmune disease cluster.","concern_path":"The orchestrator has no deterministic way to map a generated triple to a verdict on that triple. It can only map to a generic gene-condition chain, so supported/refuted labels would be post-hoc interpretation rather than a direct receipt-backed answer.","suggested_action":"Add an adapter contract that consumes the full LBD question and evaluates exact B_program and C_disease, even if v1 only supports one B_program.","novelty_flag":true,"concern_type":"correctness"},{"id":"F-006","title":"Disease universe is not ~17 specific autoimmune diseases","severity":3,"likelihood":5,"blast_radius":3,"priority":"P1","evidence":"The real non-negative-control disease values in data/cluster_autoimmune_enrichment_results.suppl_table.csv are 14: ankylosing spondylitis, asthma, atopic eczema, autoimmune disease, celiac disease, Crohn's disease, Hashimoto's thyroiditis, inflammatory bowel disease, multiple sclerosis, psoriasis, rheumatoid arthritis, systemic lupus erythematosus, type 1 diabetes mellitus, ulcerative colitis. The header is cluster,disease,gene_set,odds_ratio,ci_low,ci_high,p_value,p_adj_fdr,cluster_size,...,intersecting_genes,negative_control_disease.","concern_path":"The plan's matrix size, synonym/EFO-map work, and demo disease examples are slightly inflated and include generic umbrella terms like 'autoimmune disease' and 'inflammatory bowel disease' that are not equivalent to specific disease claims.","suggested_action":"Read C from the CSV at build time, report the exact 14 values, and decide whether umbrella rows are eligible C claims or only supporting context.","novelty_flag":false,"concern_type":"correctness"},{"id":"F-007","title":"Disjoint gate plus current supported genes is likely too narrow for the demo promise","severity":4,"likelihood":4,"blast_radius":4,"priority":"P1","evidence":"docs/lbd-proposer-spec.md defaults to ab>=3, bc>=3, ac_lit<=0, and NOT ac_known. The existing top supported examples in pyzobot_referee_ranked_full.csv include canonical immune/asthma genes like ITK, ZBTB25, CHD7, EGR2-context hits, which are unlikely to have zero gene-disease literature/known associations once Open Targets/GWAS/PubTator are queried.","concern_path":"The demo requires one disjoint-in-literature + data-supported + condition-specific survivor. With max_ac=0 and known-association exclusion, the highest-confidence data-supported hits may be filtered out, leaving no money-shot candidate under deadline.","suggested_action":"Require a preflight histogram over ac_lit/ac_known for the 457-gene ranked universe and define fallback thresholds before committing the demo claim.","novelty_flag":true,"concern_type":"novelty"},{"id":"F-008","title":"0.5-1 day estimate ignores API/entity-normalization complexity","severity":3,"likelihood":4,"blast_radius":3,"priority":"P2","evidence":"The spec requires MyGene alias resolution, disease-to-EFO/MeSH mapping, PubTator3/Europe PMC/OpenAlex co-mentions, Open Targets GraphQL, GWAS Catalog REST, caching, thresholds, and provenance sources. The repo currently has no src/arbiter/lbd implementation, and the data source mismatch means the entity map must be redesigned first.","concern_path":"Even if the pandas scoring is trivial, API semantics, rate limits, identifier misses, and hand-built synonym maps can consume the entire build window and crowd out the demo video, which the framing says is heavily weighted.","suggested_action":"Scope v1 to one or two sources and a fixed candidate universe, with cached fixtures and generated-vs-culled counts as the deliverable.","novelty_flag":false,"concern_type":"correctness"},{"id":"F-009","title":"Using pyzobot_referee_ranked_full.csv naively would leak referee answers into the proposer","severity":3,"likelihood":3,"blast_radius":3,"priority":"P2","evidence":"pyzobot_referee_ranked_full.csv contains not just genes and conditions but top_disease, overall_status, program_adj_p, disease_OR, disease_FDR, statuses, and chain_score. It is attractive as a replacement A source because it has 457 genes, but it already encodes the referee's disease-supported outputs.","concern_path":"If Stage 1 uses this file beyond defining the A universe, the LBD component stops being an independent question generator and becomes a reranker of known referee winners. That weakens the novel generate-then-cull thesis.","suggested_action":"If reusing ranked_full, restrict it to A_gene eligibility only and hide disease/status/score columns from the proposer stage.","novelty_flag":true,"concern_type":"novelty"}],"escalated_findings":[],"dropped_findings":[],"new_findings":[],"convergence_status":"round 1 — no prior position to converge with","convergence_sanding_warning":null,"recommended_next_question":"Claude must address whether v1 will change the referee/adaptor to evaluate exact (A_gene, B_program, C_disease, condition) triples, or narrow the spec to the current repo reality: one Th1/Th2 program, 14 CSV diseases, and condition-specific evidence only where the existing tables actually support it."}
+tokens used
+51,658
+{"round_number":1,"position_summary":"Claude's high-level preserve-intent thesis is coherent, but the concrete spec does not currently match the repo. The two biggest repo-verified failures are that the planned A-source files do not exist and the already-built referee cannot answer a specific requested disease C or arbitrary B_program unchanged.","findings":[{"id":"F-001","title":"Existing referee cannot adjudicate the requested disease C unchanged","severity":5,"likelihood":5,"blast_radius":5,"priority":"P0","evidence":"In docs/perturbseq-qc_2026-07-07/pyzobot_referee.py, referee(gene, condition, data) accepts only gene and condition. HOP-3 filters only by gene and gene_set == downstream_<condition>, then marks DISEASE supported if the gene is in >=1 significant disease cluster and returns receipt.diseases/top_hits. It never takes C_disease and never checks that the requested disease is present. The claim text is 'gene is a member of >=1 autoimmune-disease-enriched cluster'.","concern_path":"An LBD question can ask GATA3 -> asthma, but referee(A_gene, Stim8hr) may return supported because GATA3 appears in some other significant disease cluster. The caller would then overclaim a condition-specific, disease-specific novel finding that the referee did not actually test.","suggested_action":"Make the plan require a thin wrapper or referee extension that filters HOP-3 receipts by C_disease and returns supported/refuted for that exact disease.","novelty_flag":true,"concern_type":"correctness"},{"id":"F-002","title":"Planned regulator coefficient source tables are absent from data/","severity":5,"likelihood":5,"blast_radius":4,"priority":"P0","evidence":"data/ contains only cluster_autoimmune_enrichment_results.suppl_table.csv, DE_stats.suppl_table.csv, guide_kd_efficiency.suppl_table.csv, fetch_data.sh, README.md, and Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv. A recursive search for polarization_prediction, aging_prediction, cytokine, and regulator_coefficients returned no files. docs/perturbseq-qc_2026-07-07/pyzobot_referee_ranked_full.csv exists with 602 rows, 457 genes, and all three conditions.","concern_path":"Stage 1 cannot build A as specified. A solo 0.5-1 day build will immediately stall or silently redefine A, making the spec's bounded matrix and novelty claims non-reproducible.","suggested_action":"Revise A to use existing deterministic tables: KD gate + DE_stats/T2 membership, or explicitly reuse pyzobot_referee_ranked_full.csv only as an A universe, not as answer labels.","novelty_flag":false,"concern_type":"correctness"},{"id":"F-003","title":"The repo does not support B = 3 programs x 3 conditions as specified","severity":5,"likelihood":5,"blast_radius":5,"priority":"P0","evidence":"pyzobot_join_spec.json has T2_Th2_Th1 only, with semantic 'gene -> PROGRAM shift (Th1<->Th2 log_fc/zscore)'. The T2 CSV header is variable,baseMean,log_fc,...,contrast,zscore, and its only contrast values are 'Th2_vs_Th1 (Hollbacker 2021)' and 'Th2_vs_Th1 (Ota 2021)'. No aging or cytokine production table is present in data/.","concern_path":"The proposer may emit aging or cytokine_production questions, but the existing referee has no corresponding HOP-2 evidence table. Those questions cannot be receipt-backed by the current four-table substrate.","suggested_action":"Constrain v1 B_program to Th1_Th2_polarization, or add explicit new receipt tables and referee logic before claiming 3 programs.","novelty_flag":false,"concern_type":"correctness"},{"id":"F-004","title":"Condition is only partially first-class; HOP-2 program verdict is not condition-specific","severity":4,"likelihood":5,"blast_radius":4,"priority":"P1","evidence":"In pyzobot_referee.py, HOP-0 and HOP-1 filter by culture_condition, and HOP-3 checks gene_set = downstream_<condition>. But HOP-2 uses t2r = data.t2[data.t2.variable == sym] with no condition field, then reports significance across the two literature reference contrasts. The join spec also says T2 grain is gene(SYMBOL) x contrast, not gene x condition.","concern_path":"A final claim can say 'specific to Stim8hr', but the program-shift hop is shared across conditions. The condition-specificity is coming from KD/effect and disease gene_set, not from the program B evidence itself.","suggested_action":"Downgrade the plan's condition-specific wording or define condition-specificity as HOP-0/HOP-1/HOP-3 only; do not claim HOP-2 is condition-specific without new data.","novelty_flag":true,"concern_type":"correctness"},{"id":"F-005","title":"Referee output contract is incompatible with lbd_questions.json as written","severity":4,"likelihood":5,"blast_radius":4,"priority":"P1","evidence":"The planned JSON includes A_gene, B_program, C_disease, and condition_hint. pyzobot_referee.referee_json(gene, condition, data) serializes only referee(gene, condition, data). There is no parameter or branch for B_program or C_disease; HOP-2 is hardwired to Th1/Th2 and HOP-3 is hardwired to any significant autoimmune disease cluster.","concern_path":"The orchestrator has no deterministic way to map a generated triple to a verdict on that triple. It can only map to a generic gene-condition chain, so supported/refuted labels would be post-hoc interpretation rather than a direct receipt-backed answer.","suggested_action":"Add an adapter contract that consumes the full LBD question and evaluates exact B_program and C_disease, even if v1 only supports one B_program.","novelty_flag":true,"concern_type":"correctness"},{"id":"F-006","title":"Disease universe is not ~17 specific autoimmune diseases","severity":3,"likelihood":5,"blast_radius":3,"priority":"P1","evidence":"The real non-negative-control disease values in data/cluster_autoimmune_enrichment_results.suppl_table.csv are 14: ankylosing spondylitis, asthma, atopic eczema, autoimmune disease, celiac disease, Crohn's disease, Hashimoto's thyroiditis, inflammatory bowel disease, multiple sclerosis, psoriasis, rheumatoid arthritis, systemic lupus erythematosus, type 1 diabetes mellitus, ulcerative colitis. The header is cluster,disease,gene_set,odds_ratio,ci_low,ci_high,p_value,p_adj_fdr,cluster_size,...,intersecting_genes,negative_control_disease.","concern_path":"The plan's matrix size, synonym/EFO-map work, and demo disease examples are slightly inflated and include generic umbrella terms like 'autoimmune disease' and 'inflammatory bowel disease' that are not equivalent to specific disease claims.","suggested_action":"Read C from the CSV at build time, report the exact 14 values, and decide whether umbrella rows are eligible C claims or only supporting context.","novelty_flag":false,"concern_type":"correctness"},{"id":"F-007","title":"Disjoint gate plus current supported genes is likely too narrow for the demo promise","severity":4,"likelihood":4,"blast_radius":4,"priority":"P1","evidence":"docs/lbd-proposer-spec.md defaults to ab>=3, bc>=3, ac_lit<=0, and NOT ac_known. The existing top supported examples in pyzobot_referee_ranked_full.csv include canonical immune/asthma genes like ITK, ZBTB25, CHD7, EGR2-context hits, which are unlikely to have zero gene-disease literature/known associations once Open Targets/GWAS/PubTator are queried.","concern_path":"The demo requires one disjoint-in-literature + data-supported + condition-specific survivor. With max_ac=0 and known-association exclusion, the highest-confidence data-supported hits may be filtered out, leaving no money-shot candidate under deadline.","suggested_action":"Require a preflight histogram over ac_lit/ac_known for the 457-gene ranked universe and define fallback thresholds before committing the demo claim.","novelty_flag":true,"concern_type":"novelty"},{"id":"F-008","title":"0.5-1 day estimate ignores API/entity-normalization complexity","severity":3,"likelihood":4,"blast_radius":3,"priority":"P2","evidence":"The spec requires MyGene alias resolution, disease-to-EFO/MeSH mapping, PubTator3/Europe PMC/OpenAlex co-mentions, Open Targets GraphQL, GWAS Catalog REST, caching, thresholds, and provenance sources. The repo currently has no src/arbiter/lbd implementation, and the data source mismatch means the entity map must be redesigned first.","concern_path":"Even if the pandas scoring is trivial, API semantics, rate limits, identifier misses, and hand-built synonym maps can consume the entire build window and crowd out the demo video, which the framing says is heavily weighted.","suggested_action":"Scope v1 to one or two sources and a fixed candidate universe, with cached fixtures and generated-vs-culled counts as the deliverable.","novelty_flag":false,"concern_type":"correctness"},{"id":"F-009","title":"Using pyzobot_referee_ranked_full.csv naively would leak referee answers into the proposer","severity":3,"likelihood":3,"blast_radius":3,"priority":"P2","evidence":"pyzobot_referee_ranked_full.csv contains not just genes and conditions but top_disease, overall_status, program_adj_p, disease_OR, disease_FDR, statuses, and chain_score. It is attractive as a replacement A source because it has 457 genes, but it already encodes the referee's disease-supported outputs.","concern_path":"If Stage 1 uses this file beyond defining the A universe, the LBD component stops being an independent question generator and becomes a reranker of known referee winners. That weakens the novel generate-then-cull thesis.","suggested_action":"If reusing ranked_full, restrict it to A_gene eligibility only and hide disease/status/score columns from the proposer stage.","novelty_flag":true,"concern_type":"novelty"}],"escalated_findings":[],"dropped_findings":[],"new_findings":[],"convergence_status":"round 1 — no prior position to converge with","convergence_sanding_warning":null,"recommended_next_question":"Claude must address whether v1 will change the referee/adaptor to evaluate exact (A_gene, B_program, C_disease, condition) triples, or narrow the spec to the current repo reality: one Th1/Th2 program, 14 CSV diseases, and condition-specific evidence only where the existing tables actually support it."}

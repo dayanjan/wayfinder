@@ -1,0 +1,136 @@
+{
+  "n_genes": 18,
+  "condition": "Stim8hr",
+  "n_triples": 216,
+  "params": {
+    "min_ab": 3,
+    "min_bc": 3,
+    "max_ac": 0,
+    "tau": 0.1
+  },
+  "ac_lit_zero_frac": 0.046,
+  "ac_known_below_tau_frac": 0.912,
+  "n_disjoint_survivors": 10,
+  "top_survivors": [
+    {
+      "gene": "ABCD2",
+      "disease": "Crohn's disease",
+      "ab": 25,
+      "bc": 8319,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.031,
+      "disjoint": true
+    },
+    {
+      "gene": "AAMDC",
+      "disease": "Crohn's disease",
+      "ab": 9,
+      "bc": 8319,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.037,
+      "disjoint": true
+    },
+    {
+      "gene": "AAK1",
+      "disease": "atopic eczema",
+      "ab": 132,
+      "bc": 2184,
+      "ac_lit": 0,
+      "ac_known": 0.003,
+      "score": -1.313,
+      "disjoint": true
+    },
+    {
+      "gene": "ABCA2",
+      "disease": "atopic eczema",
+      "ab": 27,
+      "bc": 2184,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.343,
+      "disjoint": true
+    },
+    {
+      "gene": "ABCF2",
+      "disease": "atopic eczema",
+      "ab": 18,
+      "bc": 2184,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.346,
+      "disjoint": true
+    },
+    {
+      "gene": "ABCD4",
+      "disease": "atopic eczema",
+      "ab": 8,
+      "bc": 2184,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.35,
+      "disjoint": true
+    },
+    {
+      "gene": "AAK1",
+      "disease": "Hashimoto's thyroiditis",
+      "ab": 132,
+      "bc": 928,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.368,
+      "disjoint": true
+    },
+    {
+      "gene": "ABHD12",
+      "disease": "Hashimoto's thyroiditis",
+      "ab": 31,
+      "bc": 928,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.406,
+      "disjoint": true
+    },
+    {
+      "gene": "ABHD13",
+      "disease": "Hashimoto's thyroiditis",
+      "ab": 10,
+      "bc": 928,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.413,
+      "disjoint": true
+    },
+    {
+      "gene": "AAMDC",
+      "disease": "Hashimoto's thyroiditis",
+      "ab": 9,
+      "bc": 928,
+      "ac_lit": 0,
+      "ac_known": 0.0,
+      "score": -1.414,
+      "disjoint": true
+    }
+  ],
+  "genes": [
+    "AAAS",
+    "AAK1",
+    "AAMDC",
+    "ABCA2",
+    "ABCA5",
+    "ABCB1",
+    "ABCB6",
+    "ABCC1",
+    "ABCC4",
+    "ABCD2",
+    "ABCD3",
+    "ABCD4",
+    "ABCF2",
+    "ABHD12",
+    "ABHD13",
+    "GATA3",
+    "TBX21",
+    "STAT4"
+  ]
+}

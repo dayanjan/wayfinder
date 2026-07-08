@@ -1,0 +1,15 @@
+SAMPLE PREFLIGHT — cond Stim8hr | genes 18 | triples 216
+ac_lit==0 fraction: 0.046
+ac_known<=tau fraction: 0.912
+disjoint survivors: 10
+--- top survivors (novel candidate hypotheses) ---
+  ABCD2    x Crohn's disease              ab=   25 bc=  8319 ac_lit=   0 ac_known=0.000 score=-1.031
+  AAMDC    x Crohn's disease              ab=    9 bc=  8319 ac_lit=   0 ac_known=0.000 score=-1.037
+  AAK1     x atopic eczema                ab=  132 bc=  2184 ac_lit=   0 ac_known=0.003 score=-1.313
+  ABCA2    x atopic eczema                ab=   27 bc=  2184 ac_lit=   0 ac_known=0.000 score=-1.343
+  ABCF2    x atopic eczema                ab=   18 bc=  2184 ac_lit=   0 ac_known=0.000 score=-1.346
+  ABCD4    x atopic eczema                ab=    8 bc=  2184 ac_lit=   0 ac_known=0.000 score=-1.35
+  AAK1     x Hashimoto's thyroiditis      ab=  132 bc=   928 ac_lit=   0 ac_known=0.000 score=-1.368
+  ABHD12   x Hashimoto's thyroiditis      ab=   31 bc=   928 ac_lit=   0 ac_known=0.000 score=-1.406
+  ABHD13   x Hashimoto's thyroiditis      ab=   10 bc=   928 ac_lit=   0 ac_known=0.000 score=-1.413
+  AAMDC    x Hashimoto's thyroiditis      ab=    9 bc=   928 ac_lit=   0 ac_known=0.000 score=-1.414
