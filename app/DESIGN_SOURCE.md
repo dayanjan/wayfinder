@@ -26,6 +26,12 @@ gate), **NAB2 → multiple sclerosis = REFUTED** (clean disease-hop NO; same gen
 3. `node app/smoke_referee.mjs` (with the app serving) → clicks all three chips screen-only and asserts
    the rendered verdict + receipts (SMOKE: ALL PASS). Run twice from a fresh browser context.
 
+## Built
+- **Screen 1 · Referee** — the interactive hero (three showcased triples; Receipt Chain, two branches).
+- **Screen 2 · Hypothesis Engine** — the LBD funnel (3,935 → 22,039 → 43 → 30 + full chain-class
+  breakdown) from `app/fixtures/`, the 30-survivor table, and a DOM-clickable "re-adjudicate a survivor"
+  control that runs it live in the Referee.
+
 ## Not yet built (post-preflight / stretch, per the debate)
-Screen 2 (Hypothesis Engine / funnel + explorer), Screen 3 (Claude Science lane), light-theme toggle,
-and the operator-only live Claude Science trigger. See `docs/plans/streamlit_workbench_plan_2026-07-08.md`.
+Screen 3 (Claude Science lane — render the pre-computed evidence chain), the light-theme toggle, and the
+operator-only live Claude Science trigger. See `docs/plans/streamlit_workbench_plan_2026-07-08.md`.
