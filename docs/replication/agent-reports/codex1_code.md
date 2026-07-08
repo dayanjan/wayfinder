@@ -1,0 +1,40 @@
+# Codex-1 (code correctness audit) — verbatim verdict
+
+32` and `3.4304/0.022385`.
+
+CONFIDENCE: high that the pipeline code is correct for the claimed 30 clean supported and NAB2 receipt; residual risk is mainly wording in `overall`, not classification.
+tokens used
+78,404
+Code is sound for the headline claims; I found only minor labeling/documentation issues, not a bug that changes the 30 clean-supported count or NAB2 receipt.
+
+**Per-File Findings**
+
+`src/arbiter/lbd/entities.py`
+No answer leakage found. `build_a_universe()` reads only T4, T1, and T2 paths at lines 21-23; it does not touch T3 disease enrichment. The optional program filter is T2-only `adj_p_value < 0.05` on `variable` at lines 29-37 and applied by symbol at lines 86-88, so `program_significant` is program-level, not disease-level.
+
+The A universe logic matches the documented code behavior: KD gate is any significant guide per ENSG x condition at lines 58-66; T1 ?effect? inclusion is `ontarget_significant OR n_downstream > 0` at lines 72-82. Independent raw-CSV recomputation gave Stim8hr program-significant A = `3,935` genes. Note: this A universe includes 637 Stim8hr genes with `n_downstream > 0` but `ontarget_significant == False`; that is not answer leakage, but it means A is broader than ?base-referee clean effect.? The downstream referee correctly demotes those when exact disease is supported.
+
+`src/arbiter/lbd/referee_triple.py`
+Full-chain verdict is correct. `answer == "supported"` is only reached after exact-C disease support, non-refuted effect, non-refuted program, nonzero `n_downstream`, and non-flagged effect status at lines 121-132. Gate failure returns `untested` before HOP-3 replacement at lines 103-106.
+
+Exact-C HOP-3 is correct versus the base referee: the adapter filters `gene == sym`, `gene_set == downstream_<condition>`, and `disease == c_disease` at lines 54-57, then requires `p_adj_fdr < 0.05` at lines 72-81. This fixes the base referee?s generic disease hop, which filters only gene and condition-specific gene set at `docs/perturbseq-qc_2026-07-07/pyzobot_referee.py:249-273`.
+
+Minor issue: `overall` can be semantically too strong or slightly wrong after resynthesis. For `supported_weak`, base `_synthesize_overall()` still says ?validated gene -> program -> disease chain? because base EFFECT treats ontarget-significant/no-downstream as supported at `docs/perturbseq-qc_2026-07-07/pyzobot_referee.py:216-223` and synthesizes support at lines 306-309; the adapter separately labels it `supported_weak` at `src/arbiter/lbd/referee_triple.py:127-128`. For exact-C absence, adapter creates a refuted disease hop at lines 58-71, but base overall text says ?gene in cluster gene-sets but enrichment not significant? at `pyzobot_referee.py:310-311`, which is not always the exact reason. This affects wording, not classification.
+
+The importlib/sys.modules hack is acceptable for this use: it inserts the docs referee directory into `sys.path`, loads the exact file, and registers it for dataclass resolution at lines 32-39. Correctness risk is low but real in a larger process because it overwrites `sys.modules["pyzobot_referee"]`; no evidence it changes this pipeline?s results.
+
+`src/arbiter/lbd/cooccur.py`
+No funnel logic bug found. The implemented gate is `ab >= ab_gate AND bc >= min_bc AND ac_known <= tau` at lines 84-86. `ac_lit` is calculated at line 78 and used as a score penalty at lines 85-86, not as a hard gate; `pure_disjoint` is only an annotation at lines 90-91.
+
+Minor documentation mismatch: the module docstring still says `ac_lit <= max_ac` is in the gate at line 12, but the code and comments at lines 80-83 correctly say it is not in the gate.
+
+`src/arbiter/lbd/propose.py`
+The full sweep applies the same gate at lines 69-71, then runs the exact-C referee before novelty scoring at lines 74-86. It keeps clean, weak, and flagged disease-C-supported rows at line 76, then reports clean supported separately at lines 109 and 115-119. No off-by-one found in the median `ab_gate`: line 65 uses the same rounded percentile formula as `cooccur.py:36-40`; independent cache recomputation gave `ab_gate = 26`, `eligible_pairs = 22,039`.
+
+I independently recomputed the full cached/raw-data funnel: class counts matched exactly: `refuted_for_c=21,995`, `supported=30`, `supported_weak=10`, `supported_flagged=3`, `refuted_effect=1`.
+
+**Headline Impact**
+
+No bug changes the headline claims. The 30 clean-supported count reproduces, and NAB2 x atopic eczema reproduces from raw CSVs: 2/2 significant KD guides, T1 effect `-16.881586` with `n_downstream=301`, Ota T2 `z=7.707704`, and exact atopic eczema Stim8hr significant clusters with OR/FDR `3.8985/0.002832` and `3.4304/0.022385`.
+
+CONFIDENCE: high that the pipeline code is correct for the claimed 30 clean supported and NAB2 receipt; residual risk is mainly wording in `overall`, not classification.
