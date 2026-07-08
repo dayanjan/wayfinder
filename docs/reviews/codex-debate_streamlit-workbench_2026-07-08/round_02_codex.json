@@ -1,0 +1,89 @@
+{
+ "round_number": 2,
+ "position_summary": "Claude's revision fixes the main strategic error: the demo spine is now a deterministic, sub-second referee, with Claude Science preserved as an async/provenance lane rather than the synchronous core. The revised NAB2\u2192MS NO is repo-real and much stronger than SLC1A5, but the plan still has a few implementation traps where stale wording or handoff instructions can reintroduce old risks.",
+ "findings": [
+  {
+   "id": "F-009",
+   "title": "Preflight command still contradicts the required src-path import fix",
+   "severity": 3,
+   "likelihood": 4,
+   "blast_radius": 3,
+   "priority": "P1",
+   "evidence": "Verified from repo root: `python -c \"import arbiter\"` fails with `ModuleNotFoundError`. Verified the app-style fix works: inserting `Path.cwd() / 'src'` allows `from arbiter.lbd.referee_triple import ...` and the three live triples run correctly. The revised plan still says the preflight must include `python -c \"import arbiter; ...referee_triple(...)\"`, which will fail unless the command itself inserts `src` or the package is installed.",
+   "concern_path": "The builder implements the correct app startup `sys.path.insert`, then runs the written preflight command and gets a false failure, or worse, weakens the preflight to ignore import setup. This can waste time right before recording.",
+   "suggested_action": "Make the preflight command mirror the app exactly: `python -c \"import sys; from pathlib import Path; sys.path.insert(0, str(Path.cwd()/'src')); from arbiter.lbd.referee_triple import ...\"`, or add minimal packaging and test that instead.",
+   "novelty_flag": true,
+   "concern_type": "correctness"
+  },
+  {
+   "id": "F-010",
+   "title": "The static Claude Science artifact still contains the stale SLC1A5 disease-hop wording",
+   "severity": 3,
+   "likelihood": 4,
+   "blast_radius": 3,
+   "priority": "P1",
+   "evidence": "`docs/claude-science-evidence-chain_2026-07-08/claude_science_verdict.json` has `contrast_cases.SLC1A5.status = \"REFUTED (at disease hop)\"`. Round 1 established SLC1A5 is not the clean NO demo example, and the live referee output now confirms the clean NO is NAB2\u2192multiple sclerosis: GATE/EFFECT/PROGRAM supported, DISEASE refuted, `answer=refuted_for_c`.",
+   "concern_path": "If the CS provenance panel renders contrast cases verbatim, the app can show the old SLC1A5 disease-hop framing right next to the newly corrected NAB2-MS story, making the demo look internally inconsistent.",
+   "suggested_action": "For the CS lane, either omit the SLC1A5 contrast case from the compact app view or label it as a legacy/chain-level contrast, while making NAB2\u2192MS the only showcased clean disease-hop NO.",
+   "novelty_flag": true,
+   "concern_type": "correctness"
+  },
+  {
+   "id": "F-011",
+   "title": "The co-design brief still invites post-preflight scope back into the first build",
+   "severity": 3,
+   "likelihood": 4,
+   "blast_radius": 3,
+   "priority": "P2",
+   "evidence": "The sequencing section correctly says Tier 1 passes smoke before Tier 2/3, with sortable explorer, theme polish, motion, and live CS post-preflight. But the self-contained design brief still asks for three screens, light and dark themes, full sortable table, motion, and a visible fresh-CS button as if all are part of the design deliverable.",
+   "concern_path": "A downstream UI agent or solo builder follows the design brief rather than the sequencing constraints and spends deadline time on navigation, themes, explorer polish, or async-CS affordances before the three referee triples are screen-smoked.",
+   "suggested_action": "Split the brief into `Tier-1 mandatory design` and `post-preflight design notes`; remove light/dark themes, full explorer, and live-CS button from the first implementation handoff.",
+   "novelty_flag": true,
+   "concern_type": "novelty"
+  }
+ ],
+ "escalated_findings": [
+  {
+   "prior_finding_id": "F-001",
+   "rationale": "Partially addressed but not fully. The app-level `sys.path.insert(.../src)` fix is correct and verified, but the revised written preflight still names a raw `python -c \"import arbiter\"` check that fails from repo root."
+  }
+ ],
+ "dropped_findings": [
+  {
+   "prior_finding_id": "F-002",
+   "rationale": "Adequately addressed. Live check confirms NAB2\u2192multiple sclerosis @ Stim8hr returns GATE supported, EFFECT supported, PROGRAM supported, DISEASE refuted, and `answer=refuted_for_c`; it is a genuinely clean disease-hop NO."
+  },
+  {
+   "prior_finding_id": "F-003",
+   "rationale": "Adequately addressed. Claude preserved the async/precomputed CS lane and demoted live CS to disabled/operator-only stretch behind a wrapper, off the demo-critical path."
+  },
+  {
+   "prior_finding_id": "F-004",
+   "rationale": "Adequately addressed at the sequencing level. Tier 1 is now the spine and must pass screen-only preflight before compact funnel/CS support sections or polish."
+  },
+  {
+   "prior_finding_id": "F-005",
+   "rationale": "Adequately addressed. The plan now states downstream UNTESTED cards are presentation-only placeholders with no receipts, derived from HOP-0 halt state."
+  },
+  {
+   "prior_finding_id": "F-006",
+   "rationale": "Adequately addressed. `app/fixtures/` with provenance is the right deliberate fixture path; `data/lbd_out/` can stay ignored."
+  },
+  {
+   "prior_finding_id": "F-007",
+   "rationale": "Adequately addressed in principle. The CS lane is framed as provenance/narrative and preserves its own vocabulary instead of being coerced into referee verdict taxonomy."
+  },
+  {
+   "prior_finding_id": "F-008",
+   "rationale": "Adequately addressed. The live sweep JSON matches the revised breakdown: 21,995 refuted_for_c, 1 refuted_effect, 10 weak, 3 flagged, 30 clean supported."
+  }
+ ],
+ "new_findings": [
+  "F-009",
+  "F-010",
+  "F-011"
+ ],
+ "convergence_status": "still iterating",
+ "convergence_sanding_warning": null,
+ "recommended_next_question": "Round 3 should settle the exact Tier-1-first implementation handoff: the corrected preflight command, whether the compact demo includes any funnel seconds, and how the CS panel avoids surfacing the stale SLC1A5 contrast while preserving the async deep-dive lane."
+}

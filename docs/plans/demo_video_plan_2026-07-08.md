@@ -100,8 +100,10 @@ with / re-derived / refuted / untested / flagged — never "discovered/proven/de
   Adjudicate → the chain **visibly HALTS at HOP-0** (gate fail; downstream hops greyed as "not
   interpretable"). "SATB1's knockdown never took — guide expression barely moved from control. So the
   honest verdict is *untested*, not a negative. Catching the failed experiment is the whole point."
-- **Scene 3 — the confident NO (REFUTED).** Choose SLC1A5 + asthma → **refuted-for-disease**. "And when
-  the chain doesn't hold for the disease, the referee says so, plainly."
+- **Scene 3 — the confident NO (REFUTED), disease-specific.** Choose **NAB2 + multiple sclerosis** →
+  **refuted-for-disease** (GATE/EFFECT/PROGRAM green, DISEASE red — verified clean, unlike SLC1A5 whose
+  effect hop also refutes). "The *same* NAB2 — same real knockdown, same effect — but ask about multiple
+  sclerosis, and the referee says no at the disease hop. It adjudicates the specific disease, not the gene."
 - **Scene 4 — the cull at scale (funnel re-framed as evidence-of-refusal).** "Behind these three: 22,039
   literature-eligible gene–disease questions. 43 held at the disease hop; **30 were clean, full-chain,
   receipt-backed** — the referee refuted the rest." *(Funnel moved AFTER the verdicts; it now proves the
@@ -128,7 +130,8 @@ from "the tool is broken").
 1. **[if Option B/C] Build the Streamlit referee UI** — `app/streamlit_app.py`: load `referee_triple`
    + `load_referee_data()` once (`@st.cache_resource`); inputs = **gene select (A-universe / measured
    genes)** + **disease select (the 12 atlas-backed modules from `load_c()`)** + condition (default
-   Stim8hr); a "try these" preset row (NAB2→eczema, SATB1→asthma, SLC1A5→asthma). **Adjudicate** renders
+   Stim8hr); a "try these" preset row (NAB2→eczema=YES, SATB1→asthma=UNTESTED, NAB2→multiple sclerosis=NO;
+   the YES and NO share the gene to show disease-specificity). **Adjudicate** renders
    against the REAL `referee_triple` contract with **two branches** (F-002): (a) **gate-fail** (`answer
    == "untested"`) → render HOP-0 badge + the downstream hops **greyed/struck as "not interpretable —
    knockdown unverified"** (this IS the hero visual); (b) **gate-pass** → the full 4-hop chain, per-hop
@@ -140,8 +143,9 @@ from "the tool is broken").
 
 1a. **PREFLIGHT GATE (must pass before any recording) (F-007/F-009/F-012):** (i) add `streamlit` to
    `requirements.txt`; (ii) `streamlit run app/streamlit_app.py` launches from a clean env; (iii) the
-   three showcased triples render the correct verdicts live (NAB2=supported 4-hop; SATB1=untested
-   HOP-0-only; SLC1A5=refuted_for_c); (iv) a Playwright **smoke script** drives all three screen-only
+   three showcased triples render the correct verdicts live (NAB2→atopic eczema=supported 4-hop;
+   SATB1→asthma=untested HOP-0-only; NAB2→multiple sclerosis=refuted_for_c with GATE/EFFECT/PROGRAM green);
+   (iv) a Playwright **smoke script** drives all three screen-only
    (no fetch/API/deep-link) and **asserts on the visible result text** for supported / untested /
    refuted_for_c; (v) the smoke script passes **twice consecutively from a fresh browser context**
    (re-runnability — the Halcyon #1-effort-sink lesson; Streamlit reruns must not leave sticky state).

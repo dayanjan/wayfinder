@@ -1,0 +1,54 @@
+{
+ "round_number": 3,
+ "position_summary": "Claude's round-3 position is directionally right: the Streamlit workbench should be anchored by the deterministic <1s referee, with the cached funnel and pre-computed Claude Science lane supporting rather than driving the demo. Repo verification confirms the corrected sys.path preflight runs and the NAB2\u2192multiple sclerosis triple is the clean disease-hop NO, but two stale handoff seams remain in repo docs that could mislead the build if followed literally.",
+ "findings": [
+  {
+   "id": "F-009",
+   "title": "One stale preflight sentence still asks for failing `import arbiter` semantics",
+   "severity": 3,
+   "likelihood": 3,
+   "blast_radius": 3,
+   "priority": "P1",
+   "evidence": "Verified from repo root: plain `python -c \"import arbiter\"` fails with `ModuleNotFoundError`; the corrected one-liner with `sys.path.insert(0, str(Path('src').resolve()))` runs and returns `untested`. `docs/plans/streamlit_workbench_plan_2026-07-08.md:165-171` has the correct command, but `docs/plans/streamlit_workbench_plan_2026-07-08.md:71-73` still says the preflight must include `python -c \"import arbiter; ...referee_triple(...)\"`.",
+   "concern_path": "A builder or future agent reads the data-contract section instead of the later build-plan section and reinstates the failing preflight, wasting the first Tier-1 smoke pass or masking the repo-root import issue.",
+   "suggested_action": "Treat lines 165-171 as canonical; delete or rewrite the stale line 73 wording to say the preflight must insert `src/` before importing `arbiter.lbd...`.",
+   "novelty_flag": false,
+   "concern_type": "correctness"
+  },
+  {
+   "id": "F-012",
+   "title": "Demo-video plan still scripts SLC1A5 as the showcased REFUTED case",
+   "severity": 3,
+   "likelihood": 3,
+   "blast_radius": 4,
+   "priority": "P1",
+   "evidence": "The final Streamlit plan correctly says the three showcased triples are NAB2\u2192atopic eczema, SATB1\u2192asthma, and NAB2\u2192multiple sclerosis, and explicitly says not to surface SLC1A5 as the clean NO (`docs/plans/streamlit_workbench_plan_2026-07-08.md:168-176`). But the linked demo-video plan still says Scene 3 chooses SLC1A5+asthma (`docs/plans/demo_video_plan_2026-07-08.md:103-104`), the preset row includes SLC1A5 (`:131`), and preflight still expects SLC1A5 (`:143-144`).",
+   "concern_path": "The final plan says to wire the Streamlit app into the demo-video pack, so a builder following both docs can implement the corrected app but record the old SLC1A5 NO, losing the disease-hop isolation that motivated the NAB2\u2192MS replacement.",
+   "suggested_action": "Before recording or writing the Playwright script, patch the demo-video plan/pack to replace SLC1A5\u2192asthma with NAB2\u2192multiple sclerosis everywhere in Scene 3, presets, and smoke assertions.",
+   "novelty_flag": false,
+   "concern_type": "correctness"
+  }
+ ],
+ "escalated_findings": [
+  {
+   "prior_finding_id": "F-009",
+   "rationale": "Partially addressed but not fully closed. The canonical build-plan command is now correct and was verified live, but the same Streamlit plan still contains a stale data-contract sentence requiring an `import arbiter` preflight form that fails from repo root."
+  }
+ ],
+ "dropped_findings": [
+  {
+   "prior_finding_id": "F-010",
+   "rationale": "Addressed for the app handoff. The historical CS artifact still contains SLC1A5, but the Streamlit plan explicitly keeps it out of the clean-NO demo and requires NAB2\u2192MS as the sole showcased clean disease-hop NO."
+  },
+  {
+   "prior_finding_id": "F-011",
+   "rationale": "Addressed enough for implementation. The design brief still preserves the full workbench vision, but it now clearly demarcates Tier-1 MVP first and labels explorer, theming, motion, and live-CS work as post-preflight."
+  }
+ ],
+ "new_findings": [
+  "F-012"
+ ],
+ "convergence_status": "still iterating",
+ "convergence_sanding_warning": null,
+ "recommended_next_question": "The single thing to watch during the build: do not start Tier-2/CS or demo-video scripting until the corrected Tier-1 preflight passes with NAB2\u2192MS replacing every stale SLC1A5 clean-NO reference."
+}
