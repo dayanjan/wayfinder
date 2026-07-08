@@ -134,8 +134,48 @@ discriminates; SLC1A5 refuted; IL2 gate-fail untested). Ranked pilot (15 effect-
   of/with n_downstream. Does NOT block the full sweep (which uses ALL genes, not a top-effect
   sample), only reorders survivors.
 
+## FULL SWEEP result (Stim8hr, 2026-07-08) — the honest funnel + the money-shot
+`propose.py` full sweep over all program-significant genes. A **Codex judgment consult** then
+found a real bug (the triple answer was set from the disease hop ALONE, so effect-refuted/flagged/
+empty rows were mislabelled "supported"). **Fixed:** `referee_triple.answer` is now a FULL-CHAIN
+verdict. Corrected honest funnel (matches Codex's independent rerun, stricter on empty-effect):
+
+**a_genes 3,935 → eligible pairs 22,039 → disease-C-supported 43 →**
+- **CLEAN full-chain supported: 30** (gate+effect+program+disease-C all hold, effect>0)
+- supported_weak 10 (effect=0 downstream — empty effect, excluded from clean)
+- supported_flagged 3 (off-target caveat)
+- refuted_effect 1 (SBF2 — effect refuted; correctly excluded)
+- refuted_for_c 21,995 (the cull)
+Artifacts: `data/lbd_out/sweep_Stim8hr.json` + `lbd_questions_Stim8hr.json` (clean set; gitignored).
+
+- **The one pure-disjoint clean** (NUDT1 × T1D) has a **trivial effect (4 DEs)** + borderline
+  program shift — *strict literature-absence correlates with weak/obscure*, why we rank not
+  hard-gate (F-007).
+- **Headline money-shot — NAB2 × atopic eczema @ Stim8hr.** Codex verdict: **keep-with-caveat** —
+  frame as *"near-novel, receipt-backed, Ota-supported,"* NOT pristine-novel or replicated.
+  Clean full-chain, receipts verified by Codex against the CSVs:
+  - GATE supported (2/2 guides, best adj-p 1e-16; guide expr 0.056 vs NTC 0.567)
+  - EFFECT supported, **on-target, NO off-target flag**, effect −16.9, **301 downstream DEs**
+  - PROGRAM supported, Th1-associated (Ota 2021 zscore 7.71, adj-p 1.96e-13; **Hollbacker n.s.
+    — only 1 of 2 contrasts significant, state this**)
+  - DISEASE supported for the **specific** disease: atopic-eczema clusters OR 3.90 FDR 0.0028
+    **and** OR 3.43 FDR 0.0224 (2 clusters)
+  - ac_lit=6 is a **low/noisy count, NOT "established/curated literature"** (not gene-normalized);
+    say "near-novel," never "known." EGR2-NAB2 corepressor is a **hypothesis-strengthener, NOT
+    part of the referee evidence** — subordinate it to the receipt (Codex caution).
+- **Honesty examples for the demo:** NUDT1 pure-disjoint-but-weak; DNAJB9 supported-but-off-target-
+  flagged; SBF2 refuted-effect; and the 21,995 refuted-for-C = the cull. Show the full class breakdown.
+- **Codex on conditions:** Stim8hr is **sufficient** for the demo; run Rest/Stim48hr only as a
+  bonus/appendix if time remains — do NOT spend demo-critical time chasing them first.
+
+The story: *the LBD engine generated 22,039 candidate questions from a dataset that came with none;
+the data-referee culled to 30 clean receipt-backed supported; the standout is a near-novel,
+mechanistically-plausible gene→program→specific-disease link (NAB2→Th1/Th2→atopic eczema).*
+
 ## Next move
-Run the full pipeline **smartly, not alphabetically**: (1) over the whole program-significant
+Lock the NAB2 story with the honest framing above; write the demo-facing finding artifact
+(`docs/lbd_finding_*.md`) + emit is done (`lbd_questions_Stim8hr.json`). Optional bonus: Rest/
+Stim48hr sweeps. Then the demo video + README-as-paper (M5). (1) over the whole program-significant
 A universe (4,373) compute the bridges + novelty score and RANK; (2) **cull the top candidates
 through `referee_triple`** — a survivor is the money-shot only when the referee supports the
 gene→program→*specific-disease* chain (F-001/F-012); (3) sanity-check the pipeline against

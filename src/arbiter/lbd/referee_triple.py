@@ -111,7 +111,25 @@ def referee_triple(a_gene: str, c_disease: str, condition: str, data,
     v.hops.sort(key=lambda h: h.hop)
     overall = _REF._synthesize_overall(v)
 
-    answer = "supported" if classification == "supported" else \
-             ("untested" if classification == "untested_for_c" else "refuted_for_c")
-    return {**base, "answer": answer, "overall": overall,
+    # `answer` is a FULL-CHAIN verdict, not the disease hop alone (Codex consult 2026-07-08):
+    # a triple is only "supported" if gate+effect+program+disease-C all hold. A disease-C hop
+    # can be supported while EFFECT is refuted/flagged upstream -- those are NOT clean money-shots.
+    st = {h.name: h.status for h in v.hops}
+    eff, prog = st.get("EFFECT"), st.get("PROGRAM")
+    n_down = next((h.receipt.get("n_downstream_DE_genes") for h in v.hops
+                   if h.name == "EFFECT"), None)
+    if classification != "supported":
+        answer = "untested_for_c" if classification == "untested_for_c" else "refuted_for_c"
+    elif eff == "refuted":
+        answer = "refuted_effect"
+    elif prog == "refuted":
+        answer = "refuted_program"
+    elif not n_down:                       # effect=0 downstream -> empty effect, not a clean chain
+        answer = "supported_weak"
+    elif eff == "flagged":
+        answer = "supported_flagged"       # chain holds but off-target caveat
+    else:
+        answer = "supported"               # clean full chain -- the money-shot class
+    return {**base, "answer": answer, "overall": overall, "effect_status": eff,
+            "program_status": prog, "n_downstream": n_down,
             "hops": [h.__dict__ for h in v.hops]}

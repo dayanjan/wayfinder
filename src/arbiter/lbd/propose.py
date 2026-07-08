@@ -71,14 +71,20 @@ def sweep(condition: str = "Stim8hr", min_bc: int = 3, tau: float = 0.1,
                 and S.opentargets_known(g, known[d["disease"]]) <= tau]
     log(f"[sweep] eligible pairs (pre-referee): {len(eligible)}")
 
-    # 4. referee cull FIRST (local) -> supported only
+    # 4. referee cull FIRST (local) -> keep any row whose exact-C chain is supported
+    #    (clean / flagged / weak), labelled by full-chain class; refuted-* are culled.
+    KEEP = {"supported", "supported_flagged", "supported_weak"}
     data = load_referee_data()
+    from collections import Counter
+    classes = Counter()
     supported = []
     for g, d in eligible:
         r = referee_triple(g, d["disease"], condition, data)
-        if r["answer"] == "supported":
+        classes[r["answer"]] += 1
+        if r["answer"] in KEEP:
             supported.append((g, d, r))
-    log(f"[sweep] referee-supported survivors: {len(supported)}")
+    log(f"[sweep] chain classes: {dict(classes)}")
+    log(f"[sweep] disease-C-supported survivors (clean+flagged+weak): {len(supported)}")
 
     # 5. A-C literature ONLY for supported survivors
     zab_m, zab_sd = _z(list(ab.values()))
@@ -96,19 +102,23 @@ def sweep(condition: str = "Stim8hr", min_bc: int = 3, tau: float = 0.1,
                      "condition": condition, "ab": ab[g], "bc": bc[dn], "ac_lit": ac_lit,
                      "ac_known": round(ac_known, 4), "effect": int(effect.get(g, 0)),
                      "pure_disjoint": ac_lit == 0, "score": round(score, 3),
-                     "referee_overall": r["overall"]})
+                     "referee_answer": r["answer"], "referee_overall": r["overall"]})
     rows.sort(key=lambda x: x["score"], reverse=True)
-    log(f"[sweep] scored {len(rows)} supported survivors")
+    log(f"[sweep] scored {len(rows)} disease-C-supported survivors")
 
+    clean = [r for r in rows if r["referee_answer"] == "supported"]
     return {
         "condition": condition,
         "params": {"min_bc": min_bc, "tau": tau, "ab_gate_pct": ab_gate_pct,
                    "ab_gate_value": ab_gate, "beta": beta, "w": w, "w2": w2,
                    "program_significant": program_significant},
         "funnel": {"a_genes": len(genes), "eligible_pairs": len(eligible),
-                   "referee_supported": len(supported),
-                   "pure_disjoint_supported": sum(1 for r in rows if r["pure_disjoint"])},
+                   "chain_classes": dict(classes),
+                   "clean_supported": len(clean),
+                   "disease_c_supported_total": len(rows),
+                   "pure_disjoint_clean": sum(1 for r in clean if r["pure_disjoint"])},
         "ranked_supported": rows,
+        "ranked_clean_supported": clean,
     }
 
 
@@ -121,15 +131,17 @@ def main():
     res = sweep(condition=args.condition, ab_gate_pct=args.ab_gate_pct)
     out = OUT_DIR / f"sweep_{args.condition}.json"
     out.write_text(json.dumps(res, indent=2), encoding="utf-8")
-    # the ranked questions the referee SUPPORTED (the demo-facing artifact)
+    # the CLEAN full-chain supported questions are the demo-facing artifact
     q = OUT_DIR / f"lbd_questions_{args.condition}.json"
-    q.write_text(json.dumps(res["ranked_supported"], indent=2), encoding="utf-8")
+    q.write_text(json.dumps(res["ranked_clean_supported"], indent=2), encoding="utf-8")
     f = res["funnel"]
     print(f"FUNNEL {args.condition}: a_genes {f['a_genes']} -> eligible {f['eligible_pairs']}"
-          f" -> referee-supported {f['referee_supported']}"
-          f" (pure-disjoint {f['pure_disjoint_supported']})")
-    print("TOP 10 supported (ranked by novelty):")
-    for r in res["ranked_supported"][:10]:
+          f" -> disease-C-supported {f['disease_c_supported_total']}"
+          f" -> CLEAN full-chain {f['clean_supported']}"
+          f" (pure-disjoint clean {f['pure_disjoint_clean']})")
+    print(f"chain classes: {f['chain_classes']}")
+    print("TOP 10 CLEAN supported (ranked by novelty):")
+    for r in res["ranked_clean_supported"][:10]:
         print(f"  {r['a_gene']:8} x {r['c_disease']:26} s={r['score']:6} "
               f"ab={r['ab']:5} ac_lit={r['ac_lit']:4} ac_known={r['ac_known']:.3f} eff={r['effect']:5}")
     print(f"wrote {out.name} + {q.name}")
