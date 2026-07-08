@@ -40,3 +40,6 @@ data/lbd_out/
 
 # source paper PDF (bioRxiv preprint — referenced/cited, not redistributed)
 references/*.pdf
+
+# demo-video working dir (rendered mp4 + music mp3 — large, out-of-band; recipe is in docs/demo-video-pack/)
+.tmp/

@@ -5,8 +5,8 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 
 ## Snapshot
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
-- **Active workstream:** next = **M5 submission artifacts** — (1) executable evidence-chain Jupyter notebook, (2) Claude Science evidence chain, (3) 3-min demo video
-- **Last updated:** 2026-07-08 (full-close)
+- **Active workstream:** **M5 COMPLETE** (notebook + Claude Science evidence chain + interactive Streamlit workbench app + final demo video). Next = deeper **Claude Science dive** driven by today's product-demo transcript (see `memory/NEXT_SESSION.md`). The demo/app are the **fallback MVP**.
+- **Last updated:** 2026-07-08 18:02 (full-close)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline — light identifier scrub first)
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -19,7 +19,7 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 | M2 | Receipt-backed YES / UNTESTED / REFUTED demonstrated (the moat) | 🟢 done (EGR2/GATA3 YES · IL2 UNTESTED · SLC1A5/CTLA4 REFUTED) |
 | M3 | **LBD question-proposer** (generate untested questions → referee answers) | 🟢 done — v2 spec (debate-hardened) + fresh tool layer + full Stim8hr sweep; funnel 22,039→30 clean supported |
 | M4 | Anchor lock + finding validation | 🟢 done — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS: `docs/replication/`), STAT6+EGR+cis confounders stress-tested, source-paper-vetted → reframed as novel reproducible NOMINATION (disease link flagged) |
-| M5 | Submission artifacts — evidence-chain notebook + Claude Science chain + 3-min video | ⚪ not started — finding + full validation + provenance documented; notebook is next (imports vetted modules, runs decisive checks live) |
+| M5 | Submission artifacts — evidence-chain notebook + Claude Science chain + demo video (+ interactive app) | 🟢 done — notebook (`notebooks/`); CS evidence chain (`docs/claude-science-evidence-chain_2026-07-08/`); 3-screen Streamlit **workbench** (`app/`) implementing a Claude co-design (via DesignSync); **final demo video** ~112s (ElevenLabs Brian + CC-BY music, gate PASS 94%; recipe `docs/demo-video-pack/`). Debate-hardened (2 × 3-round). Fallback MVP. |
 
 Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ not started
 
@@ -27,6 +27,22 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-08 18:02 — Session close (full-close): M5 SHIPPED IN FULL (notebook + CS chain + app + demo video)
+Built all three M5 artifacts. (1) Executable **evidence-chain notebook** (`notebooks/`) — imports the
+vetted `arbiter.lbd` modules, recomputes every headline number live, outputs baked. (2) **Claude Science
+evidence chain** (`docs/claude-science-evidence-chain_2026-07-08/`) — drove CS headless on only the 4
+tables + the question; it reached the identical receipt-backed verdict, weakened the STAT6 cis-artifact
+by all 3 in-data checks, and emitted a 6-panel figure. (3) A 3-screen Streamlit **"Researcher's
+Workbench"** (`app/streamlit_app.py`: Referee / Hypothesis Engine / Claude Science) implementing a
+**Claude co-design** imported via the **DesignSync** integration; all screens preflight-green
+(screen-only Playwright smokes). Then the **final demo video** (~112s): falsification-first arc,
+ElevenLabs "Brian" narration, "Deliberate Thought" (Kevin MacLeod, CC-BY) music bed; transcription gate
+**PASS 94%** with music. Recipe checked in at `docs/demo-video-pack/`; MP4/MP3 out-of-band (`.tmp/`, now
+gitignored). Two **3-round repo-read codex-debates** (demo-video + workbench plans; both converged,
+preserve-intent passed). **Track reframed** to "Researcher who also builds" across CLAUDE/AGENTS/README/
+plan. The demo + app are the **fallback MVP**. Next = a deeper Claude Science dive driven by today's
+product-demo transcript.
+
 ### 2026-07-08 HH:MM — Session close (full-close): definitive STAT6 check + provenance; notebook next
 Preserved the full raw provenance trail (`docs/provenance/`, 52 artifacts, abstracts stripped,
 secret-scanned). Ran the **definitive STAT6 cis-artifact check** against the authors' deposited
