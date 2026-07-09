@@ -1,0 +1,6 @@
+input_symbol,canonical_symbol,database_used,stable_id_or_accession,species,lookup_status
+NAB2,NAB2,mygene.info (genes-ontologies MCP: query_genes),ENSG00000166886,Homo sapiens (taxid 9606),success
+STAT6,STAT6,mygene.info (genes-ontologies MCP: query_genes),ENSG00000166888,Homo sapiens (taxid 9606),success
+IL2,IL2,mygene.info (genes-ontologies MCP: query_genes),ENSG00000109471,Homo sapiens (taxid 9606),success
+EGR2,EGR2,mygene.info (genes-ontologies MCP: query_genes),ENSG00000122877,Homo sapiens (taxid 9606),success
+SATB1,SATB1,mygene.info (genes-ontologies MCP: query_genes),ENSG00000182568,Homo sapiens (taxid 9606),success

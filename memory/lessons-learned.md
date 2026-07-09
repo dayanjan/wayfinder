@@ -134,3 +134,53 @@ gate `RESULT:`), don't trust the early notification.
 
 **Assets:** `docs/demo-video-pack/` (the reproducible recipe), `app/DESIGN_SOURCE.md`,
 `docs/plans/streamlit_workbench_plan_2026-07-08.md` + the two codex-debate records.
+
+---
+
+## 2026-07-08 — Claude Science capability audit: mine the demo, then VERIFY-FROM-DB (not UI)
+*Category: research method / Claude Science knowledge (reusable for any CS-capability question)*
+
+**What we did (overnight, autonomous).** (1) A 5-agent parallel pass over the 2026-07-08 CS product-demo
+transcript → a `[DEMO]` capability catalog with a testable inventory (`docs/claude-science-demo-findings_2026-07-08.md`).
+(2) A 2-round repo-read codex-debate turned that inventory into an executable test plan
+(`docs/claude-science-test-plan_2026-07-08.md`). (3) Drove our own CS install headlessly and verified
+each capability empirically (`docs/cs-capability-tests_2026-07-08/RESULTS.md`).
+
+**THE load-bearing discovery — `operon-cli.db` is CS's readable receipt store.**
+`~/.claude-science/orgs/<org>/operon-cli.db` (SQLite) opens read-only even while the daemon runs
+(`file:<db>?mode=ro&immutable=1`; no `sqlite3` CLI in the image → use WSL `python3`). It records
+EVERYTHING: `host_call_log` (every `host.*` call), `execution_log` (source/kernel_id/language/files),
+`artifact_versions` (+ `extracted_code` repro block, `artifact_dependencies` graph), **`verification_checks`
+(the Reviewer's findings, with `reviewer_model`)**, and `frames` (per-frame model/effort/tokens/cost).
+**Method: drive CS with Playwright only to make it DO the work; verify from the DB + workspace files —
+never scrape the UI** (doctrine §19; the scraped text tail is unreliable and the Reviewer/provenance are
+UI-only). This makes reviewer + provenance capabilities verifiable with zero UI scraping.
+
+**Empirically confirmed on our install (all DB- + artifact-verified):**
+- **Actor-critic is real & on-thesis:** primary **OPERON = claude-opus-4-8 (effort high)**; **Reviewer =
+  claude-sonnet-5**, forked as **3 checkpoint frames**; it **reads saved artifacts** and **caught a
+  planted 4-vs-5 persona count inconsistency as a FAIL** (+ a WARN on a method substitution). This IS our
+  referee/falsification thesis, validated by an independent product.
+- **Real `host` SDK:** `host.llm_batch(...)` (inline cheap-model sampling — model **claude-haiku-4-5**),
+  `host.mcp("<connector>","<tool>",{args})` (batched MCP/DB lookup — 5 genes in ONE call, MyGene-backed,
+  returned **correct real Ensembl IDs**), `host.delegate(...)`, `host.artifacts/artifact_path`.
+- **`host.delegate` is GATED** behind a session **Delegation ("ultra mode") toggle**, OFF by default in a
+  driver-created project → agent falls back to `host.llm_batch`. To test true sub-agent delegation we must
+  enable delegation (not exposed by the current headless driver).
+- **Persistent kernel reuse, Python↔R interop** (separate processes, **CSV handoff**, real ggplot2),
+  **figure self-sight self-correction** (z>3 outlier caught + v2) — all PASS.
+- **Cost datapoint:** an ~8-min combined audit ≈ **$3.17** (Opus $2.08 + 3 Sonnet reviewers ~$1.05);
+  OPERON input = 1.55M tokens (cache/folding). **The reviewer roughly doubles model spend.**
+- **Async gotchas (matter for any CS automation):** the driver's "DONE" (Stop button gone) ≠ receipts
+  landed — the **Reviewer commits findings ~10 min later**, and the **`extracted_code` repro block is
+  deferred to frame/session completion** (didn't backfill for a headlessly-driven run; the OPERON frame
+  stays `processing`). Poll `verification_checks`/`frames.status` after the run; immutable versioning +
+  dependency graph ARE immediate.
+
+**Driver hardening applied + live-validated** (`~/.claude/skills/drive-claude-science/cs-drive.js`):
+broadened `APPROVE`/`PENDING` for the MCP-use / usage-velocity / snooze / network-domain cards revealed by
+the demo; **deliberately never auto-clicks "Allow globally."** Auto-approved cleanly with no misfire.
+
+**Reusable assets:** `docs/claude-science-{demo-findings,test-plan}_2026-07-08.md`,
+`docs/cs-capability-tests_2026-07-08/` (RESULTS + extracted artifacts), and the DB verifier
+`.claude/scratch/cs-capability-mining/verify_cs_capabilities.py` (promote to a real tool if we keep using it).

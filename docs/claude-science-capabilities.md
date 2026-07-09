@@ -3,7 +3,16 @@
 **Compiled 2026-07-07** from five independent sources, cross-checked. Source tags per item:
 `[UI]` live product Customize panel (this install, ground truth) · `[INSTALL]` filesystem/CLI probe
 of the running install · `[DOCS]` official Anthropic/Claude docs (26 pages) · `[KEYNOTE]` the launch
-keynote transcript · `[3P]` 52 third-party sources · `[OURS]` first-hand from driving it today.
+keynote transcript · `[3P]` 52 third-party sources · `[OURS]` first-hand from driving it today ·
+`[DEMO]` the 2026-07-08 live product demo (Alec Tarashansky), mined 2026-07-08.
+
+> **UPDATE 2026-07-08 — a 6th source is now mined.** The Wednesday live demo (§15, formerly "not yet
+> occurred") has been transcribed and analyzed. Its net-new primitives (the **`host` kernel SDK**,
+> **folding compaction**, **MCP-as-skill-invoked-programmatically**, sharper reviewer + specialists +
+> memory mechanics) and its corrections (**native Windows imminent**; **conda-first**;
+> **headless-unsupported confirmed**; the right panel is **not Jupyter**) live in the companion doc
+> **`claude-science-demo-findings_2026-07-08.md`**, which also carries a **testable-capability
+> inventory**. Read that alongside this list.
 
 > **Version probed:** `claude-science 0.1.16-dev.20260707` (public beta, launched 2026-06-30).
 > **What Claude Science IS:** a local desktop AI workbench for scientists — Claude writes & runs
@@ -102,7 +111,10 @@ SSO (SAML/OIDC), SCIM, domain capture, custom roles; org enablement (Owner-only)
 - Confirmed the sandbox runs on a **managed/endpoint-secured corporate laptop**; the **reviewer is a genuinely separate model** (Sonnet 5); ran a real T-cell Perturb-seq referee pipeline end-to-end.
 
 ## 15. Sources not yet mined (for completeness)
-- **Wednesday 2026-07-08 live session** (Alexander Terashansky's Claude Science overview) + hackathon **Discord** office hours — direct from the team; not yet occurred/captured.
+- ~~**Wednesday 2026-07-08 live session**~~ **✓ MINED 2026-07-08** (Alec Tarashansky's Claude Science
+  overview) → `claude-science-demo-findings_2026-07-08.md`. Still pending: hackathon **Discord** office
+  hours (compliance/data-access guidance was deferred there); the **Friday session** with Sukrit Silas
+  (Gladstone Institute).
 - The **launch keynote video** itself (we have the transcript, not the on-screen UI frames).
 
 ---

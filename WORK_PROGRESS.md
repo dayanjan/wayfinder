@@ -6,7 +6,7 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 ## Snapshot
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
 - **Active workstream:** **M5 COMPLETE** (notebook + Claude Science evidence chain + interactive Streamlit workbench app + final demo video). Next = deeper **Claude Science dive** driven by today's product-demo transcript (see `memory/NEXT_SESSION.md`). The demo/app are the **fallback MVP**.
-- **Last updated:** 2026-07-08 18:02 (full-close)
+- **Last updated:** 2026-07-08 (overnight autonomous — Claude Science capability deep-dive)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline — light identifier scrub first)
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -27,6 +27,21 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-08 (overnight, autonomous) — Claude Science capability deep-dive (mine → brainstorm → verify)
+Executed the prior handoff's "deeper dive into Claude Science" as a 4-phase autonomous run:
+**(1)** 5-agent parallel pass over the 2026-07-08 CS product-demo transcript → `[DEMO]` capability catalog +
+testable inventory (`docs/claude-science-demo-findings_2026-07-08.md`; main capabilities doc updated).
+**(2)** 2-round **repo-read codex-debate** turned the inventory into an executable test plan and surfaced
+the load-bearing discovery: **`operon-cli.db` is CS's readable audit/receipt store**
+(`docs/claude-science-test-plan_2026-07-08.md`). **(3)** Drove our own CS install headlessly (hardened
+`cs-drive.js`) and **verified capabilities from the DB + artifacts** (drive-then-verify, doctrine §19),
+`docs/cs-capability-tests_2026-07-08/RESULTS.md`. **Confirmed live:** actor-critic (OPERON **Opus 4.8** +
+Reviewer **Sonnet 5** ×3 checkpoints) with the **Reviewer catching a planted count inconsistency (FAIL)** —
+our falsification thesis, in an independent product; `host.mcp` **batched DB lookup → real Ensembl IDs**;
+`host.llm_batch` inline sampling (**Haiku 4.5**); persistent kernel + Python↔R + self-sight all PASS;
+`host.delegate` **gated** behind a Delegation toggle. **(4)** Memory + handoff updated; new docs uncommitted.
+**Next:** exploit CS for the finding/product — top pick a **referee-inside-CS tracer**. See `memory/NEXT_SESSION.md`.
+
 ### 2026-07-08 18:02 — Session close (full-close): M5 SHIPPED IN FULL (notebook + CS chain + app + demo video)
 Built all three M5 artifacts. (1) Executable **evidence-chain notebook** (`notebooks/`) — imports the
 vetted `arbiter.lbd` modules, recomputes every headline number live, outputs baked. (2) **Claude Science

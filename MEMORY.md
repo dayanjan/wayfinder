@@ -16,8 +16,15 @@ implementing a **Claude co-design** imported via **DesignSync**) + the **final d
 ElevenLabs "Brian" + CC-BY music bed, transcription gate PASS 94%; recipe in `docs/demo-video-pack/`,
 MP4 out-of-band). Two 3-round repo-read codex-debates hardened the demo + workbench plans. Track reframed
 to **"Researcher who also builds"**. The demo/app are the **fallback MVP**.
-**Next:** deeper dive into **Claude Science**, driven by today's product-demo transcript (path in
-`memory/NEXT_SESSION.md`). Read the transcript first.
+**2026-07-08 (overnight, autonomous) — CLAUDE SCIENCE CAPABILITY DEEP-DIVE done.** Mined the CS product-demo
+transcript (5-agent parallel pass), brainstormed tests with Codex (2-round repo-read debate), and
+**empirically verified CS live against our own install** — all receipt-backed from CS's own audit DB
+(**`operon-cli.db`**). Key: CS's **Reviewer (Sonnet 5) caught a planted inconsistency (fail)** — our
+falsification thesis, live; **`host.mcp` batched DB lookups return real Ensembl IDs**; `host.delegate` is
+gated behind a Delegation toggle. Docs: `docs/cs-capability-tests_2026-07-08/RESULTS.md`,
+`docs/claude-science-{test-plan,demo-findings}_2026-07-08.md`. Driver hardened.
+**Next:** EXPLOIT CS for the finding/product — top option: a **referee-inside-CS tracer** (`host.mcp` receipts
++ delegation + CS's own reviewer auditing it). See `memory/NEXT_SESSION.md`.
 
 ## Hard constraints (never lose)
 - **NEW WORK ONLY** — every file authored during the event (started 2026-07-07); git history is the compliance proof.
@@ -41,5 +48,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-08 | Validation + source-paper vetting | 4-agent literature audit (new `src/arbiter/lit/`) → both links 0-papers novel; STAT6/EGR/cis confounders stress-tested & argued-against; **5-agent independent replication unanimous PASS** (`docs/replication/`); source-paper read → **reframed as novel reproducible NOMINATION, disease link flagged**; paper in `references/` + analysis repo recorded; ~8 commits |
 | 2026-07-08 | Definitive STAT6 check + provenance (full-close) | Preserved full raw provenance trail (`docs/provenance/`, 52 artifacts); **definitive STAT6 cis-check** via lazy S3 read of authors' genome-wide DE → **NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED**, verdict upgraded to genuine novel NAB2-specific regulator; decided M5 = evidence-chain notebook + Claude Science chain + demo video |
 | 2026-07-08 (M5, full-close) | **M5 shipped in full** | Evidence-chain **notebook**; **Claude Science evidence chain** (independent same verdict + figure); 3-screen Streamlit **"Researcher's Workbench"** app implementing a **Claude co-design** (imported via **DesignSync**), all screens preflight-green; **final demo video** (~112s, ElevenLabs "Brian" + CC-BY music, gate PASS 94%; recipe `docs/demo-video-pack/`). Two 3-round repo-read codex-debates (demo + workbench plans). Track → **"Researcher who also builds"**. Demo/app = fallback MVP |
+| 2026-07-08 (overnight, autonomous) | **Claude Science capability deep-dive** | 5-agent transcript mining → `[DEMO]` catalog + testable inventory; 2-round repo-read codex-debate → executable test plan; **live-verified CS on our install** via drive-then-verify-from-**`operon-cli.db`** (doctrine §19). Confirmed: Reviewer=**Sonnet 5** caught a planted inconsistency (**fail**); OPERON=**Opus 4.8**; inline=**Haiku 4.5**; `host.mcp` batched lookup → **real Ensembl IDs**; `host.delegate` **gated** behind Delegation toggle. Hardened `cs-drive.js`. Docs in `docs/cs-capability-tests_2026-07-08/` + `docs/claude-science-{test-plan,demo-findings}_2026-07-08.md` |
 
-_Last updated: 2026-07-08 18:02 (full-close)_
+_Last updated: 2026-07-08 (overnight autonomous CS capability deep-dive)_
