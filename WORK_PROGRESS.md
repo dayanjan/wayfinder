@@ -6,7 +6,7 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 ## Snapshot
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
 - **Active workstream:** **M5 COMPLETE** (notebook + Claude Science evidence chain + interactive Streamlit workbench app + final demo video). Next = deeper **Claude Science dive** driven by today's product-demo transcript (see `memory/NEXT_SESSION.md`). The demo/app are the **fallback MVP**.
-- **Last updated:** 2026-07-08 (overnight autonomous — Claude Science capability deep-dive)
+- **Last updated:** 2026-07-09 (pipeline↔CS mapping + native tracer + solidified full-pipeline-in-CS plan)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline — light identifier scrub first)
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -27,6 +27,19 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-09 06:15 — Session close (full-close): pipeline↔CS mapping + native tracer + solidified plan
+Continued the CS deep-dive into an exploitation plan. **(1)** 3-agent exhaustive reconstruction of the full
+LBD→NAB2 pipeline (30 steps) + per-step Claude Science feasibility → `docs/pipeline-inventory-and-cs-mapping_2026-07-09.md`
+(**~25/30 CS-native**; the one gap = cross-model/Codex independence). **(2)** LBD methods explainer / manuscript
+seed → `docs/lbd-methods-explainer.md`. **(3)** **CS TRACER** — drove CS to write its own 4-hop referee over
+the raw tables and **reproduce the NAB2 finding digit-for-digit natively** (gate 2/2 1e-16; effect −16.88/301;
+Ota z 7.708; eczema clusters 90&100 OR 3.899/3.43) + IL2 untested hero + SLC1A5 refuted; CS self-audited
+unprompted → `docs/cs-capability-tests_2026-07-08/tracer-artifacts/`. **(4)** **full-pipeline-in-CS plan → SHIP**
+via a 3-round repo-read codex-debate (11→8→0) → `docs/plans/full-pipeline-in-cs-plan_2026-07-09.md` (v3) +
+`docs/reviews/codex-debate_full-pipeline-cs_2026-07-09/`. Architecture decided: **CS = instrument (generation →
+referee → provenance); Codex = external cross-model auditor.** Prior commit c243840 landed explainer+inventory+tracer.
+**Next:** implement the plan's §9 checklist in CS (Stage 0→1→3→5).
+
 ### 2026-07-08 (overnight, autonomous) — Claude Science capability deep-dive (mine → brainstorm → verify)
 Executed the prior handoff's "deeper dive into Claude Science" as a 4-phase autonomous run:
 **(1)** 5-agent parallel pass over the 2026-07-08 CS product-demo transcript → `[DEMO]` capability catalog +

@@ -184,3 +184,16 @@ the demo; **deliberately never auto-clicks "Allow globally."** Auto-approved cle
 **Reusable assets:** `docs/claude-science-{demo-findings,test-plan}_2026-07-08.md`,
 `docs/cs-capability-tests_2026-07-08/` (RESULTS + extracted artifacts), and the DB verifier
 `.claude/scratch/cs-capability-mining/verify_cs_capabilities.py` (promote to a real tool if we keep using it).
+
+## 2026-07-09 — Tracer-first + repo-read-debate is a strong plan-hardening workflow
+*Category: workflow (reusable for any "port an external result into a new tool" effort)*
+
+De-risk a big rebuild by (1) a TRACER: drive the target tool to reproduce ONE known result end-to-end from
+raw inputs, verified against known numbers (here CS re-derived the NAB2 receipt digit-for-digit + the IL2
+untested hero catch, from raw tables, writing its own code) — this proves the substrate, connectors, and
+verification path before any scale-up. Then (2) write the full plan and harden it with a **repo-read
+codex-debate** (`-s read-only`, from the repo, Codex told it may open files to verify): findings arrive
+repo-verified so acceptance is cheap and it converges fast (11→8→0 → SHIP). The debate's own accept/reject
+log + per-round snapshots (`docs/reviews/codex-debate_*/`) are the audit trail. Net: the plan is executable
+by a weaker model next session without re-derivation, and every claim is checked against reality first.
+Pairs with the drive-CS-then-verify-from-`operon-cli.db` discipline (never UI-scrape).

@@ -32,3 +32,19 @@ are the off-limits big data; the DE results are the CPU-feasible slice.
 The DE_stats `offtarget_flag` = "a gene with TSS within 10 kb of the guide is significantly down-regulated."
 So a False flag on a perturbation already means no 10 kb neighbor is cis-repressed — a cheap partial answer
 to any "did the guide hit a neighbor?" (e.g. NAB2 guide vs STAT6 1.9 kb away) before pulling the full DE.
+
+## Claude Science operational gotchas — Added: 2026-07-09
+- **`host.delegate` is gated** behind a session Delegation ("ultra mode") toggle — OFF by default and NOT
+  reachable via the headless driver. Programmatic sub-agent fan-out fails with "delegation is not enabled";
+  use `host.llm_batch` (inline Haiku-4.5 sampling) instead. Real host API: `mcp`/`llm_batch`/`query_db`/
+  `delegate`/`agent_list`/`list_artifacts`/`artifact_path`/`artifacts`. (`host.capabilities()` is NOT real.)
+- **The driver's "DONE" ≠ receipts landed.** CS's Sonnet-5 Reviewer commits `verification_checks` and the
+  `extracted_code` provenance block backfills only on FRAME COMPLETION — headless runs may leave the OPERON
+  frame "processing" for 10+ min. Poll `operon-cli.db` after DONE; save receipts from the kernel, don't rely
+  on DB backfill.
+- **CS base env is lean** — `s3fs`/`h5py` (and other bio stacks) may need install into the workspace env;
+  distinguish "missing package → install" from "S3/network blocked" when a data-access step fails.
+- **LBD in CS = kernel HTTP, not connectors.** Europe PMC `hitCount` (GET) + Open Targets GraphQL (POST) are
+  plain HTTP in `sources.py`; CS's `_mcp-*` connectors don't expose those exact scalars. Port `sources.py`/
+  `_http.py` into the kernel with a workspace SHA1 cache (a fresh `--new` project resets the workspace → copy
+  `lbd_cache/` in before replay).

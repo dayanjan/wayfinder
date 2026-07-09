@@ -23,8 +23,10 @@ transcript (5-agent parallel pass), brainstormed tests with Codex (2-round repo-
 falsification thesis, live; **`host.mcp` batched DB lookups return real Ensembl IDs**; `host.delegate` is
 gated behind a Delegation toggle. Docs: `docs/cs-capability-tests_2026-07-08/RESULTS.md`,
 `docs/claude-science-{test-plan,demo-findings}_2026-07-08.md`. Driver hardened.
-**Next:** EXPLOIT CS for the finding/product — top option: a **referee-inside-CS tracer** (`host.mcp` receipts
-+ delegation + CS's own reviewer auditing it). See `memory/NEXT_SESSION.md`.
+**Next:** EXPLOIT CS for the finding/product — the referee-inside-CS tracer is DONE (native digit-for-digit
+reproduction); the **full-pipeline-in-CS plan is SOLIDIFIED (codex-debate SHIP)**. Next session = **implement
+it** (Stage 0 probe → Stage 1 LBD proposer via kernel HTTP → Stage 3 S3 cis-check → Stage 5 provenance),
+per the §9 runnable checklist in `docs/plans/full-pipeline-in-cs-plan_2026-07-09.md`. See `memory/NEXT_SESSION.md`.
 
 ## Hard constraints (never lose)
 - **NEW WORK ONLY** — every file authored during the event (started 2026-07-07); git history is the compliance proof.
@@ -49,5 +51,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-08 | Definitive STAT6 check + provenance (full-close) | Preserved full raw provenance trail (`docs/provenance/`, 52 artifacts); **definitive STAT6 cis-check** via lazy S3 read of authors' genome-wide DE → **NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED**, verdict upgraded to genuine novel NAB2-specific regulator; decided M5 = evidence-chain notebook + Claude Science chain + demo video |
 | 2026-07-08 (M5, full-close) | **M5 shipped in full** | Evidence-chain **notebook**; **Claude Science evidence chain** (independent same verdict + figure); 3-screen Streamlit **"Researcher's Workbench"** app implementing a **Claude co-design** (imported via **DesignSync**), all screens preflight-green; **final demo video** (~112s, ElevenLabs "Brian" + CC-BY music, gate PASS 94%; recipe `docs/demo-video-pack/`). Two 3-round repo-read codex-debates (demo + workbench plans). Track → **"Researcher who also builds"**. Demo/app = fallback MVP |
 | 2026-07-08 (overnight, autonomous) | **Claude Science capability deep-dive** | 5-agent transcript mining → `[DEMO]` catalog + testable inventory; 2-round repo-read codex-debate → executable test plan; **live-verified CS on our install** via drive-then-verify-from-**`operon-cli.db`** (doctrine §19). Confirmed: Reviewer=**Sonnet 5** caught a planted inconsistency (**fail**); OPERON=**Opus 4.8**; inline=**Haiku 4.5**; `host.mcp` batched lookup → **real Ensembl IDs**; `host.delegate` **gated** behind Delegation toggle. Hardened `cs-drive.js`. Docs in `docs/cs-capability-tests_2026-07-08/` + `docs/claude-science-{test-plan,demo-findings}_2026-07-08.md` |
+| 2026-07-09 | **Pipeline↔CS mapping + native tracer + solidified plan** | Exhaustive 30-step LBD→NAB2 pipeline reconstruction + per-step CS feasibility (**~25/30 CS-native**; gap = cross-model/Codex); **LBD methods explainer** (manuscript seed); **CS TRACER** reproduced the 4-hop referee + NAB2 finding **natively, digit-for-digit** (+IL2 untested hero); **full-pipeline-in-CS plan** hardened by a **3-round repo-read codex-debate → SHIP**. Architecture: **CS = instrument, Codex = external cross-model auditor.** Docs: `pipeline-inventory-and-cs-mapping_2026-07-09.md`, `lbd-methods-explainer.md`, `plans/full-pipeline-in-cs-plan_2026-07-09.md`, `reviews/codex-debate_full-pipeline-cs_2026-07-09/` |
 
-_Last updated: 2026-07-08 (overnight autonomous CS capability deep-dive)_
+_Last updated: 2026-07-09 (pipeline↔CS mapping + native tracer + solidified full-pipeline plan)_

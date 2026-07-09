@@ -1,62 +1,39 @@
 # NEXT_SESSION — async handoff (canonical; written/read by session-closer & session-start)
 
-## Next session priorities — written 2026-07-08 (overnight CS capability deep-dive, autonomous)
+## Next session priorities — written 2026-07-09 06:15 (full-close)
 
-**Current state**: **M5 still complete** (notebook + CS evidence chain + Streamlit app + demo video).
-On top of that, this overnight session did the **Claude Science capability deep-dive** the prior handoff
-asked for — mined the 2026-07-08 CS demo, brainstormed tests with Codex (2-round repo-read debate), and
-**empirically verified CS capabilities live against our own install**. All findings are receipt-backed
-from CS's own audit DB. Tree has new docs + a hardened driver; **not yet committed** (see below).
+**Current state**: Claude Science exploitation is planned and de-risked. The **CS tracer already reproduced
+the 4-hop referee + NAB2 finding natively, digit-for-digit** (`docs/cs-capability-tests_2026-07-08/tracer-artifacts/`),
+and the **full-pipeline-in-CS plan is SOLIDIFIED** — 3-round repo-read codex-debate → **SHIP**
+(`docs/plans/full-pipeline-in-cs-plan_2026-07-09.md` v3). Architecture: **CS = the instrument (generation →
+referee → provenance); Codex = the external cross-model auditor.** Tree clean after this close (plan +
+debate committed). M5 submission artifacts (notebook + app + demo video) remain the fallback MVP.
 
-**What we now KNOW about Claude Science (read these first):**
-- `docs/cs-capability-tests_2026-07-08/RESULTS.md` — the empirical scorecard (start here).
-- `docs/claude-science-test-plan_2026-07-08.md` — the method + the **`operon-cli.db` receipt-store** map.
-- `docs/claude-science-demo-findings_2026-07-08.md` — the mined `[DEMO]` catalog (host SDK, folding
-  compaction, reviewer/specialists/memory mechanics, roadmap, Q&A).
-- `memory/lessons-learned.md` (2026-07-08 CS entry) — the reusable playbook.
+**Next action**: **Implement the plan's §9 runnable checklist in CS**, starting with **Stage 0 (feasibility
+probe)** — one driven CS run that, from the kernel, (a) GETs a Europe PMC `hitCount` (e.g. `"NAB2" AND "atopic
+eczema"` → expect 6), (b) POSTs an Open Targets GraphQL disease→targets query, (c) S3 micro-probe (anon
+`s3fs`+`h5py` open of `GWCD4i.DE_stats.h5ad`, read obs/var labels, close), (d) lists `_mcp-*` connectors.
+Then Stage 1 (LBD proposer, full 3,935 sweep via kernel HTTP + workspace cache) → Stage 3 (S3 cis-check) →
+Stage 5 (provenance from `operon-cli.db`). `[HYBRID]` — Claude drives + verifies-from-DB; author each stage
+prompt into `.claude/scratch/cs-capability-mining/prompts/`.
 
-**Headline findings that shape tomorrow:**
-1. **CS's own Reviewer (Sonnet 5) is our thesis, live** — it forks at checkpoints, reads the saved
-   artifacts, and **caught a planted count inconsistency as a FAIL**. Opus-4.8 primary + Sonnet-5 reviewer.
-2. **`host.mcp(connector,tool,{args})` does batched deterministic DB lookups returning REAL Ensembl IDs**
-   (one call for 5 genes, MyGene-backed) — CS can fetch our referee's receipts natively.
-3. **`operon-cli.db`** is a fully-readable audit/receipt store → drive CS with Playwright, **verify from the
-   DB**, never scrape the UI.
-4. **`host.delegate` is gated** behind a session Delegation toggle (off by default) → to run a multi-agent
-   referee *inside* CS we must enable delegation.
+**Prerequisites**: CS daemon up on :8765 (`wsl -d Ubuntu -- bash -lc 'export PATH=$HOME/.local/bin:$PATH; claude-science status'`);
+data at `/home/dayanjan/pyzobot-data/` (4 CSVs + join_spec.json); hardened driver `~/.claude/skills/drive-claude-science/cs-drive.js`
+(auth `cs_state.json` beside it; re-mints nonce); DB `operon-cli.db` under `~/.claude-science/orgs/741d6512-…/`
+(read via WSL `python3`, no `sqlite3` CLI). Reuse `verify_cs_capabilities.py` + `probe_tracer.py` as verifier seeds.
 
-**Next action — decide how to EXPLOIT Claude Science for the finding/product (the whole point):**
-1. **Referee-inside-CS tracer.** Rebuild a slice of our 3-hop referee natively in CS: `host.mcp` for the
-   receipt lookups + `host.llm_batch`/delegation for the Skeptic/Adjudicator, with CS's Reviewer auditing
-   it — then pull the whole receipt chain from `operon-cli.db`. Strongest "researcher who builds their
-   instrument in the actual workbench" story. **[HYBRID]** (Claude designs; drive CS; verify-from-DB). First
-   enable the **Delegation toggle** (needs a driver/UI step — small spike).
-2. **Use CS's Reviewer as an independent corroboration of the NAB2 finding.** Feed the evidence chain in and
-   let its Sonnet-5 reviewer adversarially audit our claims → another independent falsification pass, on
-   the record. **[CLAUDE]** drive + capture `verification_checks`.
-3. **Deepen the science with CS** — a new CS-driven analysis (e.g. the STAT6/cis question or a fresh LBD
-   question) run end-to-end with the drive-then-verify-from-DB harness. **[HYBRID]**.
-4. **Promote the tooling**: turn `verify_cs_capabilities.py` + the DB-read recipe into a small committed
-   `src/` tool; extend `cs-drive.js` to toggle Delegation + open provenance if we want UI-side too. **[CODEX-RESCUE]**.
+**Open questions**: Does the S3 in-CS path clear the network-domain approval headlessly (Stage 0-(ii))? If not
+→ documented external fallback for Stage 3. Are `s3fs`/`h5py` in CS's base env or need workspace install?
+Smallest honest Stage-1 proof = the FULL 3,935 sweep (a forced-NAB2 reduced run is plumbing only, not "CS
+generated the question").
 
-**Prerequisites / gotchas**: CS daemon up on **:8765** (was ~30h uptime). Auth state saved at
-`~/.claude/skills/drive-claude-science/cs_state.json` (driver re-mints a nonce if needed). **Async:** after a
-driven run, the **Reviewer commits findings ~10 min later** and the **`extracted_code` repro block is
-deferred to frame completion** — poll `operon-cli.db` / `frames.status`, don't trust the driver's "DONE".
-Read the DB via WSL `python3` (no `sqlite3` CLI). Two OPERON frames from tonight may still show `processing`.
+**Do not touch**: never commit `.env`, `data/*.csv`, `data/lbd_cache/`, `data/lbd_out/`, `references/*.pdf`,
+`.claude/scratch/`, `.tmp/`. CS's store `~/.claude-science/` is CS's private data (copy only the audit
+artifacts we produce into `docs/`). Don't re-run the tracer (referee+NAB2 already proven native).
 
-**UNCOMMITTED — commit at session start:** new docs (`docs/claude-science-demo-findings_*`,
-`docs/claude-science-test-plan_*`, `docs/cs-capability-tests_2026-07-08/`), edited
-`docs/claude-science-capabilities.md`, `memory/lessons-learned.md`, this handoff, MEMORY.md,
-WORK_PROGRESS.md. Scratch (`.claude/scratch/cs-capability-mining/`) is gitignored — the raw pass notes +
-codex logs + probe scripts live there if needed. **Also commit the hardened `cs-drive.js` to `~/.claude`**
-(separate repo; run the pre-push secret-grep).
+**Context to preload**: `docs/plans/full-pipeline-in-cs-plan_2026-07-09.md` (esp. §9 checklist + §5 stages);
+`docs/reviews/codex-debate_full-pipeline-cs_2026-07-09/final_synthesis.md`; `docs/cs-capability-tests_2026-07-08/tracer-artifacts/TRACER-RESULTS.md`;
+`docs/claude-science-test-plan_2026-07-08.md` (operon-cli.db map); `docs/pipeline-inventory-and-cs-mapping_2026-07-09.md`;
+`src/arbiter/lbd/sources.py` + `_http.py` (the code to port); `docs/lbd-methods-explainer.md`; `WORK_PROGRESS.md`; `MEMORY.md`.
 
-**Do not touch**: never commit `.env`, `data/*.csv`, `data/lbd_*`, `references/*.pdf`, `.claude/scratch/`,
-`.tmp/`. The CS store `~/.claude-science/` is CS's private data, not ours to commit (we copy only the
-audit artifacts we produced into `docs/cs-capability-tests_2026-07-08/artifacts*`).
-
-**Context to preload**: the four docs above; `WORK_PROGRESS.md`; `MEMORY.md`;
-`~/.claude/skills/drive-claude-science/` (SKILL.md + cs-drive.js).
-
-**Estimated budget**: ~0.5–1 day (pick one exploit path; the referee-inside-CS tracer is the highest-value).
+**Estimated budget**: ~0.5–1 day for the MVP (Stage 0/1/3/5); Stage 1 full sweep is the long one (cache makes it replayable).

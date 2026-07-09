@@ -46,3 +46,11 @@ against the source authors' own gold-standard data is the strongest possible ext
 For a full audit trail, preserve raw agent run-logs/prompts/scripts verbatim (the trace is the proof),
 but strip third-party copyrighted text (paper abstracts) to metadata-only, and secret-scan (values +
 patterns) before committing. See `docs/provenance/`.
+
+## Repo-read codex-debate → specification-completion — Noted: 2026-07-09
+When the debated artifact is an IMPLEMENTATION PLAN, run codex-debate FROM the repo with `-s read-only` and
+tell Codex each round it may open referenced files to verify claims. Findings then arrive repo-VERIFIED
+(file:line), so acceptance is cheap and convergence is fast — here 11 findings (r1, all accepted) → 8
+spec-completions (r2, 0 re-escalations) → 0 (r3) → SHIP. The debate becomes spec-completion, not argument.
+Pairs with: drive CS with Playwright only to make it DO the work, then VERIFY from `operon-cli.db` +
+kernel-saved files (never UI-scrape).
