@@ -5,8 +5,8 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 
 ## Snapshot
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
-- **Active workstream:** **FULL PIPELINE REPRODUCED NATIVELY IN CLAUDE SCIENCE** — MVP (Stage 0/1/3/5) all PASS, verified-from-DB, archived to `docs/cs-full-pipeline_2026-07-09/`. Generation (LBD sweep, cached-receipt replay), referee (native, from the tracer), and falsification (native anon-S3 STAT6 cis-check) all run in CS; provenance in `operon-cli.db`; cross-model independence stays external (Codex). Only unbuilt stretch = Stage 2 confounder checks. The demo/app/notebook remain the **submission MVP**.
-- **Last updated:** 2026-07-09 (full pipeline reproduced natively in CS — MVP Stage 0/1/3/5)
+- **Active workstream:** **CS instrument extended + NAB2 target/direction investigated — next session = MANUSCRIPT assembly + remaining-experiments gap analysis.** CS now proven to AUTHOR + run the LBD generator 100% live from scratch (micro-sweep) AND at full scale over all genes × 3 conditions (loose sweep: filter-safe, NAB2 reproduced Stim8hr-specific, 39 candidates in `CANDIDATES.md`). NAB2 drug-target verdict: DepMap negative-for-cancer; **GEO direction mining → association-backed NAB2-DOWN per-cell in lesional skin → knockdown likely backwards, NAB2 reads as a Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Referee direction-label bug fixed (verdicts safe). Only unbuilt CS stretch = Stage 2. Demo/app/notebook remain the **submission MVP**.
+- **Last updated:** 2026-07-09 PM (CS instrument extended + NAB2 target/direction; next = manuscript + experiment gaps)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline — light identifier scrub first)
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -27,6 +27,19 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-09 13:30 — Session close (full-close): CS instrument extended + NAB2 target/direction
+Two threads. **A (CS instrument):** (1) live from-scratch **micro-sweep** — CS authored its OWN LBD generator
+and ran it 100% live (liveness independently re-verified); (2) **calibration probe** (~1.29 s/call, throttle-free);
+(3) **full 100%-live loose sweep** all 3 conditions, 9,557 live calls — program-sig filter SAFE, **NAB2→eczema
+reproduced digit-for-digit (Stim8hr rank 4, Stim8hr-SPECIFIC)**, 39 candidate nominations (34/39 timepoint-
+specific), `CANDIDATES.md`; (4) fixed an **inverted Th1/Th2 direction label** in the referee (marker-validated;
+verdicts unaffected — NAB2 is correctly Th2-associated). **B (NAB2 target/direction):** DepMap =
+negative-for-cancer-target (non-contradictory); **GEO direction mining** via a 3-round **live-verified**
+codex-debate (11→10→0) → executed 4 arms + STAT6 → NO-CALL; then **ARM-D scRNA** resolved the composition
+confound → **association-backed NAB2-DOWN per-cell in lesional skin (keratinocyte/T-NK) → topical KNOCKDOWN
+likely BACKWARDS; NAB2 = Th2 BRAKE lost in disease → restore/UP-modulate** (ceiling: perturbation proof needed).
+All committed + pushed. **Next:** manuscript assembly + remaining-experiments gap analysis.
+
 ### 2026-07-09 07:20 — Session close (full-close): full pipeline reproduced natively in Claude Science (MVP Stage 0/1/3/5)
 Implemented the solidified plan's §9 runnable checklist; Claude drove CS headless + verified-from-DB, Codex
 brainstormed + honesty-eval'd. **Stage 0 (feasibility)** — one driven run proved all four external paths from

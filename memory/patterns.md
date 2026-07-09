@@ -74,3 +74,22 @@ live calls are fine and separate from the funnel-reproduction proof).
 When porting a package that locates data via `Path(__file__).resolve().parents[N]`, stage it into a
 repo-SHAPED tree (`<root>/src/<pkg>`, `<root>/data`, `<root>/docs/...`) so the relative-path contract
 resolves unchanged after relocation — no code edits, no env shims. Used for `arbiter.lbd` → `/home/dayanjan/pyzobot-cs-stage1`.
+
+## Orthogonal-validation triage: pick the assay that matches the claim — Noted: 2026-07-09
+DepMap (cancer-cell fitness) is the WRONG validator for an immune-STATE regulator; a null there is
+non-contradictory. GEO human-disease transcriptomics is the right orthogonal system. Match the validation
+assay to what the finding actually claims (immune regulation, not cancer essentiality) before reading a null
+as evidence.
+
+## Direction triangulation + composition-confound resolution — Noted: 2026-07-09
+To call a gene's direction in a disease tissue: triangulate association (bulk lesional-vs-healthy) + cytokine
+causation (stim) + treatment reversal + on-point cell-type (e.g. CD4 T-cell polarization). A bulk association
+is composition-confounded → the move that resolves it is **scRNA pseudobulk-by-cell-type + cell-proportion
+shifts**: if the direction holds WITHIN the relevant cell types AND proportions don't explain it, the bulk
+signal is real per-cell. This turned a NO-CALL into an association-backed call (NAB2-DOWN per-cell) and
+flipped a naive therapeutic direction.
+
+## Live-verified codex-debate (§22 + network) — Noted: 2026-07-09
+Run the repo-read codex-debate with network + a scoped key so Codex verifies each external artifact (GEO
+dataset groups/probes/matrix) against LIVE reality per round, not just against the repo. Findings arrive
+reality-checked; converged 11→10→0 in 3 rounds. Extends §22 from repo-verification to reality-verification.

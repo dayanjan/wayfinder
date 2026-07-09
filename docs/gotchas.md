@@ -70,3 +70,20 @@ to any "did the guide hit a neighbor?" (e.g. NAB2 guide vs STAT6 1.9 kb away) be
   even though a REVIEWER frame ran — the driver-tail "Reviewer · No issues found" is the corroboration. To
   guarantee captured findings, end the prompt with an explicit "request a review of <file>" and poll the DB
   after "DONE".
+
+## Codex + live network/API key, CS port drift, referee polarity — Added: 2026-07-09 (PM)
+- **Codex CAN do live network + a scoped API key.** `codex exec -s workspace-write -c
+  sandbox_workspace_write.network_access=true` with the key exported to env (`export NCBI_API_KEY=$(grep ...)`;
+  fallback: tell Codex to read the ONE `NCBI_API_KEY` line in `.env`). Verified hitting NCBI E-utilities + GEO
+  FTP live. This enables **live-verified codex-debates** (Codex checks each dataset's existence/groups/probe/
+  matrix against real GEO during the debate) — §22 extended from "verify claims against the repo" to "against
+  reality." Windows needs `[windows] sandbox="unelevated"` in `~/.codex/config.toml` for workspace-write.
+- **CS daemon restart moves the port.** `claude-science stop && serve` picked **8000** (old 8765 pid was stale).
+  The `cs-drive.js` driver re-auths via nonce on the new origin — just pass the new `claude-science url` nonce +
+  `--url http://localhost:8000/`. Get the running port from `claude-science status` (JSON).
+- **Killing the cs-drive.js driver does NOT stop the CS kernel** — the in-kernel sweep loop runs autonomously
+  (no driver needed once the cell is executing). A fresh-context Stop-button click missed it. Reliable halt =
+  `claude-science stop && serve` (the on-disk cache under a non-workspace path persists → resumable).
+- **Referee Th1/Th2 direction label was INVERTED** (`log_fc>0` mislabeled "Th1-associated"). Validate signature
+  polarity against canonical markers (GATA3/IL4/IL13 are +, TBX21/IFNG are − in the T2 signature ⇒ +log_fc=Th2),
+  NOT against a coded convention. Verdicts were unaffected (HOP-2 status keys on significance, not direction).

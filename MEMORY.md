@@ -5,6 +5,18 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+**2026-07-09 (PM, full-close) — CS INSTRUMENT EXTENDED (live micro-sweep + 100%-live 3-condition loose sweep)
++ NAB2 DRUG-TARGET & DIRECTION INVESTIGATED. Next session = MANUSCRIPT + remaining-experiments gap analysis.**
+Thread A (CS instrument): CS AUTHORED its own LBD generator and ran it 100% live from scratch (liveness
+independently verified); the full loose sweep ran 100% live over ALL genes × 3 conditions (9,557 live calls) —
+**program-sig filter proven safe, NAB2→eczema reproduced digit-for-digit (Stim8hr rank 4, Stim8hr-SPECIFIC),
+39 candidate nominations (34/39 timepoint-specific)** → `docs/cs-full-pipeline_2026-07-09/live-fullsweep-loose/`
+(CANDIDATES.md). Also fixed an inverted Th1/Th2 direction LABEL in the referee (verdicts unaffected; NAB2 is
+correctly Th2-associated). Thread B (NAB2 target): DepMap = negative-for-cancer-target (non-contradictory);
+**GEO direction mining** (3-round live-verified codex-debate → execute → ARM-D scRNA) → **association-backed
+NAB2-DOWN-in-lesional-skin (per-cell, not composition) → the topical-KNOCKDOWN idea is likely BACKWARDS; NAB2
+reads as a Th2 BRAKE lost in chronic disease → restore/UP-modulate** (ceiling: needs perturbation proof).
+`docs/nab2-direction-geo_2026-07-09/`, `docs/nab2-depmap-check_2026-07-09/`. All committed + pushed (f-series).
 **2026-07-09 (full-close) — FULL PIPELINE REPRODUCED NATIVELY IN CLAUDE SCIENCE (MVP: Stage 0/1/3/5, all PASS).**
 Implemented the solidified plan's §9 checklist. **Stage 0** proved all four external paths from the CS kernel
 (Europe PMC=6, OT asthma=7403, **anon S3 lazy read opens headless — no download**, 24 connectors) → resolved
@@ -65,4 +77,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-09 | **Pipeline↔CS mapping + native tracer + solidified plan** | Exhaustive 30-step LBD→NAB2 pipeline reconstruction + per-step CS feasibility (**~25/30 CS-native**; gap = cross-model/Codex); **LBD methods explainer** (manuscript seed); **CS TRACER** reproduced the 4-hop referee + NAB2 finding **natively, digit-for-digit** (+IL2 untested hero); **full-pipeline-in-CS plan** hardened by a **3-round repo-read codex-debate → SHIP**. Architecture: **CS = instrument, Codex = external cross-model auditor.** Docs: `pipeline-inventory-and-cs-mapping_2026-07-09.md`, `lbd-methods-explainer.md`, `plans/full-pipeline-in-cs-plan_2026-07-09.md`, `reviews/codex-debate_full-pipeline-cs_2026-07-09/` |
 | 2026-07-09 | **Full pipeline reproduced natively in CS (MVP Stage 0/1/3/5)** | Implemented the §9 checklist. Stage 0 (feasibility): all 4 external paths from the kernel, incl. **anon S3 lazy read opens headless** → Stage 3 native. Stage 1 (generation): real `sweep()` unchanged over 3,935 genes under a **pure-replay guard** (cache delta 0) → funnel 3935/22039/43/30 + **NAB2 rank 4** exact, ALL_PASS. Stage 3 (falsification): native anon-S3 → **STAT6 unmoved +0.087/0.79, cis refuted**. Stage 5: CS receipt chain + **Sonnet-5 Reviewer verified numbers + enforced calibrated language**. Codex: Stage-1 design (Strategy B) + README honesty-eval (SHIP-WITH-EDITS, applied). Archived `docs/cs-full-pipeline_2026-07-09/` (16 files, provenance, ~$6.41) |
 
-_Last updated: 2026-07-09 (full pipeline reproduced natively in Claude Science — MVP Stage 0/1/3/5)_
+| 2026-07-09 (PM) | **CS instrument extended + NAB2 target/direction** | Live from-scratch micro-sweep (CS authored its own generator, liveness-verified); 100%-live loose sweep all 3 conditions (9,557 live calls) → filter-safe + NAB2 reproduced (Stim8hr rank 4, timepoint-specific) + 39 candidates (34 timepoint-specific), `CANDIDATES.md`; fixed inverted referee direction label (verdicts safe). DepMap = negative-for-cancer-target. **GEO direction mining** (3-round live-verified codex-debate → NO-CALL → ARM-D scRNA) → **association-backed NAB2-DOWN per-cell in lesional skin; knockdown likely backwards → Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Docs: `nab2-direction-geo_2026-07-09/`, `nab2-depmap-check_2026-07-09/` |
+
+_Last updated: 2026-07-09 PM (CS instrument extended + NAB2 target/direction; next = manuscript + experiment gaps)_
