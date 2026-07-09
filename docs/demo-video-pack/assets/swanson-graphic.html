@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Swanson ABC — concept graphic</title>
+<style>
+  /* PyZoBot Arbiter demo asset — Swanson ABC concept (beat 3) + NAB2 instance (beat 5 overlay).
+     1920x1080, brand palette (bg #091314 / fg #eaf3f1 / accent #26c6c9). Auto-plays on load;
+     deterministic timeline for clean screen-record. Scene via ?scene=swanson|nab2 (default swanson). */
+  :root{
+    --bg:#091314; --fg:#eaf3f1; --accent:#26c6c9; --accent-dim:#5ea9a8;
+    --muted:#3a5150; --amber:#f2b53c; --node:#0f2122;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--fg)}
+  .stage{position:relative;width:1920px;height:1080px;
+    background:radial-gradient(1200px 700px at 50% 38%,#0d1e1f 0%,#0a1617 55%,#091314 100%)}
+  .stage::after{content:"";position:absolute;inset:0;pointer-events:none;
+    box-shadow:inset 0 0 320px 60px rgba(0,0,0,.55)}
+
+  .eyebrow{position:absolute;top:118px;left:0;width:100%;text-align:center;
+    font-size:30px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);
+    opacity:0;animation:fade .8s ease .3s forwards}
+  .caption{position:absolute;bottom:150px;left:0;width:100%;text-align:center;
+    font-size:40px;font-weight:300;color:var(--fg);opacity:0;padding:0 200px;line-height:1.35;
+    animation:fade 1s ease 10.4s forwards}
+  .nab2 .caption{animation-delay:8.4s}
+
+  svg{position:absolute;inset:0;width:1920px;height:1080px}
+
+  /* nodes */
+  .node circle{fill:var(--node);stroke:var(--accent);stroke-width:3;
+    filter:drop-shadow(0 0 22px rgba(38,198,201,.35))}
+  .node .role{fill:var(--accent);font-size:60px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+  .node .term{fill:var(--fg);font-size:34px;font-weight:400;text-anchor:middle}
+  .node{opacity:0;transform-box:fill-box;transform-origin:center}
+  #nA{animation:pop .6s cubic-bezier(.2,1.4,.4,1) 1.0s forwards}
+  #nB{animation:pop .6s cubic-bezier(.2,1.4,.4,1) 3.0s forwards}
+  #nC{animation:pop .6s cubic-bezier(.2,1.4,.4,1) 5.0s forwards}
+  .nab2 #nA{animation-delay:.8s}
+  .nab2 #nB{animation-delay:2.2s}
+  .nab2 #nC{animation-delay:3.6s}
+
+  /* known arrows (top) — draw via dashoffset */
+  .known{fill:none;stroke:var(--accent-dim);stroke-width:4;
+    stroke-dasharray:340;stroke-dashoffset:340}
+  #eAB{animation:draw 1s ease 2.0s forwards}
+  #eBC{animation:draw 1s ease 4.0s forwards}
+  .nab2 #eAB{animation-delay:1.4s}
+  .nab2 #eBC{animation-delay:2.8s}
+  .known-lab{fill:var(--accent-dim);font-size:24px;letter-spacing:.14em;text-transform:uppercase;
+    text-anchor:middle;opacity:0}
+  #labAB{animation:fade .6s ease 2.8s forwards}
+  #labBC{animation:fade .6s ease 4.8s forwards}
+  .nab2 #labAB{animation-delay:2.2s}
+  .nab2 #labBC{animation-delay:3.6s}
+
+  /* hidden arc (bottom) */
+  .hidden{fill:none;stroke:var(--muted);stroke-width:5;stroke-dasharray:14 16;
+    stroke-dashoffset:1000;opacity:0}
+  #arc{animation:arcdraw 1.6s ease 6.6s forwards, fade .4s ease 6.6s forwards}
+  .nab2 #arc{animation-delay:5.0s,5.0s}
+  #arc.resolve{stroke:var(--accent);stroke-width:6;
+    filter:drop-shadow(0 0 18px rgba(38,198,201,.6));transition:stroke .6s,stroke-width .6s,filter .6s}
+
+  /* ?/check badge at arc midpoint (960,660) */
+  .badge{opacity:0}
+  #badgeQ{animation:pop .5s cubic-bezier(.2,1.4,.4,1) 8.0s forwards}
+  .nab2 #badgeQ{animation-delay:6.0s}
+  #badgeQ circle{fill:#1a1408;stroke:var(--amber);stroke-width:3}
+  #badgeQ text{fill:var(--amber);font-size:56px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+  #badgeC{opacity:0}
+  #badgeC circle{fill:var(--accent);stroke:var(--accent);stroke-width:3;
+    filter:drop-shadow(0 0 20px rgba(38,198,201,.7))}
+  #badgeC path{stroke:#04191a;stroke-width:7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+  @keyframes fade{to{opacity:1}}
+  @keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes arcdraw{to{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="eyebrow" id="eyebrow"></div>
+
+  <svg viewBox="0 0 1920 1080">
+    <defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#5ea9a8"/>
+      </marker>
+    </defs>
+
+    <!-- known hops (top) -->
+    <path id="eAB" class="known" d="M572,412 L876,332" marker-end="url(#ah)"/>
+    <path id="eBC" class="known" d="M1044,332 L1348,412" marker-end="url(#ah)"/>
+    <text id="labAB" class="known-lab" x="724" y="352">known</text>
+    <text id="labBC" class="known-lab" x="1196" y="352">known</text>
+
+    <!-- hidden / implied link (bottom) -->
+    <path id="arc" class="hidden" d="M515,500 Q960,820 1405,500"/>
+
+    <!-- nodes -->
+    <g id="nA" class="node"><circle cx="500" cy="430" r="72"/>
+      <text class="role" x="500" y="430">A</text><text class="term" x="500" y="552" id="tA"></text></g>
+    <g id="nB" class="node"><circle cx="960" cy="310" r="72"/>
+      <text class="role" x="960" y="310">B</text><text class="term" x="960" y="432" id="tB"></text></g>
+    <g id="nC" class="node"><circle cx="1420" cy="430" r="72"/>
+      <text class="role" x="1420" y="430">C</text><text class="term" x="1420" y="552" id="tC"></text></g>
+
+    <!-- badges at arc midpoint (960,660) -->
+    <g id="badgeQ" class="badge"><circle cx="960" cy="660" r="44"/><text x="960" y="660">?</text></g>
+    <g id="badgeC" class="badge"><circle cx="960" cy="660" r="46"/>
+      <path d="M936,662 L953,680 L986,642"/></g>
+  </svg>
+
+  <div class="caption" id="caption"></div>
+</div>
+
+<script>
+  const scenes = {
+    swanson: {
+      eyebrow: "Literature-Based Discovery · Swanson's ABC",
+      A: "Fish oil", B: "Blood viscosity", C: "Raynaud's",
+      caption: "Two facts, each written down. One link no single paper had drawn."
+    },
+    nab2: {
+      eyebrow: "The same move — on real data",
+      A: "NAB2", B: "Th1/Th2 program", C: "Atopic eczema",
+      caption: "A candidate the literature had never drawn — with a receipt in the data."
+    }
+  };
+  const q = new URLSearchParams(location.search).get("scene");
+  const s = scenes[q] || scenes.swanson;
+  if (q === "nab2") document.getElementById("stage").classList.add("nab2");
+  document.getElementById("eyebrow").textContent = s.eyebrow;
+  document.getElementById("caption").textContent = s.caption;
+  document.getElementById("tA").textContent = s.A;
+  document.getElementById("tB").textContent = s.B;
+  document.getElementById("tC").textContent = s.C;
+
+  // resolve ?->check + glow the arc. swanson t=10.0s, nab2 t=8.0s
+  const resolveAt = (q === "nab2") ? 8000 : 10000;
+  setTimeout(() => {
+    document.getElementById("badgeQ").style.opacity = "0";
+    document.getElementById("badgeQ").style.transition = "opacity .4s";
+    const c = document.getElementById("badgeC");
+    c.style.animation = "pop .6s cubic-bezier(.2,1.4,.4,1) forwards";
+    document.getElementById("arc").classList.add("resolve");
+  }, resolveAt);
+</script>
+</body>
+</html>
