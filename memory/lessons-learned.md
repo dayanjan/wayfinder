@@ -87,3 +87,50 @@ part; the single-model self-check is what it replaces.
 **Reusable assets built this session:** `src/arbiter/lit/` (multi-source lit search), the frozen-protocol
 replication harness (`docs/replication/agent-prompts/00_shared_protocol.md`), and the lazy-S3-h5ad read
 recipe (`docs/nab2_stat6_definitive_check.py`). Full record: `docs/replication/`, `docs/provenance/`.
+
+---
+
+## 2026-07-08 — Two reusable end-to-end workflows validated: Claude co-design → app (DesignSync), and the demo-video pipeline
+*Category: workflow / tooling (flows to generator template)*
+
+### A. DesignSync: Claude co-design → a real, honest app
+**The loop that worked.** (1) Write a **self-contained** design brief (no repo jargon; include the real
+example data values so the designer mocks accurate components) — `docs/plans/streamlit_design_brief_*.md`
+is the template. (2) Operator runs it through **Claude co-design** (claude.ai/design); it asks a few
+calibration questions (theme, accent, typography, layout, animation) — answer them consistent with the
+plan. (3) Pull the design file into the session with the **DesignSync** tool: `/design-login` once
+(needed even on an API-key session), then `get_project` → `list_files` → `get_file` on the `.dc.html`.
+(4) **Implement it as the real app** — the co-design file ships with MOCK data; the win is wiring every
+value to the real backend function (here `referee_triple`) so nothing is hardcoded. (5) Verify
+screen-only with a Playwright smoke before trusting it.
+
+**Why it's good.** The designer produces a cohesive, attractive system (colors/typography/components in
+all states) far faster + better than hand-CSS; the engineer's job collapses to translation + real-data
+wiring + a preflight. Demarcate a **Tier-1 MVP** in the brief so co-design invests in the hero component
+first (here the Receipt Chain), everything else as "the frame."
+
+**Gotchas.** DesignSync needs `/design-login`. Streamlit's `st.dataframe` is a **canvas** grid — row
+clicks are NOT reliably screen-only-drivable; use a DOM `selectbox`+`button` for click-through. `arbiter`
+wasn't installable → the app inserts `src/` on `sys.path` at startup.
+
+### B. The demo-video pipeline (two-stage economy) end-to-end
+**The flow.** `~/.claude/skills/demo-video/` harness + a 3-file pack (`demo.config`/`narration`/`scenes`).
+Author narration FIRST (calibrated, falsification-first), then: **grep-gate → edge-tts DRAFT → record →
+assemble → stitch → transcription gate PASS → operator review → flip TTS to ElevenLabs → RE-RUN the whole
+pipeline → music mux**. Draft-in-cheap-edge-then-upgrade is the point: you never spend ElevenLabs on a
+cut that might be re-cut.
+
+**Load-bearing details.** (1) **No-auth app:** set the actor `user: ""` → the harness skips login; the
+scene navigates to BASE itself. (2) **TTS-first pacing means a voice swap requires a RE-RECORD** — the
+scenes are paced to the measured audio durations, so ElevenLabs durations ≠ edge → re-run `--stage=all`,
+don't just re-tts+re-assemble. (3) **Music mux:** loop the track, `volume=-20dB` + fades, and
+`amix ... normalize=0` so the **voice stays at full**; then **re-run the transcription gate on the music
+version** — if coverage holds (held at 94% here) the bed provably doesn't drown the narration. (4) CC-BY
+music (Kevin MacLeod / incompetech) is directly `curl`-able and license-clean; record attribution.
+
+**Gotcha.** Backgrounding `node ... &` INSIDE a `run_in_background` Bash call double-detaches → the
+harness reports "completed" prematurely while node runs on; **poll the log to true end** (look for the
+gate `RESULT:`), don't trust the early notification.
+
+**Assets:** `docs/demo-video-pack/` (the reproducible recipe), `app/DESIGN_SOURCE.md`,
+`docs/plans/streamlit_workbench_plan_2026-07-08.md` + the two codex-debate records.
