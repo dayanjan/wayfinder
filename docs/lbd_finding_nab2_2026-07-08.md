@@ -32,7 +32,7 @@ score 0.038) that the data **supports with a receipt at every hop**:
 |---|---|---|
 | 0 · knockdown-QC gate | supported | 2/2 guides significant, best adj-p 1e-16 (guide expr 0.056 vs NTC 0.567) |
 | 1 · effect | supported | on-target KD, effect −16.9, **301 downstream DE genes, no off-target flag** |
-| 2 · program (Th1/Th2) | supported | Th1-associated in Ota 2021 (z 7.71, adj-p 1.96e-13); **not significant in Hollbacker 2021 (1 of 2 contrasts)** |
+| 2 · program (Th1/Th2) | supported | Th2-associated in Ota 2021 (z 7.71, adj-p 1.96e-13; log_fc +0.63, polarity marker-validated 2026-07-09); **not significant in Hollbacker 2021 (1 of 2 contrasts)** |
 | 3 · disease (exact = atopic eczema) | supported | member of 2 atopic-eczema-enriched clusters: OR 3.90 FDR 0.0028; OR 3.43 FDR 0.0224 |
 
 **Calibrated claim:** *consistent with a re-derived NAB2 → Th1/Th2 → atopic-eczema chain that the

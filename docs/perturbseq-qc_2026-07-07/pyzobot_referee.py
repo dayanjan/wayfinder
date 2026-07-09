@@ -233,7 +233,13 @@ def referee(gene: str, condition: str, data: RefereeData) -> Verdict:
         for _, row in t2r.iterrows():
             sig = pd.notna(row.adj_p_value) and row.adj_p_value < SIG_ALPHA
             any_sig = any_sig or sig
-            direction = ("Th2-associated" if row.log_fc < 0 else "Th1-associated") \
+            # Polarity of the Th2_vs_Th1 contrast: log_fc > 0 == Th2-associated.
+            # Validated 2026-07-09 against canonical markers in the signature itself --
+            # Th2 markers (GATA3/IL4/IL13/IL5) are strongly POSITIVE (Ota mean +1.74),
+            # Th1 markers (TBX21/IFNG) strongly negative (mean -4.10). (Prior code had this
+            # inverted: it labeled log_fc>0 "Th1-associated". Verdicts are unaffected -- HOP-2
+            # status keys on significance, not direction -- only this descriptive label changed.)
+            direction = ("Th2-associated" if row.log_fc > 0 else "Th1-associated") \
                 if sig else "no significant shift"
             facets[row.contrast] = {
                 "log_fc": _fmt(row.log_fc), "zscore": _fmt(row.zscore),
