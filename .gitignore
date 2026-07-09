@@ -43,3 +43,6 @@ references/*.pdf
 
 # demo-video working dir (rendered mp4 + music mp3 — large, out-of-band; recipe is in docs/demo-video-pack/)
 .tmp/
+# NAB2 GEO mining: raw downloads + caches are provenance, not committed
+docs/nab2-direction-geo_2026-07-09/downloads/
+docs/nab2-direction-geo_*/__pycache__/

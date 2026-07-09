@@ -1,0 +1,636 @@
+{
+  "arms": {
+    "A": {
+      "STAT6": {
+        "fdr": 0.03125673957966862,
+        "log2fc": -0.14246060918776418,
+        "p": 0.0037553767373483126
+      },
+      "arm_call": "DOWN",
+      "contrast": "baseline Lesion vs Non-Lesion, patient fixed effect; sensitivity Lesion vs Control",
+      "dataset": "GSE330551",
+      "lesion_vs_control_sensitivity": {
+        "fdr": 0.6472969688386272,
+        "log2fc": -0.10745824158235187,
+        "p": 0.18483868090787178
+      },
+      "preflight": {
+        "NAB2_resolved": "NAB2 row",
+        "STAT6_resolved": "STAT6 row",
+        "n_primary_samples": 57,
+        "n_samples": 174
+      },
+      "primary": {
+        "direction": "DOWN",
+        "fdr": 0.001779325888375018,
+        "gene": "NAB2",
+        "log2fc": -0.32260621747365215,
+        "p": 3.7870812419156215e-05
+      },
+      "reason": "primary baseline lesional-vs-nonlesional paired model",
+      "type2_rho": {
+        "fdr": 3.563683401794599e-06,
+        "n": 174,
+        "p": 3.563683401794599e-06,
+        "rho": -0.34314758392892736
+      },
+      "type2_rho_three_scores": {
+        "chemokine_receptor": {
+          "fdr": 6.65807167499373e-07,
+          "n": 174,
+          "p": 6.65807167499373e-07,
+          "rho": -0.3663145305959737
+        },
+        "detection_filtered": {
+          "fdr": 3.563683401794599e-06,
+          "n": 174,
+          "p": 3.563683401794599e-06,
+          "rho": -0.34314758392892736
+        },
+        "full": {
+          "fdr": 3.632401058561175e-05,
+          "n": 174,
+          "p": 3.632401058561175e-05,
+          "rho": -0.3076613798798371
+        }
+      },
+      "type2_score": {
+        "chemokine_receptor_genes_present": [
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R",
+          "IL31"
+        ],
+        "detection_filtered_genes": [
+          "IL13",
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ],
+        "dropped_full": [],
+        "full_genes_present": [
+          "IL13",
+          "IL4",
+          "IL5",
+          "IL31",
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ]
+      }
+    },
+    "B": {
+      "all_cytokine_contrasts": [
+        {
+          "STAT6": {
+            "fdr": 0.9063756978546373,
+            "log2fc": 0.008349788116167758,
+            "p": 0.8568292795442292
+          },
+          "contrast": "IL4 vs Control",
+          "direction": "NO-CALL",
+          "fdr": 0.2507558506899635,
+          "gene": "ENSG00000166886",
+          "log2fc": -0.3286380548401077,
+          "p": 0.009274081847743821,
+          "type2_rho": {
+            "fdr": 0.6396101242558595,
+            "n": 25,
+            "p": 0.6396101242558595,
+            "rho": -0.09846153846153846
+          },
+          "type2_rho_three_scores": {
+            "chemokine_receptor": {
+              "fdr": 0.9708893714908722,
+              "n": 25,
+              "p": 0.9708893714908722,
+              "rho": 0.007692307692307692
+            },
+            "detection_filtered": {
+              "fdr": 0.6396101242558595,
+              "n": 25,
+              "p": 0.6396101242558595,
+              "rho": -0.09846153846153846
+            },
+            "full": {
+              "fdr": 0.19576896557659831,
+              "n": 25,
+              "p": 0.19576896557659831,
+              "rho": -0.2676923076923077
+            }
+          }
+        },
+        {
+          "STAT6": {
+            "fdr": 0.7053346074258764,
+            "log2fc": -0.04800250389208324,
+            "p": 0.6232221096829365
+          },
+          "contrast": "IL13 vs Control",
+          "direction": "NO-CALL",
+          "fdr": 0.3886754233018789,
+          "gene": "ENSG00000166886",
+          "log2fc": -0.06733092268558971,
+          "p": 0.27441563333903185,
+          "type2_rho": {
+            "fdr": 0.6396101242558595,
+            "n": 25,
+            "p": 0.6396101242558595,
+            "rho": -0.09846153846153846
+          },
+          "type2_rho_three_scores": {
+            "chemokine_receptor": {
+              "fdr": 0.9708893714908722,
+              "n": 25,
+              "p": 0.9708893714908722,
+              "rho": 0.007692307692307692
+            },
+            "detection_filtered": {
+              "fdr": 0.6396101242558595,
+              "n": 25,
+              "p": 0.6396101242558595,
+              "rho": -0.09846153846153846
+            },
+            "full": {
+              "fdr": 0.19576896557659831,
+              "n": 25,
+              "p": 0.19576896557659831,
+              "rho": -0.2676923076923077
+            }
+          }
+        },
+        {
+          "STAT6": {
+            "fdr": 0.7356716603659041,
+            "log2fc": 0.03023930622102069,
+            "p": 0.6182175914202267
+          },
+          "contrast": "IL4_IL13 vs Control",
+          "direction": "NO-CALL",
+          "fdr": 0.7295968465411129,
+          "gene": "ENSG00000166886",
+          "log2fc": -0.10869402611931997,
+          "p": 0.6104134611804501,
+          "type2_rho": {
+            "fdr": 0.6396101242558595,
+            "n": 25,
+            "p": 0.6396101242558595,
+            "rho": -0.09846153846153846
+          },
+          "type2_rho_three_scores": {
+            "chemokine_receptor": {
+              "fdr": 0.9708893714908722,
+              "n": 25,
+              "p": 0.9708893714908722,
+              "rho": 0.007692307692307692
+            },
+            "detection_filtered": {
+              "fdr": 0.6396101242558595,
+              "n": 25,
+              "p": 0.6396101242558595,
+              "rho": -0.09846153846153846
+            },
+            "full": {
+              "fdr": 0.19576896557659831,
+              "n": 25,
+              "p": 0.19576896557659831,
+              "rho": -0.2676923076923077
+            }
+          }
+        },
+        {
+          "STAT6": {
+            "fdr": 0.972235104392474,
+            "log2fc": 0.004314025843199974,
+            "p": 0.9513361581204112
+          },
+          "contrast": "IL22 vs Control",
+          "direction": "NO-CALL",
+          "fdr": 0.9656014773833608,
+          "gene": "ENSG00000166886",
+          "log2fc": 0.012794000990759155,
+          "p": 0.9411496332423183,
+          "type2_rho": {
+            "fdr": 0.6396101242558595,
+            "n": 25,
+            "p": 0.6396101242558595,
+            "rho": -0.09846153846153846
+          },
+          "type2_rho_three_scores": {
+            "chemokine_receptor": {
+              "fdr": 0.9708893714908722,
+              "n": 25,
+              "p": 0.9708893714908722,
+              "rho": 0.007692307692307692
+            },
+            "detection_filtered": {
+              "fdr": 0.6396101242558595,
+              "n": 25,
+              "p": 0.6396101242558595,
+              "rho": -0.09846153846153846
+            },
+            "full": {
+              "fdr": 0.19576896557659831,
+              "n": 25,
+              "p": 0.19576896557659831,
+              "rho": -0.2676923076923077
+            }
+          }
+        }
+      ],
+      "arm_call": "NO-CALL",
+      "contrast": "NativeSkin cytokine treatment vs paired control, donor fixed effect",
+      "dataset": "GSE292848",
+      "preflight": {
+        "NAB2_resolved": "ENSG00000166886",
+        "STAT6_resolved": "ENSG00000166888",
+        "n_samples": 25
+      },
+      "primary": {
+        "STAT6": {
+          "fdr": 0.7356716603659041,
+          "log2fc": 0.03023930622102069,
+          "p": 0.6182175914202267
+        },
+        "contrast": "IL4_IL13 vs Control",
+        "direction": "NO-CALL",
+        "fdr": 0.7295968465411129,
+        "gene": "ENSG00000166886",
+        "log2fc": -0.10869402611931997,
+        "p": 0.6104134611804501,
+        "type2_rho": {
+          "fdr": 0.6396101242558595,
+          "n": 25,
+          "p": 0.6396101242558595,
+          "rho": -0.09846153846153846
+        },
+        "type2_rho_three_scores": {
+          "chemokine_receptor": {
+            "fdr": 0.9708893714908722,
+            "n": 25,
+            "p": 0.9708893714908722,
+            "rho": 0.007692307692307692
+          },
+          "detection_filtered": {
+            "fdr": 0.6396101242558595,
+            "n": 25,
+            "p": 0.6396101242558595,
+            "rho": -0.09846153846153846
+          },
+          "full": {
+            "fdr": 0.19576896557659831,
+            "n": 25,
+            "p": 0.19576896557659831,
+            "rho": -0.2676923076923077
+          }
+        }
+      },
+      "reason": "primary endpoint is IL4_IL13 vs Control; single-cytokine contrasts are co-reported",
+      "type2_score": {
+        "chemokine_receptor_genes_present": [
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R",
+          "IL31"
+        ],
+        "detection_filtered_genes": [
+          "IL13",
+          "IL4",
+          "IL31",
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ],
+        "dropped_full": [],
+        "full_genes_present": [
+          "IL13",
+          "IL4",
+          "IL5",
+          "IL31",
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ]
+      }
+    },
+    "C": {
+      "STAT6": {
+        "fdr": 0.999960168404297,
+        "log2fc": 0.016142911106446924,
+        "p": 0.8402353225652717,
+        "selected_probe": "201331_s_at"
+      },
+      "arm_call": "AMBIGUOUS",
+      "contrast": "Dupilumab Week16 reversal beyond placebo, adjusted for time, lesion, and subject",
+      "dataset": "GSE130588",
+      "preflight": {
+        "NAB2_resolved": [
+          "212803_at",
+          "216017_s_at"
+        ],
+        "n_samples": 144,
+        "platform_mapping": {
+          "212803_at": {
+            "Gene ID": "4665",
+            "Gene symbol": "NAB2"
+          },
+          "216017_s_at": {
+            "Gene ID": "4665",
+            "Gene symbol": "NAB2"
+          }
+        }
+      },
+      "primary_probes": [
+        {
+          "direction": "NO-CALL",
+          "fdr": 0.9891562825370928,
+          "log2fc": 0.09479903318957375,
+          "p": 0.49423829523882157,
+          "probe": "212803_at",
+          "type2_rho": {
+            "fdr": 0.1854161654112073,
+            "n": 144,
+            "p": 0.1854161654112073,
+            "rho": -0.11098115385655846
+          },
+          "type2_rho_three_scores": {
+            "chemokine_receptor": {
+              "fdr": 0.15042626877262674,
+              "n": 144,
+              "p": 0.15042626877262674,
+              "rho": -0.12044863567276605
+            },
+            "detection_filtered": {
+              "fdr": 0.1854161654112073,
+              "n": 144,
+              "p": 0.1854161654112073,
+              "rho": -0.11098115385655846
+            },
+            "full": {
+              "fdr": 0.1639441171082541,
+              "n": 144,
+              "p": 0.1639441171082541,
+              "rho": -0.11661421510275458
+            }
+          }
+        },
+        {
+          "direction": "NO-CALL",
+          "fdr": 0.999960168404297,
+          "log2fc": -0.00020599350465797434,
+          "p": 0.9747532696462361,
+          "probe": "216017_s_at",
+          "type2_rho": {
+            "fdr": 0.7862647617536733,
+            "n": 144,
+            "p": 0.7862647617536733,
+            "rho": 0.02279272723815416
+          },
+          "type2_rho_three_scores": {
+            "chemokine_receptor": {
+              "fdr": 0.7684913386755768,
+              "n": 144,
+              "p": 0.7684913386755768,
+              "rho": 0.024740944245813044
+            },
+            "detection_filtered": {
+              "fdr": 0.7862647617536733,
+              "n": 144,
+              "p": 0.7862647617536733,
+              "rho": 0.02279272723815416
+            },
+            "full": {
+              "fdr": 0.8815165471458853,
+              "n": 144,
+              "p": 0.8815165471458853,
+              "rho": 0.012529294161574368
+            }
+          }
+        }
+      ],
+      "reason": "array probes are sign-discordant",
+      "type2_score": {
+        "chemokine_receptor_genes_present": [
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ],
+        "detection_filtered_genes": [
+          "IL13",
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ],
+        "dropped_full": [
+          "IL31"
+        ],
+        "full_genes_present": [
+          "IL13",
+          "IL4",
+          "IL5",
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ]
+      }
+    },
+    "T": {
+      "STAT6": {
+        "fdr": 0.6173977939560297,
+        "log2fc": -0.22593340105882026,
+        "p": 0.1492859546677995,
+        "selected_probe": "201331_s_at"
+      },
+      "arm_call": "AMBIGUOUS",
+      "contrast": "CD4 Th2(IL-4) vs Th1(IL-12), 12-72h, adjusted for time and biological replicate",
+      "dataset": "GSE32959",
+      "preflight": {
+        "NAB2_resolved": [
+          "212803_at",
+          "216017_s_at"
+        ],
+        "n_samples": 23,
+        "platform_mapping": {
+          "212803_at": {
+            "Gene ID": "4665",
+            "Gene symbol": "NAB2"
+          },
+          "216017_s_at": {
+            "Gene ID": "4665",
+            "Gene symbol": "NAB2"
+          }
+        }
+      },
+      "primary_probes": [
+        {
+          "direction": "NO-CALL",
+          "fdr": 0.33743154978861584,
+          "log2fc": 0.15242698414706032,
+          "p": 0.03451768921751675,
+          "probe": "212803_at",
+          "type2_rho": {
+            "fdr": 0.04491411963054424,
+            "n": 23,
+            "p": 0.04491411963054424,
+            "rho": 0.42193675889328064
+          },
+          "type2_rho_three_scores": {
+            "chemokine_receptor": {
+              "fdr": 0.11589212053097471,
+              "n": 23,
+              "p": 0.11589212053097471,
+              "rho": 0.33695652173913043
+            },
+            "detection_filtered": {
+              "fdr": 0.04491411963054424,
+              "n": 23,
+              "p": 0.04491411963054424,
+              "rho": 0.42193675889328064
+            },
+            "full": {
+              "fdr": 0.12524375783915412,
+              "n": 23,
+              "p": 0.12524375783915412,
+              "rho": 0.3290513833992095
+            }
+          }
+        },
+        {
+          "direction": "NO-CALL",
+          "fdr": 0.89620829315695,
+          "log2fc": -0.051476034666665865,
+          "p": 0.5684853262532557,
+          "probe": "216017_s_at",
+          "type2_rho": {
+            "fdr": 0.967843847916723,
+            "n": 23,
+            "p": 0.967843847916723,
+            "rho": -0.008902081506046586
+          },
+          "type2_rho_three_scores": {
+            "chemokine_receptor": {
+              "fdr": 0.9357360764070369,
+              "n": 23,
+              "p": 0.9357360764070369,
+              "rho": 0.01780416301209317
+            },
+            "detection_filtered": {
+              "fdr": 0.967843847916723,
+              "n": 23,
+              "p": 0.967843847916723,
+              "rho": -0.008902081506046586
+            },
+            "full": {
+              "fdr": 0.7095977850745263,
+              "n": 23,
+              "p": 0.7095977850745263,
+              "rho": -0.08209697388909629
+            }
+          }
+        }
+      ],
+      "reason": "array probes are sign-discordant",
+      "source_polarity_crosscheck": "source finding T2 signature polarity is +log_fc = Th2; this arm uses +log2FC = Th2 over Th1",
+      "type2_score": {
+        "chemokine_receptor_genes_present": [
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ],
+        "detection_filtered_genes": [
+          "IL13",
+          "IL4",
+          "IL5",
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "IL4R"
+        ],
+        "dropped_full": [
+          "IL31"
+        ],
+        "full_genes_present": [
+          "IL13",
+          "IL4",
+          "IL5",
+          "CCL17",
+          "CCL22",
+          "CCL26",
+          "TSLP",
+          "IL4R"
+        ]
+      }
+    }
+  },
+  "decision": {
+    "arm_T_vs_skin_agreement": null,
+    "ceiling": "Expression tracks direction of association, not whether NAB2 is an effector or feedback brake.",
+    "rationale": "fewer than two voting arms passed post-gate/post-conflict direction",
+    "triangulated_call": "NO-CALL",
+    "voting_arm_calls": {
+      "A": "DOWN",
+      "B": "NO-CALL",
+      "C": "AMBIGUOUS",
+      "T": "AMBIGUOUS"
+    }
+  },
+  "deferred": [
+    "scRNA ARM-D (GSE204762) deferred",
+    "all backup datasets deferred"
+  ],
+  "stat6_direct_test": {
+    "NAB2_by_siRNA": {
+      "Control_Act+IL-4 vs Control_Act": {
+        "direction": "NO-CALL",
+        "fdr": 0.8209523528332792,
+        "log2fc": -0.08862791416666797,
+        "p": 0.10167271908482826
+      },
+      "STAT6_Act+IL-4 vs STAT6_Act": {
+        "direction": "NO-CALL",
+        "fdr": 0.9680548346763012,
+        "log2fc": -0.01983061750000129,
+        "p": 0.8103066603373772
+      }
+    },
+    "STAT6_dependency_interaction": {
+      "fdr": 0.9672006834197285,
+      "log2fc": 0.06879729666667148,
+      "p": 0.4835473935640332
+    },
+    "contrast": "NAB2 IL-4 induction under control siRNA and STAT6 siRNA; interaction tests loss under STAT6 siRNA",
+    "dataset": "GSE17851",
+    "preflight": {
+      "NAB2_resolved": [
+        "ILMN_1663554"
+      ],
+      "n_samples": 48,
+      "platform_mapping": {
+        "ILMN_1663554": {
+          "Gene ID": "4665",
+          "Gene symbol": "NAB2"
+        }
+      }
+    }
+  }
+}
