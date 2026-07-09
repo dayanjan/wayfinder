@@ -43,3 +43,29 @@ log2-CPM); ARM A's two endpoints (lesional log2FC and Th2 ρ) are mutually conco
 corroborates the DOWN direction internally. The forthcoming reproducibility notebook re-runs the pipeline for a
 reader. A full byte-level independent recompute of the per-BAM RNA-seq file was not performed (low value given
 the robust NO-CALL); it can be added if the direction question is revisited.
+
+---
+
+## ARM-D UPDATE (scRNA GSE204762) — composition confound RESOLVED; call revised
+
+Ran the deferred scRNA arm (39 human samples, dataset's own cell-type labels, pseudobulk NAB2 by
+cell-type × condition). Full table: `arm_d_scrna/report.md` + `arm_d.json`.
+
+**Verdict: CONFIRMED per-cell (not composition).**
+- NAB2 lesional-vs-non-lesional log2FC WITHIN cell type: **keratinocyte −0.51 (paired p 0.027)**, **T/NK −0.57
+  (p 0.11)**, myeloid −0.59 (p 0.049) — same DOWN direction as the bulk ARM-A signal.
+- Composition check: keratinocyte *proportion* is UP in lesional (0.44 vs 0.34), so the bulk NAB2-down is NOT
+  dilution — it is genuine per-cell downregulation in the disease-relevant compartments.
+
+**Revised call: association-backed — NAB2 is DOWN in lesional AD skin, per-cell, in T/NK + keratinocytes**
+(the ARM-A bulk DOWN + ρ −0.34 with Th2 now corroborated at single-cell resolution; the load-bearing composition
+caveat is removed). The voting-arm decision rule is still not cleanly met (ARM T/B/C ambiguous/null), so this
+stays *association-backed, not perturbation-backed*.
+
+**Therapeutic reading — the naive hypothesis is likely BACKWARDS.** NAB2 being *lower* in active-disease skin
+(and anti-correlated with Th2) is consistent with a **Th2 negative-feedback BRAKE that is lost/suppressed in
+chronic lesions**, not a Th2 driver. If so, the therapeutic direction is **UP-modulation (restore/augment NAB2)**,
+and the topical-KNOCKDOWN idea we sketched earlier is contra-indicated by the data. This reconciles with the
+Perturb-seq (NAB2 induced during acute Th2 polarization = brake engaged; suppressed in chronic disease = brake
+lost; knockdown removes the brake). CEILING UNCHANGED: association + a brake HYPOTHESIS — perturbation evidence
+that *restoring* NAB2 dampens Th2 is still required before any directional therapeutic claim.
