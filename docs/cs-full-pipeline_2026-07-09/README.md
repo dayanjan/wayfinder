@@ -102,3 +102,22 @@ breakdown in `provenance.md`.
 workbench; provenance is captured in CS's own audit store; and cross-model independence is kept honestly
 external. Verdict reproduced: a novel, reproducible **nomination** that NAB2 is a Th1/Th2 regulator (the
 atopic-eczema link is Open-Targets GWAS-genetic, flagged as such).
+
+---
+
+## Addendum — fully-live LBD micro-sweep authored from scratch in CS · PASS
+`proj_64a5e671c715` · OPERON frame `2b61c815-…` (Opus 4.8) · artifacts in `live-microsweep/`
+Stage 1 was a *port* replaying cached receipts. To prove CS can **set up an LBD workflow from scratch, live**,
+we drove a fresh project where CS was given only the *method* (Swanson ABC + a gate + a novelty score) — **no
+staged code, no cache** — and had it write its own generator and run it against live APIs. It:
+- built its own 12-gene A-universe from the granted tables (top-effect KD-gated genes: CD3E, LAT, ZAP70,
+  VAV1, CD3D/G, PLCG1, LCP2, TADA2B…; **NAB2's effect was too low to rank top-12, so it did not appear** — no cherry-picking),
+- made **live** Europe PMC GET + Open Targets GraphQL POST calls for all five signals,
+- applied a self-authored gate + `min(z_ab,z_bc)+z(effect)−log1p(ac_lit)−3·ac_known` score,
+- generated **22 eligible candidate questions** (top: CD3E→Th1/Th2→atopic eczema; ac_lit 21, ac_known 0.0022),
+  labelled explicitly as *candidates to referee next, not findings*. Sonnet-5 Reviewer: no issues.
+
+**Liveness independently verified:** re-querying CS's exact recorded queries against the live Europe PMC API
+returned the identical counts — `ab` TADA2B = **7/7**, `ac_lit` TADA2B×asthma = **82/82**, `bc` program×asthma
+= **30473/30473** (TADA2B was never in our cache). → **CS can author and run an LBD generator live, from
+scratch** — the generation layer is not merely portable to CS, it is natively *constructible* there.

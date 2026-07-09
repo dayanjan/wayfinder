@@ -1,0 +1,277 @@
+{
+  "genes": [
+    "TADA2B",
+    "CD3E",
+    "LAT",
+    "SENP5",
+    "PLCG1",
+    "ZAP70",
+    "CD3D",
+    "LCP2",
+    "CD3G",
+    "VAV1",
+    "TAF6L",
+    "SUPT7L"
+  ],
+  "diseases": [
+    "asthma",
+    "atopic eczema",
+    "rheumatoid arthritis",
+    "type 1 diabetes mellitus"
+  ],
+  "liveness": {
+    "first_ab_query": "(\"TADA2B\") AND (\"Th2 cells\" OR \"T helper 2\" OR \"type 2 immunity\" OR \"Th2 differentiation\" OR \"Th1 cells\" OR \"T helper 1\" OR \"type 1 immunity\" OR \"Th1 differentiation\" OR \"Th1/Th2 polarization\" OR \"CD4 T cell polarization\" OR \"T helper cell differentiation\")",
+    "first_ab_hitCount": 7,
+    "first_bc_query": "(\"Th2 cells\" OR \"T helper 2\" OR \"type 2 immunity\" OR \"Th2 differentiation\" OR \"Th1 cells\" OR \"T helper 1\" OR \"type 1 immunity\" OR \"Th1 differentiation\" OR \"Th1/Th2 polarization\" OR \"CD4 T cell polarization\" OR \"T helper cell differentiation\") AND (\"asthma\")",
+    "first_bc_hitCount": 30473,
+    "first_ac_lit_query": "(\"TADA2B\") AND (\"asthma\")",
+    "first_ac_lit_hitCount": 82,
+    "opentargets_disease_id": "MONDO_0004979",
+    "opentargets_rows": 3000
+  },
+  "ranked_questions": [
+    {
+      "a_gene": "CD3E",
+      "c_disease": "atopic eczema",
+      "ab": 3521,
+      "bc": 1095,
+      "ac_lit": 21,
+      "ac_known": 0.0022,
+      "effect": 5710,
+      "score": -2.8233,
+      "eligible": true
+    },
+    {
+      "a_gene": "VAV1",
+      "c_disease": "atopic eczema",
+      "ab": 855,
+      "bc": 1095,
+      "ac_lit": 8,
+      "ac_known": 0.0,
+      "effect": 4897,
+      "score": -3.7882,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3D",
+      "c_disease": "atopic eczema",
+      "ab": 1629,
+      "bc": 1095,
+      "ac_lit": 12,
+      "ac_known": 0.0,
+      "effect": 4983,
+      "score": -3.9445,
+      "eligible": true
+    },
+    {
+      "a_gene": "LAT",
+      "c_disease": "atopic eczema",
+      "ab": 1785,
+      "bc": 1095,
+      "ac_lit": 53,
+      "ac_known": 0.0,
+      "effect": 5535,
+      "score": -4.0927,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3G",
+      "c_disease": "atopic eczema",
+      "ab": 749,
+      "bc": 1095,
+      "ac_lit": 14,
+      "ac_known": 0.0037,
+      "effect": 4965,
+      "score": -4.1426,
+      "eligible": true
+    },
+    {
+      "a_gene": "ZAP70",
+      "c_disease": "atopic eczema",
+      "ab": 1832,
+      "bc": 1095,
+      "ac_lit": 19,
+      "ac_known": 0.0028,
+      "effect": 5021,
+      "score": -4.2913,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3E",
+      "c_disease": "asthma",
+      "ab": 3521,
+      "bc": 30473,
+      "ac_lit": 1069,
+      "ac_known": 0.0211,
+      "effect": 5710,
+      "score": -4.4977,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3G",
+      "c_disease": "type 1 diabetes mellitus",
+      "ab": 749,
+      "bc": 1716,
+      "ac_lit": 29,
+      "ac_known": 0.0169,
+      "effect": 4965,
+      "score": -4.5694,
+      "eligible": true
+    },
+    {
+      "a_gene": "VAV1",
+      "c_disease": "type 1 diabetes mellitus",
+      "ab": 855,
+      "bc": 1716,
+      "ac_lit": 35,
+      "ac_known": 0.0,
+      "effect": 4897,
+      "score": -4.8685,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3D",
+      "c_disease": "type 1 diabetes mellitus",
+      "ab": 1629,
+      "bc": 1716,
+      "ac_lit": 46,
+      "ac_known": 0.0175,
+      "effect": 4983,
+      "score": -4.9763,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3G",
+      "c_disease": "asthma",
+      "ab": 749,
+      "bc": 30473,
+      "ac_lit": 217,
+      "ac_known": 0.029,
+      "effect": 4965,
+      "score": -5.1929,
+      "eligible": true
+    },
+    {
+      "a_gene": "LAT",
+      "c_disease": "type 1 diabetes mellitus",
+      "ab": 1785,
+      "bc": 1716,
+      "ac_lit": 222,
+      "ac_known": 0.0,
+      "effect": 5535,
+      "score": -5.2049,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3D",
+      "c_disease": "asthma",
+      "ab": 1629,
+      "bc": 30473,
+      "ac_lit": 426,
+      "ac_known": 0.0291,
+      "effect": 4983,
+      "score": -5.4947,
+      "eligible": true
+    },
+    {
+      "a_gene": "ZAP70",
+      "c_disease": "asthma",
+      "ab": 1832,
+      "bc": 30473,
+      "ac_lit": 609,
+      "ac_known": 0.0,
+      "effect": 5021,
+      "score": -5.6226,
+      "eligible": true
+    },
+    {
+      "a_gene": "ZAP70",
+      "c_disease": "type 1 diabetes mellitus",
+      "ab": 1832,
+      "bc": 1716,
+      "ac_lit": 101,
+      "ac_known": 0.0182,
+      "effect": 5021,
+      "score": -5.6608,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3G",
+      "c_disease": "rheumatoid arthritis",
+      "ab": 749,
+      "bc": 20542,
+      "ac_lit": 304,
+      "ac_known": 0.0759,
+      "effect": 4965,
+      "score": -5.6693,
+      "eligible": true
+    },
+    {
+      "a_gene": "LAT",
+      "c_disease": "rheumatoid arthritis",
+      "ab": 1785,
+      "bc": 20542,
+      "ac_lit": 1943,
+      "ac_known": 0.0462,
+      "effect": 5535,
+      "score": -5.8171,
+      "eligible": true
+    },
+    {
+      "a_gene": "VAV1",
+      "c_disease": "asthma",
+      "ab": 855,
+      "bc": 30473,
+      "ac_lit": 406,
+      "ac_known": 0.0,
+      "effect": 4897,
+      "score": -5.8421,
+      "eligible": true
+    },
+    {
+      "a_gene": "CD3D",
+      "c_disease": "rheumatoid arthritis",
+      "ab": 1629,
+      "bc": 20542,
+      "ac_lit": 560,
+      "ac_known": 0.0994,
+      "effect": 4983,
+      "score": -6.0096,
+      "eligible": true
+    },
+    {
+      "a_gene": "LAT",
+      "c_disease": "asthma",
+      "ab": 1785,
+      "bc": 30473,
+      "ac_lit": 3277,
+      "ac_known": 0.0556,
+      "effect": 5535,
+      "score": -6.2983,
+      "eligible": true
+    },
+    {
+      "a_gene": "VAV1",
+      "c_disease": "rheumatoid arthritis",
+      "ab": 855,
+      "bc": 20542,
+      "ac_lit": 606,
+      "ac_known": 0.0433,
+      "effect": 4897,
+      "score": -6.3717,
+      "eligible": true
+    },
+    {
+      "a_gene": "ZAP70",
+      "c_disease": "rheumatoid arthritis",
+      "ab": 1832,
+      "bc": 20542,
+      "ac_lit": 1087,
+      "ac_known": 0.0626,
+      "effect": 5021,
+      "score": -6.4694,
+      "eligible": true
+    }
+  ],
+  "n_eligible": 22
+}
