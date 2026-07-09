@@ -197,3 +197,24 @@ repo-verified so acceptance is cheap and it converges fast (11→8→0 → SHIP)
 log + per-round snapshots (`docs/reviews/codex-debate_*/`) are the audit trail. Net: the plan is executable
 by a weaker model next session without re-derivation, and every claim is checked against reality first.
 Pairs with the drive-CS-then-verify-from-`operon-cli.db` discipline (never UI-scrape).
+
+## 2026-07-09 (evening) — workflow: de-risk a live-UI capture BEFORE the codex-debate
+**Category:** workflow / codex-debate + live-UI capture.
+**What worked:** For a plan that depends on capturing a live UI (screen-recording Claude Science), I opened
+the actual CS conversations and screenshotted the target states BEFORE running the plan-hardening
+codex-debate. Codex reads the repo but cannot see the live UI, so the capture mechanics (does the transcript
+scroll? where does each receipt live? does saved auth hold?) must be verified by the driver, not argued.
+Doing it first (a) caught two real gotchas a debate never could (CS opens at the bottom; `mouse.wheel`
+doesn't scroll the transcript → open the receipt artifact), and (b) fed the debate real facts instead of
+assumptions, so the debate spent its rounds where it HAS visibility (narrative, honesty, spine).
+**Improvement to bank:** when a slice's plan rests on a live UI, sequence = empirical capture de-risk →
+then codex-debate. Consider a user-level doctrine corollary to §22 (repo-read debates).
+
+## 2026-07-09 (evening) — codex-debate: the highest-value catch is "accepted-but-not-implemented"
+**Category:** codex-debate discipline.
+**What worked:** In a 2-round repo-read debate on a plan-with-artifacts, round-2's decisive P0 was that my
+round-2 ACCEPTANCES existed only in the debate text — Codex re-opened the runnable files (`narration.mjs`,
+`scenes.mjs`) and verified the fixes hadn't landed. Lesson: treat the debate text as insufficient until the
+ARTIFACTS carry the accepted changes; APPLY them mid-debate (or before the final round) and let the final
+round verify against the files, not the prose. This is what turned an abstract "good critique" into shipped,
+verified hardening. Pairs with doctrine §15.2 (a claim isn't done until the artifact/executed state shows it).
