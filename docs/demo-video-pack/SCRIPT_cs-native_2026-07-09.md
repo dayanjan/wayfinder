@@ -119,5 +119,7 @@ available" toast offers Restart — dismiss via ✕; restarting kills daemon pid
 - ✅ Spine, narration, beat sheet, summary, citation — this doc
 - ✅ Swanson graphic (beats 3+5) — `assets/swanson-graphic.html`
 - ✅ Capture path de-risked (auth + screenshot + video all confirmed)
-- ⬜ Framing slides (beats 1–2) — CS-independent, buildable anytime
-- ⬜ Fri: CS capture (beats 4–6) → narrate → ffmpeg assemble → transcription gate → repo public + scrub → submit
+- ✅ Framing slides (beats 1–2) — `assets/slide-two-floods.html`, `assets/slide-feature-matrix.html`
+- ✅ **CS-native demo pack scaffolded** — `cs/{demo.config,narration,scenes}.mjs` + `cs/README.md`
+  (screen-only gate PASS, syntax-clean; harness drives CS via `STORAGE_STATE`=cs_state.json). Friday runbook in `cs/README.md`.
+- ⬜ Fri: pre-flight (CS port + refresh auth) → `run.mjs --stage=all` → tune `//TODO` scrolls → gate PASS → mux music → repo public + scrub → submit
