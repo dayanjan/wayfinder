@@ -5,8 +5,8 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 
 ## Snapshot
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
-- **Active workstream:** **M5 COMPLETE** (notebook + Claude Science evidence chain + interactive Streamlit workbench app + final demo video). Next = deeper **Claude Science dive** driven by today's product-demo transcript (see `memory/NEXT_SESSION.md`). The demo/app are the **fallback MVP**.
-- **Last updated:** 2026-07-09 (pipeline↔CS mapping + native tracer + solidified full-pipeline-in-CS plan)
+- **Active workstream:** **FULL PIPELINE REPRODUCED NATIVELY IN CLAUDE SCIENCE** — MVP (Stage 0/1/3/5) all PASS, verified-from-DB, archived to `docs/cs-full-pipeline_2026-07-09/`. Generation (LBD sweep, cached-receipt replay), referee (native, from the tracer), and falsification (native anon-S3 STAT6 cis-check) all run in CS; provenance in `operon-cli.db`; cross-model independence stays external (Codex). Only unbuilt stretch = Stage 2 confounder checks. The demo/app/notebook remain the **submission MVP**.
+- **Last updated:** 2026-07-09 (full pipeline reproduced natively in CS — MVP Stage 0/1/3/5)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline — light identifier scrub first)
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -27,6 +27,25 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-09 07:20 — Session close (full-close): full pipeline reproduced natively in Claude Science (MVP Stage 0/1/3/5)
+Implemented the solidified plan's §9 runnable checklist; Claude drove CS headless + verified-from-DB, Codex
+brainstormed + honesty-eval'd. **Stage 0 (feasibility)** — one driven run proved all four external paths from
+the kernel: Europe PMC GET (`"NAB2" AND "atopic eczema"`→**6**), OT GraphQL POST (asthma→**7403**), **anon S3
+lazy read of the 16.8 GB DE matrix opens headless, no download** (self-healed a proxy 403 via virtual
+addressing), 24 `mcp-*` connectors → **resolved the open question: Stage 3 native, no fallback.** **Stage 1
+(generation)** — Codex settled the fork → **Strategy B**; staged the real `arbiter.lbd` package + 4,675-response
+cache into a repo-shaped `/home/dayanjan/pyzobot-cs-stage1`; ran `propose.sweep()` **unchanged** under a
+**pure-replay guard** (cache 4685→4685, delta 0) → funnel **3935/22039/43/30**, ab_gate 26, **NAB2→atopic
+eczema rank 4** (ab66/bc2184/ac_lit6/effect301/score −1.137/supported), all 16 checks ✅. **Stage 3
+(falsification)** — native anon-s3fs+h5py lazy read → **STAT6 +0.0870/adj_p 0.7884 UNMOVED**, NAB2 self
+−3.0783 → **cis-artifact refuted**. **Stage 5 (provenance)** — OPERON (Opus 4.8) wrote the HOP-0→3 receipt
+chain; **3 Sonnet-5 Reviewer frames verified every number AND flagged "validated"/"definitive" (calibrated-
+language), both fixed** — the falsification thesis live in an independent product; `verification_checks`
+populated. Archived 16 artifacts + provenance to `docs/cs-full-pipeline_2026-07-09/` (~$6.41). A closing codex
+honesty-eval → **SHIP-WITH-EDITS** (title scope, drop "definitive", soften "genuinely NAB2's", fix a cost
+typo), all applied. **Next:** decide whether to surface this in the submission (notebook/app/demo) or keep as a
+depth artifact; Stage 2 confounder checks are the only unbuilt stretch.
+
 ### 2026-07-09 06:15 — Session close (full-close): pipeline↔CS mapping + native tracer + solidified plan
 Continued the CS deep-dive into an exploitation plan. **(1)** 3-agent exhaustive reconstruction of the full
 LBD→NAB2 pipeline (30 steps) + per-step Claude Science feasibility → `docs/pipeline-inventory-and-cs-mapping_2026-07-09.md`

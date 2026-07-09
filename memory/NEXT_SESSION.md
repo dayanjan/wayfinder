@@ -1,39 +1,48 @@
 # NEXT_SESSION — async handoff (canonical; written/read by session-closer & session-start)
 
-## Next session priorities — written 2026-07-09 06:15 (full-close)
+## Next session priorities — written 2026-07-09 07:20 (full-close)
 
-**Current state**: Claude Science exploitation is planned and de-risked. The **CS tracer already reproduced
-the 4-hop referee + NAB2 finding natively, digit-for-digit** (`docs/cs-capability-tests_2026-07-08/tracer-artifacts/`),
-and the **full-pipeline-in-CS plan is SOLIDIFIED** — 3-round repo-read codex-debate → **SHIP**
-(`docs/plans/full-pipeline-in-cs-plan_2026-07-09.md` v3). Architecture: **CS = the instrument (generation →
-referee → provenance); Codex = the external cross-model auditor.** Tree clean after this close (plan +
-debate committed). M5 submission artifacts (notebook + app + demo video) remain the fallback MVP.
+**Current state**: **The full LBD→NAB2 instrument now runs natively in Claude Science** — the MVP
+(Stage 0/1/3/5) is COMPLETE, all PASS, verified-from-DB, honesty-audited, and archived to
+`docs/cs-full-pipeline_2026-07-09/` (README + provenance + 4 stage dirs; ~$6.41 CS spend). Generation (LBD
+sweep, cached-receipt replay under a pure-replay guard), referee (native, from the tracer), and falsification
+(native anon-S3 STAT6 cis-check, cis refuted) all live in CS; provenance in `operon-cli.db`; cross-model
+independence stays external (Codex). Tree clean after this close. The demo/app/notebook remain the submission
+MVP; this native-in-CS reproduction is a strong **Claude Use / Depth** capability artifact.
 
-**Next action**: **Implement the plan's §9 runnable checklist in CS**, starting with **Stage 0 (feasibility
-probe)** — one driven CS run that, from the kernel, (a) GETs a Europe PMC `hitCount` (e.g. `"NAB2" AND "atopic
-eczema"` → expect 6), (b) POSTs an Open Targets GraphQL disease→targets query, (c) S3 micro-probe (anon
-`s3fs`+`h5py` open of `GWCD4i.DE_stats.h5ad`, read obs/var labels, close), (d) lists `_mcp-*` connectors.
-Then Stage 1 (LBD proposer, full 3,935 sweep via kernel HTTP + workspace cache) → Stage 3 (S3 cis-check) →
-Stage 5 (provenance from `operon-cli.db`). `[HYBRID]` — Claude drives + verifies-from-DB; author each stage
-prompt into `.claude/scratch/cs-capability-mining/prompts/`.
+**Next action**: **Decide the submission surface for the native-in-CS pipeline** (deadline 2026-07-13). Top
+pick `[CLAUDE]`: fold a tight "the whole instrument runs inside Claude Science" section into the submission
+narrative (README/notebook/app "Claude Science" screen or the demo video) — cite the funnel 3935/22039/43/30,
+NAB2 rank 4, the cis-refutation +0.087/0.79, and the Reviewer's live calibrated-language enforcement, all
+pointing at `docs/cs-full-pipeline_2026-07-09/`. Judging weights Claude Use 25% + Depth 20% — this is the
+highest-leverage place to spend remaining hours. Second option `[CLAUDE]`/`[CODEX-RESCUE]`: build **Stage 2**
+(confounder checks — dynamically-derived FDR clusters 90 & 100 + cytoband via MyGene/`host.mcp`), the only
+unbuilt stretch stage (plan §5 Stage 2).
 
-**Prerequisites**: CS daemon up on :8765 (`wsl -d Ubuntu -- bash -lc 'export PATH=$HOME/.local/bin:$PATH; claude-science status'`);
-data at `/home/dayanjan/pyzobot-data/` (4 CSVs + join_spec.json); hardened driver `~/.claude/skills/drive-claude-science/cs-drive.js`
-(auth `cs_state.json` beside it; re-mints nonce); DB `operon-cli.db` under `~/.claude-science/orgs/741d6512-…/`
-(read via WSL `python3`, no `sqlite3` CLI). Reuse `verify_cs_capabilities.py` + `probe_tracer.py` as verifier seeds.
+**Prerequisites**: CS daemon up on :8765 — run the binary DIRECTLY:
+`wsl -d Ubuntu --cd "~" -- /home/dayanjan/.local/bin/claude-science status` (do NOT `export PATH=$HOME/...:$PATH`
+— the inherited Windows PATH has `(x86)` parens that break `bash -lc`). Nonce URL:
+`wsl -d Ubuntu --cd "~" -- bash -c '$HOME/.local/bin/claude-science url'`. Driver + auth at
+`~/.claude/skills/drive-claude-science/` (`cs-drive.js` + `cs_state.json`). Stage-1 staging tree persists at
+`/home/dayanjan/pyzobot-cs-stage1/` (re-run `.claude/scratch/cs-capability-mining/stage1_prep.sh` via
+`MSYS_NO_PATHCONV=1 wsl -- bash <path>` to refresh). Verifiers: `cs_verify.py` / `cs_provenance.py`.
 
-**Open questions**: Does the S3 in-CS path clear the network-domain approval headlessly (Stage 0-(ii))? If not
-→ documented external fallback for Stage 3. Are `s3fs`/`h5py` in CS's base env or need workspace install?
-Smallest honest Stage-1 proof = the FULL 3,935 sweep (a forced-NAB2 reduced run is plumbing only, not "CS
-generated the question").
+**Open questions**: Surface the native-in-CS pipeline as a submission headline or keep as a depth artifact?
+Is Stage 2 worth building before the deadline, or is the MVP + submission-polish the better spend?
 
 **Do not touch**: never commit `.env`, `data/*.csv`, `data/lbd_cache/`, `data/lbd_out/`, `references/*.pdf`,
-`.claude/scratch/`, `.tmp/`. CS's store `~/.claude-science/` is CS's private data (copy only the audit
-artifacts we produce into `docs/`). Don't re-run the tracer (referee+NAB2 already proven native).
+`.claude/scratch/`, `.tmp/`. CS's store `~/.claude-science/` is CS's private data (copy only audit artifacts
+into `docs/`). Don't re-run Stage 0/1/3/5 — all PASS and archived. The Stage-1 staging tree
+`/home/dayanjan/pyzobot-cs-stage1/` is disposable scaffolding (regenerable), not a source of truth.
 
-**Context to preload**: `docs/plans/full-pipeline-in-cs-plan_2026-07-09.md` (esp. §9 checklist + §5 stages);
-`docs/reviews/codex-debate_full-pipeline-cs_2026-07-09/final_synthesis.md`; `docs/cs-capability-tests_2026-07-08/tracer-artifacts/TRACER-RESULTS.md`;
-`docs/claude-science-test-plan_2026-07-08.md` (operon-cli.db map); `docs/pipeline-inventory-and-cs-mapping_2026-07-09.md`;
-`src/arbiter/lbd/sources.py` + `_http.py` (the code to port); `docs/lbd-methods-explainer.md`; `WORK_PROGRESS.md`; `MEMORY.md`.
+**Context to preload**: `docs/cs-full-pipeline_2026-07-09/README.md` (the whole run at a glance);
+`docs/cs-full-pipeline_2026-07-09/provenance.md`; `docs/cs-full-pipeline_2026-07-09/stage5/receipt_chain.md`
+(the CS-authored end-to-end chain); `docs/plans/full-pipeline-in-cs-plan_2026-07-09.md` (§5 Stage 2 = the
+stretch); `WORK_PROGRESS.md`; `MEMORY.md`; `docs/gotchas.md` (the 2026-07-09 CS gotchas: S3 virtual
+addressing, workspace=OPERON-frame, Git-Bash→WSL quote mangling).
 
-**Estimated budget**: ~0.5–1 day for the MVP (Stage 0/1/3/5); Stage 1 full sweep is the long one (cache makes it replayable).
+**Estimated budget**: ~0.5 day for the submission-surface fold; +0.5–1 day if Stage 2 is built.
+
+---
+
+## Mirror — same handoff block appended to today's session log by session-closer.

@@ -48,3 +48,25 @@ to any "did the guide hit a neighbor?" (e.g. NAB2 guide vs STAT6 1.9 kb away) be
   plain HTTP in `sources.py`; CS's `_mcp-*` connectors don't expose those exact scalars. Port `sources.py`/
   `_http.py` into the kernel with a workspace SHA1 cache (a fresh `--new` project resets the workspace → copy
   `lbd_cache/` in before replay).
+
+## Claude Science full-pipeline-native gotchas — Added: 2026-07-09
+- **Anon S3 in CS needs VIRTUAL addressing.** `s3fs.S3FileSystem(anon=True)` works headless for the public
+  bucket, BUT path-style `s3.amazonaws.com` is proxy-denylisted (403). CS self-heals by switching to the
+  bucket-qualified host `genome-scale-tcell-perturb-seq.s3.amazonaws.com` (virtual addressing); the driver
+  auto-approves the network-domain card. So the 16.8 GB `GWCD4i.DE_stats.h5ad` opens + lazy-reads in-CS with
+  NO download — the S3 cis-check runs natively (no external fallback). Proven Stage 0 + Stage 3 (2026-07-09).
+- **A CS run's workspace dir == the OPERON frame id**, at
+  `~/.claude-science/orgs/<org>/workspaces/<OPERON_FRAME>/`. Get the OPERON frame from `frames` WHERE
+  project_id + agent_name='OPERON'. NOTE: `find` sometimes cannot traverse the workspace (overlay/perms);
+  a DIRECT `wsl -d Ubuntu --cd "~" -- cat /abs/path/...` reads it fine.
+- **Git-Bash → WSL nested-quote mangling (recurring, wastes runs).** A multi-line `wsl -- bash -c '...'`
+  carrying `$VAR=` assignments, `$(...)` subshells, or heredocs silently yields EMPTY variables (symptom:
+  `mkdir: cannot create directory '/src'` = `$DST` empty; or literal quotes in error paths). FIXES: (a) put
+  the script in a FILE and run `MSYS_NO_PATHCONV=1 wsl -d Ubuntu --cd "~" -- bash /mnt/c/.../script.sh`;
+  (b) for one-offs use a single direct command with NO shell vars (`wsl --cd "~" -- cat /abs/path`);
+  (c) always `MSYS_NO_PATHCONV=1` when a `/mnt/c/...` arg is present (else Git-Bash prepends its install root).
+- **CS `verification_checks` surface only when a review is EXPLICITLY requested AND the OPERON frame
+  completes.** Stage 5 (which asked for a review) populated 4 rows; Stage 0/1/3 were async-empty at capture
+  even though a REVIEWER frame ran — the driver-tail "Reviewer · No issues found" is the corroboration. To
+  guarantee captured findings, end the prompt with an explicit "request a review of <file>" and poll the DB
+  after "DONE".

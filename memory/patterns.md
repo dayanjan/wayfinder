@@ -54,3 +54,23 @@ tell Codex each round it may open referenced files to verify claims. Findings th
 spec-completions (r2, 0 re-escalations) → 0 (r3) → SHIP. The debate becomes spec-completion, not argument.
 Pairs with: drive CS with Playwright only to make it DO the work, then VERIFY from `operon-cli.db` +
 kernel-saved files (never UI-scrape).
+
+## Drive-CS → verify-from-DB, per stage — Noted: 2026-07-09
+Each native-in-CS stage: capture `run_start_ms` + `touch ~/.cs_marker_<stage>`; drive backgrounded via
+`cs-drive.js --new`; on DONE, locate artifacts by the OPERON-frame workspace path; confirm the stage's
+accept-JSON fields on disk AND the `operon-cli.db` rows (frames/execution_log/verification_checks). Reusable
+scripts: `.claude/scratch/cs-capability-mining/cs_verify.py` (per-project dump) + `cs_provenance.py`
+(consolidated cost/frames/checks across runs). Embodies doctrine §19 (verify from the DB, not chat text).
+
+## Pure-replay guard (verifiable "zero live calls") — Noted: 2026-07-09
+To PROVE a cached scientific run made no live network calls: monkeypatch the HTTP layer to raise
+(`_http.requests.request = lambda *a,**k: (_ for _ in ()).throw(RuntimeError("LIVE HTTP"))`) and assert the
+on-disk cache-file count is unchanged across the run (delta 0). Lets an honest "native generator + cached
+receipts" claim be checked, not asserted. Pair with a SEPARATE live-access probe (Stage 0) for the
+"the kernel CAN hit the network live" half of the claim. Keep the plumbing smoke guard-FREE (its incidental
+live calls are fine and separate from the funnel-reproduction proof).
+
+## Repo-shaped staging for relocated code — Noted: 2026-07-09
+When porting a package that locates data via `Path(__file__).resolve().parents[N]`, stage it into a
+repo-SHAPED tree (`<root>/src/<pkg>`, `<root>/data`, `<root>/docs/...`) so the relative-path contract
+resolves unchanged after relocation — no code edits, no env shims. Used for `arbiter.lbd` → `/home/dayanjan/pyzobot-cs-stage1`.

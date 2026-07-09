@@ -5,6 +5,17 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+**2026-07-09 (full-close) — FULL PIPELINE REPRODUCED NATIVELY IN CLAUDE SCIENCE (MVP: Stage 0/1/3/5, all PASS).**
+Implemented the solidified plan's §9 checklist. **Stage 0** proved all four external paths from the CS kernel
+(Europe PMC=6, OT asthma=7403, **anon S3 lazy read opens headless — no download**, 24 connectors) → resolved
+the open question (Stage 3 native, no fallback). **Stage 1** ran the real `arbiter.lbd.propose.sweep()`
+unchanged over the full 3,935-gene universe under a **pure-replay guard** (cache delta 0) → funnel
+3935/22039/43/30 + **NAB2→atopic eczema rank 4** exact, ALL_PASS. **Stage 3** native anon-S3 cis-check →
+**STAT6 unmoved (+0.087/adj_p 0.79), cis-artifact refuted**. **Stage 5** CS-authored receipt chain +
+**Sonnet-5 Reviewer verified every number AND enforced calibrated language** (flagged "validated"/"definitive",
+fixed) — the falsification thesis, live in an independent product. Archived to `docs/cs-full-pipeline_2026-07-09/`
+(16 files + provenance from `operon-cli.db`, ~$6.41). Codex brainstormed the Stage-1 design (Strategy B) and
+honesty-eval'd the README (SHIP-WITH-EDITS, applied). Architecture: **CS = instrument; Codex = external auditor.**
 **2026-07-08 (full-close) — M5 SHIPPED IN FULL. The finding + a submittable product both exist.**
 On top of the replicated finding (NAB2 → Th1/Th2 → atopic eczema; STAT6 cis excluded), this session built
 all three M5 artifacts: (1) the executable **evidence-chain notebook**
@@ -52,5 +63,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-08 (M5, full-close) | **M5 shipped in full** | Evidence-chain **notebook**; **Claude Science evidence chain** (independent same verdict + figure); 3-screen Streamlit **"Researcher's Workbench"** app implementing a **Claude co-design** (imported via **DesignSync**), all screens preflight-green; **final demo video** (~112s, ElevenLabs "Brian" + CC-BY music, gate PASS 94%; recipe `docs/demo-video-pack/`). Two 3-round repo-read codex-debates (demo + workbench plans). Track → **"Researcher who also builds"**. Demo/app = fallback MVP |
 | 2026-07-08 (overnight, autonomous) | **Claude Science capability deep-dive** | 5-agent transcript mining → `[DEMO]` catalog + testable inventory; 2-round repo-read codex-debate → executable test plan; **live-verified CS on our install** via drive-then-verify-from-**`operon-cli.db`** (doctrine §19). Confirmed: Reviewer=**Sonnet 5** caught a planted inconsistency (**fail**); OPERON=**Opus 4.8**; inline=**Haiku 4.5**; `host.mcp` batched lookup → **real Ensembl IDs**; `host.delegate` **gated** behind Delegation toggle. Hardened `cs-drive.js`. Docs in `docs/cs-capability-tests_2026-07-08/` + `docs/claude-science-{test-plan,demo-findings}_2026-07-08.md` |
 | 2026-07-09 | **Pipeline↔CS mapping + native tracer + solidified plan** | Exhaustive 30-step LBD→NAB2 pipeline reconstruction + per-step CS feasibility (**~25/30 CS-native**; gap = cross-model/Codex); **LBD methods explainer** (manuscript seed); **CS TRACER** reproduced the 4-hop referee + NAB2 finding **natively, digit-for-digit** (+IL2 untested hero); **full-pipeline-in-CS plan** hardened by a **3-round repo-read codex-debate → SHIP**. Architecture: **CS = instrument, Codex = external cross-model auditor.** Docs: `pipeline-inventory-and-cs-mapping_2026-07-09.md`, `lbd-methods-explainer.md`, `plans/full-pipeline-in-cs-plan_2026-07-09.md`, `reviews/codex-debate_full-pipeline-cs_2026-07-09/` |
+| 2026-07-09 | **Full pipeline reproduced natively in CS (MVP Stage 0/1/3/5)** | Implemented the §9 checklist. Stage 0 (feasibility): all 4 external paths from the kernel, incl. **anon S3 lazy read opens headless** → Stage 3 native. Stage 1 (generation): real `sweep()` unchanged over 3,935 genes under a **pure-replay guard** (cache delta 0) → funnel 3935/22039/43/30 + **NAB2 rank 4** exact, ALL_PASS. Stage 3 (falsification): native anon-S3 → **STAT6 unmoved +0.087/0.79, cis refuted**. Stage 5: CS receipt chain + **Sonnet-5 Reviewer verified numbers + enforced calibrated language**. Codex: Stage-1 design (Strategy B) + README honesty-eval (SHIP-WITH-EDITS, applied). Archived `docs/cs-full-pipeline_2026-07-09/` (16 files, provenance, ~$6.41) |
 
-_Last updated: 2026-07-09 (pipeline↔CS mapping + native tracer + solidified full-pipeline plan)_
+_Last updated: 2026-07-09 (full pipeline reproduced natively in Claude Science — MVP Stage 0/1/3/5)_
