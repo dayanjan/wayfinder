@@ -115,6 +115,13 @@ available" toast offers Restart — dismiss via ✕; restarting kills daemon pid
 - The **full 3,935-gene sweep in CS was a cached replay** — the "CS builds LBD live" beat uses the **micro-sweep** (genuinely live, independently re-verified). Never imply the full sweep was a live crawl.
 - "over a million papers / millions of measurements" are context stats, kept soft — not receipt-claims.
 
+### Debate-hardened additions (codex-debate 2026-07-09 — `cs/narration.mjs` is now authoritative)
+- **Live-vs-cached ON SCREEN (F-002):** beat 5 carries a caption *"full 22,039 sweep = cached-receipt replay · micro-sweep + STAT6 = live"* — the boundary is explicit in the cut, not buried in docs. Beat-4 narration scopes "live" to "author and run a generator live, from scratch" (the micro-sweep).
+- **Show the NO, don't assert it (F-005):** beat 5 includes a **visible refusal receipt** (IL2→untested or SBF2→effect-refuted) — verdict word + reason on screen. This is the moat.
+- **Scoped calibration (F-003/F-004):** "six co-mentions, but no paper drawing the NAB2→Th1/Th2→eczema chain"; "a possible **STAT6 cis-artifact** refuted live; the GWAS label remains a nomination."
+- **Grounded endcap (F-007):** "In this workbench, I built the missing generation half — beside the test" (no product-maturity overclaim).
+- **4 REQUIRED FRAMES are release blockers (F-001/F-011)** — see `cs/CAPTURE_PLAN.md`: live micro-sweep proof · funnel+NAB2 receipt · one concrete NO receipt · reviewer overclaim flag. Pre-capture these FIRST; static artifact overlay if live capture is unreliable.
+
 ## Status (2026-07-09 PM)
 - ✅ Spine, narration, beat sheet, summary, citation — this doc
 - ✅ Swanson graphic (beats 3+5) — `assets/swanson-graphic.html`
@@ -122,4 +129,6 @@ available" toast offers Restart — dismiss via ✕; restarting kills daemon pid
 - ✅ Framing slides (beats 1–2) — `assets/slide-two-floods.html`, `assets/slide-feature-matrix.html`
 - ✅ **CS-native demo pack scaffolded** — `cs/{demo.config,narration,scenes}.mjs` + `cs/README.md`
   (screen-only gate PASS, syntax-clean; harness drives CS via `STORAGE_STATE`=cs_state.json). Friday runbook in `cs/README.md`.
-- ⬜ Fri: pre-flight (CS port + refresh auth) → `run.mjs --stage=all` → tune `//TODO` scrolls → gate PASS → mux music → repo public + scrub → submit
+- ✅ **On-screen capture plan VERIFIED** — all 4 CS conversations opened; frame URLs + money-shot sources + gotchas in `cs/CAPTURE_PLAN.md`.
+- ✅ **Plan hardened via 2-round repo-read codex-debate** — `docs/reviews/codex-debate_cs-native-video-plan_2026-07-09.md`. Spine held (no sanding); accepted fixes applied to `cs/narration.mjs`, `cs/scenes.mjs`, `cs/CAPTURE_PLAN.md`, this doc.
+- ⬜ Fri: pre-flight (CS port + refresh auth) → **pre-capture the 4 required frames (blockers)** → `run.mjs --stage=all` → gate PASS → mux music → repo public + scrub → submit

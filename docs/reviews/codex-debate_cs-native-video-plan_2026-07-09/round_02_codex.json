@@ -1,0 +1,139 @@
+{
+  "round_number": 2,
+  "position_summary": "Claude's revision is directionally right and preserves the important differentiator: hypothesis generation plus deterministic testing/refusal inside the Claude Science workbench. But repo verification shows the revision has not landed in the artifact of record: the runnable CS narration, scene captions, and capture plan still carry the old overclaims and unresolved money-shot TODOs.",
+  "findings": [
+    {
+      "id": "F-011",
+      "title": "Claude's accepted fixes are not implemented in the actual CS demo artifacts",
+      "severity": 5,
+      "likelihood": 5,
+      "blast_radius": 5,
+      "priority": "P0",
+      "evidence": "`docs/demo-video-pack/cs/narration.mjs` still says \"one platform that can generate a hypothesis and validate it\" and \"a connection the literature had never drawn\"; `docs/demo-video-pack/SCRIPT_cs-native_2026-07-09.md` still contains the same old narration; `docs/demo-video-pack/cs/scenes.mjs` still has TODOs for opening the b5 `receipt.md` artifact and reaching b6b `review.json`.",
+      "concern_path": "The debate revision can be correct on paper while the Friday run still records the stale script. That would preserve the exact risks Claude claimed to fix: live/cached ambiguity, novelty inflation, hidden reviewer evidence, and generic UI over receipt proof.",
+      "suggested_action": "Patch the actual runnable files before recording: `cs/narration.mjs`, `SCRIPT_cs-native_2026-07-09.md`, `cs/scenes.mjs`, and `cs/CAPTURE_PLAN.md`. Treat the debate text as insufficient until the screen-recording harness itself carries the scoped lines and exact receipt shots.",
+      "novelty_flag": false,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-012",
+      "title": "The promised live-vs-cached caption is absent, while the scene caption still implies live literature/database calls",
+      "severity": 5,
+      "likelihood": 4,
+      "blast_radius": 5,
+      "priority": "P0",
+      "evidence": "Claude proposed an on-screen caption: `full sweep = CS-native cached-receipt replay \u00b7 micro-sweep + STAT6 S3 = live`. The repo does not contain that caption. Instead `cs/scenes.mjs` sets b4 to `Claude Science authored the LBD generator - live literature + database calls` and b5 to `22,039 questions in - 30 receipt-backed survivors`, with no cached-replay disclosure. The pipeline README explicitly says the full Stage-1 sweep had `delta 0` live calls and was not a fresh web crawl.",
+      "concern_path": "A viewer sees live API language immediately followed by 22,039 funnel numbers. Even if the README is honest, the video can still imply the 22k funnel was crawled live in CS.",
+      "suggested_action": "Put the cached/live boundary on screen during b5, not only in docs: `full 22,039 sweep = cached-receipt replay; live proof = micro-sweep; live falsification = STAT6 S3`. Also change b4 wording to avoid letting `live literature + database calls` bleed into b5.",
+      "novelty_flag": false,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-013",
+      "title": "The confident NO is still asserted more strongly than it is captured",
+      "severity": 4,
+      "likelihood": 4,
+      "blast_radius": 4,
+      "priority": "P1",
+      "evidence": "Claude accepted adding a visible NO receipt, but `cs/scenes.mjs` only sets the generic b5 caption `a confident NO on the rest` and still TODOs opening `receipt.md` for the funnel/NAB2. `CAPTURE_PLAN.md` has no solved capture target for a failed-knockdown or SBF2/effect-refuted receipt. The repo does have evidence elsewhere: tracer artifacts show IL2 as gate-fail untested, and `docs/lbd_finding_nab2_2026-07-08.md` names SBF2 as effect-refuted, but the CS-native b5 capture path does not visibly bind either to the video.",
+      "concern_path": "The submission may say `watch it refuse` while showing only funnel counts or NAB2 support. That undercuts the falsification moat and makes the NO feel like narration rather than a demonstrated capability.",
+      "suggested_action": "Choose one concrete refusal receipt and make it a required frame: IL2 gate-fail untested if using the tracer receipt, SBF2 effect-refuted if using the sweep, or a refuted-for-C example from the stage artifacts. The frame must show the verdict word and the receipt reason, not just the aggregate class count.",
+      "novelty_flag": true,
+      "concern_type": "novelty"
+    },
+    {
+      "id": "F-014",
+      "title": "NAB2 novelty and STAT6 scope remain unpatched in the video text",
+      "severity": 4,
+      "likelihood": 4,
+      "blast_radius": 4,
+      "priority": "P1",
+      "evidence": "`SCRIPT_cs-native_2026-07-09.md` and `cs/narration.mjs` still say NAB2 is `a connection the literature had never drawn` and `Its hardest confounder - refuted live`. The NAB2 finding doc is more nuanced: it reports `6 prior literature co-mentions`, no direct NAB2\u2192Th1/Th2\u2192eczema chain found, and a residual GWAS/LD disease-label caveat while the CRISPRi cis-artifact is what the STAT6 S3 check refutes.",
+      "concern_path": "A hostile judge can attack both lines as over-broad: `never drawn` conflicts with `ac_lit=6` unless scoped to the mechanistic chain, and `hardest confounder refuted` can sound like all STAT6/GWAS shadow concerns are closed.",
+      "suggested_action": "Use Claude's revised wording verbatim in the artifact: `six stray co-mentions, but no paper drawing the NAB2-to-Th1/Th2-to-eczema chain`; `the CRISPRi cis-artifact concern was refuted live; the GWAS disease label remains a nomination`.",
+      "novelty_flag": true,
+      "concern_type": "novelty"
+    },
+    {
+      "id": "F-015",
+      "title": "Static overlays are now the right fallback, but the plan still calls the path screen-only/de-risked",
+      "severity": 3,
+      "likelihood": 4,
+      "blast_radius": 3,
+      "priority": "P2",
+      "evidence": "Claude's revision allows prepared artifact views or static overlays for b5/b6b. The repo still says the capture path is de-risked and the `cs/scenes.mjs` header says screen-only gate PASS, while `CAPTURE_PLAN.md` says b5 and b6b require unsolved artifact-thumbnail selectors or scroll mechanics. Those are not equivalent execution modes.",
+      "concern_path": "On Friday, the builder may burn time trying to preserve the screen-only story when the safer submission path is pre-rendered receipt overlays sourced from `receipt.md` and `review.json`. Conversely, if overlays are used, the README/script should not imply every money shot was reached by live UI navigation.",
+      "suggested_action": "Make the operational rule explicit: screen-only CS UI for b4 and b6a; pre-captured artifact overlay allowed and preferred for b5 funnel/NAB2 and b6b reviewer flags. Label overlays as receipt artifacts from CS, not generic post-production claims.",
+      "novelty_flag": false,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-016",
+      "title": "Raw CS artifacts still contain `validated` wording that can leak into screenshots",
+      "severity": 3,
+      "likelihood": 3,
+      "blast_radius": 3,
+      "priority": "P2",
+      "evidence": "The README says the Reviewer flagged `validated` and `definitive` and they were edited out, but repo search shows `docs/cs-full-pipeline_2026-07-09/live-fullsweep-loose/*.json` and `stage5/chain.json` still contain phrases like `consistent with a validated gene -> program -> disease chain`. The safe reviewer evidence is `stage5/review.json`, not arbitrary raw artifact views.",
+      "concern_path": "If the Friday capture opens the wrong artifact or uses a broad static overlay, the video can accidentally show the exact calibrated-language violation it claims was removed.",
+      "suggested_action": "Whitelist screenshot sources: `stage5/review.json` for the reviewer flags, the curated `receipt_chain.md`/README for calibrated claims, and avoid raw `live-fullsweep-loose` JSON in the video unless cropped to fields that do not include `validated`.",
+      "novelty_flag": false,
+      "concern_type": "correctness"
+    }
+  ],
+  "escalated_findings": [
+    {
+      "prior_finding_id": "F-001",
+      "rationale": "Accepted in debate but not addressed in repo: b5 artifact-open and b6b reviewer-proof remain TODOs in `cs/scenes.mjs` and unsolved mechanics in `CAPTURE_PLAN.md`."
+    },
+    {
+      "prior_finding_id": "F-002",
+      "rationale": "Accepted conceptually, but the promised cached/live caption is absent from the runnable scene and narration files."
+    },
+    {
+      "prior_finding_id": "F-003",
+      "rationale": "Accepted conceptually, but the artifact of record still says `a connection the literature had never drawn` rather than scoping to six co-mentions/no direct chain."
+    },
+    {
+      "prior_finding_id": "F-004",
+      "rationale": "Accepted conceptually, but the video text still says `Its hardest confounder - refuted live` without naming the CRISPRi cis-artifact scope or GWAS-label caveat."
+    },
+    {
+      "prior_finding_id": "F-005",
+      "rationale": "Accepted strongly, but no concrete NO receipt is wired into b5; the current scene only asserts a confident NO in a caption."
+    },
+    {
+      "prior_finding_id": "F-007",
+      "rationale": "Accepted conceptually, but `cs/narration.mjs` and the endcap still use one-platform/product-maturity language rather than the grounded workbench wording."
+    },
+    {
+      "prior_finding_id": "F-008",
+      "rationale": "Accepted conceptually, but b6b still depends on reaching hidden `review.json`/up-transcript evidence and has no prepared artifact overlay in the capture plan."
+    },
+    {
+      "prior_finding_id": "F-010",
+      "rationale": "Partially unresolved: the env var spelling appears internally consistent as `ELLEVENLABS_API_KEY`, but status language remains stale because capture is still described as de-risked while blocker TODOs remain."
+    }
+  ],
+  "dropped_findings": [
+    {
+      "prior_finding_id": "F-006",
+      "rationale": "Claude's primary-CS plan with an explicit hybrid fallback is a reasonable final-week tradeoff. The remaining risk is now captured under the release-blocker and overlay findings rather than as an argument to abandon the CS-native cut."
+    },
+    {
+      "prior_finding_id": "F-009",
+      "rationale": "The Swanson segment is still long, but Claude's choice to keep it as the concept-carrier is defensible for Researcher-track framing. It is not a blocker if the recovered seconds from b5/b6 are used for visible receipts."
+    }
+  ],
+  "new_findings": [
+    "F-011",
+    "F-012",
+    "F-013",
+    "F-014",
+    "F-015",
+    "F-016"
+  ],
+  "convergence_status": "still iterating",
+  "convergence_sanding_warning": null,
+  "recommended_next_question": "Final-round recommendation: do not debate the concept further; patch the actual video artifacts and pre-capture four required frames: live micro-sweep proof, cached/full-sweep disclosure plus NAB2 receipt, one concrete NO receipt, and reviewer `validated/definitive` flag."
+}

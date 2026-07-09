@@ -25,17 +25,20 @@ export const TURNS = {
       "But literature-based discovery carried two burdens: it's a slog to collate, and it generates far more " +
       "hypotheses than anyone can test. Large-scale omics has the mirror problem — mountains of answers with " +
       "no questions. Now there's one platform that can generate a hypothesis and validate it in the same " +
-      "place: Claude Science. The generation half was capable but missing. So I built it." },
+      "place: Claude Science. The generation half was capable but missing — so I built it, and had the " +
+      "workbench author and run a literature-based-discovery generator live, from scratch." },
     { id: "b5_referee", text:
       "Now generation and testing run side by side, each covering the other's weakness. On the Marson lab's " +
-      "CD4 T-cell Perturb-seq data, twenty-two thousand machine-generated hypotheses go in; a deterministic " +
-      "referee culls them with a receipt at every hop — and confidently says no, flagging a failed knockdown " +
-      "as untested, not a false negative. Thirty survive. The standout: NAB2 to the Th1/Th2 program to " +
-      "atopic eczema — a connection the literature had never drawn, backed by a receipt in the data." },
+      "CD4 T-cell Perturb-seq data, the generator posed twenty-two thousand gene-and-disease hypotheses; a " +
+      "deterministic referee re-ran each against the data with a receipt at every hop. Watch it refuse — a " +
+      "failed knockdown comes back untested, not a false negative. Thirty survive. The standout: NAB2 — six " +
+      "stray co-mentions with eczema, but no paper drawing the NAB2-to-Th1/Th2-to-eczema chain — re-derived " +
+      "here, receipt-backed." },
     { id: "b6_selfcheck", text:
-      "Its hardest confounder — refuted live against the original authors' own genome-wide data. And the " +
-      "platform checks itself: a reviewer model caught and killed my overclaim, in real time. Swanson's ABC " +
-      "was just the start — the first of several discovery methods we're bringing to the bench." },
+      "Its hardest confounder — a possible STAT6 cis-artifact — was refuted live against the authors' own " +
+      "genome-wide data; the GWAS disease label remains a nomination. And the platform checks itself: a " +
+      "reviewer model flagged the words validated and definitive as overclaims, and I cut them. Swanson's " +
+      "ABC was just the start — the first of several discovery methods we're bringing to the bench." },
   ],
 };
 
@@ -44,6 +47,7 @@ export const CARDS = {
     "PyZoBot Arbiter. When you don't know what to ask, let the data's implicit hypotheses surface — " +
     "and build literature-based discovery right where you test it. The library and the lab, on one bench." },
   endcap: { text:
-    "Generate a hypothesis from the literature, test it on the data, in one platform. Receipt-backed, " +
-    "willing to refute, and reproducible from public Perturb-seq data. That is PyZoBot Arbiter." },
+    "In this workbench, I built the missing generation half — beside the test. Generate a hypothesis from " +
+    "the literature, then refute it or back it with a receipt, in one place. Reproducible from public " +
+    "Perturb-seq data. That is PyZoBot Arbiter." },
 };

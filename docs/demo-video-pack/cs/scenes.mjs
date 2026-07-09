@@ -69,15 +69,21 @@ export const SCENES = {
     await rec.sceneEnd();
     await rec.setCaption("");
 
-    // ── B5 · the referee culls (22,039 -> 30) + NAB2 payoff ──────────────────
+    // ── B5 · referee culls (22,039 -> 30) + a VISIBLE NO + NAB2 payoff ────────
+    // REQUIRED frames (release blockers — see CAPTURE_PLAN.md): (1) funnel + NAB2 receipt,
+    // (2) ONE concrete NO receipt (verdict word + reason). Artifact-overlay preferred over live scroll.
     await p.goto(FRAMES.b5, { waitUntil: "domcontentloaded", timeout: 30000 });
     await rec.sleep(2500); await dismissChrome(rec);
     rec.sceneStart("b5_referee");
-    await rec.setCaption("22,039 questions in — 30 receipt-backed survivors; a confident NO on the rest");
-    //TODO Fri: open the receipt.md ARTIFACT THUMBNAIL (not inline text) for the funnel + NAB2 rank
-    //          (ab 66 / bc 2184 / ac_lit 6 / ac_known 0.0376 / effect 301 / supported). See CAPTURE_PLAN.md.
-    const b5 = rec.durations["b5_referee"] || 22;
-    await rec.untilT(Math.max(1, b5 - 8));
+    // Honesty caption — scope live-vs-cached ON SCREEN (F-002/F-012), not buried in docs:
+    await rec.setCaption("full 22,039 sweep = CS-native cached-receipt replay · live proof = micro-sweep · falsification = STAT6 S3");
+    //TODO Fri: open the receipt.md ARTIFACT (funnel + NAB2: ab66/bc2184/ac_lit6/ac_known0.0376/effect301/supported).
+    const b5 = rec.durations["b5_referee"] || 24;
+    await rec.untilT(Math.max(1, b5 * 0.45));
+    // The MOAT made visible (F-005/F-013): show one concrete refusal receipt, verdict word + reason.
+    await rec.setCaption("Watch it refuse — a failed knockdown returns UNTESTED, not a false negative");
+    //TODO Fri: REQUIRED frame — IL2 untested (tracer) OR SBF2 effect-refuted; show the verdict word + the receipt reason.
+    await rec.untilT(Math.max(1, b5 - 7));
     await rec.setCaption("");
     await p.goto(ASSETS + "swanson-graphic.html?scene=nab2", { waitUntil: "load", timeout: 20000 }); // NAB2 A->B->C payoff
     await rec.sceneEnd();
@@ -86,14 +92,14 @@ export const SCENES = {
     await p.goto(FRAMES.b6a, { waitUntil: "domcontentloaded", timeout: 30000 });
     await rec.sleep(2500); await dismissChrome(rec);
     rec.sceneStart("b6_selfcheck");
-    await rec.setCaption("Hardest confounder refuted live — STAT6 unmoved under NAB2 knockdown");
-    // b6a "Cis-exclusion statement (calibrated)" is visible on load.
+    await rec.setCaption("A possible STAT6 cis-artifact — refuted live; the GWAS disease label stays a nomination");
+    // b6a "Cis-exclusion statement (calibrated)" is visible on load (screen-only, no overlay needed).
     const b6 = rec.durations["b6_selfcheck"] || 20;
     await rec.untilT(Math.max(1, b6 - 8));
     await p.goto(FRAMES.b6b, { waitUntil: "domcontentloaded", timeout: 30000 });
     await rec.sleep(2000); await dismissChrome(rec);
-    await rec.setCaption("...and the platform checks itself — a reviewer model killed my overclaim");
-    //TODO Fri: reach the calibrated-language finding (scroll up / open review.json). See CAPTURE_PLAN.md.
+    await rec.setCaption("...and the platform checks itself — a reviewer flagged 'validated' and 'definitive'");
+    //TODO Fri: REQUIRED frame — the reviewer flag from stage5/review.json (prepared overlay preferred; NOT raw loose JSON).
     await rec.sceneEnd();
     await rec.setCaption("");
   },

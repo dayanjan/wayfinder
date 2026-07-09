@@ -34,3 +34,20 @@ flow; the frame URLs are the robust fallback.
 ## Honesty note carried from the shots
 - b4 shows **"Review — blocked"** (delegation/ultra-mode off) — the micro-sweep's Reviewer did not run there; the live Reviewer-catches-overclaim moment is the **stage5 (b6b)** conversation. Keep beat 6's "platform checks itself" tied to b6b, not b4.
 - b4's liveness proof is the genuine LIVE beat (TADA2B counts re-verified against live Europe PMC). Use it — never imply the full sweep was a live crawl.
+
+## REQUIRED FRAMES — release blockers (codex-debate 2026-07-09, F-001/F-011/F-013)
+Pre-capture these FOUR frames FIRST (screenshot the exact receipt), confirm they're crisp, and only then
+assemble. If any won't capture cleanly, use a prepared static artifact overlay of that receipt — never
+narrate the claim over generic CS UI.
+1. **Live micro-sweep proof** — b4 "Liveness proof (this run)" (ab→7 / bc→30473 / ac_lit→82 / OT→3000) + `executed_code.py`.
+2. **Funnel + NAB2 receipt** — b5 `receipt.md` artifact (ab66 / bc2184 / ac_lit6 / ac_known0.0376 / effect301 / supported).
+3. **One concrete NO receipt** — the MOAT made visible: IL2 → *untested* (tracer) OR SBF2 → *effect-refuted*. Must show the **verdict word + the receipt reason**, not just the aggregate "30 supported" count.
+4. **Reviewer overclaim flag** — the calibrated-language finding ("validated"/"definitive") from **stage5 `review.json`**.
+
+## Overlay rule (F-015) — what is screen-only vs prepared overlay
+- **Screen-only CS UI** (live drive): **b4** (liveness proof) and **b6a** (cis-exclusion statement) — both visible on load.
+- **Prepared artifact overlay preferred** for **b5** (funnel/NAB2) and **b6b** (reviewer flag) — the open-at-bottom + no-scroll mechanics make live capture unreliable. Label the overlay as a **CS receipt artifact** (from `receipt.md` / `review.json`), not a generic post-production graphic.
+
+## Screenshot source whitelist (F-016) — avoid leaking stale "validated" wording
+- Reviewer flags → **`stage5/review.json`**. Calibrated claims → curated **`receipt_chain.md`** / the cs-full-pipeline README.
+- Do NOT screenshot raw `live-fullsweep-loose/*.json` unless cropped to fields that do **not** contain the word "validated" (older artifacts pre-date the calibrated-language fixes).
