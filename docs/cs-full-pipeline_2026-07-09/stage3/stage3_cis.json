@@ -1,0 +1,61 @@
+{
+  "condition": "Stim8hr",
+  "perturbation": "NAB2",
+  "opened": true,
+  "lazy_read_no_download": true,
+  "n_genes_measured": 10282,
+  "per_gene": {
+    "STAT6": {
+      "measured": true,
+      "log2fc": 0.0870007191641749,
+      "zscore": 1.1964120627601222,
+      "adj_p": 0.788380778707901,
+      "significant": false
+    },
+    "NAB2": {
+      "measured": true,
+      "log2fc": -3.07827434857406,
+      "zscore": -16.88158589006466,
+      "adj_p": 7.161993348468421e-60,
+      "significant": true
+    },
+    "STAT2": {
+      "measured": true,
+      "log2fc": 0.3033277069218743,
+      "zscore": 2.7064285490067057,
+      "adj_p": 0.1760556831043918,
+      "significant": false
+    },
+    "NDUFA12": {
+      "measured": true,
+      "log2fc": -0.012904053579629,
+      "zscore": -0.21849325133634848,
+      "adj_p": 0.9999965905961636,
+      "significant": false
+    },
+    "LRP1": {
+      "measured": false
+    },
+    "SHMT2": {
+      "measured": true,
+      "log2fc": -0.1233676289650435,
+      "zscore": -1.722277030174088,
+      "adj_p": 0.5864136895712773,
+      "significant": false
+    }
+  },
+  "stat6_abs_logfc_rank": 5444,
+  "stat6_abs_logfc_rank_of_measured": "5444 of 10282",
+  "n_genes_significantly_moved": 302,
+  "nab2_on_target_log2fc": -3.07827434857406,
+  "checks": {
+    "file_opened": true,
+    "stat6_log2fc_small_positive": true,
+    "stat6_log2fc_near_0.09": true,
+    "stat6_not_significant": true,
+    "stat6_adjp_near_0.79": true,
+    "nab2_on_target_strongly_negative": true,
+    "nab2_on_target_near_-3.08": true
+  },
+  "ALL_PASS": true
+}

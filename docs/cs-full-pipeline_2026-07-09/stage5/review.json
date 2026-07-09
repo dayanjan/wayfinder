@@ -1,0 +1,19 @@
+{
+  "verdict": "PASS_WITH_NOTES",
+  "numeric_fidelity": {
+    "status": "PASS",
+    "discrepancies": []
+  },
+  "calibrated_language": {
+    "status": "PASS_WITH_NOTES",
+    "violations": [
+      "Title/subtitle ‘A validated T-cell finding, reproduced natively across stages’ asserts the finding itself is ‘validated,’ which overstates the source’s actual verdict of ‘novel, reproducible NOMINATION’ — ‘validated’ is not one of the sanctioned calibration terms (reproduced/re-derived/consistent with/refuted/untested) and reads as a certainty upgrade akin to ‘proven.’",
+      "Section heading ‘The definitive confounder falsification (Stage 3, native S3 read)’ uses ‘definitive,’ which is not part of the calibrated vocabulary and adds unwarranted certainty beyond the source’s plain ‘REFUTED’ status label."
+    ]
+  },
+  "honesty_framing": {
+    "status": "PASS",
+    "issues": []
+  },
+  "summary": "All numeric values cited in the DOC — the LBD funnel counts, the NAB2 row receipt, all four hop receipts, and the cis-artifact-check figures — match the SOURCE-OF-TRUTH (reviewer output truncated at token limit; numeric, language, and framing verdicts complete)."
+}

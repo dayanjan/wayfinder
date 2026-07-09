@@ -1,0 +1,112 @@
+{
+  "finding": {
+    "nomination": "NAB2 is a Th1/Th2 program regulator",
+    "disease_link": "atopic eczema (Open Targets GWAS-genetic; flagged as genetic, not experimentally re-derived here)",
+    "verdict": "novel, reproducible NOMINATION",
+    "lbd_rank": 4,
+    "lbd_universe": "30 clean full-chain-supported questions out of 3,935 candidate A-genes"
+  },
+  "lbd_funnel": {
+    "a_genes": 3935,
+    "eligible_pairs": 22039,
+    "disease_C_supported": 43,
+    "clean_full_chain": 30,
+    "nab2_row_receipt": {
+      "ab": 66,
+      "bc": 2184,
+      "ac_lit": 6,
+      "ac_lit_note": "near-novel",
+      "ac_known": 0.0376,
+      "effect_downstream_genes": 301
+    }
+  },
+  "hops": {
+    "HOP-0": {
+      "name": "KNOCKDOWN-QC GATE",
+      "status": "PASS",
+      "role": "hero gate \u2014 only a silenced gene yields an interpretable downstream result; a failed knockdown is UNTESTED, never 'no effect'",
+      "receipt": {
+        "guides_significant": "2/2",
+        "best_adj_p": 1e-16,
+        "guide_expr": 0.056,
+        "ntc_expr": 0.567
+      }
+    },
+    "HOP-1": {
+      "name": "EFFECT",
+      "status": "supported",
+      "receipt": {
+        "on_target_significant": true,
+        "effect_size": -16.88,
+        "downstream_DE_genes": 301,
+        "off_target_flag": false
+      }
+    },
+    "HOP-2": {
+      "name": "PROGRAM (Th1/Th2, both contrasts)",
+      "status": "supported",
+      "receipt": {
+        "Ota_2021": {
+          "z": 7.708,
+          "adj_p": 1.95e-13,
+          "call": "Th1-associated"
+        },
+        "Hollbacher": {
+          "call": "n.s.",
+          "handling": "reported, not collapsed"
+        }
+      }
+    },
+    "HOP-3": {
+      "name": "DISEASE (atopic eczema, condition-matched)",
+      "status": "supported",
+      "receipt": {
+        "cluster_100": {
+          "OR": 3.899,
+          "FDR": 0.0028
+        },
+        "cluster_90": {
+          "OR": 3.43,
+          "FDR": 0.0224
+        }
+      }
+    }
+  },
+  "cis_artifact_check": {
+    "name": "CIS-ARTIFACT falsification (Stage 3, native S3 read)",
+    "hypothesis_tested": "NAB2 guide is ~1.9 kb from STAT6 (master Th2 regulator); could the eczema signal be STAT6 bleed?",
+    "status": "REFUTED",
+    "receipt": {
+      "distance_to_STAT6_kb": 1.9,
+      "STAT6_mRNA_log2FC": 0.09,
+      "STAT6_adj_p": 0.79,
+      "STAT6_call": "UNMOVED",
+      "NAB2_self_knockdown_log2FC": -3.08
+    },
+    "conclusion": "CRISPRi cis-artifact REFUTED; the eczema effect is genuinely NAB2's, not STAT6 bleed"
+  },
+  "what_ran_where": [
+    {
+      "stage": "Generation (Stage 1)",
+      "component": "LBD generator over full 3,935-gene Stim8hr universe",
+      "execution": "native, deterministic code path replaying cached Europe PMC / Open Targets JSON receipts from workbench-local cache; Stage-0 probe separately proved live Europe PMC GET + Open Targets GraphQL POST"
+    },
+    {
+      "stage": "Referee (4-hop)",
+      "component": "HOP-0 -> HOP-3 chain",
+      "execution": "native pandas over the deposited tables; funnel and NAB2 rank reproduced digit-for-digit"
+    },
+    {
+      "stage": "Cis-check (Stage 3)",
+      "component": "STAT6 cis-artifact falsification",
+      "execution": "live read of authors' deposited genome-wide DE matrix from public S3"
+    },
+    {
+      "stage": "Provenance",
+      "component": "receipt audit store",
+      "execution": "this workbench's audit store"
+    }
+  ],
+  "cross_model_replication": "kept external as an independent auditor (a second model family)",
+  "overall_verdict": "CONSISTENT WITH a validated gene -> Th1/Th2 program -> disease chain, re-derived from the tables: a novel, reproducible NOMINATION that NAB2 is a Th1/Th2 regulator; the atopic-eczema disease link is Open-Targets GWAS-genetic and flagged as such."
+}

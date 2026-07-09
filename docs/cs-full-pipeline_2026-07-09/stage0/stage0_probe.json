@@ -1,0 +1,171 @@
+{
+  "run_label": "PyZoBot stage0 probe",
+  "probe_A_europepmc": {
+    "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+    "queries": [
+      {
+        "query_string": "(\"NAB2\") AND (\"atopic eczema\")",
+        "hitCount": 6
+      },
+      {
+        "query_string": "(\"NAB2\") AND (\"Th2 cells\" OR \"T helper 2\" OR \"type 2 immunity\")",
+        "hitCount": 31
+      }
+    ]
+  },
+  "probe_B_opentargets": {
+    "endpoint": "https://api.platform.opentargets.org/api/v4/graphql",
+    "disease_id": "MONDO_0004979",
+    "disease_name": "asthma",
+    "total_count": 7403,
+    "top_rows": [
+      {
+        "symbol": "FLG",
+        "score": 0.7445012088296152
+      },
+      {
+        "symbol": "IL4R",
+        "score": 0.743645092476791
+      },
+      {
+        "symbol": "ADORA1",
+        "score": 0.7226049513464061
+      },
+      {
+        "symbol": "IL33",
+        "score": 0.7213803928330167
+      },
+      {
+        "symbol": "TSLP",
+        "score": 0.7183914467397707
+      },
+      {
+        "symbol": "IL5",
+        "score": 0.7105581617328595
+      },
+      {
+        "symbol": "IL13",
+        "score": 0.6963094766469521
+      },
+      {
+        "symbol": "PDE4D",
+        "score": 0.6842517354699087
+      },
+      {
+        "symbol": "CHRM2",
+        "score": 0.6388104563077198
+      },
+      {
+        "symbol": "ADRB2",
+        "score": 0.6340651619446458
+      }
+    ]
+  },
+  "probe_C_s3": {
+    "s3_key": "genome-scale-tcell-perturb-seq/marson2025_data/GWCD4i.DE_stats.h5ad",
+    "opened": true,
+    "top_level_keys": [
+      "X",
+      "layers",
+      "obs",
+      "obsm",
+      "obsp",
+      "uns",
+      "var",
+      "varm",
+      "varp"
+    ],
+    "obs_keys": [
+      "chunk",
+      "culture_condition",
+      "distal_offtarget_flag",
+      "donor_correlation_all_mean",
+      "donor_correlation_all_min",
+      "donor_correlation_hits_mean",
+      "donor_correlation_hits_min",
+      "guide_correlation_all",
+      "guide_correlation_all_pval",
+      "guide_correlation_signif",
+      "guide_correlation_signif_pval",
+      "guide_n_signif_ontarget",
+      "index",
+      "low_target_gex",
+      "n_cells_target",
+      "n_down_genes",
+      "n_downstream",
+      "n_guides",
+      "n_total_de_genes",
+      "n_total_genes_category",
+      "n_up_genes",
+      "neighboring_gene_KD",
+      "ontarget_effect_size",
+      "ontarget_significant",
+      "single_guide_estimate",
+      "target_baseMean",
+      "target_contrast",
+      "target_contrast_gene_name"
+    ],
+    "var_keys": [
+      "_index",
+      "gene_ids",
+      "gene_name"
+    ],
+    "target_contrast_sample": [
+      "A1BG",
+      "A2M",
+      "AAAS",
+      "AACS",
+      "AAGAB",
+      "AAK1",
+      "AAMDC",
+      "AAR2"
+    ],
+    "culture_conditions": [
+      "Rest",
+      "Stim8hr",
+      "Stim48hr"
+    ],
+    "gene_names_head": [
+      "DPM1",
+      "SCYL3",
+      "C1orf112",
+      "CFH",
+      "FUCA2",
+      "GCLC",
+      "STPG1",
+      "NIPAL3"
+    ],
+    "bytes_downloaded_note": "lazy range reads only, no full download",
+    "error": null
+  },
+  "probe_D_connectors": {
+    "connectors": [
+      "biomart",
+      "biorxiv",
+      "cancer-models",
+      "cellguide",
+      "chembl",
+      "chemistry",
+      "clinical-genomics",
+      "clinical-trials",
+      "drug-regulatory",
+      "expression",
+      "genes-ontologies",
+      "genomes",
+      "human-genetics",
+      "ketcher-chemistry",
+      "literature",
+      "omics-archives",
+      "protein-annotation",
+      "pubmed",
+      "regulation",
+      "research-resources",
+      "rna",
+      "structures-interactions",
+      "variants",
+      "zinc"
+    ],
+    "notes": "Enumerated via search_skills(prefix='mcp-'): 24 mcp-* connector skill docs are registered; connector server name = doc name minus the 'mcp-' prefix. Confirmed live by a real call host.mcp('genes-ontologies','query_genes',terms=['NAB2']) -> reachable=True."
+  },
+  "overall": "All four paths succeeded: A (Europe PMC HTTP GET) and B (Open Targets GraphQL POST) worked directly; C (anonymous lazy S3 HDF5 range-read) required installing s3fs/h5py AND a network grant for the bucket-qualified host genome-scale-tcell-perturb-seq.s3.amazonaws.com plus virtual addressing_style, then opened and read tiny label arrays with no full download; D enumerated 24 live MCP connectors. C was ultimately a success (initial proxy 403 was resolved by the granted bucket-qualified endpoint \u2014 no genuine network blocker remains)."
+}

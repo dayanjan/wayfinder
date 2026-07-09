@@ -1,0 +1,79 @@
+=== PLUMBING ONLY — not the funnel ===
+PLUMBING preflight n_eligible_survivors: 82
+PLUMBING referee_triple NAB2/atopic eczema answer: supported (expect 'supported')
+[sweep] condition=Stim8hr genes=3935 diseases=12
+[sweep] bc + known maps done
+[sweep] ab 250/3935
+[sweep] ab 500/3935
+[sweep] ab 750/3935
+[sweep] ab 1000/3935
+[sweep] ab 1250/3935
+[sweep] ab 1500/3935
+[sweep] ab 1750/3935
+[sweep] ab 2000/3935
+[sweep] ab 2250/3935
+[sweep] ab 2500/3935
+[sweep] ab 2750/3935
+[sweep] ab 3000/3935
+[sweep] ab 3250/3935
+[sweep] ab 3500/3935
+[sweep] ab 3750/3935
+[sweep] ab done; ab_gate(0.5)=26
+[sweep] eligible pairs (pre-referee): 22039
+[sweep] chain classes: {'refuted_for_c': 21995, 'supported': 30, 'supported_weak': 10, 'supported_flagged': 3, 'refuted_effect': 1}
+[sweep] disease-C-supported survivors (clean+flagged+weak): 43
+[sweep] scored 43 disease-C-supported survivors
+=== PURE REPLAY confirmed: cache files before=4685 after=4685 (delta=0) ===
+
+=== FULL FUNNEL ===
+{
+  "a_genes": 3935,
+  "eligible_pairs": 22039,
+  "chain_classes": {
+    "refuted_for_c": 21995,
+    "supported": 30,
+    "supported_weak": 10,
+    "supported_flagged": 3,
+    "refuted_effect": 1
+  },
+  "clean_supported": 30,
+  "disease_c_supported_total": 43,
+  "pure_disjoint_clean": 1
+}
+
+=== NAB2 -> atopic eczema row (rank 4 ) ===
+{
+  "a_gene": "NAB2",
+  "b_program": "Th1_Th2_polarization",
+  "c_disease": "atopic eczema",
+  "condition": "Stim8hr",
+  "ab": 66,
+  "bc": 2184,
+  "ac_lit": 6,
+  "ac_known": 0.0376,
+  "effect": 301,
+  "pure_disjoint": false,
+  "score": -1.137,
+  "referee_answer": "supported",
+  "referee_overall": "consistent with a validated gene -> program -> disease chain re-derived from the tables"
+}
+
+=== ACCEPTANCE CHECKS ===
+  [PASS] funnel.a_genes: expected=3935 actual=3935
+  [PASS] funnel.eligible_pairs: expected=22039 actual=22039
+  [PASS] funnel.disease_c_supported_total: expected=43 actual=43
+  [PASS] funnel.clean_supported: expected=30 actual=30
+  [PASS] funnel.pure_disjoint_clean: expected=1 actual=1
+  [PASS] funnel.chain_classes: expected={'refuted_for_c': 21995, 'supported': 30, 'supported_weak': 10, 'supported_flagged': 3, 'refuted_effect': 1} actual={'refuted_for_c': 21995, 'supported': 30, 'supported_weak': 10, 'supported_flagged': 3, 'refuted_effect': 1}
+  [PASS] params.ab_gate_value: expected=26 actual=26
+  [PASS] pure_replay_cache_delta: expected=0 actual=0
+  [PASS] NAB2 rank (1-based): expected=4 actual=4
+  [PASS] NAB2 ab: expected=66 actual=66
+  [PASS] NAB2 bc: expected=2184 actual=2184
+  [PASS] NAB2 ac_lit: expected=6 actual=6
+  [PASS] NAB2 ac_known: expected=0.0376 actual=0.0376
+  [PASS] NAB2 effect: expected=301 actual=301
+  [PASS] NAB2 referee_answer: expected='supported' actual='supported'
+  [PASS] NAB2 score (3dp): expected=-1.137 actual=-1.137
+
+ALL_PASS = True
