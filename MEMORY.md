@@ -5,6 +5,21 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+**2026-07-09 (EVENING, full-close) — SUBMISSION PIVOTED TO A CS-NATIVE 3-MIN VIDEO; ALL DESIGN + DE-RISK +
+DEBATE-HARDENING BANKED. DEADLINE MOVED UP TO EOD FRI 2026-07-10 (out of town Sat–Mon). Friday = capture +
+assemble + submit only.** New spine: *when you don't know what to ask, use LBD to surface the data's implicit
+hypotheses — built directly in Claude Science; the library and the lab on one bench.* Tonight: spine +
+narration + 6-beat sheet + 100–180w summary; dataset attribution corrected to the **Marson lab** (Zhu, Dann,
+… Marson; bioRxiv doi:10.64898/2025.12.23.696273), citation locked; **3 visual assets** (Swanson ABC
+dual-scene graphic, two-floods + feature-matrix slides — 1920×1080, brand palette, QA'd); **capture path
+de-risked** (Playwright + saved CS auth: screenshot + video) and **all 4 CS conversations opened** →
+verified per-beat money shots + frame URLs + the two gotchas (opens-at-bottom, wheel-no-scroll → open the
+receipt artifact) in `cs/CAPTURE_PLAN.md`; **CS-native demo pack** (`cs/*.mjs` + README + CAPTURE_PLAN;
+harness drives CS via `STORAGE_STATE=cs_state.json`; gate PASS); **2-round repo-read codex-debate**
+(`--preserve-intent`) → spine held (no sanding), 2 P0s fixed (money-shot receipts = release blockers;
+live-vs-cached explicit on-screen), the confident NO made **visible**, calibration tightened — all applied to
+the runnable artifacts (`docs/reviews/codex-debate_cs-native-video-plan_2026-07-09.md`). Streamlit app + prior
+video remain the fallback MVP → this video is upside, not gating. All pushed (`49f9453`).
 **2026-07-09 (PM, full-close) — CS INSTRUMENT EXTENDED (live micro-sweep + 100%-live 3-condition loose sweep)
 + NAB2 DRUG-TARGET & DIRECTION INVESTIGATED. Next session = MANUSCRIPT + remaining-experiments gap analysis.**
 Thread A (CS instrument): CS AUTHORED its own LBD generator and ran it 100% live from scratch (liveness
@@ -79,4 +94,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 
 | 2026-07-09 (PM) | **CS instrument extended + NAB2 target/direction** | Live from-scratch micro-sweep (CS authored its own generator, liveness-verified); 100%-live loose sweep all 3 conditions (9,557 live calls) → filter-safe + NAB2 reproduced (Stim8hr rank 4, timepoint-specific) + 39 candidates (34 timepoint-specific), `CANDIDATES.md`; fixed inverted referee direction label (verdicts safe). DepMap = negative-for-cancer-target. **GEO direction mining** (3-round live-verified codex-debate → NO-CALL → ARM-D scRNA) → **association-backed NAB2-DOWN per-cell in lesional skin; knockdown likely backwards → Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Docs: `nab2-direction-geo_2026-07-09/`, `nab2-depmap-check_2026-07-09/` |
 
-_Last updated: 2026-07-09 PM (CS instrument extended + NAB2 target/direction; next = manuscript + experiment gaps)_
+| 2026-07-09 (evening) | **Submission → CS-native video (pivot) + full de-risk** | Spine decided + polished (LBD-in-CS; library+lab on one bench); dataset attribution → Marson lab, citation locked; 3 QA'd visual assets (Swanson ABC graphic + 2 slides); capture de-risked (Playwright+saved CS auth) + all 4 CS conversations opened → verified capture plan (`cs/CAPTURE_PLAN.md`); CS-native demo pack (`cs/*`, harness via STORAGE_STATE, gate PASS); **2-round repo-read codex-debate** → spine held, 2 P0s fixed + NO made visible + calibration tightened, all applied. Deadline pulled to EOD Fri. Friday = capture+assemble+submit. Streamlit MVP = fallback |
+
+_Last updated: 2026-07-09 evening (submission pivoted to CS-native video; design+de-risk+debate banked; Friday = capture+assemble+submit)_

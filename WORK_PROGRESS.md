@@ -5,8 +5,9 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 
 ## Snapshot
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
-- **Active workstream:** **CS instrument extended + NAB2 target/direction investigated — next session = MANUSCRIPT assembly + remaining-experiments gap analysis.** CS now proven to AUTHOR + run the LBD generator 100% live from scratch (micro-sweep) AND at full scale over all genes × 3 conditions (loose sweep: filter-safe, NAB2 reproduced Stim8hr-specific, 39 candidates in `CANDIDATES.md`). NAB2 drug-target verdict: DepMap negative-for-cancer; **GEO direction mining → association-backed NAB2-DOWN per-cell in lesional skin → knockdown likely backwards, NAB2 reads as a Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Referee direction-label bug fixed (verdicts safe). Only unbuilt CS stretch = Stage 2. Demo/app/notebook remain the **submission MVP**.
-- **Last updated:** 2026-07-09 PM (CS instrument extended + NAB2 target/direction; next = manuscript + experiment gaps)
+- **Active workstream:** **Submission → CS-native 3-min video (see the Working-target line below). Next session = capture + assemble + submit.** _(Manuscript + remaining-experiments gap analysis deferred — post-submission upside, not this week.)_ Prior finding state: CS proven to AUTHOR + run the LBD generator 100% live from scratch (micro-sweep) AND at full scale over all genes × 3 conditions (loose sweep: filter-safe, NAB2 reproduced Stim8hr-specific, 39 candidates in `CANDIDATES.md`). NAB2 drug-target verdict: DepMap negative-for-cancer; **GEO direction mining → association-backed NAB2-DOWN per-cell in lesional skin → knockdown likely backwards, NAB2 reads as a Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Referee direction-label bug fixed (verdicts safe). Only unbuilt CS stretch = Stage 2. Demo/app/notebook remain the **submission MVP**.
+- **Working target: submit by EOD Friday 2026-07-10** (operator out of town Sat–Mon; official deadline still 2026-07-13). **Submission pivoted to a CS-native 3-min video**; tonight banked all design + de-risk + a 2-round codex-debate hardening (spine held). Friday = pre-capture 4 required frames (blockers) → assemble → gate → submit. Streamlit app + prior demo video = fallback MVP. Assets: `docs/demo-video-pack/cs/` + `assets/`.
+- **Last updated:** 2026-07-09 evening (submission → CS-native video; design+de-risk+debate banked; Friday = capture+assemble+submit)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline — light identifier scrub first)
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -27,6 +28,25 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-09 19:12 — Session close (full-close): submission pivoted to CS-native video + full de-risk + codex-debate
+Interactive evening session. **Pivoted the submission to a CS-native 3-minute video** (skip the Streamlit
+app in the cut; app stays as fallback MVP). New spine: *when you don't know what to ask, use LBD to surface
+the data's implicit hypotheses — built directly in Claude Science; the library and the lab on one bench.*
+**Deadline pulled to EOD Friday 2026-07-10** (out of town Sat–Mon). Banked ALL of: spine + narration +
+6-beat sheet + 100–180w summary; dataset attribution corrected to the **Marson lab** (Zhu, Dann, … Marson;
+bioRxiv doi:10.64898/2025.12.23.696273), citation locked; **3 QA'd 1920×1080 HTML assets** (Swanson ABC
+dual-scene graphic + two-floods + feature-matrix slides); **capture path de-risked** (Playwright + saved CS
+auth → screenshot + video) and **all 4 target CS conversations opened** → verified per-beat money-shot
+sources + frame URLs + two gotchas (opens-at-bottom, wheel-no-scroll → open receipt artifact) in
+`cs/CAPTURE_PLAN.md`; **CS-native demo pack** `cs/{demo.config,narration,scenes}.mjs` + `README.md` +
+`CAPTURE_PLAN.md` (harness drives CS via `STORAGE_STATE=cs_state.json`; screen-only gate PASS; syntax-clean);
+**2-round repo-read codex-debate** (`--preserve-intent`) → spine held (no sanding), fixed 2 P0s (money-shot
+receipts = release blockers; live-vs-cached explicit on-screen), made the confident **NO visible**, tightened
+calibration — ALL accepted fixes applied to the runnable artifacts. Record:
+`docs/reviews/codex-debate_cs-native-video-plan_2026-07-09.md`. Friday = pre-capture 4 required frames
+(blockers) → `run.mjs --stage=all` → gate → mux → repo public + scrub → submit. All committed + pushed
+(`49f9453`). Tree clean.
+
 ### 2026-07-09 13:30 — Session close (full-close): CS instrument extended + NAB2 target/direction
 Two threads. **A (CS instrument):** (1) live from-scratch **micro-sweep** — CS authored its OWN LBD generator
 and ran it 100% live (liveness independently re-verified); (2) **calibration probe** (~1.29 s/call, throttle-free);

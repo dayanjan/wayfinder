@@ -87,3 +87,23 @@ to any "did the guide hit a neighbor?" (e.g. NAB2 guide vs STAT6 1.9 kb away) be
 - **Referee Th1/Th2 direction label was INVERTED** (`log_fc>0` mislabeled "Th1-associated"). Validate signature
   polarity against canonical markers (GATA3/IL4/IL13 are +, TBX21/IFNG are − in the T2 signature ⇒ +log_fc=Th2),
   NOT against a coded convention. Verdicts were unaffected (HOP-2 status keys on significance, not direction).
+
+## CS conversation UI opens at the bottom + mouse-wheel doesn't scroll the transcript — Added: 2026-07-09
+Driving Claude Science conversation frames via Playwright: the frame loads scrolled to the LATEST message
+(bottom), and `page.mouse.wheel(0, N)` does NOT scroll the transcript (CS scrolls an inner element, not the
+window). Consequence for screen-capture: money shots earlier in a conversation (or inside artifacts) aren't
+reachable by naive wheel. Fix: open the receipt ARTIFACT (thumbnail card, not inline text — `getByText`
+matches inline code too) for a clean receipt view, or use a prepared static overlay. Verified opening all 4
+PyZoBot CS conversations 2026-07-09. See `docs/demo-video-pack/cs/CAPTURE_PLAN.md`.
+
+## demo-video harness supports STORAGE_STATE for pre-authed sessions — Added: 2026-07-09
+`~/.claude/skills/demo-video/lib/record.mjs` injects `config.STORAGE_STATE` as the Playwright context
+`storageState` (paired with `actor.user=""` to skip the Authentik login). So the harness can drive ANY
+saved-session app (e.g. Claude Science via `cs_state.json`) through the normal pipeline — no separate
+capture+manual-assembly path needed. This is what makes a fully CS-native demo video run through one pipeline.
+
+## codex 0.141 exec: debate round via --output-schema + stdin works; review flags changed (not exec) — Added: 2026-07-09
+Ran a 2-round codex-debate on codex-cli 0.141.0. `codex exec --ephemeral -s read-only --skip-git-repo-check
+--output-schema <schema.json> --color never - < prompt.txt` works and returns schema-conforming JSON as the
+final message (interleaved with narration; extract the last valid JSON object). The 0.141 flag tightening
+(per doctrine §13.5) is on `codex review`, NOT `codex exec` — exec's schema+stdin path is unchanged.

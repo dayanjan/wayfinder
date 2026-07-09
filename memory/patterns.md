@@ -93,3 +93,17 @@ flipped a naive therapeutic direction.
 Run the repo-read codex-debate with network + a scoped key so Codex verifies each external artifact (GEO
 dataset groups/probes/matrix) against LIVE reality per round, not just against the repo. Findings arrive
 reality-checked; converged 11→10→0 in 3 rounds. Extends §22 from repo-verification to reality-verification.
+
+## Empirically de-risk a live-UI capture BEFORE the codex-debate — Noted: 2026-07-09
+When a plan depends on capturing a live UI (here: screen-recording Claude Science), OPEN the actual UI and
+screenshot the target states before running a plan-hardening codex-debate. Codex reads the repo but cannot
+see the live UI, so the mechanics (does it scroll? where's the receipt? does auth hold?) must be verified by
+you. Doing it first also feeds the debate real facts instead of assumptions. On 2026-07-09 this surfaced two
+real gotchas (open-at-bottom, wheel-no-scroll) that the debate could never have caught, and the debate then
+added value where it CAN — the narrative/honesty/spine.
+
+## A repo-read debate's highest-value catch is "accepted-but-not-implemented" — Noted: 2026-07-09
+In a 2-round codex-debate, round-2's decisive finding (P0) was that Claude's round-2 ACCEPTANCES existed
+only in the debate text — Codex re-opened the runnable files and verified the fixes hadn't landed. Lesson:
+in a debate over a plan-with-artifacts, treat the debate text as insufficient until the ARTIFACTS carry the
+accepted changes; apply them and let the final round verify against the files, not the prose.
