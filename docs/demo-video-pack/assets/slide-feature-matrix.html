@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Feature matrix — the pain</title>
+<style>
+  /* Beat 2 — the core-facility pain: a matrix of thousands of features, "what does it all mean?"
+     1920x1080, brand palette. Auto-plays; deterministic heatmap for stable screen-record. */
+  :root{--bg:#091314;--fg:#eaf3f1;--accent:#26c6c9;--accent-dim:#5ea9a8;--amber:#f2b53c}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--fg)}
+  .stage{position:relative;width:1920px;height:1080px;
+    background:radial-gradient(1300px 760px at 50% 44%,#0d1e1f 0%,#0a1617 58%,#091314 100%)}
+  .stage::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 320px 60px rgba(0,0,0,.55)}
+
+  .eyebrow{position:absolute;top:104px;width:100%;text-align:center;font-size:30px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--accent);opacity:0;animation:fade .8s ease .3s forwards}
+  .caption{position:absolute;bottom:118px;width:100%;text-align:center;font-size:40px;font-weight:300;
+    opacity:0;animation:fade 1s ease 5.6s forwards}
+
+  .wrap{position:absolute;top:220px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center}
+  .toplab{font-size:24px;color:var(--accent-dim);letter-spacing:.14em;margin-bottom:14px;
+    text-transform:uppercase;opacity:0;animation:fade .7s ease 1s forwards}
+  .row{display:flex;align-items:center}
+  .sidelab{writing-mode:vertical-rl;transform:rotate(180deg);font-size:24px;color:var(--accent-dim);
+    letter-spacing:.14em;text-transform:uppercase;margin-right:18px;opacity:0;animation:fade .7s ease 1s forwards}
+  #matrix{display:grid;grid-template-columns:repeat(30,1fr);gap:3px}
+  .cell{width:36px;height:34px;border-radius:2px;opacity:0;animation:fade .3s ease forwards}
+
+  .qoverlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);
+    padding:38px 66px;border-radius:18px;background:rgba(9,19,20,.78);border:1px solid rgba(38,198,201,.4);
+    font-size:76px;font-weight:700;color:var(--fg);text-align:center;opacity:0;
+    box-shadow:0 0 60px rgba(0,0,0,.6);animation:qin .8s cubic-bezier(.2,1.2,.4,1) 4.2s forwards}
+  .qoverlay small{display:block;font-size:30px;font-weight:400;color:var(--accent-dim);margin-top:14px;letter-spacing:.04em}
+
+  @keyframes fade{to{opacity:1}}
+  @keyframes qin{from{opacity:0;transform:translate(-50%,-50%) scale(.9)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="eyebrow">Metabolomics &amp; lipidomics core facility</div>
+  <div class="wrap">
+    <div class="toplab">features → thousands per sample</div>
+    <div class="row">
+      <div class="sidelab">samples</div>
+      <div id="matrix"></div>
+    </div>
+  </div>
+  <div class="qoverlay">"What does it all mean?"<small>Testing one hypothesis at a time doesn't scale.</small></div>
+  <div class="caption">Clinical samples in, data out — and then the question with no easy answer.</div>
+</div>
+<script>
+  const cols=30, rows=15, m=document.getElementById('matrix');
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    const d=document.createElement('div'); d.className='cell';
+    let x=Math.sin(r*12.9898+c*78.233)*43758.5453; x=x-Math.floor(x);      // deterministic heatmap
+    const band=0.5+0.5*Math.sin(c*0.5+r*0.3);                              // gentle structure
+    const v=Math.min(1,0.1+ (x*0.7+band*0.3));
+    d.style.background='rgba(38,198,201,'+v.toFixed(3)+')';
+    d.style.animationDelay=(800+(r+c)*26)+'ms';                            // diagonal flood
+    m.appendChild(d);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Two floods — opening concept</title>
+<style>
+  /* Beat 1 opener — "two floods": literature vs data, discovery in the gap.
+     1920x1080, brand palette. Auto-plays; deterministic for screen-record. */
+  :root{--bg:#091314;--fg:#eaf3f1;--accent:#26c6c9;--accent-dim:#5ea9a8;--amber:#f2b53c;--panel:#0e1e1f}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--fg)}
+  .stage{position:relative;width:1920px;height:1080px;
+    background:radial-gradient(1300px 760px at 50% 42%,#0d1e1f 0%,#0a1617 58%,#091314 100%)}
+  .stage::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 320px 60px rgba(0,0,0,.55)}
+
+  .eyebrow{position:absolute;top:96px;width:100%;text-align:center;font-size:30px;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--accent);opacity:0;animation:fade .8s ease .3s forwards}
+  .caption{position:absolute;bottom:112px;width:100%;text-align:center;font-size:40px;font-weight:300;
+    opacity:0;animation:fade 1s ease 5.4s forwards}
+
+  .floods{position:absolute;top:190px;left:0;width:100%;height:720px;display:flex;
+    align-items:stretch;justify-content:center;gap:0;padding:0 150px}
+  .panel{flex:1;display:flex;flex-direction:column;align-items:center;padding:34px 30px;border-radius:20px;
+    background:linear-gradient(180deg,rgba(20,40,41,.42),rgba(14,30,31,.18));
+    border:1px solid rgba(38,198,201,.16);opacity:0}
+  .panel.lit{animation:slideL .7s cubic-bezier(.2,.9,.3,1) .6s forwards;margin-right:60px}
+  .panel.data{animation:slideR .7s cubic-bezier(.2,.9,.3,1) .6s forwards;margin-left:60px}
+  .panel h3{font-size:26px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:22px}
+  .grid{display:grid;gap:6px;margin-bottom:26px}
+  #litGrid{grid-template-columns:repeat(12,1fr)}
+  #dataGrid{grid-template-columns:repeat(15,1fr)}
+  .tile{opacity:0;animation:fade .35s ease forwards}
+  .paper{width:34px;height:24px;border-radius:3px;background:#16302f;border:1px solid rgba(94,169,168,.55)}
+  .cell{width:24px;height:24px;border-radius:3px}
+  .stat{font-size:82px;font-weight:800;line-height:1;color:var(--fg);opacity:0}
+  .panel.lit .stat{animation:pop .6s cubic-bezier(.2,1.4,.4,1) 3.0s forwards}
+  .panel.data .stat{animation:pop .6s cubic-bezier(.2,1.4,.4,1) 3.4s forwards}
+  .statsub{font-size:28px;color:var(--accent-dim);margin-top:10px;opacity:0}
+  .panel.lit .statsub{animation:fade .6s ease 3.3s forwards}
+  .panel.data .statsub{animation:fade .6s ease 3.7s forwards}
+
+  .gap{position:absolute;top:300px;left:50%;transform:translateX(-50%);width:210px;height:430px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .gapnode{width:120px;height:120px;border-radius:50%;background:#1a1408;border:3px solid var(--amber);
+    display:flex;align-items:center;justify-content:center;font-size:66px;font-weight:700;color:var(--amber);
+    opacity:0;animation:pop .6s cubic-bezier(.2,1.4,.4,1) 4.4s forwards,glow 2.4s ease 5s infinite}
+  .gaptxt{margin-top:20px;font-size:24px;color:var(--amber);text-align:center;letter-spacing:.06em;opacity:0;
+    animation:fade .7s ease 4.8s forwards}
+
+  @keyframes fade{to{opacity:1}}
+  @keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+  @keyframes slideL{from{opacity:0;transform:translateX(-70px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes slideR{from{opacity:0;transform:translateX(70px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes glow{0%,100%{box-shadow:0 0 26px rgba(242,181,60,.35)}50%{box-shadow:0 0 46px rgba(242,181,60,.7)}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="eyebrow">The scientist's dilemma — two exponential floods</div>
+  <div class="floods">
+    <div class="panel lit"><h3>The literature</h3><div class="grid" id="litGrid"></div>
+      <div class="stat">1,000,000+</div><div class="statsub">new papers / year</div></div>
+    <div class="panel data"><h3>The data</h3><div class="grid" id="dataGrid"></div>
+      <div class="stat">millions</div><div class="statsub">measurements / sample</div></div>
+  </div>
+  <div class="gap"><div class="gapnode">?</div><div class="gaptxt">the discovery<br>hides in the gap</div></div>
+  <div class="caption">Two exponential floods — and the finding is in the gap between them.</div>
+</div>
+<script>
+  function fill(id, n, cls, base, step, colorFn){
+    const g = document.getElementById(id);
+    for (let i=0;i<n;i++){ const d=document.createElement('div');
+      d.className='tile '+cls; d.style.animationDelay=(base+i*step)+'ms';
+      if(colorFn) d.style.background=colorFn(i); g.appendChild(d); }
+  }
+  fill('litGrid', 96, 'paper', 1200, 11, null);
+  // data cells: deterministic teal heatmap
+  fill('dataGrid', 150, 'cell', 1200, 9, i=>{
+    let x=Math.sin(i*12.9898+7.13)*43758.5453; x=x-Math.floor(x);
+    return 'rgba(38,198,201,'+(0.15+x*0.75).toFixed(3)+')';
+  });
+</script>
+</body>
+</html>
