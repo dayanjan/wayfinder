@@ -1,0 +1,62 @@
+[
+  {
+    "a_gene": "ATP5MG",
+    "b_program": "Th1_Th2_polarization",
+    "c_disease": "rheumatoid arthritis",
+    "condition": "Rest",
+    "ab": 18,
+    "bc": 46621,
+    "ac_lit": 13,
+    "ac_known": 0.0941,
+    "effect": 21,
+    "pure_disjoint": false,
+    "score": -2.359,
+    "referee_answer": "supported",
+    "referee_overall": "partial chain - effect:supported, program:untested, disease:supported"
+  },
+  {
+    "a_gene": "NSUN6",
+    "b_program": "Th1_Th2_polarization",
+    "c_disease": "ulcerative colitis",
+    "condition": "Rest",
+    "ab": 26,
+    "bc": 18677,
+    "ac_lit": 10,
+    "ac_known": 0.059,
+    "effect": 3,
+    "pure_disjoint": false,
+    "score": -2.736,
+    "referee_answer": "supported",
+    "referee_overall": "consistent with a validated gene -> program -> disease chain re-derived from the tables"
+  },
+  {
+    "a_gene": "FKBP5",
+    "b_program": "Th1_Th2_polarization",
+    "c_disease": "ankylosing spondylitis",
+    "condition": "Rest",
+    "ab": 267,
+    "bc": 4773,
+    "ac_lit": 34,
+    "ac_known": 0.095,
+    "effect": 8,
+    "pure_disjoint": false,
+    "score": -4.24,
+    "referee_answer": "supported",
+    "referee_overall": "consistent with a validated gene -> program -> disease chain re-derived from the tables"
+  },
+  {
+    "a_gene": "ETS2",
+    "b_program": "Th1_Th2_polarization",
+    "c_disease": "rheumatoid arthritis",
+    "condition": "Rest",
+    "ab": 266,
+    "bc": 46621,
+    "ac_lit": 257,
+    "ac_known": 0.0936,
+    "effect": 1,
+    "pure_disjoint": false,
+    "score": -5.263,
+    "referee_answer": "supported",
+    "referee_overall": "consistent with a validated gene -> program -> disease chain re-derived from the tables"
+  }
+]
