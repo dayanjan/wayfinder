@@ -1,0 +1,236 @@
+[
+  {
+    "gene": "NAB2",
+    "condition": "Stim8hr",
+    "overall": "consistent with a validated gene -> Th1/Th2 program -> disease chain re-derived from the tables",
+    "gate_pass": true,
+    "hops": [
+      {
+        "hop": 0,
+        "name": "knockdown-QC gate (T4)",
+        "status": "supported",
+        "gate_pass": true,
+        "claim": "Knockdown QC passed: 2 of 2 guide(s) reached signif_knockdown (best adj_p = 1e-16); guide mean expr 0.05603 vs NTC 0.5672.",
+        "receipt": {
+          "n_guides": 2,
+          "n_signif": 2,
+          "best_adj_p": 1e-16,
+          "mean_guide_expr": 0.056029523473686754,
+          "mean_ntc_expr": 0.5671943752018408
+        },
+        "caveats": []
+      },
+      {
+        "hop": 1,
+        "name": "on-target effect (T1)",
+        "status": "supported",
+        "claim": "On-target knockdown is significant with 301 downstream DE gene(s) (effect size -16.88, category 'on-target KD').",
+        "receipt": {
+          "ontarget_significant": true,
+          "ontarget_effect_size": -16.88158589006466,
+          "ontarget_effect_category": "on-target KD",
+          "n_downstream": 301,
+          "offtarget_flag": false
+        },
+        "caveats": []
+      },
+      {
+        "hop": 2,
+        "name": "Th1/Th2 program shift (T2)",
+        "status": "supported",
+        "claim": "Th1/Th2 program shift is significant in at least one reference contrast \u2014 Th2_vs_Th1 (Ota 2021): log_fc=0.6332, z=7.708, adj_p=1.95e-13, significant (Th1-associated); Th2_vs_Th1 (Hollbacker 2021): log_fc=0.6085, z=2.391, adj_p=0.205, not significant.",
+        "receipt": {
+          "contrasts": [
+            {
+              "contrast": "Th2_vs_Th1 (Ota 2021)",
+              "log_fc": 0.633190291697714,
+              "zscore": 7.707704442850936,
+              "adj_p_value": 1.954764933784385e-13,
+              "significant": true,
+              "direction": "Th1-associated"
+            },
+            {
+              "contrast": "Th2_vs_Th1 (Hollbacker 2021)",
+              "log_fc": 0.6085289839870799,
+              "zscore": 2.390553924537657,
+              "adj_p_value": 0.2046207165854035,
+              "significant": false,
+              "direction": null
+            }
+          ]
+        },
+        "caveats": []
+      },
+      {
+        "hop": 3,
+        "name": "disease enrichment (T3)",
+        "status": "supported",
+        "claim": "NAB2 is a member of 4 disease-enriched cluster(s) at FDR<0.05 in gene_set 'downstream_Stim8hr', spanning disease(s): asthma, atopic eczema.",
+        "receipt": {
+          "gene_set": "downstream_Stim8hr",
+          "n_significant_disease_clusters": 4,
+          "diseases_sorted": [
+            "asthma",
+            "atopic eczema"
+          ],
+          "top_hits": [
+            {
+              "disease": "atopic eczema",
+              "cluster": 100,
+              "odds_ratio": 3.898532169880283,
+              "p_adj_fdr": 0.002832239121295
+            },
+            {
+              "disease": "asthma",
+              "cluster": 100,
+              "odds_ratio": 2.1891342160625338,
+              "p_adj_fdr": 0.0200266735862858
+            },
+            {
+              "disease": "atopic eczema",
+              "cluster": 90,
+              "odds_ratio": 3.43039900946541,
+              "p_adj_fdr": 0.0223847654670472
+            },
+            {
+              "disease": "asthma",
+              "cluster": 90,
+              "odds_ratio": 2.6125684408329874,
+              "p_adj_fdr": 0.0223847654670472
+            }
+          ],
+          "all_significant": [
+            {
+              "disease": "atopic eczema",
+              "cluster": 100,
+              "odds_ratio": 3.898532169880283,
+              "p_adj_fdr": 0.002832239121295
+            },
+            {
+              "disease": "asthma",
+              "cluster": 100,
+              "odds_ratio": 2.1891342160625338,
+              "p_adj_fdr": 0.0200266735862858
+            },
+            {
+              "disease": "atopic eczema",
+              "cluster": 90,
+              "odds_ratio": 3.43039900946541,
+              "p_adj_fdr": 0.0223847654670472
+            },
+            {
+              "disease": "asthma",
+              "cluster": 90,
+              "odds_ratio": 2.6125684408329874,
+              "p_adj_fdr": 0.0223847654670472
+            }
+          ]
+        },
+        "caveats": []
+      }
+    ]
+  },
+  {
+    "gene": "IL2",
+    "condition": "Rest",
+    "overall": "untested \u2014 knockdown failed the QC gate; any null downstream result cannot be read as a negative",
+    "gate_pass": false,
+    "hops": [
+      {
+        "hop": 0,
+        "name": "knockdown-QC gate (T4)",
+        "status": "untested",
+        "gate_pass": false,
+        "claim": "Knockdown QC failed: 0 of 2 guide(s) reached signif_knockdown (best adj_p = 0.32); guide mean expr 0.03072 vs NTC 0.03559. A guide is informative only if it actually silenced the gene, so any null downstream result here is UNTESTED, never 'no effect'.",
+        "receipt": {
+          "n_guides": 2,
+          "n_signif": 0,
+          "best_adj_p": 0.3199563475864344,
+          "mean_guide_expr": 0.03071946260117,
+          "mean_ntc_expr": 0.035586652028034
+        },
+        "caveats": [
+          "target barely expressed \u2014 nothing to knock down"
+        ]
+      }
+    ]
+  },
+  {
+    "gene": "SLC1A5",
+    "condition": "Stim8hr",
+    "overall": "chain breaks at HOP 1 (on-target effect (T1)): On-target knockdown is not significant in T1 (effect size -3.456, category 'no on-target KD', n_downstream=1).",
+    "gate_pass": true,
+    "hops": [
+      {
+        "hop": 0,
+        "name": "knockdown-QC gate (T4)",
+        "status": "supported",
+        "gate_pass": true,
+        "claim": "Knockdown QC passed: 1 of 2 guide(s) reached signif_knockdown (best adj_p = 0.00919); guide mean expr 1.423 vs NTC 1.487.",
+        "receipt": {
+          "n_guides": 2,
+          "n_signif": 1,
+          "best_adj_p": 0.0091879277314984,
+          "mean_guide_expr": 1.4228131912147965,
+          "mean_ntc_expr": 1.487201037331638
+        },
+        "caveats": []
+      },
+      {
+        "hop": 1,
+        "name": "on-target effect (T1)",
+        "status": "refuted",
+        "claim": "On-target knockdown is not significant in T1 (effect size -3.456, category 'no on-target KD', n_downstream=1).",
+        "receipt": {
+          "ontarget_significant": false,
+          "ontarget_effect_size": -3.456346629213628,
+          "ontarget_effect_category": "no on-target KD",
+          "n_downstream": 1,
+          "offtarget_flag": false
+        },
+        "caveats": []
+      },
+      {
+        "hop": 2,
+        "name": "Th1/Th2 program shift (T2)",
+        "status": "supported",
+        "claim": "Th1/Th2 program shift is significant in at least one reference contrast \u2014 Th2_vs_Th1 (Ota 2021): log_fc=0.1941, z=3.699, adj_p=0.00109, significant (Th1-associated); Th2_vs_Th1 (Hollbacker 2021): log_fc=0.4763, z=1.681, adj_p=0.535, not significant.",
+        "receipt": {
+          "contrasts": [
+            {
+              "contrast": "Th2_vs_Th1 (Ota 2021)",
+              "log_fc": 0.1940574217354543,
+              "zscore": 3.699114046846309,
+              "adj_p_value": 0.0010893307277077,
+              "significant": true,
+              "direction": "Th1-associated"
+            },
+            {
+              "contrast": "Th2_vs_Th1 (Hollbacker 2021)",
+              "log_fc": 0.4763211791278248,
+              "zscore": 1.680954193401322,
+              "adj_p_value": 0.5347139083284608,
+              "significant": false,
+              "direction": null
+            }
+          ]
+        },
+        "caveats": []
+      },
+      {
+        "hop": 3,
+        "name": "disease enrichment (T3)",
+        "status": "refuted",
+        "claim": "SLC1A5 appears in 9 cluster(s) of gene_set 'downstream_Stim8hr' but none reach FDR<0.05 (best p_adj_fdr=0.0538, disease 'type 1 diabetes mellitus', odds_ratio=2.732).",
+        "receipt": {
+          "gene_set": "downstream_Stim8hr",
+          "n_appearances": 9,
+          "best_p_adj_fdr": 0.053834965563333,
+          "best_odds_ratio": 2.7316064510625573,
+          "best_disease": "type 1 diabetes mellitus"
+        },
+        "caveats": []
+      }
+    ]
+  }
+]
