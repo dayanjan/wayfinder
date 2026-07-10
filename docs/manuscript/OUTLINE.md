@@ -24,13 +24,22 @@ JSON for numbers, post-critic Stage-5 receipt for prose — the pre/post-critic 
 
 - **Type:** ORIGINAL RESEARCH (methods + demonstration fused into a discovery narrative — the Henry
   house style, see `references/frma-06-644728.pdf`).
+- **Framing stance (decided 2026-07-10):** Wayfinder is an **APPROACH / method**, NOT a software product.
+  The contribution is *receipt-backed adjudication of machine-generated hypotheses* + what it found;
+  the code / CS pipeline / notebook are the **vehicle** that shows the approach is real and reproducible,
+  not a released, supported tool. Rhetorical rule for all drafting: name Wayfinder as "an approach / a
+  method"; "the referee" is a *component* of it; reserve "workbench / platform / product" for **Claude
+  Science** (someone else's product the approach runs on). This deliberately lowers the reviewer burden
+  (no packaging / user-study / generality-across-datasets expectations) and matches Henry's "the novelty
+  is how known components are applied." Consistent with `CLAUDE.md` ("the tooling is the method/vehicle;
+  the deliverable is a reproducible finding + how Claude Science reached it").
 - **Venue:** *Frontiers in Research Metrics and Analytics*, "Text-mining and Literature-based
   Discovery" section — the same venue as the Henry lineage paper. Audience = LBD/informatics
   readers + bench scientists (dual-teach).
 - **Author:** Dayanjan Shanaka Wijesinghe (solo).
-- **Working title:** *Closing the loop on literature-based discovery: an agentic workbench that
-  generates, adjudicates, and self-audits gene→program→disease hypotheses against Perturb-seq data.*
-  (Provisional; tune length in debate.)
+- **Title (locked 2026-07-10):** *Closing the loop on literature-based discovery: receipt-backed
+  adjudication of machine-generated hypotheses against Perturb-seq data.* (Method-forward, approach-framed,
+  Henry-echo. Chosen from 4 variants.)
 - **Headline contribution (decided):** the **agentic loop** — Claude generates hypotheses,
   deterministic tools adjudicate each hypothesis with a receipt at every hop — *perturbation-substrate*
   receipts for the KD / effect / program hops and an *association / enrichment* receipt for the disease
@@ -54,7 +63,8 @@ Henry, **Wijesinghe**, Myers, McInnes (2021), *Using Literature Based Discovery 
 the Metabolomic Processes of Cardiac Arrest*, Front. Res. Metrics Anal. 6:644728,
 doi:10.3389/frma.2021.644728. The operator is second author — this is his own LBD lineage.
 
-**Inherited wholesale:** the genre ("we built the instrument, here is the finding it produced");
+**Inherited wholesale:** the genre ("we developed the approach, here is the finding it produced — the
+novelty is in how known components are applied", Henry's own words);
 the Intro→Background(dual-teach)→Methods→Results→Discussion skeleton; the figure grammar (a
 method-as-loop Fig 1; a generic-then-specific pipeline pair; a mechanism figure; **tables that show
 the tool's actual output on the page** — Henry's Table 2 is the ancestor of our receipt ledger);
@@ -112,7 +122,17 @@ thesis = the agentic loop that generates *and* adjudicates *and* self-audits; ro
   Methods, not only in Limitations.
 - **3.4 The agentic loop in Claude Science.** How CS authored + ran the generator + referee; provenance
   from its own audit DB (`operon-cli.db`); the critic model's calibrated-language enforcement. (Carries
-  the headline contribution.) **Three liveness claims kept distinct (F-005), never blurred:**
+  the headline contribution.) **How we OPERATE the instrument (distinctive, under-appreciated — give it
+  weight):** Claude Science exposes **no task-submission API/CLI**; the only way to make it *scriptable
+  and reproducible* is to drive its web UI. We built a headless driver (Playwright + a saved
+  authenticated session/`STORAGE_STATE`) that submits a task prompt, **auto-approves CS's in-loop
+  sandbox cards — folder / code-execution / network — for true zero-click operation**, polls the run to
+  completion, and pulls the resulting artifacts + provenance from CS's own audit DB. The driver is
+  orchestrated from **Claude Code** (an agent driving an agentic workbench). This is what turns a
+  click-once web session into a *reproducible* pipeline run; it is also an honest **limitation** (UI
+  automation depends on the CS front-end; there is no stable public contract) → note in §5.3. Connects to
+  the "prefer a direct API" principle by its exception: *no direct API exists, so automation is the
+  necessity, stated as such.* **Three liveness claims kept distinct (F-005), never blurred:**
   (a) *full-scale reproduction* — the real `propose.sweep()` ran unchanged over the full 3,935-gene
   universe **inside CS**, but as a **cached-receipt replay under a pure-replay guard** (cache delta 0;
   no live web calls during the sweep); (b) *live authorship* — a separate **12-gene from-scratch
@@ -160,13 +180,18 @@ thesis = the agentic loop that generates *and* adjudicates *and* self-audits; ro
   (generate + test + audit on one bench), NOT a replacement for prospective experimental follow-up. It
   makes "which of the 22,039 do you even look at" answerable with a receipt; the wet-lab confirmation of
   a survivor remains future work. This is the honest reading of "almost none get followed up."
+  **Reproducibility angle:** because we drive the (API-less) workbench programmatically and pull its own
+  provenance, an analysis that would otherwise be a one-off web session becomes a re-runnable, audited
+  pipeline — a small but real step toward reproducible *agentic* science, not just reproducible code.
 - **5.2 The next experiment (NAB2 direction).** DepMap-negative + GEO direction-mining → NAB2 reads as
   a Th2 *brake* lost in chronic disease → the therapeutic move is likely *restore/UP-modulate*, not
   knockdown. Association-backed; the falsifiable next step is a perturbation.
 - **5.3 Limitations** (Henry-candid): nomination not causation; the disease *label* is Open Targets
   GWAS-genetic (no colocalization); retrospective substrate (no new wet-lab); single program/dataset;
   the program hop is a tautology *inside the funnel*; "43 supported" is a joint gate×referee product;
-  the determinism boundary (where does Claude judgment enter?); LLM-judgment scope.
+  the determinism boundary (where does Claude judgment enter?); LLM-judgment scope; **UI-automation
+  dependence** (CS exposes no public API, so the driver depends on the front-end — a reproducibility
+  bridge, not a stable contract); single model-family for the CS self-audit (cross-family is external).
 - **5.4 Conclusion.**
 
 **Data & Code Availability** — GitHub (MIT, new-work; git history is the compliance proof);
@@ -180,7 +205,7 @@ thesis = the agentic loop that generates *and* adjudicates *and* self-audits; ro
 |---|--------|-------|----------------|
 | 1 | The Wayfinder **loop** (Henry Fig 1 analog): LBD generates → referee adjudicates against receipts → supported/refuted/untested → confident-NO feeds back; actor–critic wrapped around it | schematic | HTML/SVG asset pipeline |
 | 2 | Generic Swanson ABC triangle (brief, textbook) | schematic | HTML/SVG (reuse video Swanson asset) |
-| 3 | The specific Wayfinder **system**: answer-free A-universe → 5 signals → gate → 4-hop referee → ledger; agent-cast overlay (tools vs. Claude judgment; Opus author + Sonnet critic) | schematic | HTML/SVG asset pipeline |
+| 3 | The specific Wayfinder **system**: answer-free A-universe → 5 signals → gate → 4-hop referee → ledger; agent-cast overlay (tools vs. Claude judgment; Opus author + Sonnet critic). **Inset: how we operate it** — Claude Code → Playwright (saved auth, zero-click card approval) → CS web UI → artifacts + `operon-cli.db` (the no-API driver) | schematic | HTML/SVG asset pipeline |
 | 4 | NAB2 **4-hop receipt chain** (the mechanism/hero figure) + STAT6 cis-refutation callout | data | **CS kernel** (matplotlib/plotly) |
 | 5 | The **self-audit made visible** — the Sonnet reviewer flagging "validated"/"definitive" and forcing the edit | schematic/data | HTML/SVG + CS provenance excerpt |
 
