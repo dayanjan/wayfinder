@@ -7,9 +7,9 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
 - **Active workstream:** **Submission → CS-native 3-min video (see the Working-target line below). Next session = capture + assemble + submit.** _(Manuscript + remaining-experiments gap analysis deferred — post-submission upside, not this week.)_ Prior finding state: CS proven to AUTHOR + run the LBD generator 100% live from scratch (micro-sweep) AND at full scale over all genes × 3 conditions (loose sweep: filter-safe, NAB2 reproduced Stim8hr-specific, 39 candidates in `CANDIDATES.md`). NAB2 drug-target verdict: DepMap negative-for-cancer; **GEO direction mining → association-backed NAB2-DOWN per-cell in lesional skin → knockdown likely backwards, NAB2 reads as a Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Referee direction-label bug fixed (verdicts safe). Only unbuilt CS stretch = Stage 2. Demo/app/notebook remain the **submission MVP**.
 - **Working target: submit by EOD Friday 2026-07-10** (operator out of town Sat–Mon; official deadline still 2026-07-13). **Submission pivoted to a CS-native 3-min video**; tonight banked all design + de-risk + a 2-round codex-debate hardening (spine held). Friday = pre-capture 4 required frames (blockers) → assemble → gate → submit. Streamlit app + prior demo video = fallback MVP. Assets: `docs/demo-video-pack/cs/` + `assets/`.
-- **Last updated:** 2026-07-09 evening (submission → CS-native video; design+de-risk+debate banked; Friday = capture+assemble+submit)
+- **Last updated:** 2026-07-10 (submission BUILT + rebranded → Wayfinder; fire-ready; next thread = manuscript in Claude Science)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
-- **Repo:** `dayanjan/pyzobot-arbiter` (private; flip public before deadline — light identifier scrub first)
+- **Repo:** `dayanjan/wayfinder` (private; renamed from pyzobot-arbiter, history preserved; flip public via `SUBMIT_CHECKLIST.md` — say "scrub and flip")
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
 
 ## Milestones (judging aims: Demo 30% · Claude Use 25% · Impact 25% · Depth 20% — WEIGHTS UNVERIFIED, confirm on CV form)
@@ -28,6 +28,19 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-10 — Session close (full-close): submission BUILT + rebranded → Wayfinder; fire-ready
+Recreated the demo video in the operator's **cloned ElevenLabs voice** + music (2:52, gate PASS 96%). Ran a
+**6-agent independent judging panel** (~8/10, unanimous "likely top-6") then a **2-round frame-grounded
+codex-debate** — Codex "watched" a 12-frame storyboard via `-i` (multimodal on images; audio boundary flagged)
+→ runtime-discipline re-scope; records in `docs/reviews/{judging-panel,codex-debate}_cs-native-video_2026-07-10.md`
++ `EDIT_PLAN`. Verified the STAT6-cis claim (authors' own deposited genome-wide DE, lazy S3 read). **Renamed
+PyZoBot Arbiter → Wayfinder.** Rewrote judge-facing README + summary + builder bio; Tier-0 integrity (purged
+"validated", Th1→Th2 label, license wording). **Full video re-cut v4** (IL2 cold-open, Wayfinder cards + credit,
+spoken name, split disease-label + de-number, new STAT6 callout, plain captions). **GitHub repo renamed
+`dayanjan/wayfinder`** (PRIVATE, history preserved). Staged `SUBMIT_CHECKLIST.md` + `submission-fire-ready`
+memory → say **"scrub and flip"** to submit. Next thread: **manuscript in Claude Science** (template
+`references/frma-06-644728.pdf`). Housekeeping committed; tree clean.
+
 ### 2026-07-09 19:12 — Session close (full-close): submission pivoted to CS-native video + full de-risk + codex-debate
 Interactive evening session. **Pivoted the submission to a CS-native 3-minute video** (skip the Streamlit
 app in the cut; app stays as fallback MVP). New spine: *when you don't know what to ask, use LBD to surface

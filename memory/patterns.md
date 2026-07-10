@@ -107,3 +107,18 @@ In a 2-round codex-debate, round-2's decisive finding (P0) was that Claude's rou
 only in the debate text — Codex re-opened the runnable files and verified the fixes hadn't landed. Lesson:
 in a debate over a plan-with-artifacts, treat the debate text as insufficient until the ARTIFACTS carry the
 accepted changes; apply them and let the final round verify against the files, not the prose.
+
+### Frame-grounded codex-debate (multimodal) — Noted: 2026-07-10
+codex-cli `codex exec` is multimodal on IMAGES (`-i/--image`), not audio/video. To have Codex critique a
+rendered VIDEO, extract a storyboard (ffmpeg frames at scene/overlay boundaries), attach them via `-i`, and
+supply the transcript + captions + audio metadata; be explicit that voice/music quality is NOT assessable from
+frames (a human-QA boundary). Then run the normal codex-debate. This surfaced video-visible findings a
+text-only panel could not (unreadable live-UI frames, a caption contradicting narration, over-density) and a
+runtime-discipline re-scope. Record: docs/reviews/codex-debate_cs-native-video_2026-07-10.md.
+
+### Judge-panel-per-rubric-lens before a debate — Noted: 2026-07-10
+Before cross-model debate on a judged deliverable, run N cold-context Claude sub-agents in parallel, one per
+scoring dimension (here Demo/Claude-Use/Impact/Depth) + a skeptical-domain-expert lens + a compliance/own-goal
+lens. Give each the exact artifact + rubric + repo access; dedup/synthesize into a tiered fix register; THEN
+codex-debate to pressure-test. The compliance/own-goal agent caught the biggest issue (a stale README) that
+none of the quality lenses did. Record: docs/reviews/judging-panel_cs-native-video_2026-07-10.md.

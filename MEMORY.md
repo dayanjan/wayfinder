@@ -5,6 +5,13 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+**2026-07-10 (full-close) — SUBMISSION BUILT + REBRANDED "PyZoBot Arbiter" → "WAYFINDER"; FIRE-READY.**
+Video re-cut in the operator's **cloned voice** (2:52, gate PASS 96%); **6-agent judge panel** (~8/10,
+unanimous likely-top-6) + a **2-round frame-grounded codex-debate** (Codex "watched" a 12-frame storyboard);
+judge-facing README + ~180w summary + builder bio; Tier-0 integrity fixes; **GitHub repo renamed
+`dayanjan/wayfinder`** (PRIVATE, history preserved). One phrase from public — say **"scrub and flip"** →
+`SUBMIT_CHECKLIST.md`. **Next working thread: write a MANUSCRIPT in Claude Science** (template
+`references/frma-06-644728.pdf`, gitignored). Deadline: EOD ET Mon 2026-07-13. See `memory/NEXT_SESSION.md`.
 **2026-07-09 (EVENING, full-close) — SUBMISSION PIVOTED TO A CS-NATIVE 3-MIN VIDEO; ALL DESIGN + DE-RISK +
 DEBATE-HARDENING BANKED. DEADLINE MOVED UP TO EOD FRI 2026-07-10 (out of town Sat–Mon). Friday = capture +
 assemble + submit only.** New spine: *when you don't know what to ask, use LBD to surface the data's implicit
