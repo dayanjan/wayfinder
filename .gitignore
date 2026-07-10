@@ -49,3 +49,6 @@ docs/nab2-direction-geo_*/__pycache__/
 
 # Personal CV (contains contact info) — never publish
 CV/
+
+# Last-minute submission runbook (operator-only)
+SUBMIT_CHECKLIST.md
