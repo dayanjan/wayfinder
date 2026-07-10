@@ -1,0 +1,232 @@
+[
+ {
+  "type": "number",
+  "section": "01_introduction.md",
+  "location": "L61 (~body)",
+  "claim": "22,039 gene\u2192program\u2192disease hypotheses",
+  "artifact_source": "sweep_Stim8hr.json \u2192 funnel.eligible_pairs = 22039",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "01_introduction.md",
+  "location": "L65-66",
+  "claim": "NAB2 highest-ranked near-novel survivor; Th1/Th2 \u2192 atopic eczema; genetic link",
+  "artifact_source": "lbd_questions_Stim8hr.json \u2192 NAB2\u00d7atopic eczema at index 4; ac_lit=6 (near-novel), ranks 1-2 UFM1/BHLHE40 ac_lit 43/26 (not novel), rank3 NUDT1 ac_lit 0 (trivial effect)",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L47 / L75 / L126",
+  "claim": "A contains 3,935 genes",
+  "artifact_source": "sweep \u2192 funnel.a_genes = 3935",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L75",
+  "claim": "\u2192 22,039 eligible (gene,disease) pairs",
+  "artifact_source": "sweep \u2192 funnel.eligible_pairs = 22039",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L76",
+  "claim": "\u2192 43 disease-supported",
+  "artifact_source": "sweep \u2192 funnel.disease_c_supported_total = 43",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L76",
+  "claim": "\u2192 30 clean full-chain nominations",
+  "artifact_source": "sweep \u2192 funnel.clean_supported = 30 (chain_classes.supported = 30)",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L45",
+  "claim": "significant Th1/Th2 shift: T2 adjusted p < 0.05",
+  "artifact_source": "params.program_significant = True; finding md: 'all A genes pass T2<0.05'",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L58",
+  "claim": "bc \u2265 3",
+  "artifact_source": "sweep \u2192 params.min_bc = 3",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L58",
+  "claim": "ac_known \u2264 0.1 (no established genetic link)",
+  "artifact_source": "sweep \u2192 params.tau = 0.1",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L56",
+  "claim": "ab \u2265 ab_gate = universe percentile, default the median",
+  "artifact_source": "sweep \u2192 params.ab_gate_pct = 0.5 (ab_gate_value = 26)",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L66",
+  "claim": "\u03b2 = 1",
+  "artifact_source": "sweep \u2192 params.beta = 1.0",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L66",
+  "claim": "w = 1",
+  "artifact_source": "sweep \u2192 params.w = 1.0",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L66",
+  "claim": "w2 = 3",
+  "artifact_source": "sweep \u2192 params.w2 = 3.0",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L25",
+  "claim": "12 immune diseases (disease set C)",
+  "artifact_source": "DERIVED: finding md + replication md state 'referee alone 395/47,220'; 47,220 \u00f7 a_genes 3,935 = 12 exactly. No artifact field literally enumerates 12 diseases; clean set surfaces only 10 distinct diseases (2 had no clean survivors).",
+  "status": "MATCH*",
+  "suggested_fix": "Keep '12' (arithmetically confirmed) but cite the disease-vocabulary list/verify_disease_ids output directly rather than relying on the 47,220 quotient. Independent reviewer flagged this as not a direct field.",
+  "severity": "low"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L33-34",
+  "claim": "author = Opus-class (Claude Opus 4.8)",
+  "artifact_source": "README.md L28/L87 \u2192 'OPERON = Opus 4.8'",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L34",
+  "claim": "reviewer = Sonnet-class (Claude Sonnet 5)",
+  "artifact_source": "README.md L28/L87 \u2192 'REVIEWER = Sonnet 5'",
+  "status": "MATCH",
+  "suggested_fix": "",
+  "severity": "info"
+ },
+ {
+  "type": "number",
+  "section": "03_methods.md",
+  "location": "L35",
+  "claim": "inline sampling = Haiku-class (Claude Haiku 4.5)",
+  "artifact_source": "NOT PRESENT in README.md or any provided artifact (grep 'haiku' \u2192 0 hits)",
+  "status": "UNSUPPORTED",
+  "suggested_fix": "Cite the audit record that assigns a Haiku-class model, or drop/soften the specific 'Claude Haiku 4.5' identity to 'a lightweight model' if the audit store does not record it.",
+  "severity": "medium"
+ },
+ {
+  "type": "number",
+  "section": "01_introduction.md & 02_background.md",
+  "location": "intro L29 / bg L28",
+  "claim": "NIH grant 1R01LM015392-01 + reviewer quote",
+  "artifact_source": "Not in provided artifacts (external R01 critique; out of artifact scope)",
+  "status": "UNSUPPORTED",
+  "suggested_fix": "Verify against the funded critique document (not among the 6 provided artifacts); label as external citation.",
+  "severity": "low"
+ },
+ {
+  "type": "language",
+  "severity": "low",
+  "section": "02_background.md",
+  "location": "L53 (\u00a72.2 body)",
+  "claim": "\"Reading the substrate as an experimental **oracle** for the first three hops but an association signal for the fourth...\"",
+  "artifact_source": "n/a (calibrated-language scan)",
+  "status": "FLAG",
+  "suggested_fix": "Replace \"experimental oracle\" with \"direct experimental measurement source\" (or \"experimental receipt source\"). \"oracle\" is on the overclaim list and Task-3 specifically calls it out for the substrate; the word implies an infallible ground-truth machine (the substrate is aggregated supp. tables with QC caveats). NOTE: the sentence itself does NOT blur receipt classes \u2014 it correctly restricts \"oracle\" to the first three hops and contrasts an association signal for the fourth; this is a word-choice flag only."
+ },
+ {
+  "type": "other",
+  "severity": "medium",
+  "section": "03_methods.md",
+  "location": "L35 (\u00a73.1 Model cast)",
+  "claim": "lightweight inline sampling uses a Haiku-class model (Claude Haiku 4.5)",
+  "artifact_source": "README.md records only Opus 4.8 (author) + Sonnet 5 (reviewer); grep 'haiku' across all 6 artifacts = 0 hits",
+  "status": "UNSUPPORTED",
+  "suggested_fix": "Cite the CS audit-store row that assigns a Haiku-class model, or soften to 'a lightweight model' if the provided provenance does not record the Haiku 4.5 identity. (Duplicate of Task-1 UNSUPPORTED row \u2014 the specific '4.5' version string is the unverifiable part.)"
+ },
+ {
+  "type": "other",
+  "severity": "low",
+  "section": "01_introduction.md",
+  "location": "L61 vs 03_methods.md L75",
+  "claim": "Intro: \"posed 22,039 gene\u2192program\u2192disease hypotheses and a deterministic referee culled them\"",
+  "artifact_source": "sweep funnel: 22,039 is POST-gate eligible_pairs; the raw gene\u00d7disease universe is 47,220 (3,935\u00d712), of which the ab/bc/ac_known gate keeps 22,039 before the referee runs.",
+  "status": "MATCH (framing note)",
+  "suggested_fix": "Accurate as written (the referee does cull the 22,039), but note that a literature/known-association GATE \u2014 not the referee \u2014 performs the 47,220\u219222,039 reduction first. Methods L74-76 states the funnel precisely; consider mirroring that precision if intro readers may conflate gate and referee."
+ },
+ {
+  "type": "other",
+  "severity": "info",
+  "section": "03_methods.md",
+  "location": "L48-53 (five signals)",
+  "claim": "The five deterministic signals are named: ab, bc, ac_known, ac_lit, effect",
+  "artifact_source": "lbd_questions_Stim8hr.json record fields: ab, bc, ac_lit, ac_known, effect \u2014 all present and named identically",
+  "status": "MATCH",
+  "suggested_fix": ""
+ },
+ {
+  "type": "other",
+  "severity": "info",
+  "section": "all three drafts",
+  "location": "\u2014",
+  "claim": "STAT6 cis-check numbers (log2FC +0.087, adj_p 0.788, rank 5444/10282, 302 moved, NAB2 \u22123.08)",
+  "artifact_source": "stage3_cis.json \u2014 internally consistent and ALL_PASS=true",
+  "status": "NOT CITED IN THESE SECTIONS",
+  "suggested_fix": "These numbers belong to Section 4 (worked example) and do not appear in the Intro/Background/Methods drafts under review; verified the artifact is internally consistent for when \u00a74 cites them."
+ }
+]

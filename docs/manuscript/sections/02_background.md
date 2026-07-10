@@ -50,8 +50,8 @@ receipts**: direct measurements from the perturbation data. The fourth hop — d
 downstream signature enrich for a disease — is an **association receipt**: the disease labels derive from
 genetic evidence (GWAS and related association data, without colocalization or linkage-disequilibrium
 control), so a positive verdict at this hop is a *nomination*, not a claim of experimental disease
-causality. Reading the substrate as an experimental oracle for the first three hops but an association
-signal for the fourth is what keeps the eventual claims calibrated.
+causality. Reading the substrate as a direct experimental readout for the first three hops but an
+association signal for the fourth is what keeps the eventual claims calibrated.
 
 ## 2.3 Agentic language models as a scientific instrument
 

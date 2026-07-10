@@ -59,7 +59,8 @@ checkpoints, verified every number and enforced calibrated language on the outpu
 overstated words from the platform's own text. The platform checked its own work.
 
 We demonstrate Wayfinder on the CD4+ T-cell resource, where it posed 22,039 gene→program→disease
-hypotheses and a deterministic referee culled them to a small set of receipt-backed survivors. We use a
+hypotheses that a literature-novelty gate and a deterministic referee together culled to a small set of
+receipt-backed survivors. We use a
 ledger of adjudicated verdicts to *demonstrate* that the referee discriminates — supporting, refuting, and
 declining to test — and a negative-control panel to show the discrimination is not an artifact of the
 setup. The highest-ranked near-novel survivor, a nomination that **NAB2** regulates Th1/Th2 polarization

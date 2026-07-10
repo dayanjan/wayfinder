@@ -32,7 +32,7 @@ terms quoted); curated gene→disease genetic-association scores come from the O
 
 **Model cast.** Inside the workbench (Section 3.4) the author role is an Opus-class model (Claude Opus
 4.8); the independent reviewer role is a Sonnet-class model (Claude Sonnet 5), invoked at separate
-verification checkpoints; lightweight inline sampling uses a Haiku-class model (Claude Haiku 4.5). All
+verification checkpoints; lightweight inline sampling is handled by a smaller model. All
 biological interpretation is confined to these models reading deterministic receipts; no model computes a
 receipt.
 
