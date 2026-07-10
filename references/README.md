@@ -2,8 +2,9 @@
 
 ## Source paper (the dataset our finding is built on)
 Genome-scale CD4+ T-cell Perturb-seq study (Dann, Pritchard, Marson, and colleagues).
-- **bioRxiv preprint:** 2025.12.23.696273v1 — https://www.biorxiv.org/content/10.1101/2025.12.23.696273v1
-- **DOI:** 10.1101/2025.12.23.696273
+- **bioRxiv preprint:** 2025.12.23.696273v1 — https://doi.org/10.64898/2025.12.23.696273
+- **DOI:** 10.64898/2025.12.23.696273 *(bioRxiv/openRxiv prefix; Crossref-registered. The older `10.1101/…` form is NOT registered — verified 2026-07-10 via Crossref API.)*
+- **Title:** *Genome-scale perturb-seq in primary human CD4+ T cells maps context-specific regulators of T cell programs and human immune traits* (Zhu, Dann, Yan, … Marson).
 - Local copy (gitignored, not redistributed — bioRxiv preprint): `Zhu_etal_2025_CD4_Perturbseq_bioRxiv_2025.12.23.696273.pdf`
 - Supplementary tables we use are in `data/` (fetch via `data/fetch_data.sh`; public).
 - *(Confirm the exact author list / title from the PDF when citing formally — see the
