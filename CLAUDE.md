@@ -1,4 +1,4 @@
-# PyZoBot Arbiter — project map
+# Wayfinder — project map
 
 Hackathon build (*Built with Claude: Life Sciences*, **Researcher track — a researcher who also builds**). A **hypothesis referee**: Claude agents adjudicate a mechanistic T-cell claim and return a verdict with a **receipt for every hop**. The framing: a researcher who builds their own instruments — the referee, the LBD question-engine, and the Claude-Science automation are tools built *to ask and answer the research questions*. The deliverable is a **reproducible T-cell finding + how Claude Science reached it**; the tooling is the method/vehicle, and the builder-craft is evidence of a scientist who can build to get the science done. Full plan: `docs/plan.md` (v7). This file is the lean map.
 

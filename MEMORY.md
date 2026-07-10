@@ -1,4 +1,4 @@
-# MEMORY.md — PyZoBot Arbiter Session Index
+# MEMORY.md — Wayfinder Session Index
 
 Lean cross-session index. The narrative lives in `memory/sessions/YYYY-MM-DD.md`;
 the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md`.

@@ -1,8 +1,10 @@
 # Data — genome-scale CD4+ T-cell Perturb-seq (public supplementary tables)
 
 Source: Zhu, Dann, et al. (Marson & Pritchard labs), *Genome-scale perturb-seq in
-primary human CD4+ T cells* (bioRxiv 2025). MIT-licensed supplementary tables,
-mirrored on GitHub. This repo commits no raw data; run `fetch_data.sh` to reproduce.
+primary human CD4+ T cells* (bioRxiv 2025; doi:10.64898/2025.12.23.696273). Public
+supplementary tables, used under the hackathon's public-dataset provision; the
+analysis-reference repository (github.com/emdann/GWT_perturbseq_analysis_2025) is
+MIT-licensed. This repo commits no raw data; run `fetch_data.sh` to reproduce.
 
 Files fetched (~25 MB total):
 - `DE_stats.suppl_table.csv` — per perturbation x condition: up/down genes, on-target effect, cross-donor/guide reproducibility. (Hop 1: gene -> effect.)

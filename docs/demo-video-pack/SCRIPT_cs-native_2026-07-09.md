@@ -78,21 +78,25 @@ available" toast offers Restart — dismiss via ✕; restarting kills daemon pid
 
 ## Written summary — required submission field (~180 words)
 
-> Scientists are caught between two floods: over a million biomedical papers a year, and omics runs
-> returning millions of measurements per sample. Discoveries hide in the gap — and the two classic
-> tools each fail alone. Literature-based discovery (LBD) generates more hypotheses than anyone can
-> test; large-scale omics generates answers with no questions attached.
+> Every scientist is caught between two floods — over a million papers a year, and omics runs returning
+> millions of measurements per sample. **Wayfinder** helps you navigate the gap. It surfaces the data's
+> implicit hypotheses with literature-based discovery, then tests each against real experimental data and
+> returns a verdict with a receipt for every hop — and it is willing to say a confident **no**. A failed
+> knockdown comes back *untested*, not a false negative: an artifact caught, not a discovery missed.
 >
-> We built the missing half. Inside **Claude Science** — a platform that can already *validate* a
-> hypothesis — we implemented **Swanson ABC** literature-based discovery, so hypothesis *generation* and
-> *testing* run side by side. Every machine-generated hypothesis is culled immediately against real data
-> by a deterministic referee that returns a receipt at every hop and confidently says **"no"** —
-> flagging a failed knockdown as *untested*, not a false negative.
+> This answers the critique that has plagued literature-based discovery for decades — that it generates
+> hypotheses almost none of which get followed up. On the Marson lab's public CD4+ T-cell Perturb-seq data,
+> 22,039 gene→program→disease hypotheses were culled to a handful of clean, receipt-backed candidates. The
+> standout: **NAB2 → Th1/Th2 → atopic eczema** — a connection the literature had never drawn. (Calibrated:
+> the eczema label is a GWAS-genetic *nomination*; the perturbation-backed claim is NAB2 as a Th1/Th2
+> regulator. Its cis-artifact confounder was refuted live against the authors' own genome-wide data.)
 >
-> On a public CD4+ T-cell Perturb-seq dataset (Zhu, Dann, … Marson; Gladstone/UCSF), 22,039 hypotheses
-> funneled to **30 receipt-backed survivors**. The standout: **NAB2 → Th1/Th2 → atopic eczema** — a
-> connection the literature had never drawn — plus other candidate leads. *The library and the lab, on
-> one bench.*
+> The whole pipeline ran inside **Claude Science**, whose independent reviewer model flagged and cut the
+> project's own overclaims. *The library and the lab, on one bench.*
+>
+> **Built by** Dayanjan Shanaka Wijesinghe, Ph.D. ("Shanaka"), Associate Professor at Virginia Commonwealth
+> University School of Pharmacy and former Deputy Director of VCU's Lipidomics/Metabolomics Core Facility —
+> a researcher who builds his own instruments. linkedin.com/in/dayanjanwijesinghe
 
 ---
 

@@ -1,4 +1,4 @@
-# WORK_PROGRESS.md — PyZoBot Arbiter
+# WORK_PROGRESS.md — Wayfinder
 
 Live snapshot dashboard. Updated by `session-closer` at each session close and by
 `freshen` on demand. The plan of record is `docs/plan.md` (v7 — Researcher-track reframe, §0).

@@ -179,7 +179,7 @@ def referee(gene: str, condition: str, data: RefereeData) -> Verdict:
         return v
 
     v.hops.append(Hop(0, "GATE", "supported",
-        f"knockdown validated: {int(gp.n_signif)}/{int(gp.n_guides)} guides "
+        f"knockdown confirmed: {int(gp.n_signif)}/{int(gp.n_guides)} guides "
         f"significant (best adj-p {_fmt(gp.best_adj_p)})",
         receipt=gate_receipt))
 
@@ -216,7 +216,7 @@ def referee(gene: str, condition: str, data: RefereeData) -> Verdict:
         elif r.ontarget_significant and r.n_downstream == 0:
             status = "supported"   # KD worked, simply no downstream DE
         else:
-            status = "refuted"     # KD validated by gate but T1 sees no on-target effect
+            status = "refuted"     # KD confirmed by gate but T1 sees no on-target effect
         claim = ("perturbation produces a downstream transcriptional effect"
                  if r.n_downstream > 0 else
                  "on-target KD detected but no downstream DE genes at this condition")
@@ -311,7 +311,7 @@ def _synthesize_overall(v: Verdict) -> str:
     eff = hs.get("EFFECT"); prog = hs.get("PROGRAM"); dis = hs.get("DISEASE")
     if eff in ("supported", "flagged") and prog == "supported" and dis == "supported":
         tail = " (with caveats)" if eff == "flagged" else ""
-        return ("consistent with a validated gene -> program -> disease chain "
+        return ("consistent with a gene -> program -> disease chain "
                 "re-derived from the tables" + tail)
     if dis == "refuted":
         return "gene->disease link refuted: gene in cluster gene-sets but enrichment not significant"

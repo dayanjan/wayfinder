@@ -52,7 +52,7 @@ result; a failed knockdown would leave the chain **UNTESTED**, and must never be
 
 ### HOP-2 — PROGRAM (Th1/Th2, both contrasts) — **supported**
 
-- Receipt: **Ota 2021** z = **7.708**, adj_p = **1.95e-13** (Th1-associated).
+- Receipt: **Ota 2021** z = **7.708**, adj_p = **1.95e-13** (Th2-associated).
 - **Hollbacher** contrast: **n.s.** — reported as-is, not collapsed into the positive call.
 
 Both contrasts are shown; the non-significant one is disclosed rather than dropped.
@@ -64,7 +64,7 @@ Both contrasts are shown; the non-significant one is disclosed rather than dropp
 
 ### Referee overall
 
-**Consistent with** a validated gene → Th1/Th2 program → disease chain, re-derived from the
+**Consistent with** a gene → Th1/Th2 program → disease chain, re-derived from the
 deposited tables.
 
 ---
