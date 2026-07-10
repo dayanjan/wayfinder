@@ -103,8 +103,10 @@ agentic scientific workbench, in which an author model writes and runs analysis 
 reviewer model verifies the result at separate checkpoints (Section 3.1).
 
 **Operating an instrument that has no API.** Claude Science exposes no programmatic task-submission
-interface: analyses are ordinarily driven by hand in its web interface, which makes a run a one-off event
-rather than a reproducible procedure. To make the workbench *scriptable*, we drive its web interface
+interface: analyses are ordinarily driven by hand in its web interface, which makes each run a one-off,
+hand-paced event rather than a reproducible procedure — human clicking becomes the bottleneck at exactly
+the moment when keeping pace with the twin floods of data and literature is the whole point. To make the
+workbench *scriptable*, we drive its web interface
 headlessly. A browser-automation driver, orchestrated from a coding agent (Claude Code), loads a saved
 authenticated session, submits the task prompt, and **auto-approves the workbench's in-loop sandbox
 prompts — working-directory, code-execution, and network-access cards — for fully unattended, zero-click

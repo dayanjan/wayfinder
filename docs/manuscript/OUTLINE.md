@@ -79,10 +79,12 @@ calibrated language; the human-in-the-loop philosophy ("the tool sparks; the hum
 3. The **agentic Claude layer** — deterministic tools vs. Claude judgment; actor–critic; native
    Claude Science reproduction + self-audit. Henry = deterministic co-occurrence + manual review.
 
-**The narrative frame we own:** three NIH reviewers killed the R01 (**1R01LM015392-01**) with
-*"the same major problem that has plagued all LBD work: it generates an enormous number of
-hypotheses, almost none of which ever get followed up."* Henry is the lineage that provoked that
-critique; **Wayfinder is the paper that answers it.**
+**The narrative frame we own:** in the review of a proposal submitted for funding consideration, three
+reviewers converged on *"the same major problem that has plagued all LBD work: it generates an enormous
+number of hypotheses, almost none of which ever get followed up."* (Operator decision 2026-07-10: do NOT
+name the grant number in the manuscript, and do not describe the proposal as "funded" — it was submitted,
+reviewed, not funded. The quote stands on its own.) Henry is the lineage that provoked that critique;
+**Wayfinder is the paper that answers it.**
 
 ---
 
@@ -282,7 +284,7 @@ Stage-1 artifact (it is provenance; hand-editing would corrupt the "this is what
 | C22 | Dataset attribution + title | **Zhu, Dann, Yan, … Marson** (Gladstone/UCSF), bioRxiv/openRxiv 2025 · title *"Genome-scale perturb-seq in primary human CD4+ T cells maps context-specific regulators of T cell programs and human immune traits"* | Crossref (verified 2026-07-10); `references/README.md` |
 | C23 | Dataset DOI — ✅ **RESOLVED** | **`10.64898/2025.12.23.696273`** (Crossref-registered, bioRxiv/openRxiv prefix). The `10.1101/…` form is NOT registered (404). `references/README.md` corrected 2026-07-10. | Crossref API |
 | C24 | Henry citation | Henry, Wijesinghe, Myers, McInnes 2021, FRMA 6:644728, doi:10.3389/frma.2021.644728 | `references/frma-06-644728.pdf` |
-| C25 | R01 grant number | 1R01LM015392-01 | main `README.md` |
+| C25 | R01 critique | quote used; grant number **deliberately NOT named** (operator decision) + proposal framed as "submitted for funding consideration", not "funded" | main `README.md` (source of quote) |
 
 ---
 
