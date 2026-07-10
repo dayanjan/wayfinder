@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CS receipt — STAT6 cis-artifact refuted</title>
+<style>
+  /* Beat 6 legibility callout (codex-debate F-025): the live CS receipt is too small to read at laptop
+     scale, so this renders the key STAT6-cis numbers big. Source: docs/cs-full-pipeline_2026-07-09/stage3.
+     "refuted" is the good outcome here (the confounder is killed) -> teal, not amber. 1920x1080, brand
+     palette, deterministic auto-reveal. */
+  :root{--bg:#091314;--fg:#eaf3f1;--accent:#26c6c9;--accent-dim:#5ea9a8;--amber:#f2b53c;--mut:#8fb0ae}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--fg)}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+  .stage{position:relative;width:1920px;height:1080px;
+    background:radial-gradient(1300px 760px at 50% 42%,#0d1e1f 0%,#0a1617 58%,#091314 100%)}
+  .stage::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 320px 60px rgba(0,0,0,.55)}
+
+  .eyebrow{position:absolute;top:92px;width:100%;text-align:center;font-size:28px;letter-spacing:.30em;
+    text-transform:uppercase;color:var(--accent);opacity:0;animation:fade .7s ease .2s forwards}
+  .eyebrow b{color:var(--accent-dim);font-weight:600}
+
+  .verdrow{position:absolute;top:200px;left:50%;transform:translateX(-50%);
+    display:flex;align-items:center;gap:34px;opacity:0;animation:rise .7s ease .5s forwards}
+  .vt{font-size:46px;font-weight:800;white-space:nowrap}
+  .to{font-size:56px;color:var(--accent-dim)}
+  .pill{font-size:64px;font-weight:800;letter-spacing:.05em;color:var(--accent);
+    border:3px solid var(--accent);border-radius:16px;padding:10px 40px;background:rgba(38,198,201,.08)}
+
+  .rows{position:absolute;top:392px;left:50%;transform:translateX(-50%);width:1420px;
+    display:flex;flex-direction:column;gap:24px}
+  .row{display:flex;align-items:baseline;gap:26px;background:rgba(9,20,21,.72);border-radius:8px;
+    padding:26px 44px;opacity:0;animation:rowin .7s ease forwards}
+  .row .gene{font-size:52px;font-weight:800;min-width:150px}
+  .row .stat{font-size:40px;color:var(--fg)}
+  .row .stat .k{color:var(--mut)}
+  .row .tag{margin-left:auto;font-size:34px;font-weight:700}
+  .row.neighbor{border-left:5px solid var(--accent)} .row.neighbor .tag{color:var(--accent)}
+  .row.target{border-left:5px solid var(--accent-dim)} .row.target .tag{color:var(--accent-dim)}
+
+  .reason{position:absolute;top:672px;left:50%;transform:translateX(-50%);width:1420px;text-align:left;
+    font-size:34px;line-height:1.45;color:var(--fg);opacity:0;animation:fade .8s ease 2.0s forwards}
+  .reason b{color:var(--accent)}
+
+  .foot{position:absolute;bottom:96px;width:100%;text-align:center;font-size:28px;color:var(--accent-dim);
+    opacity:0;animation:fade .8s ease 2.7s forwards}
+
+  @keyframes fade{to{opacity:1}}
+  @keyframes rise{from{opacity:0;transform:translateX(-50%) translateY(18px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+  @keyframes rowin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="eyebrow">Claude Science receipt &nbsp;<b>stage3/receipt.md</b> &nbsp;·&nbsp; the hardest confounder</div>
+
+  <div class="verdrow">
+    <span class="vt">STAT6 cis-artifact</span>
+    <span class="to">&rarr;</span>
+    <span class="pill mono">REFUTED</span>
+  </div>
+
+  <div class="rows">
+    <div class="row neighbor mono" style="animation-delay:1.0s">
+      <span class="gene">STAT6</span>
+      <span class="stat"><span class="k">log2FC</span> +0.09 &nbsp;·&nbsp; <span class="k">adj_p</span> 0.79</span>
+      <span class="tag">unmoved</span>
+    </div>
+    <div class="row target mono" style="animation-delay:1.5s">
+      <span class="gene">NAB2</span>
+      <span class="stat"><span class="k">log2FC</span> &minus;3.08 &nbsp;·&nbsp; <span class="k">z</span> &asymp; &minus;17</span>
+      <span class="tag">knockdown confirmed</span>
+    </div>
+  </div>
+
+  <div class="reason">
+    A cis-artifact would drag the neighbor <b>STAT6</b> down. It doesn&rsquo;t move &mdash; while NAB2&rsquo;s own
+    transcript drops. So the Th2 effect is genuinely NAB2&rsquo;s, <b>not STAT6 bleed</b>.
+  </div>
+
+  <div class="foot mono">Read live from the authors&rsquo; own deposited genome-wide DE matrix &mdash; no download.</div>
+</div>
+</body>
+</html>

@@ -48,6 +48,7 @@
   .verdict{padding:18px 40px 30px;font-size:30px}
   .verdict .pill{background:rgba(38,198,201,.18);border:1px solid rgba(38,198,201,.5);color:var(--accent);
     border-radius:999px;padding:8px 22px;font-weight:700;letter-spacing:.04em}
+  .verdict .pill.nom{background:rgba(242,181,60,.14);border-color:rgba(242,181,60,.55);color:var(--amber)}
 
   .stamp{position:absolute;bottom:96px;width:100%;text-align:center;font-size:30px;color:var(--accent-dim);
     opacity:0;animation:fade .8s ease 2.4s forwards}
@@ -75,17 +76,17 @@
     <div class="cardhdr">
       <span class="dot"></span>
       <span class="chain"><span class="g">NAB2</span> &rarr; Th1/Th2 polarization &rarr; atopic eczema</span>
-      <span class="cond mono">Stim8hr</span><span class="rank mono">rank #4</span>
+      <span class="cond mono">Stim8hr</span>
     </div>
     <div class="receipt mono">
-      <div><span class="k">ab</span><span class="v">66</span></div>
-      <div><span class="k">bc</span><span class="v">2,184</span></div>
-      <div><span class="k">ac&#95;lit</span><span class="v">6</span></div>
-      <div><span class="k">ac&#95;known</span><span class="v">0.0376</span></div>
-      <div><span class="k">effect</span><span class="v">301</span></div>
-      <div><span class="k">score</span><span class="v">&minus;1.137</span></div>
+      <div><span class="k">literature novelty</span><span class="v">ac&#95;lit 6 &mdash; a link unwritten</span></div>
+      <div><span class="k">downstream effect</span><span class="v">301 genes</span></div>
     </div>
-    <div class="verdict">referee verdict &nbsp;<span class="pill mono">supported</span></div>
+    <div class="verdict">
+      <span class="pill mono">program hop supported</span>
+      &nbsp;·&nbsp;
+      <span class="pill nom mono">eczema label = nomination</span>
+    </div>
   </div>
 
   <div class="stamp mono">ALL&#95;PASS &#10003; &nbsp;·&nbsp; pure-replay cache &Delta; 0 &nbsp;·&nbsp; <b>re-derived, not discovered</b></div>

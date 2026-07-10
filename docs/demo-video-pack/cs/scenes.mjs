@@ -1,24 +1,22 @@
 // CS-native demo — scenes. SCREEN-ONLY: mouse/keyboard only, no API reach.
-// Slides (beats 1-3) are our own file:// assets that auto-animate; CS captures (beats 4-6)
-// drive the LIVE Claude Science UI (real front door -> click a conversation card -> scroll).
-// Passes the screen-only gate (goto is WARN-only; no fetch/request/api/evaluate here).
+// Slides + prepared CS-receipt overlays are our own file:// assets; live beats drive the LIVE
+// Claude Science UI. Passes the screen-only gate (goto is WARN-only; no fetch/request/api/evaluate).
 //
-// FRIDAY TODOs are marked //TODO — they need the live CS on screen to tune (scroll targets,
-// exact card titles). Everything else runs as-is.
+// v4 (2026-07-10): codex-debate + panel edits — B0 cold-open on the refusal; two plain honesty
+// captions (live micro-sweep vs cached full sweep); STAT6 legibility callout in B6; frame-8 overlay
+// carries the split disease-label + de-numbered receipt. Wayfinder rename lives in narration/cards.
 
 const pg = (rec) => rec.page;
 
-// Absolute file URL to the committed slide assets (spaces %20-encoded). //TODO if repo moves.
 const ASSETS =
   "file:///C:/Users/wijesingheds/Documents/04%20Fun%20with%20Coding/2026-07-07%20PyZoBot-Arbiter/docs/demo-video-pack/assets/";
-const CS = "http://localhost:8000/";   //TODO Fri: confirm port via `claude-science status`
+const CS = "http://localhost:8000/";   // confirm port via `claude-science status`
 
-// VERIFIED frame URLs (2026-07-09 de-risk; see CAPTURE_PLAN.md). Robust fallback to home->click.
+// VERIFIED frame URLs (2026-07-09 de-risk; see CAPTURE_PLAN.md).
 const FRAMES = {
   b4:  CS + "projects/proj_64a5e671c715/frames/2b61c815-3e41-48fb-945c-618e8e94a190", // live micro-sweep
-  b5:  CS + "projects/proj_fd9d7046d730/frames/681b75c5-64eb-48dc-a239-f8a45c1fcb88", // loose sweep
+  b5:  CS + "projects/proj_fd9d7046d730/frames/681b75c5-64eb-48dc-a239-f8a45c1fcb88", // loose (cached) sweep
   b6a: CS + "projects/proj_ea76f1a08006/frames/fb886080-da06-492a-bfec-df1a972955bf", // stage3 STAT6
-  b6b: CS + "projects/proj_99ccc044f003/frames/4473ddef-0858-47f8-a4f8-408ce5ecfdcf", // stage5 reviewer
 };
 
 // Best-effort dismiss of CS UI chrome (update toast + "where you left off" tooltip) — real clicks.
@@ -30,25 +28,22 @@ async function dismissChrome(rec) {
   }
 }
 
-// Play one self-animating slide for the full narration beat (slides carry their own captions).
-async function playSlide(rec, file, id) {
+// Play one self-animating slide/overlay for the full narration beat.
+async function playSlide(rec, file, id, caption) {
   await pg(rec).goto(ASSETS + file, { waitUntil: "load", timeout: 20000 });
   rec.sceneStart(id);
+  if (caption) await rec.setCaption(caption);
   await rec.sceneEnd();
-}
-
-// Open a CS conversation from the real home screen by its visible title (screen-only click).
-async function openConversation(rec, title) {
-  const p = pg(rec);
-  await p.goto(CS, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await rec.sleep(1800);
-  await rec.act(p.getByText(title, { exact: false }).first());   //TODO Fri: confirm the card lands in the transcript
-  await rec.sleep(2600);
+  await rec.setCaption("");
 }
 
 export const SCENES = {
   walk: async (rec) => {
     const p = pg(rec);
+
+    // ── B0 · COLD-OPEN on the confident NO (F-015: distinctive behavior in the first seconds) ──
+    await playSlide(rec, "overlay-no-il2.html", "b0_hook",
+      "A failed knockdown → UNTESTED, not a false negative — the moat");
 
     // ── B1 · the two floods (slide) ──────────────────────────────────────────
     await playSlide(rec, "slide-two-floods.html", "b1_floods");
@@ -59,50 +54,45 @@ export const SCENES = {
     // ── B3 · Swanson ABC (concept graphic) ───────────────────────────────────
     await playSlide(rec, "swanson-graphic.html?scene=swanson", "b3_swanson");
 
-    // ── B4 · CS builds the LBD generator, live (Liveness proof visible on load) ──
+    // ── B4 · CS builds the LBD generator LIVE (liveness proof visible on load) ──
     await p.goto(FRAMES.b4, { waitUntil: "domcontentloaded", timeout: 30000 });
     await rec.sleep(1500); await dismissChrome(rec);
     rec.sceneStart("b4_build");
-    await rec.setCaption("Claude Science authored the LBD generator — live literature + database calls");
-    // Money shot on the bottom view: ranked table + "Liveness proof" (ab->7, bc->30473, ac_lit->82, OT->3000).
-    //TODO Fri: optional — open the executed_code.py thumbnail to show "the generator it wrote".
+    // Plain honesty caption #1 (F-065): this is the genuinely LIVE proof.
+    await rec.setCaption("Live micro-sweep — the generator it wrote, run on live literature + database calls");
     await rec.sceneEnd();
     await rec.setCaption("");
 
-    // ── B5 · referee culls (22,039 -> 30) + a VISIBLE NO + NAB2 payoff ────────
-    // REQUIRED money shots (release blockers — CAPTURE_PLAN.md F-015) via prepared CS-receipt
-    // overlays: live scroll is unreliable (CS opens at bottom + wheel doesn't scroll the transcript).
-    // Live b5 frame establishes "real Claude Science"; the overlays render the exact on-disk
-    // artifacts (stage1/receipt.md, tracer/receipt_chain.md) — verdict word + receipt reason on screen.
-    // Visual order tracks the narration: referee context -> the refusal -> 30 survive + NAB2 -> payoff.
+    // ── B5 · referee culls (22,039 -> 30) + NAB2 payoff ───────────────────────
+    // Live b5 frame establishes "real Claude Science" (cached full sweep); funnel overlay carries the
+    // de-numbered NAB2 receipt with the split disease-label. The refusal itself was front-loaded in B0.
     await p.goto(FRAMES.b5, { waitUntil: "domcontentloaded", timeout: 30000 });
     await rec.sleep(1500); await dismissChrome(rec);
     rec.sceneStart("b5_referee");
     const b5 = rec.durations["b5_referee"] || 30;
-    // Honesty caption — scope live-vs-cached ON SCREEN (F-002/F-012), not buried in docs:
-    await rec.setCaption("full 22,039 sweep = CS-native cached-receipt replay · live proof = micro-sweep · falsification = STAT6 S3");
-    await rec.untilT(Math.max(1, b5 * 0.28));
-    // The MOAT made visible (F-005/F-013): one concrete refusal receipt — verdict word + reason.
-    await p.goto(ASSETS + "overlay-no-il2.html", { waitUntil: "load", timeout: 20000 });
-    await rec.setCaption("Watch it refuse — a failed knockdown returns UNTESTED, not a false negative");
-    await rec.untilT(Math.max(1, b5 * 0.52));
-    // REQUIRED frame — funnel + NAB2 receipt (ab66/bc2184/ac_lit6/ac_known0.0376/effect301/supported).
+    // Plain honesty caption #2 (F-065): scope the full sweep as a cached replay (not a live crawl).
+    await rec.setCaption("Full 22,039 sweep — cached replay of the same deterministic referee");
+    await rec.untilT(Math.max(1, b5 * 0.42));
+    // REQUIRED frame — funnel + de-numbered NAB2 receipt + split disease-label (F-095/F-035/F-115).
     await p.goto(ASSETS + "overlay-funnel-nab2.html", { waitUntil: "load", timeout: 20000 });
-    await rec.setCaption("Thirty survive — NAB2 → Th1/Th2 → atopic eczema, re-derived with a receipt at every hop");
-    await rec.untilT(Math.max(1, b5 * 0.82));
+    await rec.setCaption("Thirty clean candidates survive — NAB2 → Th1/Th2 re-derived; eczema stays a nomination");
+    await rec.untilT(Math.max(1, b5 * 0.80));
     await rec.setCaption("");
-    await p.goto(ASSETS + "swanson-graphic.html?scene=nab2", { waitUntil: "load", timeout: 20000 }); // NAB2 A->B->C payoff
+    await p.goto(ASSETS + "swanson-graphic.html?scene=nab2", { waitUntil: "load", timeout: 20000 }); // A->B->C payoff
     await rec.sceneEnd();
 
-    // ── B6 · self-check: STAT6 refuted live (b6a, screen-only) -> Reviewer kills overclaim (overlay) ──
+    // ── B6 · self-check: STAT6 refuted live -> legible callout -> Reviewer kills overclaim ──
     await p.goto(FRAMES.b6a, { waitUntil: "domcontentloaded", timeout: 30000 });
     await rec.sleep(1500); await dismissChrome(rec);
     rec.sceneStart("b6_selfcheck");
     const b6 = rec.durations["b6_selfcheck"] || 22;
-    // b6a "Cis-exclusion statement (calibrated)" is visible on load (screen-only, no overlay needed).
     await rec.setCaption("A possible STAT6 cis-artifact — refuted live; the GWAS disease label stays a nomination");
-    await rec.untilT(Math.max(1, b6 * 0.55));
-    // REQUIRED frame — reviewer flag via prepared CS-receipt overlay (stage5/review.json, not raw JSON).
+    await rec.untilT(Math.max(1, b6 * 0.40));
+    // F-025 — one legible callout of the STAT6 evidence (the live receipt is too small to read at scale).
+    await p.goto(ASSETS + "overlay-stat6.html", { waitUntil: "load", timeout: 20000 });
+    await rec.setCaption("STAT6 unmoved by NAB2 knockdown → the cis-artifact is refuted");
+    await rec.untilT(Math.max(1, b6 * 0.70));
+    // REQUIRED frame — reviewer flag via prepared CS-receipt overlay (stage5/review.json).
     await p.goto(ASSETS + "overlay-reviewer.html", { waitUntil: "load", timeout: 20000 });
     await rec.setCaption("...and the platform checks itself — a reviewer flagged 'validated' and 'definitive', and I cut them");
     await rec.sceneEnd();

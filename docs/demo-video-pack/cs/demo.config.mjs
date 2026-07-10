@@ -25,7 +25,7 @@ export const LOGIN = {
 // FINAL cut — ElevenLabs "Brian" (draft = { mode:"edge" }).
 export const TTS = {
   mode: "elevenlabs",
-  elevenVoiceId: "nPczCjzI2devNBz1zQrb",   // Brian — deep, resonant narrator
+  elevenVoiceId: "HgYyghnaV40lVlip9yo7",   // author's own cloned voice (first-person narration)
   elevenModelId: "eleven_multilingual_v2",
   elevenVoiceSettings: { stability: 0.5, similarity_boost: 0.75, style: 0.0, use_speaker_boost: true },
   keyEnvFile: ENV_FILE,
@@ -38,12 +38,12 @@ export const STITCH = {
   out: "out/pyzobot_arbiter_cs_demo.mp4",
   theme: { bg: "#091314", fg: "#eaf3f1", accent: "#26c6c9" },
   cards: {
-    title:  { voiced: true, eyebrow: "PyZoBot Arbiter",
+    title:  { voiced: true, eyebrow: "Wayfinder",
               title: "The library and the lab, on one bench",
               sub: "Literature-based discovery, built inside Claude Science" },
-    endcap: { voiced: true, eyebrow: "PyZoBot Arbiter",
+    endcap: { voiced: true, eyebrow: "Wayfinder",
               title: "Generate a hypothesis. Test it. One platform.",
-              sub: "Receipt-backed · willing to refute · reproducible from public Perturb-seq data" },
+              sub: "Dr. Shanaka Wijesinghe · VCU School of Pharmacy · linkedin.com/in/dayanjanwijesinghe" },
   },
   order: [
     { card: "title" },
