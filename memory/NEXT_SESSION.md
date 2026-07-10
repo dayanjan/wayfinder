@@ -1,6 +1,21 @@
 # NEXT_SESSION — async handoff (canonical; written/read by session-closer & session-start)
 
-## Next session priorities — written 2026-07-09 19:12 (full-close)
+## 🚀 SUBMISSION FIRE-READY — updated 2026-07-10
+
+The submission is BUILT. Project renamed **PyZoBot Arbiter → Wayfinder**. Video `wayfinder_demo.mp4` (2:52,
+operator's cloned voice, gate PASS 96%); judge-facing README + summary + bio; Tier-0 integrity fixes done;
+GitHub repo renamed `dayanjan/wayfinder` (PRIVATE, history preserved); panel + frame-grounded codex-debate
+folded in.
+
+**When the operator says "scrub and flip" / "we're ready":** run `SUBMIT_CHECKLIST.md` (gitignored, repo root)
+steps 1–5 → scrub `wijesingheds` paths (LAST — breaks video re-runs) · add uploaded video link to README ·
+leak grep · commit · `gh repo edit dayanjan/wayfinder --visibility public` → hand back the public URL. Voice-ID
+= KEEP. Form values + drafts are in the checklist. Only operator-blocked steps: upload the video + final flip.
+Deadline: official EOD ET Mon 2026-07-13. See memory `submission-fire-ready`.
+
+---
+
+## Next session priorities — written 2026-07-09 19:12 (full-close) — SUPERSEDED by the fire-ready block above
 
 **Current state**: Full-close, tree clean, all pushed. **Submission strategy pivoted to a CS-native
 3-minute video** (new spine: *when you don't know what to ask, use LBD to surface the data's implicit
