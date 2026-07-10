@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CS receipt — funnel + NAB2</title>
+<style>
+  /* Beat 5 overlay — the funnel (22,039 -> 30) + the NAB2 receipt row.
+     Source: docs/cs-full-pipeline_2026-07-09/stage1/receipt.md (funnel + ranked_supported[NAB2] + ALL_PASS).
+     Deliberately excludes the referee_overall "validated" wording per F-016. 1920x1080, brand palette,
+     auto-reveal (deterministic, no random/time) so it reads whenever shown in the beat. */
+  :root{--bg:#091314;--fg:#eaf3f1;--accent:#26c6c9;--accent-dim:#5ea9a8;--amber:#f2b53c;--mut:#8fb0ae}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--fg)}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+  .stage{position:relative;width:1920px;height:1080px;
+    background:radial-gradient(1300px 760px at 50% 42%,#0d1e1f 0%,#0a1617 58%,#091314 100%)}
+  .stage::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 320px 60px rgba(0,0,0,.55)}
+
+  .eyebrow{position:absolute;top:92px;width:100%;text-align:center;font-size:28px;letter-spacing:.30em;
+    text-transform:uppercase;color:var(--accent);opacity:0;animation:fade .7s ease .2s forwards}
+  .eyebrow b{color:var(--accent-dim);font-weight:600}
+
+  /* funnel */
+  .funnel{position:absolute;top:210px;left:50%;transform:translateX(-50%);
+    display:flex;align-items:center;gap:34px}
+  .stepc{display:flex;flex-direction:column;align-items:center;opacity:0;animation:rise .7s ease forwards}
+  .num{font-size:96px;font-weight:800;line-height:1;color:var(--fg)}
+  .num.win{color:var(--accent)}
+  .lab{margin-top:14px;font-size:26px;color:var(--mut);letter-spacing:.03em}
+  .arrow{font-size:64px;color:var(--accent-dim);opacity:0;animation:fade .5s ease forwards}
+  .culled{margin-top:10px;font-size:22px;color:var(--amber);opacity:.9}
+
+  /* NAB2 receipt card */
+  .card{position:absolute;top:566px;left:50%;transform:translateX(-50%) scale(.98);
+    width:1360px;border-radius:16px;background:rgba(9,20,21,.82);border:1px solid rgba(38,198,201,.34);
+    box-shadow:0 0 60px rgba(0,0,0,.5);opacity:0;animation:cardin .8s cubic-bezier(.2,1.1,.4,1) 1.5s forwards}
+  .cardhdr{display:flex;align-items:center;gap:16px;padding:26px 40px 8px}
+  .dot{width:13px;height:13px;border-radius:50%;background:var(--accent)}
+  .chain{font-size:40px;font-weight:700}
+  .chain .g{color:var(--accent)}
+  .cond{margin-left:auto;font-size:26px;color:var(--mut)}
+  .rank{color:var(--fg);background:rgba(38,198,201,.16);border:1px solid rgba(38,198,201,.4);
+    border-radius:999px;padding:6px 18px;font-size:26px;margin-left:18px}
+  .receipt{display:flex;flex-wrap:wrap;gap:14px 40px;padding:22px 40px 12px;font-size:32px}
+  .receipt .k{color:var(--mut);font-size:24px;display:block;letter-spacing:.06em;text-transform:uppercase}
+  .receipt .v{color:var(--fg)}
+  .verdict{padding:18px 40px 30px;font-size:30px}
+  .verdict .pill{background:rgba(38,198,201,.18);border:1px solid rgba(38,198,201,.5);color:var(--accent);
+    border-radius:999px;padding:8px 22px;font-weight:700;letter-spacing:.04em}
+
+  .stamp{position:absolute;bottom:96px;width:100%;text-align:center;font-size:30px;color:var(--accent-dim);
+    opacity:0;animation:fade .8s ease 2.4s forwards}
+  .stamp b{color:var(--accent)}
+
+  @keyframes fade{to{opacity:1}}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes cardin{to{opacity:1;transform:translateX(-50%) scale(1)}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="eyebrow">Claude Science receipt &nbsp;<b>stage1/receipt.md</b></div>
+
+  <div class="funnel">
+    <div class="stepc" style="animation-delay:.4s"><div class="num">3,935</div><div class="lab">genes</div></div>
+    <div class="arrow" style="animation-delay:.7s">&rarr;</div>
+    <div class="stepc" style="animation-delay:.8s"><div class="num">22,039</div><div class="lab">hypotheses posed</div></div>
+    <div class="arrow" style="animation-delay:1.1s">&rarr;</div>
+    <div class="stepc" style="animation-delay:1.2s"><div class="num win">30</div><div class="lab">clean, receipt-backed</div>
+      <div class="culled">21,995 refuted &amp; culled</div></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhdr">
+      <span class="dot"></span>
+      <span class="chain"><span class="g">NAB2</span> &rarr; Th1/Th2 polarization &rarr; atopic eczema</span>
+      <span class="cond mono">Stim8hr</span><span class="rank mono">rank #4</span>
+    </div>
+    <div class="receipt mono">
+      <div><span class="k">ab</span><span class="v">66</span></div>
+      <div><span class="k">bc</span><span class="v">2,184</span></div>
+      <div><span class="k">ac&#95;lit</span><span class="v">6</span></div>
+      <div><span class="k">ac&#95;known</span><span class="v">0.0376</span></div>
+      <div><span class="k">effect</span><span class="v">301</span></div>
+      <div><span class="k">score</span><span class="v">&minus;1.137</span></div>
+    </div>
+    <div class="verdict">referee verdict &nbsp;<span class="pill mono">supported</span></div>
+  </div>
+
+  <div class="stamp mono">ALL&#95;PASS &#10003; &nbsp;·&nbsp; pure-replay cache &Delta; 0 &nbsp;·&nbsp; <b>re-derived, not discovered</b></div>
+</div>
+</body>
+</html>

@@ -61,7 +61,7 @@ export const SCENES = {
 
     // ── B4 · CS builds the LBD generator, live (Liveness proof visible on load) ──
     await p.goto(FRAMES.b4, { waitUntil: "domcontentloaded", timeout: 30000 });
-    await rec.sleep(2500); await dismissChrome(rec);
+    await rec.sleep(1500); await dismissChrome(rec);
     rec.sceneStart("b4_build");
     await rec.setCaption("Claude Science authored the LBD generator — live literature + database calls");
     // Money shot on the bottom view: ranked table + "Liveness proof" (ab->7, bc->30473, ac_lit->82, OT->3000).
@@ -70,36 +70,41 @@ export const SCENES = {
     await rec.setCaption("");
 
     // ── B5 · referee culls (22,039 -> 30) + a VISIBLE NO + NAB2 payoff ────────
-    // REQUIRED frames (release blockers — see CAPTURE_PLAN.md): (1) funnel + NAB2 receipt,
-    // (2) ONE concrete NO receipt (verdict word + reason). Artifact-overlay preferred over live scroll.
+    // REQUIRED money shots (release blockers — CAPTURE_PLAN.md F-015) via prepared CS-receipt
+    // overlays: live scroll is unreliable (CS opens at bottom + wheel doesn't scroll the transcript).
+    // Live b5 frame establishes "real Claude Science"; the overlays render the exact on-disk
+    // artifacts (stage1/receipt.md, tracer/receipt_chain.md) — verdict word + receipt reason on screen.
+    // Visual order tracks the narration: referee context -> the refusal -> 30 survive + NAB2 -> payoff.
     await p.goto(FRAMES.b5, { waitUntil: "domcontentloaded", timeout: 30000 });
-    await rec.sleep(2500); await dismissChrome(rec);
+    await rec.sleep(1500); await dismissChrome(rec);
     rec.sceneStart("b5_referee");
+    const b5 = rec.durations["b5_referee"] || 30;
     // Honesty caption — scope live-vs-cached ON SCREEN (F-002/F-012), not buried in docs:
     await rec.setCaption("full 22,039 sweep = CS-native cached-receipt replay · live proof = micro-sweep · falsification = STAT6 S3");
-    //TODO Fri: open the receipt.md ARTIFACT (funnel + NAB2: ab66/bc2184/ac_lit6/ac_known0.0376/effect301/supported).
-    const b5 = rec.durations["b5_referee"] || 24;
-    await rec.untilT(Math.max(1, b5 * 0.45));
-    // The MOAT made visible (F-005/F-013): show one concrete refusal receipt, verdict word + reason.
+    await rec.untilT(Math.max(1, b5 * 0.28));
+    // The MOAT made visible (F-005/F-013): one concrete refusal receipt — verdict word + reason.
+    await p.goto(ASSETS + "overlay-no-il2.html", { waitUntil: "load", timeout: 20000 });
     await rec.setCaption("Watch it refuse — a failed knockdown returns UNTESTED, not a false negative");
-    //TODO Fri: REQUIRED frame — IL2 untested (tracer) OR SBF2 effect-refuted; show the verdict word + the receipt reason.
-    await rec.untilT(Math.max(1, b5 - 7));
+    await rec.untilT(Math.max(1, b5 * 0.52));
+    // REQUIRED frame — funnel + NAB2 receipt (ab66/bc2184/ac_lit6/ac_known0.0376/effect301/supported).
+    await p.goto(ASSETS + "overlay-funnel-nab2.html", { waitUntil: "load", timeout: 20000 });
+    await rec.setCaption("Thirty survive — NAB2 → Th1/Th2 → atopic eczema, re-derived with a receipt at every hop");
+    await rec.untilT(Math.max(1, b5 * 0.82));
     await rec.setCaption("");
     await p.goto(ASSETS + "swanson-graphic.html?scene=nab2", { waitUntil: "load", timeout: 20000 }); // NAB2 A->B->C payoff
     await rec.sceneEnd();
 
-    // ── B6 · self-check: STAT6 refuted live (b6a) -> Reviewer kills overclaim (b6b) ──
+    // ── B6 · self-check: STAT6 refuted live (b6a, screen-only) -> Reviewer kills overclaim (overlay) ──
     await p.goto(FRAMES.b6a, { waitUntil: "domcontentloaded", timeout: 30000 });
-    await rec.sleep(2500); await dismissChrome(rec);
+    await rec.sleep(1500); await dismissChrome(rec);
     rec.sceneStart("b6_selfcheck");
-    await rec.setCaption("A possible STAT6 cis-artifact — refuted live; the GWAS disease label stays a nomination");
+    const b6 = rec.durations["b6_selfcheck"] || 22;
     // b6a "Cis-exclusion statement (calibrated)" is visible on load (screen-only, no overlay needed).
-    const b6 = rec.durations["b6_selfcheck"] || 20;
-    await rec.untilT(Math.max(1, b6 - 8));
-    await p.goto(FRAMES.b6b, { waitUntil: "domcontentloaded", timeout: 30000 });
-    await rec.sleep(2000); await dismissChrome(rec);
-    await rec.setCaption("...and the platform checks itself — a reviewer flagged 'validated' and 'definitive'");
-    //TODO Fri: REQUIRED frame — the reviewer flag from stage5/review.json (prepared overlay preferred; NOT raw loose JSON).
+    await rec.setCaption("A possible STAT6 cis-artifact — refuted live; the GWAS disease label stays a nomination");
+    await rec.untilT(Math.max(1, b6 * 0.55));
+    // REQUIRED frame — reviewer flag via prepared CS-receipt overlay (stage5/review.json, not raw JSON).
+    await p.goto(ASSETS + "overlay-reviewer.html", { waitUntil: "load", timeout: 20000 });
+    await rec.setCaption("...and the platform checks itself — a reviewer flagged 'validated' and 'definitive', and I cut them");
     await rec.sceneEnd();
     await rec.setCaption("");
   },

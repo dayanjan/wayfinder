@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CS reviewer — the platform checks itself</title>
+<style>
+  /* Beat 6 overlay — the self-check: an independent reviewer model flags the overclaims.
+     Source: docs/cs-full-pipeline_2026-07-09/stage5/review.json (calibrated_language violations).
+     verdict PASS_WITH_NOTES; numeric_fidelity PASS; two flagged words. 1920x1080, brand palette,
+     deterministic auto-reveal. */
+  :root{--bg:#091314;--fg:#eaf3f1;--accent:#26c6c9;--accent-dim:#5ea9a8;--amber:#f2b53c;--mut:#8fb0ae}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--fg)}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+  .stage{position:relative;width:1920px;height:1080px;
+    background:radial-gradient(1300px 760px at 50% 42%,#0d1e1f 0%,#0a1617 58%,#091314 100%)}
+  .stage::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 320px 60px rgba(0,0,0,.55)}
+
+  .eyebrow{position:absolute;top:92px;width:100%;text-align:center;font-size:28px;letter-spacing:.30em;
+    text-transform:uppercase;color:var(--accent);opacity:0;animation:fade .7s ease .2s forwards}
+  .eyebrow b{color:var(--accent-dim);font-weight:600}
+
+  .title{position:absolute;top:168px;width:100%;text-align:center;font-size:62px;font-weight:800;
+    opacity:0;animation:rise .7s ease .5s forwards}
+  .verdrow{position:absolute;top:268px;width:100%;text-align:center;font-size:30px;color:var(--mut);
+    opacity:0;animation:fade .7s ease .9s forwards}
+  .verdrow .ok{color:var(--accent);font-weight:700}
+  .verdrow .pill{border:1px solid rgba(38,198,201,.5);border-radius:999px;padding:6px 20px;color:var(--accent)}
+
+  .flags{position:absolute;top:378px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;gap:26px;width:1400px}
+  .flag{display:flex;align-items:flex-start;gap:26px;background:rgba(9,20,21,.72);
+    border-left:5px solid var(--amber);border-radius:6px;padding:28px 40px;opacity:0;
+    animation:rise .7s ease forwards}
+  .flag .mark{font-size:44px;color:var(--amber);line-height:1}
+  .flag .word{font-size:48px;font-weight:800;color:var(--amber);min-width:360px;padding-right:24px}
+  .flag .why{font-size:34px;line-height:1.4;color:var(--fg);align-self:center}
+
+  .foot{position:absolute;bottom:96px;width:100%;text-align:center;font-size:32px;color:var(--accent-dim);
+    opacity:0;animation:fade .8s ease 2.6s forwards}
+  .foot b{color:var(--fg)}
+
+  @keyframes fade{to{opacity:1}}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="eyebrow">Claude Science reviewer &nbsp;<b>stage5/review.json</b></div>
+  <div class="title">The platform checks itself</div>
+  <div class="verdrow">
+    <span class="pill mono">PASS_WITH_NOTES</span> &nbsp;·&nbsp; numeric fidelity <span class="ok">PASS</span> &mdash; every number matched the source
+  </div>
+
+  <div class="flags">
+    <div class="flag" style="animation-delay:1.3s">
+      <span class="mark">&#9873;</span>
+      <span class="word mono">&ldquo;validated&rdquo;</span>
+      <span class="why">flagged &mdash; a certainty upgrade akin to &ldquo;proven.&rdquo; Not a sanctioned calibration term.</span>
+    </div>
+    <div class="flag" style="animation-delay:1.9s">
+      <span class="mark">&#9873;</span>
+      <span class="word mono">&ldquo;definitive&rdquo;</span>
+      <span class="why">flagged &mdash; unwarranted certainty beyond the plain &ldquo;REFUTED&rdquo; status.</span>
+    </div>
+  </div>
+
+  <div class="foot">An independent reviewer model caught the overclaims &mdash; and <b>I cut them.</b></div>
+</div>
+</body>
+</html>

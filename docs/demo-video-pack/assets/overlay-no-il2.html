@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CS receipt — the confident NO (IL2 untested)</title>
+<style>
+  /* Beat 5 overlay — THE MOAT MADE VISIBLE (F-005/F-013): one concrete refusal receipt.
+     Source: docs/cs-capability-tests_2026-07-08/tracer-artifacts/receipt_chain.md (IL2 @ Rest, HOP 0).
+     verdict word + receipt reason on screen. UNTESTED is amber (a QC abstention), NOT red (a negative).
+     1920x1080, brand palette, deterministic auto-reveal. */
+  :root{--bg:#091314;--fg:#eaf3f1;--accent:#26c6c9;--accent-dim:#5ea9a8;--amber:#f2b53c;--mut:#8fb0ae}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--fg)}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+  .stage{position:relative;width:1920px;height:1080px;
+    background:radial-gradient(1300px 760px at 50% 44%,#0d1e1f 0%,#0a1617 58%,#091314 100%)}
+  .stage::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 320px 60px rgba(0,0,0,.55)}
+
+  .eyebrow{position:absolute;top:96px;width:100%;text-align:center;font-size:28px;letter-spacing:.30em;
+    text-transform:uppercase;color:var(--accent);opacity:0;animation:fade .7s ease .2s forwards}
+  .eyebrow b{color:var(--accent-dim);font-weight:600}
+
+  .verdictrow{position:absolute;top:236px;left:50%;transform:translateX(-50%);
+    display:flex;align-items:center;gap:40px;opacity:0;animation:rise .7s ease .5s forwards}
+  .gene{font-size:104px;font-weight:800;color:var(--fg)}
+  .to{font-size:70px;color:var(--accent-dim)}
+  .pill{font-size:80px;font-weight:800;letter-spacing:.06em;color:var(--amber);
+    border:3px solid var(--amber);border-radius:18px;padding:12px 42px;background:rgba(242,181,60,.08)}
+
+  .gate{position:absolute;top:460px;left:50%;transform:translateX(-50%);width:1360px;
+    border-left:5px solid var(--amber);background:rgba(9,20,21,.72);border-radius:6px;
+    padding:30px 46px;opacity:0;animation:rise .7s ease 1.2s forwards}
+  .gatehd{font-size:32px;color:var(--amber);letter-spacing:.04em;margin-bottom:16px}
+  .gatehd .x{font-weight:800}
+  .stat{font-size:38px;line-height:1.5}
+  .stat .v{color:var(--fg);font-weight:700}
+  .stat .k{color:var(--mut)}
+
+  .reason{position:absolute;top:686px;left:50%;transform:translateX(-50%);width:1360px;text-align:left;
+    font-size:36px;line-height:1.45;color:var(--fg);opacity:0;animation:fade .8s ease 1.9s forwards}
+  .reason .em{color:var(--amber);font-weight:700}
+
+  .foot{position:absolute;bottom:96px;width:100%;text-align:center;font-size:28px;color:var(--accent-dim);
+    opacity:0;animation:fade .8s ease 2.6s forwards}
+  .foot b{color:var(--accent)}
+
+  @keyframes fade{to{opacity:1}}
+  @keyframes rise{from{opacity:0;transform:translateX(-50%) translateY(18px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="eyebrow">Claude Science receipt &nbsp;<b>tracer/receipt_chain.md</b> &nbsp;·&nbsp; the confident NO</div>
+
+  <div class="verdictrow">
+    <span class="gene mono">IL2</span>
+    <span class="to">&rarr;</span>
+    <span class="pill mono">UNTESTED</span>
+  </div>
+
+  <div class="gate">
+    <div class="gatehd">HOP 0 &nbsp;·&nbsp; knockdown-QC gate &nbsp;<span class="x mono">FAILED</span></div>
+    <div class="stat mono"><span class="v">0 of 2</span> <span class="k">guides reached signif_knockdown</span> &nbsp;·&nbsp; <span class="k">best adj_p</span> <span class="v">0.32</span></div>
+  </div>
+
+  <div class="reason">
+    A guide is informative only if it actually silenced the gene. So a null downstream result is
+    <span class="em">UNTESTED</span> &mdash; never &ldquo;no effect.&rdquo; An artifact caught, not a false negative.
+  </div>
+
+  <div class="foot mono">By contrast, NAB2&rsquo;s gate <b>passed</b> &mdash; 2 of 2 guides, adj_p 1e&minus;16 &mdash; so NAB2 can be judged.</div>
+</div>
+</body>
+</html>
