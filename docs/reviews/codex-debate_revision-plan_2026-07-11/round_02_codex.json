@@ -1,0 +1,131 @@
+{
+  "round_number": 2,
+  "position_summary": "Claude has materially improved the plan: it no longer misrepresents internal diagnostics as validation, and C4 is honestly foregrounded as unresolved. However, the revision still does not move the paper to \u201cmachinery decides correctly\u201d; more importantly, \u201ccalibrated\u201d remains an unsupported performance claim, and the proposed C6 nulls, C3 positive controls, and C2 hard-negative design are not yet statistically well specified.",
+  "findings": [
+    {
+      "id": "F-009",
+      "title": "The top-line claim still overclaims calibration",
+      "severity": 5,
+      "likelihood": 5,
+      "blast_radius": 5,
+      "priority": "P0",
+      "evidence": "The revised roadmap declares \u201ccalibrated, receipt-backed prioritization\u201d at docs/reviews/codex-debate_revision-plan_2026-07-11.md:8-11, while explicitly conceding that the analyses are behavioral diagnostics rather than validation. No repository artifact estimates predictive calibration, class-conditional error, precision, or probability reliability. The implementation returns rule-based categorical answers in src/arbiter/lbd/referee_triple.py:102-137; it does not produce calibrated probabilities. C3 external validation remains NEEDS-FRESH-CS-RUN/LIT and is only a crude proxy.",
+      "concern_path": "A methods reviewer can reasonably interpret \u201ccalibrated\u201d as empirically calibrated confidence. Renaming \u201cadjudication\u201d while retaining \u201ccalibrated\u201d merely relocates the correctness overclaim. The proposed diagnostics can demonstrate explicit abstention and evidence-linked decision rules, but not that confidence or verdict frequencies match truth.",
+      "suggested_action": "Use \u201creceipt-backed prioritization with explicit abstention and falsification diagnostics\u201d as the defensible top line. Reserve \u201ccalibrated language\u201d for vocabulary discipline, or define calibration narrowly and non-statistically. State directly that supported-call accuracy and empirical verdict calibration remain unmeasured.",
+      "novelty_flag": true,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-010",
+      "title": "Two of the three proposed C6 permutations lack a valid null estimand",
+      "severity": 5,
+      "likelihood": 5,
+      "blast_radius": 4,
+      "priority": "P0",
+      "evidence": "FEASIBLE computationally, but statistically mis-specified as written at docs/reviews/codex-debate_revision-plan_2026-07-11.md:20 and :55. Eligibility is deterministically formed from AB, BC, and Open Targets at src/arbiter/lbd/propose.py:68-71, while clean survival is then determined by the exact-C referee at :75-109. Permuting already-eligible pairs either leaves the number of tested pairs invariant or assigns pairs without specifying which attached gene/disease receipts move with them. Likewise, \u201cgene-label permutation within condition\u201d is undefined: independently permuting T1/T2/T3/T4 labels destroys real cross-table gene coupling, whereas jointly permuting a gene label across every table is only a relabeling and changes nothing. Existing Control 2 is precisely defined as a T3 disease-column shuffle at docs/manuscript/analysis/sensitivity_panel.py:86-122 and produced the already-problematic null result.",
+      "concern_path": "Reporting three null distributions gives an appearance of robustness, but undefined exchangeability makes their survivor counts uninterpretable. A reviewer can reject the analysis regardless of the \u201cdiagnostic\u201d label because the randomization mechanism does not correspond to a coherent null hypothesis.",
+      "suggested_action": "Pre-specify one primary randomization test. For \u201cis exact disease matching informative beyond cluster membership?\u201d, permute disease labels among T3 disease-enrichment rows while preserving condition, cluster/gene-set structure, row counts, OR/FDR pairs, and the fixed eligible-pair set; recompute exact-C survival and report a Monte Carlo tail probability plus effect size. Treat this as a disease-label-specificity diagnostic, not an answer to whether 30 whole-pipeline discoveries are surprising. Drop eligible-pair permutation. Only add a second null if its exchangeable unit and destroyed dependency are explicitly stated; otherwise say a defensible whole-pipeline null is unavailable.",
+      "novelty_flag": true,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-011",
+      "title": "The proposed canonical-regulator recovery panel is mismatched to a novelty-gated LBD funnel",
+      "severity": 4,
+      "likelihood": 5,
+      "blast_radius": 4,
+      "priority": "P1",
+      "evidence": "NEEDS-FRESH-CS-RUN/LIT for curation, and the proposed recovery metric is conceptually confounded. Canonical regulators such as STAT6, GATA3, TBX21, and IL4 are likely penalized or excluded by the novelty machinery: eligibility requires Open Targets known association <= tau at src/arbiter/lbd/propose.py:69-71, and ranking penalizes both literature co-mentions and known association at :97-100. The plan nevertheless proposes asking whether canonical regulators \u201crecover\u201d at docs/reviews/codex-debate_revision-plan_2026-07-11.md:23. Literature scripts exist, but fresh retrieval is required; src/arbiter/lbd/sources.py:32 stores Europe PMC count queries with pageSize=1 rather than a curated benchmark.",
+      "concern_path": "Failure to recover canonical regulators may merely show that the proposer intentionally suppresses already-known biology, not poor prioritization. Conversely, bypassing novelty gates to recover them evaluates a different pipeline. Either result is hard to interpret and does not answer C3 correctness.",
+      "suggested_action": "Split the benchmark by pipeline component. Test canonical Th1/Th2 regulators only against the Perturb-seq referee substrate, blinded to literature/novelty gates, asking whether expected program/effect receipts are recovered. Separately test the proposer with timestamped rediscovery or leave-one-source-out cases where evidence predates the cutoff but the target link is hidden from the novelty inputs. If time cannot support this design, omit C3c and explicitly leave external correctness unresolved.",
+      "novelty_flag": true,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-012",
+      "title": "C2 hard negatives remain selected by the same rules being evaluated",
+      "severity": 4,
+      "likelihood": 5,
+      "blast_radius": 4,
+      "priority": "P1",
+      "evidence": "FEASIBLE offline but insufficiently specified. The proposed hard negatives are \u201cliterature-plausible / eligible pairs that fail exact-C or effect\u201d at docs/reviews/codex-debate_revision-plan_2026-07-11.md:24. Exact-C failure is itself the outcome computed from T3 in src/arbiter/lbd/referee_triple.py:48-88, and effect failure is an outcome from the same referee at :116-137. Selecting cases because they fail those gates and then reporting that the referee rejects them is circular. Existing examples at docs/perturbseq-qc_2026-07-07/pyzobot_referee_results.md:25-40 demonstrate EGR2/IL2/SLC1A5 behavior but provide no independent negative labels.",
+      "concern_path": "The new panel could become a larger version of Control 1: a sample defined by the failure criterion inevitably demonstrates that criterion. It would show rule execution, not discrimination, and therefore would not strengthen the confident-no thesis at scale.",
+      "suggested_action": "Define panels without using the evaluated verdict: sample from a frozen literature-only nomination rule, stratified by condition, AB strength, disease, and assay coverage. Then apply the referee and report the pre-specified decomposition into QC-untested, effect-refuted, exact-C-refuted, and supported. Call this incremental filtering yield. For genuine discrimination, independently curate a small set of known assay failures or experimentally established positive/negative regulator-condition pairs; otherwise do not call the buckets hard negatives.",
+      "novelty_flag": false,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-013",
+      "title": "Cross-condition robustness needs a common cohort and is not a held-out test",
+      "severity": 4,
+      "likelihood": 4,
+      "blast_radius": 3,
+      "priority": "P1",
+      "evidence": "FEASIBLE from existing artifacts: docs/cs-full-pipeline_2026-07-09/live-fullsweep-loose/sweep_Rest.json, sweep_Stim8hr.json, and sweep_Stim48hr.json exist. But each sweep rebuilds a condition-specific A universe via src/arbiter/lbd/propose.py:45-51 and condition-specific referee evidence at :81-86. Comparing each condition\u2019s independently selected winners therefore mixes biological condition differences, assay coverage, eligibility, and selection. It is temporal robustness on the same Perturb-seq study, not held-out validation.",
+      "concern_path": "Overlap or rank differences among independently selected condition-specific sets cannot tell whether Stim8hr nominations replicate. Low overlap could be genuine temporal specificity; high overlap could reflect shared substrate structure. Either can be narratively rationalized after observing results.",
+      "suggested_action": "Pre-register Stim8hr as the discovery cohort, freeze its eligible gene-disease pairs and scoring inputs, and evaluate only their QC/effect/program/exact-C receipts at Rest and Stim48hr. Report coverage first, then transition matrices and receipt-effect concordance among testable pairs. Keep the existing independent sweeps as a secondary descriptive analysis.",
+      "novelty_flag": true,
+      "concern_type": "correctness"
+    },
+    {
+      "id": "F-014",
+      "title": "The MVP ordering omits the most interpretable robustness check and over-prioritizes C6",
+      "severity": 3,
+      "likelihood": 4,
+      "blast_radius": 3,
+      "priority": "P2",
+      "evidence": "The roadmap\u2019s MVP includes C6 and C2 hard negatives but excludes C3 temporal robustness and C10 threshold sensitivity at docs/reviews/codex-debate_revision-plan_2026-07-11.md:53-60. Yet threshold parameters are directly exposed by src/arbiter/lbd/propose.py:43-44 and existing sensitivity code already establishes the reporting framework at docs/manuscript/analysis/sensitivity_panel.py:152-191. The cross-condition JSON artifacts already exist. By contrast, the only defensible C6 test is narrow and cannot answer the whole-pipeline-surprise question.",
+      "concern_path": "Limited revision time could be spent implementing elaborate nulls that still do not address correctness, while omitting straightforward evidence about whether conclusions depend on arbitrary thresholds or condition-specific selection.",
+      "suggested_action": "Minimum viable scope: reframe/C1 architecture; C2 frozen literature-nomination decomposition; C10 small gate grid; frozen-cohort C3a; C4 foreground limitation; C9 enumeration if literature access works; four essential figures. Ideal scope: component-specific canonical controls, timestamped/leave-one-source-out validation, and additional constrained nulls. Keep the single T3-label C6 diagnostic supplementary unless it produces a clearly interpretable result.",
+      "novelty_flag": true,
+      "concern_type": "correctness"
+    }
+  ],
+  "escalated_findings": [
+    {
+      "prior_finding_id": "F-001",
+      "rationale": "Claude correctly relabeled C3 as diagnostic, but the canonical-positive-control design remains confounded by the novelty gates and cross-condition analysis is not yet specified as a frozen held-out cohort."
+    },
+    {
+      "prior_finding_id": "F-002",
+      "rationale": "Dropping \u201cjoint FDR\u201d was necessary, but the replacement still lists undefined gene-label and eligible-pair permutations. The central statistical objection therefore remains unresolved."
+    },
+    {
+      "prior_finding_id": "F-004",
+      "rationale": "Claude accepted the need for hard negatives but still defines them by failing the very exact-C/effect rules being evaluated, preserving selection circularity."
+    }
+  ],
+  "dropped_findings": [
+    {
+      "prior_finding_id": "F-003",
+      "rationale": "Adequately addressed: C4 is explicitly unresolved, the locus check is only a sanity check, and LD/colocalization is foregrounded as unavailable."
+    },
+    {
+      "prior_finding_id": "F-005",
+      "rationale": "Adequately addressed at plan level: C10 now requires a fresh deterministic gate-threshold grid rather than relying on the existing weight-only panel."
+    },
+    {
+      "prior_finding_id": "F-006",
+      "rationale": "Adequately addressed: C9 is correctly marked as a fresh literature audit requiring enumeration and classification of the six co-mentions."
+    },
+    {
+      "prior_finding_id": "F-007",
+      "rationale": "The structure and figure hierarchy are substantially corrected, with CS de-weighted and four defensible core figures specified."
+    },
+    {
+      "prior_finding_id": "F-008",
+      "rationale": "The strategic reframe, C4 limitation, CS placement, and no-wet-lab/no-LD-validation guardrails are now explicit, although the analysis ordering needs one further adjustment."
+    }
+  ],
+  "new_findings": [
+    "F-009",
+    "F-010",
+    "F-011",
+    "F-012",
+    "F-013",
+    "F-014"
+  ],
+  "convergence_status": "still iterating",
+  "convergence_sanding_warning": null,
+  "recommended_next_question": "Replace \u201ccalibrated\u201d with a strictly supportable claim, then specify the exact C6 exchangeability unit and a frozen, outcome-independent sampling frame for C2/C3; provide an MVP table distinguishing analyses that demonstrate rule behavior from those that can estimate correctness."
+}

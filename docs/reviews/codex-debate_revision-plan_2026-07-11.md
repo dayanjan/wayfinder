@@ -7,12 +7,19 @@ unrelated earlier debate — archived `round_02_codex.CONFABULATED.*`). Codex ha
 this repo when handed large multi-part artifacts; the reliable output is the round-1-hardened plan below.
 Every [CS]/[LIT] item was checked against actual repo data.
 
+> **UPDATE — Round 2 (gpt-5.6-sol) statistical refinements below supersede where they conflict.** After the
+> Codex model was upgraded (0.141.0→0.144.1, `gpt-5.5`→`gpt-5.6-sol`), round 2 re-ran cleanly (no
+> confabulation) and corrected the *design* of nearly every analysis. See "Round-2 refinements" at the end;
+> those are authoritative.
+
 ## THE decision (settles the reviewers' core tension)
-The paper's top-line claim is **"calibrated, receipt-backed *prioritization* with explicit falsification
-diagnostics"** — NOT empirical correctness of "supported" calls. Every new analysis is a **diagnostic of the
-machinery's behavior**, never validation. Retitle → *"Receipt-backed prioritization for literature-based
-discovery using Perturb-seq evidence."* Soften "adjudication" → "prioritization/evidence integration" wherever
-the disease hop is involved; keep "adjudication" only for the hops the referee genuinely owns (QC + effect).
+The paper's top-line claim is **"receipt-backed *prioritization* with explicit *abstention* and falsification
+diagnostics"** — NOT empirical correctness, and NOT "calibrated" as a *performance* claim (R2 F-009: no
+artifact estimates predictive calibration/precision; reserve "calibrated" strictly for *vocabulary*
+discipline). Every new analysis is a **diagnostic of the machinery's behavior**, never validation. Retitle →
+*"Receipt-backed prioritization for literature-based discovery using Perturb-seq evidence."* Soften
+"adjudication" → "prioritization/evidence integration" wherever the disease hop is involved; keep
+"adjudication" only for the hops the referee genuinely owns (QC + effect).
 
 ## Analyses to run (all feasible offline from repo data unless noted; all reported as DIAGNOSTICS)
 | ID | Analysis | Feasibility (repo evidence) | Framing guardrail |
@@ -59,3 +66,38 @@ Wet-lab validation of a supported call; LD/colocalization *resolution* for NAB2 
 
 **MVP for resubmission credibility:** the reframe + C6 + C2-hard-negatives + the 12q13 foregrounding + Figs 1–4.
 Everything else strengthens but is not strictly gating.
+
+---
+
+## Round-2 refinements (gpt-5.6-sol, grounded — AUTHORITATIVE on analysis design)
+Round 2 dropped 5 round-1 findings as addressed and raised 6 new, file-cited ones. These correct the
+*design* of the analyses (the round-1 table above named the right analyses; R2 fixes how to run them so they
+are not circular). Model note: this ran cleanly on the upgraded `gpt-5.6-sol`; the earlier gpt-5.5 round-2
+attempt confabulated (archived `round_02_codex.CONFABULATED.*`).
+
+- **Top-line (F-009):** drop "calibrated" as a performance word → **"receipt-backed prioritization with
+  explicit abstention and falsification diagnostics."** "Calibrated" only ever refers to vocabulary discipline.
+- **C6 permutation diagnostic (F-010):** my three nulls were partly mis-specified — permuting *already-eligible*
+  pairs is circular (eligibility is deterministic from AB/BC/Open Targets, `propose.py:68-71`). Use **ONE
+  primary randomization test**: permute the disease labels among the T3 enrichment rows *preserving condition,
+  cluster/gene-set structure, and row marginals*, and ask whether exact-disease matching is informative beyond
+  cluster membership. Report expected clean survivors under that single principled null vs observed 30.
+- **C3c positive control (F-011):** canonical Th1/Th2 regulators (STAT6/GATA3/TBX21/IL4) are **excluded by the
+  novelty gate** (`ac_known ≤ τ`, `propose.py:69-71`) — so "do they recover?" is confounded with the funnel.
+  Instead test them **against the referee substrate ONLY, blinded to the literature/novelty gate**: do the
+  expected QC/effect/program receipts recover? Keep the referee-recovery test separate from the novelty gate.
+- **C2 hard negatives (F-012):** must not be selected by the verdict being evaluated (exact-C/effect failure
+  *is* the outcome). Sample from a **frozen literature-only nomination rule**, stratified by condition / AB
+  strength / disease / assay coverage; *then* apply the referee and report the pre-specified decomposition.
+- **C3a temporal (F-013):** not a held-out test as written (each condition rebuilds its own A-universe). Use a
+  **frozen common cohort**: pre-register Stim8hr as discovery, freeze its eligible pairs + scoring inputs, and
+  evaluate only *those* pairs' QC/effect/program/exact-C receipts at Rest/Stim48hr. Report coverage first,
+  then a transition matrix.
+- **MVP re-ordered (F-014):** reframe/C1 architecture · **C2 frozen-literature-nomination decomposition** ·
+  **C10 small gate grid** (cheap; code exposes ab_gate_pct/min_bc/tau) · **frozen-cohort C3a** · C4 foreground
+  limitation · C9 enumeration (if literature access works) · four essential figures. (C6 stays, but as ONE
+  well-specified null, not the headline.)
+
+**Net:** the reframe is necessary but not sufficient; the analyses are feasible offline but must be
+**outcome-independent and pre-specified** to count. Do not claim wet-lab, LD, or statistical-calibration
+validation. Debate is substantively converged after 2 grounded rounds (R1 gpt-5.5 + R2 gpt-5.6-sol).
