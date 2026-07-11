@@ -20,20 +20,20 @@
 % --- colours + section headers (LightsOut aesthetic; starred = unnumbered so the manual
 %     "4.1b"-style numbers in titles match the prose's literal cross-references) ---
 \usepackage[dvipsnames]{xcolor}
-\definecolor{sectioncolor}{RGB}{128,0,0}
-\definecolor{subsectioncolor}{RGB}{0,51,102}
-\definecolor{markercolor}{RGB}{0,102,153}
+\definecolor{sectioncolor}{RGB}{0,0,0}      % black (standard manuscript headings)
+\definecolor{subsectioncolor}{RGB}{0,0,0}
+\definecolor{markercolor}{RGB}{0,0,0}
 \usepackage{titlesec}
-\titleformat{\section}{\normalfont\bfseries\large\color{sectioncolor}}{}{0em}{}
-  [\vspace{-0.5em}\textcolor{sectioncolor}{\rule{\textwidth}{0.5pt}}]
-\titleformat{\subsection}{\normalfont\bfseries\color{subsectioncolor}}
-  {\textcolor{markercolor}{$\blacksquare$}\ }{0em}{}
+\titleformat{\section}{\normalfont\bfseries\large}{}{0em}{}
+  [\vspace{-0.4em}\rule{\textwidth}{0.4pt}]
+\titleformat{\subsection}{\normalfont\bfseries}{}{0em}{}
 \titleformat{\subsubsection}[runin]{\normalfont\bfseries\itshape}{}{0em}{}[:]
 \titlespacing*{\section}{0pt}{10pt}{4pt}
 \titlespacing*{\subsection}{0pt}{6pt}{2pt}
 \titlespacing*{\subsubsection}{0pt}{4pt}{0.5em}
 
-% --- tables / figures / links ---
+% --- math / tables / figures / links ---
+\usepackage{amsmath}
 \usepackage{calc}  % defines \real{} for pandoc's longtable column-width arithmetic
 \usepackage{graphicx,booktabs,longtable,array,caption}
 \captionsetup{font=footnotesize,labelfont=bf,skip=3pt}

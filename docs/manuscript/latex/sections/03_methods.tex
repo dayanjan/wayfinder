@@ -56,9 +56,12 @@ default the median, which removes candidates that look novel only because the ge
 gate --- hard-gating on zero co-mention would exclude every well-studied strong regulator and reward
 obscurity. Eligible candidates are ranked by a balanced objective,
 
-\begin{verbatim}
-score = min( z(log1p ab), z(log1p bc) ) + $\beta$$\cdot$z(log1p effect) - w$\cdot$log1p(ac_lit) - w2$\cdot$ac_known,
-\end{verbatim}
+\begin{equation*}
+\mathrm{score} = \min\!\big(z(\mathrm{log1p}\,ab),\; z(\mathrm{log1p}\,bc)\big)
+  + \beta\, z(\mathrm{log1p}\,\mathrm{effect})
+  - w\,\mathrm{log1p}(\mathit{ac\_lit})
+  - w_2\, \mathit{ac\_known},
+\end{equation*}
 
 with $\beta$ = 1, w = 1, w2 = 3, and z-scores taken over the universe. The \texttt{min(z\_ab,\ z\_bc)} term makes the
 bridge \emph{balanced} --- one strong axis cannot rescue a weak other; \texttt{$\beta$$\cdot$z(effect)} is the ``loud in the data''
