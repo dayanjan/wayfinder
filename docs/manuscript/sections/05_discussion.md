@@ -52,7 +52,7 @@ consistent with (though not proof of) a regulatory rather than an essential role
 rather than support. Second, and more informative, mining public expression data for the *direction* of the
 NAB2–atopic-eczema association: in lesional atopic-dermatitis skin, NAB2 is **down** relative to non-lesional
 (bulk log₂FC −0.32, FDR 0.002; anti-correlated with Th2 activity, ρ −0.34), and a single-cell analysis
-confirmed this is a genuine per-cell reduction in the disease-relevant compartments (keratinocyte −0.51,
+confirmed this is a per-cell reduction in the disease-relevant compartments (keratinocyte −0.51,
 paired *p* 0.027; T/NK −0.57) rather than a shift in cell-type composition. Read together, these are more
 consistent with NAB2 acting as a **Th2 brake that is lost or suppressed in chronic lesions** than as a Th2
 driver — a reading that reconciles with the perturbation data (the brake is engaged during acute
@@ -83,7 +83,7 @@ label-shuffle control (§4.1b) is the most important honesty check in the paper,
 report straight: the disease hop supports fewer than 1% of arbitrary gene×disease pairs, but so does a
 random relabeling of the enrichment data — the near-total refutation rate is a property of the enrichment
 study's FDR family, inherited by the referee, not a discrimination the referee itself supplies. The
-referee's genuine confident-*no* edge lies in the knockdown-QC gate and the effect/program demotions, which
+referee's confident-*no* edge lies in the knockdown-QC gate and the effect/program demotions, which
 are its own computations; the disease hop's contribution is a stringent, label-dependent nomination filter,
 and we claim no more for it.
 
