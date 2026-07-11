@@ -1,7 +1,8 @@
 We report six results. The funnel and verdict ledger show the referee discriminating across a spread of
 worked examples (\S{}4.1), and two negative controls plus a rank-stability check probe how much of that
 discrimination is a property of the data versus an artifact of the setup --- with one control returning a
-deliberately honest, non-obvious answer (\S{}4.1b). The confident \emph{no} and the quality-control
+deliberately honest, non-obvious answer (\S{}4.1b) --- and a gate-threshold grid shows the flagship's rank is
+stable wherever it stays eligible (\S{}4.1c). The confident \emph{no} and the quality-control
 catch are examined on their own (\S{}4.2), because they are the point. NAB2 is then followed hop by hop as the
 worked hero (\S{}4.3), and its sharpest artifactual confounder is falsified against the study authors' own
 genome-wide data (\S{}4.4), while the one confounder the substrate \emph{cannot} discharge --- the 12q13
@@ -112,6 +113,40 @@ its default-weight value and re-ranking under every setting (the default setting
 it stayed within the top five survivors under \textbf{24 of the 27} settings (89\%). No survivor's \emph{verdict}
 changed, since verdicts do not depend on the weights. The worked hero is robust to the one human judgment
 (\S{}3.2) in an otherwise mechanical pipeline.
+
+\subsection*{4.1c Threshold robustness: survivors and the flagship rank across the gate}\label{threshold-robustness-survivors-and-the-flagship-rank-across-the-gate}
+
+Section 4.1b varied the ranking \emph{weights}; the eligibility \emph{gate} (\S{}3.2) has its own three
+thresholds --- the literature-percentile floor \texttt{ab\_gate\_pct} (default the median, 0.50), the
+program--disease co-mention floor \texttt{min\_bc} (default 3), and the novelty ceiling \texttt{tau} on
+curated association (default 0.10). We swept a \textbf{27-point grid} crossing \texttt{ab\_gate\_pct} $\in$
+\{0.25, 0.50, 0.75\}, \texttt{min\_bc} $\in$ \{2, 3, 5\}, and \texttt{tau} $\in$ \{0.05, 0.10, 0.20\},
+recomputing the funnel offline for every cell. Because a pair's referee verdict does not read the gate, the
+verdicts are computed once over the full 47,220-pair space and re-filtered per cell (the default cell
+reproduces the 30 clean survivors and NAB2's rank of 4 exactly). We read three things from the grid, as a
+diagnostic of the machinery's response to its thresholds, not as a validation.
+
+\emph{The survivor count behaves as a gate should.} The clean full-chain survivor count ranges from
+\textbf{7} at the strictest cell to \textbf{74} at the loosest, rising as the gate is relaxed, with the
+default setting (30) in mid-range --- the gate admits more candidates as it loosens, without discontinuity.
+
+\emph{The flagship's rank is stable wherever it is eligible.} Whenever NAB2 $\rightarrow$ atopic eczema clears
+the gate, it ranks in a tight band --- \textbf{1, 4, or 5} across every such cell, median \textbf{4}, never
+worse than fifth --- echoing the rank-4 median of the weight sweep (\S{}4.1b). Its \emph{verdict} is
+invariant: the referee supports the pair in all 27 cells.
+
+\emph{But eligibility depends on the literature floor, and we say so plainly.} NAB2 survives as a clean
+nomination in \textbf{18 of 27} cells, and the nine exceptions are exactly the nine at
+\texttt{ab\_gate\_pct}~=~0.75 --- independent of \texttt{min\_bc} and \texttt{tau}. NAB2's A--B program-literature
+co-mention sits between the median and the 75th percentile of the universe, so a floor at the 75th percentile
+removes it from the \emph{candidate pool} --- not because its receipts fail (they do not) but because a
+near-novel gene, by construction, carries only moderate program-literature. This is the honest cost of
+ranking near-novelty: the flagship is robust to the two disease-side thresholds (\texttt{min\_bc},
+\texttt{tau}) but sensitive to how aggressively the literature floor prunes understudied genes, a dependence
+a reader should weigh alongside the nomination. The clean-survivor \emph{sets} overlap the default by a
+Jaccard of \textbf{0.41} at the median cell (minimum 0.23) --- a gate that reshapes the candidate pool around
+a stable core. (This grid is deterministic and offline; recomputing the survivor sets and NAB2's rank reads
+only cached literature counts.)
 
 \subsection*{\texorpdfstring{4.2 The confident \emph{no}, and the quality-control catch}{4.2 The confident no, and the quality-control catch}}\label{the-confident-no-and-the-quality-control-catch}
 
