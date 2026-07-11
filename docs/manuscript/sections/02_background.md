@@ -1,6 +1,6 @@
 # 2. Background
 
-> **DRAFT v1 — for CS actor–critic review.** Dual-teach Background (LBD/informatics readers + bench
+> **DRAFT v2 — post CS-review + codex-debate (sections 1-3).** Dual-teach Background (LBD/informatics readers + bench
 > scientists). Honors the outline v1.2 framing: approach-not-product; two receipt classes; self-audit =
 > role/model/checkpoint independence; calibrated language. ~1,050 words. Citations are placeholders in
 > [author year] form pending the citation resolver.
@@ -23,13 +23,16 @@ returns thousands of candidate links, and the ranking signals available to class
 of the literature — how rare a co-mention is, how strong an intermediate association looks. Rarity in the
 literature, however, tracks *obscurity* at least as strongly as it tracks *importance*: a gene can look
 novel simply because no one has studied it. The result is a long ranked list that no laboratory can work
-through, and the field has said so of itself. Reviewing a proposal to extend this line of work, three
-reviewers named the problem directly — LBD *"generates an enormous number of hypotheses, almost none of
-which ever get followed up"* (NIH 1R01LM015392-01). Standard evaluations of LBD (time-slicing, link
-prediction) measure whether the generator would have *rediscovered* known links, not whether a specific
-proposed hypothesis is *true in fresh experimental data* [cf. Henry et al. 2021, who forwent statistical
-evaluation on these grounds]. What has been missing is an adjudication step: a way to put each
-machine-generated hypothesis to a data test and record a verdict — including a *no*.
+through, and the field has said so of itself. Reviewing a proposal submitted for funding consideration,
+three reviewers named the problem directly — LBD *"generates an enormous number of hypotheses, almost none
+of which ever get followed up"*. Standard evaluations of LBD (time-slicing, link prediction) measure
+whether the generator would have *rediscovered* known links, not whether a specific proposed hypothesis is
+supported by independent experimental data it has not seen [cf. Henry et al. 2021, who forwent statistical
+evaluation on these grounds]. We are precise about the scope of the answer this enables: adjudicating a
+hypothesis against a held experimental substrate closes the *triage* loop — which of the machine's
+hypotheses is worth pursuing — not the experimental-follow-up loop itself. What has been missing is that
+adjudication step: a way to put each machine-generated hypothesis to a data test and record a verdict —
+including a *no*.
 
 ## 2.2 A held experimental substrate, and what counts as a receipt at each hop
 
@@ -41,7 +44,10 @@ were made before — and without reference to — any triple we test, they funct
 referee queries them retrospectively rather than commissioning new experiments. The analysis is
 CPU-feasible because it runs over the study's aggregated supplementary tables — per-guide knockdown
 efficiency, differential-expression statistics, a Th1/Th2 polarization signature, and a
-cluster-to-autoimmune-disease enrichment — rather than the raw multi-million-cell matrices.
+cluster-to-autoimmune-disease enrichment — rather than the raw multi-million-cell matrices. This substrate
+is not a universal oracle of biological truth; it is a bounded, independent adjudication surface for
+mechanistic T-cell claims — valuable precisely because, for a hypothesis it *can* speak to, it returns
+support, refutation, or *untested* with a receipt, and stays silent (rather than guessing) on the rest.
 
 Crucially, the four tables do not all supply the same *kind* of evidence, and we keep the distinction
 explicit throughout. The first three hops — did the knockdown work, did the perturbation produce a real

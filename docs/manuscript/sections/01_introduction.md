@@ -1,10 +1,11 @@
 # 1. Introduction
 
-> **DRAFT v1 — for CS actor–critic review.** Honors the debate-hardened outline (`docs/manuscript/OUTLINE.md`
+> **DRAFT v2 — post CS-review + codex-debate (sections 1-3).** Honors the debate-hardened outline (`docs/manuscript/OUTLINE.md`
 > v1.2): two receipt classes, ledger *demonstrates* (not proves), triage-not-replacement framing,
 > role/model/checkpoint self-audit, calibrated language throughout (never "proven/definitive/validated/genuine").
 > **Open voice decision:** drafted in editorial first-person plural ("we") per FRMA convention; solo author —
-> switch to "I" if preferred. ~700 words. R01 quote is verbatim from the funded critique.
+> switch to "I" if preferred. ~700 words. R01 quote is verbatim; the proposal was submitted for funding
+> consideration (not funded), and the grant number is deliberately not named.
 
 ---
 
@@ -14,13 +15,14 @@ person can read. On the other side is the data: a single genome-scale screen ret
 thousands of genes across thousands of genetic perturbations, and a lab that runs one is often left
 holding a matrix of measurements with no obvious question to ask of it. The two floods share a shape —
 far more has been *measured* and *written down* than has been *connected* — and the gap between them is
-where new discoveries wait, hidden in plain sight.
+where testable connections wait, hidden in plain sight.
 
 Literature-based discovery (LBD) was designed to bridge exactly that gap. Since Swanson's demonstration
 that fish oil and Raynaud's disease were linked by facts already in print but never joined [Swanson 1986],
 LBD has framed a hypothesis as a triangle: an entity **A** relates to an intermediate program **B**, **B**
 relates to an outcome **C**, yet **A** and **C** have never been connected directly. If both legs are
-supported and the closing edge is missing from the literature, that missing edge is a candidate discovery.
+supported and the closing edge is missing from the literature, that missing edge is a candidate
+connection — novel in the literature, not yet a claim about biology.
 The paradigm is now four decades old and has been applied across biomedicine, our own prior work included:
 we used an ABC co-occurrence pipeline to connect a plasma-metabolite signal to a druggable target in
 cardiac arrest [Henry et al. 2021], a link for which we then found evidence in vivo [doi: 10.1016/j.biopha.2020.110970. Epub 2020 Nov 7. PubMed PMID: 33166763.].
@@ -55,18 +57,24 @@ control, the result is reported as *untested*, never as a negative — an artifa
 negative recorded. Falsification, not confirmation, is the point. Second, the entire loop — generation,
 adjudication, and the assembly of its own provenance — was run inside an agentic scientific workbench
 (Claude Science), in which one model authored the analysis and an independent reviewer model, at separate
-checkpoints, verified every number and enforced calibrated language on the output, flagging and removing
-overstated words from the platform's own text. The platform checked its own work.
+checkpoints, verified every number and enforced calibrated language on the manuscript-facing output,
+flagging and removing overstated words from the platform's own text. The platform audited its own output —
+through an independent reviewer *role* (a distinct model at distinct checkpoints), not a cross-vendor
+check; cross-family independence is provided separately (Section 4.6).
 
-We demonstrate the Wayfinder approach on the CD4+ T-cell resource, where it posed 22,039 gene→program→disease
-hypotheses that a literature-novelty gate and a deterministic referee together culled to a small set of
-receipt-backed survivors. We use a
-ledger of adjudicated verdicts to *demonstrate* that the referee discriminates — supporting, refuting, and
-declining to test — and a negative-control panel to show the discrimination is not an artifact of the
-setup. The highest-ranked near-novel survivor, **NAB2**, is the worked example: the perturbation (RNA-seq) data
-support it as a Th1/Th2 regulator, while its atopic-eczema link is a **genetic-association nomination** —
-the disease label is GWAS-based, not an expression claim — including a falsification of its sharpest
-confounder against the study authors' own genome-wide data. Wayfinder does not replace
+We demonstrate the Wayfinder approach on the CD4+ T-cell resource, where it posed 22,039
+gene→program→disease hypotheses that a literature-novelty gate and a deterministic referee together culled
+to a small set of receipt-backed survivors. A ledger of adjudicated verdicts *demonstrates* that the
+referee discriminates — supporting, refuting, and declining to test — and a negative-control panel
+(failed-knockdown genes, which must return *untested*; label-shuffled disease assignments, which estimate
+the null disease-hop pass rate) shows the discrimination is not an artifact of the setup. The
+highest-ranked near-novel survivor — near-novel by an operational criterion of low direct-literature
+co-mention plus low curated association, not strict Swanson-style A–C absence — is **NAB2**, the worked
+example: the perturbation (RNA-seq) data support it as a Th1/Th2 regulator, while its atopic-eczema link is
+a *genetic-association nomination* (a GWAS-based disease label, not an expression claim). We further
+falsify the sharpest artifactual explanation of NAB2's *perturbation* signal — a CRISPRi cis-effect on the
+adjacent gene *STAT6* — against the study authors' own genome-wide data; this strengthens the case that
+the signal is NAB2-specific, and does not claim to prove the disease link. Wayfinder does not replace
 experimental follow-up; it makes the prior question — *which of these thousands is worth a bench's time?*
 — answerable, with a receipt.
 

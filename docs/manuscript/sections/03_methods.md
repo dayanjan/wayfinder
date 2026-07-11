@@ -1,6 +1,6 @@
 # 3. Materials and Methods
 
-> **DRAFT v1 — for CS actor–critic review.** Numbers here MUST be reviewer-checked against primary
+> **DRAFT v2 — post CS-review + codex-debate (sections 1-3).** Numbers here MUST be reviewer-checked against primary
 > artifacts (`stage1/sweep_Stim8hr.json`, `stage1/lbd_questions_Stim8hr.json`, `src/arbiter/lbd/`).
 > Honors outline v1.2: approach-not-product; two receipt classes; three liveness claims distinct;
 > role/model/checkpoint self-audit; the no-API driver given weight. Calibrated language. ~1,450 words.
@@ -28,7 +28,10 @@ verification is load-bearing: MONDO and EFO identifiers differ, and a wrong iden
 report "no known association" for every gene, spuriously inflating apparent novelty everywhere.
 
 **Literature and association sources.** Co-mention counts come from Europe PMC `hitCount` queries (all
-terms quoted); curated gene→disease genetic-association scores come from the Open Targets GraphQL API.
+terms quoted); curated gene→disease association scores come from the Open Targets GraphQL API — the
+*overall* target–disease association score (not a genetics-only subset), used as a known-link / novelty
+prior. This is distinct from the disease *labels* on the enrichment modules (the disease hop, §3.3), which
+the source study derives from genetic evidence.
 
 **Model cast.** Inside the workbench (Section 3.4) the author role is an Opus-class model (Claude Opus
 4.8); the independent reviewer role is a Sonnet-class model (Claude Sonnet 5), invoked at separate
@@ -38,24 +41,27 @@ receipt.
 
 ## 3.2 Candidate generation
 
-**An answer-free gene universe.** The candidate gene set **A** is defined from the perturbation data
-alone, before any disease information is consulted. A gene enters **A** if it clears the knockdown-QC gate
-(≥1 guide with a significant knockdown call in T4), has a significant transcriptional effect (an on-target
-significance flag or a nonzero downstream-DE count in T1), and shows a significant Th1/Th2 shift (T2
-adjusted *p* < 0.05). Construction never reads the disease table T3, so the gene list cannot be
-contaminated by the answer it will later be tested against; each gene carries its downstream-DE count
-forward as an effect-strength prior. At the 8-hour condition, **A** contains 3,935 genes.
+**A disease-answer-free gene universe.** The candidate gene set **A** is defined from the perturbation
+data alone, before any disease information is consulted. A gene enters **A** if it clears the knockdown-QC
+gate (≥1 guide with a significant knockdown call in T4), has a significant transcriptional effect (an
+on-target significance flag or a nonzero downstream-DE count in T1), and shows a significant Th1/Th2 shift
+(T2 adjusted *p* < 0.05). Construction never reads the disease table T3, so the gene list cannot be
+contaminated by the *disease* answer it will later be tested against; each gene carries its downstream-DE
+count forward as an effect-strength prior. **A** is disease-answer-free, not evidence-free: it is
+preselected on the same knockdown/effect/program evidence the referee re-reads at hops 0–2 (a consequence
+we make explicit in §3.3). At the 8-hour condition, **A** contains 3,935 genes.
 
 **Five deterministic signals.** For each (gene A, disease C) pair we compute: `ab`, the Europe PMC
 co-mention count of A with the Th1/Th2 process terms; `bc`, the co-mention count of the program terms with
-C (constant per disease); `ac_known`, the Open Targets genetic-association score of A for C (zero when
-absent — the novelty signal); `ac_lit`, the direct A–C co-mention count (computed only for referee
+C (constant per disease); `ac_known`, the Open Targets *overall* target–disease association score of A for
+C (zero when absent — the novelty signal; the overall score, not a genetics-only subset); `ac_lit`, the
+direct A–C co-mention count (computed only for referee
 survivors, to bound API cost); and `effect`, the downstream-DE count from T1. Every signal is a
 deterministic lookup.
 
 **Gate and ranking objective.** Eligibility requires all of: `ab ≥ ab_gate` (a universe percentile,
 default the median, which removes candidates that look novel only because the gene is understudied),
-`bc ≥ 3`, and `ac_known ≤ 0.1` (no established genetic link). Raw `ac_lit` is deliberately *not* in the
+`bc ≥ 3`, and `ac_known ≤ 0.1` (no established curated association). Raw `ac_lit` is deliberately *not* in the
 gate — hard-gating on zero co-mention would exclude every well-studied strong regulator and reward
 obscurity. Eligible candidates are ranked by a balanced objective,
 
@@ -66,14 +72,17 @@ score = min( z(log1p ab), z(log1p bc) ) + β·z(log1p effect) − w·log1p(ac_li
 with β = 1, w = 1, w2 = 3, and z-scores taken over the universe. The `min(z_ab, z_bc)` term makes the
 bridge *balanced* — one strong axis cannot rescue a weak other; `β·z(effect)` is the "loud in the data"
 reward; the final two terms push novel-yet-bridged candidates up without hard-excluding them. The
-objective was designed offline (its structure fixed before running), the only human judgment in an
-otherwise mechanical pipeline.
+objective's structure and weights were fixed before the sweep and were not tuned to any survivor; the
+design of this objective is the only human judgment in an otherwise mechanical pipeline. Ranking sets
+*priority* among eligible candidates and is separate from the referee's supported/refuted verdict — a
+survivor's verdict does not depend on the weights — so the choice of weights affects which candidate is
+foregrounded, not whether it is supported (we examine rank stability under alternative weights in Section 4).
 
 **Order of operations.** The sweep builds **A**, prefetches the per-disease `bc`/`ac_known` (12 calls
 each) and per-gene `ab`, applies the gate, then runs the deterministic referee *first* (it is local and
-free) to keep only chain-supported survivors, and only then computes `ac_lit` and the final score for
-those survivors. At the 8-hour condition this funnels 3,935 genes → 22,039 eligible (gene, disease) pairs
-→ 43 disease-supported → 30 clean full-chain nominations.
+free) to keep only chain-held survivors (receipt-complete at every hop), and only then computes `ac_lit`
+and the final score for those survivors. At the 8-hour condition this funnels 3,935 genes → 22,039 eligible
+(gene, disease) pairs → 43 with a positive disease-hop enrichment → 30 clean full-chain nominations.
 
 ## 3.3 The referee
 
@@ -86,15 +95,26 @@ The referee adjudicates one triple at a time as a four-hop chain, each hop readi
   nonzero downstream-DE count, on target, without an off-target flag?
 - **Hop 2 — program.** Do the downstream effects shift the Th1/Th2 program (T2)?
 - **Hop 3 — disease.** Does the perturbed gene's downstream signature fall in a module enriched for the
-  specific disease (T3: odds ratio, FDR)?
+  specific disease (T3: odds ratio, FDR)? This is an **association / enrichment** receipt — the module's
+  disease label is genetic (GWAS-based) — not experimental evidence of disease causality.
 
 A triple is **supported** only if the full chain holds with a nonzero, positive effect; effect-zero chains
-are demoted to **supported-weak**, off-target-flagged chains to **supported-flagged**, and a failed effect
-hop yields **refuted-effect**; failure at the specific-disease hop is **refuted-for-C**. The confident *no*
-lives in these demotions, all deterministically computed. One honesty point belongs in Methods, not only
-in Limitations: because **A** is preselected on program-significance, *within the funnel* the program hop
-is a tautology (no eligible gene can fail it), so the program hop discriminates in an individual triple's
-receipt — as a reported quantity — not as an independent filter on funnel survivors.
+are demoted to **supported-weak**, off-target-flagged chains to **supported-flagged**, a failed effect hop
+yields **refuted-effect**, and failure at the specific-disease hop is **refuted-for-C**. Throughout,
+**supported** is a bounded *verdict label* — the chain held with a receipt at each hop, the disease hop
+remaining a genetic-association nomination — not a claim that the biology is proven. The confident *no*
+lives in these demotions, all deterministically computed.
+
+Two honesty points belong in Methods, not only in Limitations. First, because **A** is preselected on
+knockdown-QC, effect, and program-significance, *within the funnel* hops 0–2 are largely pre-gated (the
+program hop is a strict tautology — no eligible gene can fail it), so among funnel survivors the dominant
+cull is disease-C specificity rather than broad four-hop falsification. The confident-*no* behaviour is
+therefore shown two ways: by the referee's demotions and exact-disease refutations within the funnel, and
+— more tellingly — by applying the same referee to *arbitrary* genes outside the pre-gated universe, where
+it discriminates at every hop (a gene whose knockdown fails QC returns *untested* at hop 0; a gene with no
+real transcriptional effect is *refuted* at hop 1). That out-of-funnel ledger is reported in Section 4.
+Second, the program hop, being a within-funnel tautology, discriminates in an individual triple's receipt
+— as a reported quantity — not as an independent filter on funnel survivors.
 
 ## 3.4 The agentic loop, and how the instrument is operated
 
@@ -107,21 +127,31 @@ interface: analyses are ordinarily driven by hand in its web interface, which ma
 hand-paced event rather than a reproducible procedure — human clicking becomes the bottleneck at exactly
 the moment when keeping pace with the twin floods of data and literature is the whole point. To make the
 workbench *scriptable*, we drive its web interface
-headlessly. A browser-automation driver, orchestrated from a coding agent (Claude Code), loads a saved
+headlessly. A browser-automation driver, orchestrated from a coding agent (Claude Code), loads an operator-owned
 authenticated session, submits the task prompt, and **auto-approves the workbench's in-loop sandbox
-prompts — working-directory, code-execution, and network-access cards — for fully unattended, zero-click
+prompts — working-directory, code-execution, and network-access cards — for unattended, zero-click
 operation**; it then polls the run to completion and retrieves the emitted artifacts together with the
-workbench's own audit records. We are candid that this is browser automation against a user interface with
-no stable public contract (Section 5.3); it is nonetheless what converts a click-once web session into a
-re-runnable, audited pipeline, and it is, to our knowledge, an under-appreciated route to reproducible
-*agentic* science: where no direct API exists, principled UI automation is the honest substitute.
+workbench's own audit records. The auto-approval replaces a human *click*, not a safety boundary: the run
+executes in the workbench's own sandbox, in a fixed workspace, under an operator-owned session, and every
+approval is logged in the audit store — so the consent trail is inspectable after the fact rather than
+absent. Network approvals were granted only for the named data and literature endpoints the task used — an
+auditable, endpoint-specific approval trail rather than a claim of an enforced allowlist — and, as the
+liveness accounting below makes explicit — the full-scale run reads from a local cache under a guard that
+raises on any live call, so unattended approval cannot silently alter the data receipts. We are candid that
+this is browser automation against a user interface with no stable public contract (Section 5.3); it is
+nonetheless what converts a click-once web session into a re-runnable, audited pipeline, and — where a
+platform exposes no programmatic interface — an under-appreciated route to reproducible *agentic* science.
 
 **Provenance and self-audit.** Every run is captured in the workbench's own audit store, from which we
 draw model identities, per-step costs, and the reviewer's checks. The reviewer verifies each reported
-number against the underlying artifacts and enforces calibrated language on the author's output; in this
-work it flagged overstated words ("validated", "definitive") and they were removed. We characterize this
-independence precisely: it is *role, model, and checkpoint* independence — a distinct reviewer model at
-distinct verification points — within a single model family, not independence across vendors.
+number against the underlying artifacts and enforces calibrated language on the manuscript-facing output —
+the receipt chain and the verdicts a reader sees; in this work it flagged overstated words ("validated",
+"definitive") in that output and they were removed. We scope this claim honestly: the enforcement applies
+to the manuscript-facing receipt chain, not to every intermediate machine-generated log (an earlier
+generation record still carries a legacy "validated" string in a free-text field), which is why
+manuscript-facing verdicts cite the post-review receipt rather than the raw generation log. We characterize
+the independence precisely, too: it is *role, model, and checkpoint* independence — a distinct reviewer
+model at distinct verification points — within a single model family, not independence across vendors.
 
 **Three claims about liveness, kept distinct.** We separate what ran live from what was replayed, because
 conflating them would overstate the result. (i) *Full-scale reproduction*: the generation pipeline ran
