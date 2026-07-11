@@ -65,9 +65,11 @@ check; cross-family independence is provided separately (Section 4.6).
 We demonstrate the Wayfinder approach on the CD4+ T-cell resource, where it posed 22,039
 gene→program→disease hypotheses that a literature-novelty gate and a deterministic referee together culled
 to a small set of receipt-backed survivors. A ledger of adjudicated verdicts *demonstrates* that the
-referee discriminates — supporting, refuting, and declining to test — and a negative-control panel
-(failed-knockdown genes, which must return *untested*; label-shuffled disease assignments, which estimate
-the null disease-hop pass rate) shows the discrimination is not an artifact of the setup. The
+referee discriminates — supporting, refuting, and declining to test — and a negative-control panel —
+failed-knockdown genes, which must return *untested*, and label-shuffled disease assignments — probes how
+much of that discrimination is real rather than an artifact of the setup, finding the quality-control gate
+behaves exactly as designed while the disease hop's stringency is largely inherited from the underlying
+enrichment data (Section 4.1b). The
 highest-ranked near-novel survivor — near-novel by an operational criterion of low direct-literature
 co-mention plus low curated association, not strict Swanson-style A–C absence — is **NAB2**, the worked
 example: the perturbation (RNA-seq) data support it as a Th1/Th2 regulator, while its atopic-eczema link is

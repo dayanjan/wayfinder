@@ -1,0 +1,218 @@
+{
+  "condition": "Stim8hr",
+  "control1_failed_kd_untested": {
+    "n_failed_kd_genes": 2430,
+    "n_tested": 2430,
+    "n_untested": 2430,
+    "fraction_untested": 1.0,
+    "leaks": []
+  },
+  "control2_label_shuffle_null": {
+    "pair_space_AxC": 47220,
+    "n_A_genes": 3935,
+    "n_C_diseases": 12,
+    "observed_disease_hop_supported": 406,
+    "observed_rate": 0.008598,
+    "n_perm": 2000,
+    "null_mean": 467.727,
+    "null_sd": 10.935,
+    "null_max": 512,
+    "null_rate_mean": 0.009905,
+    "signed_z": -5.645,
+    "empirical_p": 1.0,
+    "empirical_p_upper": 1.0,
+    "empirical_p_lower": 0.0005,
+    "empirical_p_two_sided": 0.001,
+    "fold_over_null": 0.87,
+    "mean_distinct_C_diseases_per_gene_observed": 2.388,
+    "mean_distinct_C_diseases_per_gene_null": 2.442
+  },
+  "control3_rank_stability": {
+    "n_survivors": 30,
+    "default_rank_check": 4,
+    "grid_size": 27,
+    "grid_beta": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "grid_w": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "grid_w2": [
+      1.0,
+      3.0,
+      5.0
+    ],
+    "nab2_rank_min": 1,
+    "nab2_rank_max": 8,
+    "nab2_rank_median": 4,
+    "nab2_top5_fraction": 0.889,
+    "grid": [
+      {
+        "beta": 0.5,
+        "w": 0.5,
+        "w2": 1.0,
+        "nab2_rank": 5
+      },
+      {
+        "beta": 0.5,
+        "w": 0.5,
+        "w2": 3.0,
+        "nab2_rank": 4
+      },
+      {
+        "beta": 0.5,
+        "w": 0.5,
+        "w2": 5.0,
+        "nab2_rank": 4
+      },
+      {
+        "beta": 0.5,
+        "w": 1.0,
+        "w2": 1.0,
+        "nab2_rank": 2
+      },
+      {
+        "beta": 0.5,
+        "w": 1.0,
+        "w2": 3.0,
+        "nab2_rank": 2
+      },
+      {
+        "beta": 0.5,
+        "w": 1.0,
+        "w2": 5.0,
+        "nab2_rank": 2
+      },
+      {
+        "beta": 0.5,
+        "w": 2.0,
+        "w2": 1.0,
+        "nab2_rank": 3
+      },
+      {
+        "beta": 0.5,
+        "w": 2.0,
+        "w2": 3.0,
+        "nab2_rank": 3
+      },
+      {
+        "beta": 0.5,
+        "w": 2.0,
+        "w2": 5.0,
+        "nab2_rank": 3
+      },
+      {
+        "beta": 1.0,
+        "w": 0.5,
+        "w2": 1.0,
+        "nab2_rank": 5
+      },
+      {
+        "beta": 1.0,
+        "w": 0.5,
+        "w2": 3.0,
+        "nab2_rank": 5
+      },
+      {
+        "beta": 1.0,
+        "w": 0.5,
+        "w2": 5.0,
+        "nab2_rank": 5
+      },
+      {
+        "beta": 1.0,
+        "w": 1.0,
+        "w2": 1.0,
+        "nab2_rank": 4
+      },
+      {
+        "beta": 1.0,
+        "w": 1.0,
+        "w2": 3.0,
+        "nab2_rank": 4
+      },
+      {
+        "beta": 1.0,
+        "w": 1.0,
+        "w2": 5.0,
+        "nab2_rank": 3
+      },
+      {
+        "beta": 1.0,
+        "w": 2.0,
+        "w2": 1.0,
+        "nab2_rank": 2
+      },
+      {
+        "beta": 1.0,
+        "w": 2.0,
+        "w2": 3.0,
+        "nab2_rank": 2
+      },
+      {
+        "beta": 1.0,
+        "w": 2.0,
+        "w2": 5.0,
+        "nab2_rank": 2
+      },
+      {
+        "beta": 2.0,
+        "w": 0.5,
+        "w2": 1.0,
+        "nab2_rank": 8
+      },
+      {
+        "beta": 2.0,
+        "w": 0.5,
+        "w2": 3.0,
+        "nab2_rank": 8
+      },
+      {
+        "beta": 2.0,
+        "w": 0.5,
+        "w2": 5.0,
+        "nab2_rank": 8
+      },
+      {
+        "beta": 2.0,
+        "w": 1.0,
+        "w2": 1.0,
+        "nab2_rank": 4
+      },
+      {
+        "beta": 2.0,
+        "w": 1.0,
+        "w2": 3.0,
+        "nab2_rank": 4
+      },
+      {
+        "beta": 2.0,
+        "w": 1.0,
+        "w2": 5.0,
+        "nab2_rank": 4
+      },
+      {
+        "beta": 2.0,
+        "w": 2.0,
+        "w2": 1.0,
+        "nab2_rank": 1
+      },
+      {
+        "beta": 2.0,
+        "w": 2.0,
+        "w2": 3.0,
+        "nab2_rank": 1
+      },
+      {
+        "beta": 2.0,
+        "w": 2.0,
+        "w2": 5.0,
+        "nab2_rank": 1
+      }
+    ]
+  }
+}

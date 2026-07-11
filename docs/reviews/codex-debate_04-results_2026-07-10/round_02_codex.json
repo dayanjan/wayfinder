@@ -1,0 +1,68 @@
+{
+  "round_number": 2,
+  "position_summary": "Claude\u2019s revision materially fixed the round-1 problems: the Control-2 artifact now carries signed/tail-specific statistics, \u00a74 reports the lower-tail and upper-tail readings honestly, and the prior overclaims around validation, locus-artifact scope, replication scope, and \u00a71 calibration mostly landed in the actual files. One new residual issue remains: the rewritten Control-2 paragraph still gives a mechanistic explanation for the observed-below-null direction that is not fully decomposed by the new artifact.",
+  "findings": [
+    {
+      "id": "F-011",
+      "title": "Control-2 rewrite still explains the lower-tail direction beyond the new decomposition",
+      "severity": 3,
+      "likelihood": 3,
+      "blast_radius": 3,
+      "priority": "P2",
+      "evidence": "MISMATCH/PARTIAL: \u00a74 now says the observed-below-null direction is 'a modest consequence of restricting the test to twelve diseases interacting with the permutation, together with a small per-gene concentration effect' (docs/manuscript/sections/04_results.md:95-98). The new artifact HOLDS for the reported count/tails and per-passing-gene disease-cardinality means: observed 406, null 467.727\u00b110.935, signed_z -5.645, empirical_p_lower 0.0005, empirical_p_upper 1.0, two_sided 0.001, mean distinct diseases/gene 2.388 vs 2.442 (docs/manuscript/analysis/sensitivity_results.json:14-28). But the code only returns distinct passing pairs plus mean distinct C diseases per passing gene (docs/manuscript/analysis/sensitivity_panel.py:95-113,115-146); it does not decompose the lower-tail deficit into number of passing genes, row multiplicity, 12-disease marginal effects, or a contribution analysis showing the stated restriction\u00d7permutation mechanism.",
+      "concern_path": "A hostile reviewer can accept the tail statistics and still object that the sentence moves from 'we measured a lower-tail label effect and one small cardinality difference' to 'we know why the direction occurs.' Because the manuscript says it does not build an argument on the mechanism, this is not a major threat, but it remains a soft just-so explanation in an otherwise hardened control.",
+      "suggested_action": "Either reduce the sentence to 'The direction remains a feature of this restricted 12-disease permutation setup; the measured per-gene cardinality difference is small, so we do not interpret the mechanism,' or add a real decomposition with passing-gene counts and marginal-disease/permutation contributions.",
+      "novelty_flag": true,
+      "concern_type": "correctness"
+    }
+  ],
+  "escalated_findings": [],
+  "dropped_findings": [
+    {
+      "prior_finding_id": "F-001",
+      "rationale": "Addressed enough to drop: the original unsupported 'concentrate on fewer diseases per gene' claim is gone, and the new artifact/code add the requested per-gene disease-cardinality measurement. HOLDS: code computes mean distinct C-diseases per passing gene at docs/manuscript/analysis/sensitivity_panel.py:95-113 and stores observed/null fields at docs/manuscript/analysis/sensitivity_results.json:27-28; \u00a74 reports 2.39 vs 2.44 and says it does not build an argument on them at docs/manuscript/sections/04_results.md:95-99. Residual mechanism wording is replaced by new F-011 rather than keeping F-001 unchanged."
+    },
+    {
+      "prior_finding_id": "F-002",
+      "rationale": "Addressed: tail-specific p-values now exist and the prose uses the correct tails. HOLDS: signed_z, empirical_p_upper/lower/two_sided are emitted by docs/manuscript/analysis/sensitivity_panel.py:139-143 and stored at docs/manuscript/analysis/sensitivity_results.json:21-25; \u00a74 states lower-tail p\u22485e-4 and upper-tail p=1.0 at docs/manuscript/sections/04_results.md:92-94."
+    },
+    {
+      "prior_finding_id": "F-003",
+      "rationale": "Addressed: the Control-2 heading no longer says 'rubber stamp' and now frames substrate-inherited stringency plus label-dependence. HOLDS: docs/manuscript/sections/04_results.md:83; overview wording is softened at docs/manuscript/sections/04_results.md:19-22."
+    },
+    {
+      "prior_finding_id": "F-004",
+      "rationale": "Addressed: the \u00a74.3 claim text now says 'polarity marker-checked,' not 'validated.' HOLDS: docs/manuscript/sections/04_results.md:146-148. Remaining 'validated' hits are draft-note/self-audit quotations of the forbidden word, not claim text, at docs/manuscript/sections/04_results.md:4 and 207-212."
+    },
+    {
+      "prior_finding_id": "F-005",
+      "rationale": "Addressed: the locus-artifact rejection is scoped to cluster membership and explicitly leaves the GWAS-label/LD question open. HOLDS: docs/manuscript/sections/04_results.md:232-234; \u00a74.4 also preserves that the disease link is a genetic-association nomination rather than disease proof at docs/manuscript/sections/04_results.md:153-157 and 183-185."
+    },
+    {
+      "prior_finding_id": "F-006",
+      "rationale": "Addressed: replication wording no longer implies each agent reproduced every number. HOLDS: \u00a74.6 says across the lab each headline number was re-derived by at least one clean-room member, not every member, at docs/manuscript/sections/04_results.md:220-225."
+    },
+    {
+      "prior_finding_id": "F-007",
+      "rationale": "Addressed: the Results roadmap now says six results. HOLDS: docs/manuscript/sections/04_results.md:19-26."
+    },
+    {
+      "prior_finding_id": "F-008",
+      "rationale": "Addressed: the Introduction no longer says the disease-hop stringency 'proves' inherited. HOLDS: docs/manuscript/sections/01_introduction.md:65-72 says the panel probes discrimination and finds disease-hop stringency largely inherited; rg only finds 'proves' in the draft-note rule statement at docs/manuscript/sections/01_introduction.md:4."
+    },
+    {
+      "prior_finding_id": "F-009",
+      "rationale": "Addressed: \u00a74.1 now specifies the rate is a disease-hop support-rate control over the full A\u00d7C space, not ledger accuracy, precision, or recall. HOLDS: docs/manuscript/sections/04_results.md:68-70."
+    },
+    {
+      "prior_finding_id": "F-010",
+      "rationale": "Addressed: \u00a74.4 now labels the three corroborations as coming from study QC fields and the finding analysis rather than the genome-wide DE row. HOLDS: docs/manuscript/sections/04_results.md:175-182."
+    }
+  ],
+  "new_findings": [
+    "F-011"
+  ],
+  "convergence_status": "still iterating",
+  "convergence_sanding_warning": null,
+  "recommended_next_question": "Can Claude either remove the remaining mechanistic explanation for the Control-2 lower-tail direction or add a decomposition that actually supports the restriction\u00d7permutation claim?"
+}
