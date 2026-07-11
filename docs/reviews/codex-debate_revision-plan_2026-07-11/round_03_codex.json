@@ -1,0 +1,68 @@
+{
+  "round_number": 3,
+  "position_summary": "The round-3 plan is substantively converged and is credible for Major Revision only because it now narrows the contribution to receipt-backed prioritization, abstention, and falsification diagnostics\u2014not demonstrated correctness. C2, C3a, C6, and C10 are feasible from repository data; C4 LD/colocalization remains infeasible locally and must remain foregrounded, while C3c, C4 literature review, and C9 require fresh literature retrieval.",
+  "findings": [],
+  "escalated_findings": [],
+  "dropped_findings": [
+    {
+      "prior_finding_id": "F-009",
+      "rationale": "Addressed at docs/reviews/codex-debate_revision-plan_2026-07-11.md:15-22 and :78-79. The top line no longer claims empirical calibration or correctness."
+    },
+    {
+      "prior_finding_id": "F-010",
+      "rationale": "Addressed at docs/reviews/codex-debate_revision-plan_2026-07-11.md:80-84. FEASIBLE offline using data/cluster_autoimmune_enrichment_results.suppl_table.csv and the fixed Stim8hr eligible cohort. Disease labels are permuted across T3 rows while each row retains cluster, gene-set, intersecting genes, OR, and FDR; this tests disease-label specificity conditional on the observed T3 structure. Nothing else should be permuted for this estimand. Report exact-disease-hop passes\u2014not whole-pipeline null discoveries or joint FDR\u2014and preferably a Monte Carlo tail probability plus observed-minus-null effect size."
+    },
+    {
+      "prior_finding_id": "F-011",
+      "rationale": "Addressed at docs/reviews/codex-debate_revision-plan_2026-07-11.md:85-88. The referee-only panel is outcome-independent if the regulator list, expected direction/program, conditions, and scoring rule are frozen from literature before inspecting receipts. NEEDS-FRESH-LIT for that curation; local execution is FEASIBLE from data/DE_stats.suppl_table.csv, data/guide_kd_efficiency.suppl_table.csv, and data/Th2_Th1_polarization_signature_DE_results_full.suppl_table.csv. Coverage must be reported before recovery, and absent/failed perturbations must count as untested rather than failures."
+    },
+    {
+      "prior_finding_id": "F-012",
+      "rationale": "Addressed at docs/reviews/codex-debate_revision-plan_2026-07-11.md:89-91. FEASIBLE offline through src/arbiter/lbd/referee_triple.py and local CSVs. It is genuinely outcome-independent provided top-K, AB query, disease assignment, strata, and assay-coverage definition are frozen without using significant-KD, effect, exact-C, or final-verdict fields. The result remains incremental filtering yield, not confident-no accuracy."
+    },
+    {
+      "prior_finding_id": "F-013",
+      "rationale": "Addressed at docs/reviews/codex-debate_revision-plan_2026-07-11.md:92-95. FEASIBLE: condition artifacts exist at docs/cs-full-pipeline_2026-07-09/live-fullsweep-loose/sweep_Stim8hr.json, sweep_Rest.json, and sweep_Stim48hr.json, while condition-specific receipts can be recomputed locally. Freezing Stim8hr pairs avoids reselection leakage. This remains same-study temporal robustness, not external validation."
+    },
+    {
+      "prior_finding_id": "F-014",
+      "rationale": "Addressed at docs/reviews/codex-debate_revision-plan_2026-07-11.md:96-99. The revised MVP correctly prioritizes C1/C2, the C10 gate grid, frozen-cohort C3a, C4 limitation, C9 audit, and essential figures; C6 is supplementary. C10 is FEASIBLE because src/arbiter/lbd/propose.py:43-45 exposes ab_gate_pct, min_bc, and tau, although docs/manuscript/analysis/sensitivity_panel.py must be extended."
+    },
+    {
+      "prior_finding_id": "F-001",
+      "rationale": "Addressed by explicitly classifying C3a as internal temporal robustness and C3c as a referee-component control rather than external correctness validation. Genuine external supported-call accuracy remains unresolved and is honestly stated rather than disguised."
+    },
+    {
+      "prior_finding_id": "F-002",
+      "rationale": "Addressed by abandoning joint-FDR language and reducing C6 to one conditional disease-label-specificity randomization."
+    },
+    {
+      "prior_finding_id": "F-003",
+      "rationale": "Addressed at docs/reviews/codex-debate_revision-plan_2026-07-11.md:38 and :57-58. The locus-neighbor check is FEASIBLE from T3 but explicitly only a sanity check. LD/colocalization is INFEASIBLE from repository CSVs; the 12q13 literature subsection NEEDS-FRESH-LIT via tools/, and unresolved provenance remains foregrounded."
+    },
+    {
+      "prior_finding_id": "F-004",
+      "rationale": "Addressed through the frozen literature-only sampling frame and filtering-yield framing. Existing EGR2/IL2/SLC1A5 examples at docs/perturbseq-qc_2026-07-07/pyzobot_referee_results.md remain illustrative, not accuracy evidence."
+    },
+    {
+      "prior_finding_id": "F-005",
+      "rationale": "Addressed by placing the C10 gate grid in the MVP and acknowledging that existing sensitivity_panel.py does not yet run it."
+    },
+    {
+      "prior_finding_id": "F-006",
+      "rationale": "Addressed conditionally: C9 enumeration remains NEEDS-FRESH-LIT through tools/pubmed_fetch.py and tools/semantic_scholar.py. The plan correctly does not claim the count-only cache completes the audit."
+    },
+    {
+      "prior_finding_id": "F-007",
+      "rationale": "Addressed by de-weighting Claude Science, making the self-audit figure optional, and prioritizing architecture, ledger/funnel, NAB2 receipt with 12q13 caveat, and sensitivity/null figures."
+    },
+    {
+      "prior_finding_id": "F-008",
+      "rationale": "The five strategic questions are now answered defensibly: reframe alone is insufficient; C4 cannot be resolved locally; Claude Science belongs in Methods/appendix as the execution vehicle; four figures are sufficient; and the highest-value order is C2, C10, frozen C3a, C4 limitation/LIT, C9 LIT, with C6 supplementary. This can support a credible resubmission, but cannot establish that the machinery 'decides correctly.'"
+    }
+  ],
+  "new_findings": [],
+  "convergence_status": "converged",
+  "convergence_sanding_warning": null,
+  "recommended_next_question": "debate concluded"
+}

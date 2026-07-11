@@ -7,10 +7,12 @@ unrelated earlier debate — archived `round_02_codex.CONFABULATED.*`). Codex ha
 this repo when handed large multi-part artifacts; the reliable output is the round-1-hardened plan below.
 Every [CS]/[LIT] item was checked against actual repo data.
 
-> **UPDATE — Round 2 (gpt-5.6-sol) statistical refinements below supersede where they conflict.** After the
-> Codex model was upgraded (0.141.0→0.144.1, `gpt-5.5`→`gpt-5.6-sol`), round 2 re-ran cleanly (no
-> confabulation) and corrected the *design* of nearly every analysis. See "Round-2 refinements" at the end;
-> those are authoritative.
+> **UPDATE — debate CONVERGED (3 rounds).** After the Codex model was upgraded (0.141.0→0.144.1,
+> `gpt-5.5`→`gpt-5.6-sol`), rounds 2–3 ran cleanly (no confabulation). Trajectory: R1 (8 findings) → R2 (6,
+> corrected the *design* of nearly every analysis) → **R3 (0 new, converged, no sanding — "debate
+> concluded")**. Codex's closing position: the plan is credible for Major Revision *because* it narrows the
+> contribution to receipt-backed prioritization + abstention + falsification diagnostics, not demonstrated
+> correctness. The "Round-2 refinements" at the end are authoritative on analysis design.
 
 ## THE decision (settles the reviewers' core tension)
 The paper's top-line claim is **"receipt-backed *prioritization* with explicit *abstention* and falsification
