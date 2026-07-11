@@ -68,3 +68,6 @@ docs/manuscript/latex/*.pdf
 docs/manuscript/latex/*.docx
 docs/manuscript/latex/compile.log
 docs/manuscript/latex/__pycache__/
+
+# Generated tool reports (citation_audit etc.)
+project-management/

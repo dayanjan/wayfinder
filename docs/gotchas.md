@@ -107,3 +107,29 @@ Ran a 2-round codex-debate on codex-cli 0.141.0. `codex exec --ephemeral -s read
 --output-schema <schema.json> --color never - < prompt.txt` works and returns schema-conforming JSON as the
 final message (interleaved with narration; extract the last valid JSON object). The 0.141 flag tightening
 (per doctrine §13.5) is on `codex review`, NOT `codex exec` — exec's schema+stdin path is unchanged.
+
+## Codex/gpt-5.5 confabulates on large inline multi-part artifacts (Added: 2026-07-11)
+When a codex-debate prompt inlines a large multi-part artifact (the 9k-word full manuscript; a dossier +
+plan + re-inlined dossier), gpt-5.5 pattern-matches a generic prior and FABRICATES findings — quoting text
+that does not exist (a grant number, "new discoveries wait", "genetic-association score"). **Always verify
+every Codex quote against the actual file (grep) before acting.** Fix: (1) inline ONE focused artifact,
+(2) require "verbatim-quote-or-drop", (3) reference big context by PATH (repo-read) not inline, (4) upgrade
+to **gpt-5.6-sol** (codex ≥0.144.1) — it stayed grounded + file-cited where gpt-5.5 confabulated.
+
+## pandoc markdown→LaTeX preamble fixes (Added: 2026-07-11)
+`docs/manuscript/latex/main.tex` needs, for pandoc-generated fragments to compile: `\usepackage{amsmath}`
+(display equations); `\usepackage{calc}` (pandoc longtable `\real{}` column widths); `\newcounter{none}` +
+`\providecommand{\theHnone}` (caption-less longtable + hyperref reference a counter literally named `none`);
+`\DeclareUnicodeCharacter{03C9}{...}` + `{2014}` (omega/em-dash from bib titles). `build_tex.py` maps all
+other unicode → LaTeX and stars the sectioning. A fenced ``` block becomes `verbatim` (no wrap, no math) →
+convert display equations to `equation*` manually or they bleed into the margin + show literal `$...$`.
+
+## PDF visual inspection: use PyMuPDF, not pdftoppm (Added: 2026-07-11)
+The Read tool renders PDF pages via poppler `pdftoppm`, which is NOT installed. Workaround: PyMuPDF (`fitz`)
+is installed — `doc[p].get_pixmap(dpi=110).save('p.png')` then Read the PNG. Used to catch the equation
+margin-bleed + colored headings.
+
+## gpt-5.6-sol requires codex CLI ≥0.144 (Added: 2026-07-11)
+On a ChatGPT-account, plain `gpt-5.6`/`gpt-5.6-codex`/`sol` are "not supported"; only **`gpt-5.6-sol`** is —
+but codex 0.141 errors "requires a newer version". `codex update` (npm-global) → 0.144.1 fixes it. Set
+`model = "gpt-5.6-sol"` in `~/.codex/config.toml`.

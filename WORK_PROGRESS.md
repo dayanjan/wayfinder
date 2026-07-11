@@ -7,8 +7,8 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
 - **Active workstream:** **Submission → CS-native 3-min video (see the Working-target line below). Next session = capture + assemble + submit.** _(Manuscript + remaining-experiments gap analysis deferred — post-submission upside, not this week.)_ Prior finding state: CS proven to AUTHOR + run the LBD generator 100% live from scratch (micro-sweep) AND at full scale over all genes × 3 conditions (loose sweep: filter-safe, NAB2 reproduced Stim8hr-specific, 39 candidates in `CANDIDATES.md`). NAB2 drug-target verdict: DepMap negative-for-cancer; **GEO direction mining → association-backed NAB2-DOWN per-cell in lesional skin → knockdown likely backwards, NAB2 reads as a Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Referee direction-label bug fixed (verdicts safe). Only unbuilt CS stretch = Stage 2. Demo/app/notebook remain the **submission MVP**.
 - **Working target: submit by EOD Friday 2026-07-10** (operator out of town Sat–Mon; official deadline still 2026-07-13). **Submission pivoted to a CS-native 3-min video**; tonight banked all design + de-risk + a 2-round codex-debate hardening (spine held). Friday = pre-capture 4 required frames (blockers) → assemble → gate → submit. Streamlit app + prior demo video = fallback MVP. Assets: `docs/demo-video-pack/cs/` + `assets/`.
-- **Active thread (NEW):** **MANUSCRIPT** for FRMA (Henry lineage). Outline v1.2 build-ready (3-round repo-read codex-debate, converged); §1/§2/§3 drafted → CS-number-verified (16/18) → prose codex-debate converged (14→4→0). Wayfinder framed as an **approach**; title locked. **Next = §4 Results** (+ label-shuffle null + rank-stability sensitivity). Submission stays fire-ready in parallel.
-- **Last updated:** 2026-07-10 (manuscript kickoff — outline + sections 1-3 build-ready; submission still fire-ready)
+- **Active thread:** **MANUSCRIPT** for FRMA — **FULL DRAFT (Abstract + §1–§5) in LaTeX, compiles (21pp, 0 errors)**; **12-ref bibliography** (resolved/audited, **Zotero 12 in-sync**); two **Major-Revision referee reviews** → **converged 3-round revision roadmap** (`docs/reviews/codex-debate_revision-plan_2026-07-11.md`). Top-line reframed → "**receipt-backed prioritization + abstention + falsification diagnostics**" (not correctness/adjudication/calibrated). **Next = execute revision MVP** (reframe + C6/C2/C10/C3a diagnostics + 12q13 foregrounding + 4 figures). Submission stays fire-ready in parallel.
+- **Last updated:** 2026-07-11 (full draft in LaTeX + citations/Zotero + converged revision roadmap + codex→gpt-5.6-sol; next = revision MVP)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/wayfinder` (private; renamed from pyzobot-arbiter, history preserved; flip public via `SUBMIT_CHECKLIST.md` — say "scrub and flip")
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -29,6 +29,21 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-11 — Session close (full-close): full draft in LaTeX + citations + converged revision roadmap
+Big session. **Drafted §4 Results** (~1,900w) with a cache-free **sensitivity panel** (Control 1 QC 2,430→
+untested; Control 2 label-shuffle 406/47,220 vs 467.7±10.9 → **substrate-inherited stringency**, lower-tail
+p≈5e-4; Control 3 NAB2 rank 1–8) **reproduced byte-identical in Claude Science (delta-0, Reviewer-verified)**;
+3-round §4 codex-debate converged (10→1→1). **Drafted §5 + Abstract** → full §1–§5 arc. **Ported the LightsOut
+citation stack** (`tools/` + new `semantic_scholar.py`); **references.bib 4→12** (CrossRef/S2-resolved,
+live-audited tier=OK, **pushed to Zotero, 12 in-sync**), wired \cite into the .tex. **Built the LaTeX
+manuscript** (LightsOut approach, `docs/manuscript/latex/`) → **21-page PDF, 12 refs, 0 errors**. Visual
+inspection caught + **fixed the equation margin-bleed (verbatim→amsmath display) and colored→black headings**.
+Processed **two Major-Revision referee reviews** → consolidated **dossier** (22-item register) + resource-
+tagged **revision roadmap**, hardened by a **3-round codex-debate that CONVERGED** (R1→R2→R3, 8→6→0) — top-line
+reframed to "**receipt-backed prioritization + abstention + falsification diagnostics**". **Upgraded Codex
+0.141.0→0.144.1; default model gpt-5.5→gpt-5.6-sol** (fixes large-artifact confabulation). ~15 commits
+`2166257`→`94a40ea`, all pushed. **Next = execute the revision MVP.** Tree clean.
+
 ### 2026-07-10 — Session close (full-close, manuscript kickoff): outline + sections 1-3 build-ready
 Started the **manuscript** (new thread). Confirmed the template is **Henry, Wijesinghe, Myers, McInnes 2021**
 (FRMA 6:644728 — the operator's own LBD lineage). Locked: FRMA venue · agentic-loop headline · ledger+NAB2-hero

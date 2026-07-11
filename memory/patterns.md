@@ -122,3 +122,16 @@ scoring dimension (here Demo/Claude-Use/Impact/Depth) + a skeptical-domain-exper
 lens. Give each the exact artifact + rubric + repo access; dedup/synthesize into a tiered fix register; THEN
 codex-debate to pressure-test. The compliance/own-goal agent caught the biggest issue (a stale README) that
 none of the quality lenses did. Record: docs/reviews/judging-panel_cs-native-video_2026-07-10.md.
+
+## Grounded codex-debate discipline (Noted: 2026-07-11)
+Reliable codex-debate = ONE focused artifact inlined + "verbatim-quote-or-drop" + big context referenced by
+PATH (repo-read) + verify every quote yourself. This worked for the §4 single-section debate, the grounded
+Abstract+§5 pass, and the revision-plan debate on gpt-5.6-sol. Large multi-part inline artifacts degrade the
+model into confabulation (see gotchas). Trajectory of a healthy debate: finding count drops per round
+(revision plan: 8→6→0 converged).
+
+## Citation stack is portable from LightsOut-R01 (Noted: 2026-07-11)
+`tools/{crossref_lookup,pubmed_fetch,citation_audit,claim_tracker,zotero_sync,utils}.py` port cleanly
+(standalone CLIs). The `resolve <key> --bib` live-audit + `zotero_sync push` are the high-value pieces;
+the `audit --tex` mode is LaTeX-cite-specific. Added `semantic_scholar.py` (TLDRs, related-work). Workflow:
+crossref/S2 resolve → build .bib → citation_audit resolve (tier=OK) → zotero push → wire \cite.

@@ -5,6 +5,16 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+**2026-07-11 (full-close) — FULL DRAFT (Abstract + §1–§5) IN LaTeX, COMPILES (21pp); 12-REF BIBLIOGRAPHY +
+ZOTERO LIVE; TWO REFEREE REVIEWS → CONVERGED REVISION ROADMAP; CODEX → gpt-5.6-sol.** Drafted §4 (CS-
+reproduced sensitivity panel, delta-0) + §5 + Abstract; 3-round §4 debate converged. Ported the LightsOut
+**citation stack** (`tools/`) + `semantic_scholar.py`; `references.bib` 4→12 (resolved/audited/Zotero-synced,
+wired into .tex). Built the **LaTeX manuscript** (LightsOut approach, `docs/manuscript/latex/`); fixed the
+equation margin-bleed + colored headings. Two Major-Revision reviews → dossier + **converged 3-round revision
+debate** (`docs/reviews/codex-debate_revision-plan_2026-07-11.md`) — top-line reframed to "**receipt-backed
+prioritization + abstention + falsification diagnostics**" (not correctness/adjudication/calibrated). Upgraded
+codex 0.141→0.144.1, default model **gpt-5.6-sol**. **Next = execute the revision MVP** (reframe + C6/C2/C10/
+C3a diagnostics + 12q13 foregrounding + 4 figures). See `memory/NEXT_SESSION.md`.
 **2026-07-10 (full-close, manuscript kickoff) — MANUSCRIPT STARTED: OUTLINE + SECTIONS 1-3 BUILD-READY.**
 Target venue **FRMA** (Henry lineage — the template is **Henry, Wijesinghe, Myers, McInnes 2021**, 6:644728).
 Headline = the agentic loop; **Wayfinder framed as an APPROACH, not a product**; title locked (*"Closing the
@@ -116,4 +126,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-10 | Submission built + rebranded → Wayfinder | Cloned-voice video re-cut (gate 96%); 6-agent judge panel + frame-grounded codex-debate; judge-facing README/summary/bio; GitHub repo renamed `dayanjan/wayfinder` (private); fire-staged (`SUBMIT_CHECKLIST.md`) |
 | 2026-07-10 (cont.) | **Manuscript kickoff — outline + sections 1-3** | Template = **Henry et al. 2021** (FRMA); Wayfinder framed as an **approach**; title locked; **outline** hardened by 3-round repo-read codex-debate (10→5→1; DOI→10.64898); **§1/§2/§3 drafted** (§3.4 = no-API CS driver); **CS actor-critic verified 16/18**; **prose codex-debate 14→4→0 converged** (caught `ac_known`=overall-not-genetic via code read). 5 commits `ec68a23`→`a2d125e`. Next = §4 Results |
 
-_Last updated: 2026-07-10 (manuscript kickoff — outline v1.2 + sections 1-3 build-ready; next = §4 Results)_
+| 2026-07-11 | **Full draft + LaTeX + citations + review roadmap** | §4 Results (CS-reproduced sensitivity panel, delta-0; 3-round debate 10→1→1) + §5 + Abstract → full §1–§5 arc. Ported LightsOut **citation stack** + `semantic_scholar.py`; **references.bib 4→12** (DOIs resolved/audited, **Zotero 12 in-sync**), wired into .tex. Built **LaTeX manuscript** (LightsOut approach) → **21pp PDF, 0 errors**; fixed equation margin-bleed + colored→black headings. Two **Major-Revision reviews** → dossier + **converged 3-round revision debate** → top-line = "prioritization + abstention + falsification diagnostics". **Codex 0.141→0.144.1, default gpt-5.6-sol.** Next = revision MVP |
+
+_Last updated: 2026-07-11 (full draft in LaTeX; 12-ref bibliography + Zotero; converged revision roadmap; codex→gpt-5.6-sol; next = execute revision MVP)_
