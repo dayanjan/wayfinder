@@ -5,6 +5,16 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+**2026-07-10 (full-close, manuscript kickoff) — MANUSCRIPT STARTED: OUTLINE + SECTIONS 1-3 BUILD-READY.**
+Target venue **FRMA** (Henry lineage — the template is **Henry, Wijesinghe, Myers, McInnes 2021**, 6:644728).
+Headline = the agentic loop; **Wayfinder framed as an APPROACH, not a product**; title locked (*"Closing the
+loop on literature-based discovery: receipt-backed adjudication of machine-generated hypotheses against
+Perturb-seq data"*). Outline hardened by a 3-round repo-read codex-debate (10→5→1; DOI resolved to
+**10.64898/2025.12.23.696273**). §1 Intro / §2 Background / §3 Methods drafted (§3.4 = the **no-API →
+headless-UI-automation-from-Claude-Code** methods element), **CS actor-critic verified (16/18 exact)**, then a
+3-round prose codex-debate (14→4→0, converged, zero sanding — caught a real factual error: `ac_known` is the
+Open Targets *overall* score, not "genetic"). All committed+pushed (`a2d125e`). **Next = draft §4 Results**
+(honor two promises: label-shuffle null distribution + rank-stability sensitivity). See `memory/NEXT_SESSION.md`.
 **2026-07-10 (full-close) — SUBMISSION BUILT + REBRANDED "PyZoBot Arbiter" → "WAYFINDER"; FIRE-READY.**
 Video re-cut in the operator's **cloned voice** (2:52, gate PASS 96%); **6-agent judge panel** (~8/10,
 unanimous likely-top-6) + a **2-round frame-grounded codex-debate** (Codex "watched" a 12-frame storyboard);
@@ -103,4 +113,7 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 
 | 2026-07-09 (evening) | **Submission → CS-native video (pivot) + full de-risk** | Spine decided + polished (LBD-in-CS; library+lab on one bench); dataset attribution → Marson lab, citation locked; 3 QA'd visual assets (Swanson ABC graphic + 2 slides); capture de-risked (Playwright+saved CS auth) + all 4 CS conversations opened → verified capture plan (`cs/CAPTURE_PLAN.md`); CS-native demo pack (`cs/*`, harness via STORAGE_STATE, gate PASS); **2-round repo-read codex-debate** → spine held, 2 P0s fixed + NO made visible + calibration tightened, all applied. Deadline pulled to EOD Fri. Friday = capture+assemble+submit. Streamlit MVP = fallback |
 
-_Last updated: 2026-07-09 evening (submission pivoted to CS-native video; design+de-risk+debate banked; Friday = capture+assemble+submit)_
+| 2026-07-10 | Submission built + rebranded → Wayfinder | Cloned-voice video re-cut (gate 96%); 6-agent judge panel + frame-grounded codex-debate; judge-facing README/summary/bio; GitHub repo renamed `dayanjan/wayfinder` (private); fire-staged (`SUBMIT_CHECKLIST.md`) |
+| 2026-07-10 (cont.) | **Manuscript kickoff — outline + sections 1-3** | Template = **Henry et al. 2021** (FRMA); Wayfinder framed as an **approach**; title locked; **outline** hardened by 3-round repo-read codex-debate (10→5→1; DOI→10.64898); **§1/§2/§3 drafted** (§3.4 = no-API CS driver); **CS actor-critic verified 16/18**; **prose codex-debate 14→4→0 converged** (caught `ac_known`=overall-not-genetic via code read). 5 commits `ec68a23`→`a2d125e`. Next = §4 Results |
+
+_Last updated: 2026-07-10 (manuscript kickoff — outline v1.2 + sections 1-3 build-ready; next = §4 Results)_

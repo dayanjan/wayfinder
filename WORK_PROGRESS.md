@@ -7,7 +7,8 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
 - **Active workstream:** **Submission → CS-native 3-min video (see the Working-target line below). Next session = capture + assemble + submit.** _(Manuscript + remaining-experiments gap analysis deferred — post-submission upside, not this week.)_ Prior finding state: CS proven to AUTHOR + run the LBD generator 100% live from scratch (micro-sweep) AND at full scale over all genes × 3 conditions (loose sweep: filter-safe, NAB2 reproduced Stim8hr-specific, 39 candidates in `CANDIDATES.md`). NAB2 drug-target verdict: DepMap negative-for-cancer; **GEO direction mining → association-backed NAB2-DOWN per-cell in lesional skin → knockdown likely backwards, NAB2 reads as a Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Referee direction-label bug fixed (verdicts safe). Only unbuilt CS stretch = Stage 2. Demo/app/notebook remain the **submission MVP**.
 - **Working target: submit by EOD Friday 2026-07-10** (operator out of town Sat–Mon; official deadline still 2026-07-13). **Submission pivoted to a CS-native 3-min video**; tonight banked all design + de-risk + a 2-round codex-debate hardening (spine held). Friday = pre-capture 4 required frames (blockers) → assemble → gate → submit. Streamlit app + prior demo video = fallback MVP. Assets: `docs/demo-video-pack/cs/` + `assets/`.
-- **Last updated:** 2026-07-10 (submission BUILT + rebranded → Wayfinder; fire-ready; next thread = manuscript in Claude Science)
+- **Active thread (NEW):** **MANUSCRIPT** for FRMA (Henry lineage). Outline v1.2 build-ready (3-round repo-read codex-debate, converged); §1/§2/§3 drafted → CS-number-verified (16/18) → prose codex-debate converged (14→4→0). Wayfinder framed as an **approach**; title locked. **Next = §4 Results** (+ label-shuffle null + rank-stability sensitivity). Submission stays fire-ready in parallel.
+- **Last updated:** 2026-07-10 (manuscript kickoff — outline + sections 1-3 build-ready; submission still fire-ready)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/wayfinder` (private; renamed from pyzobot-arbiter, history preserved; flip public via `SUBMIT_CHECKLIST.md` — say "scrub and flip")
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -28,6 +29,22 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-10 — Session close (full-close, manuscript kickoff): outline + sections 1-3 build-ready
+Started the **manuscript** (new thread). Confirmed the template is **Henry, Wijesinghe, Myers, McInnes 2021**
+(FRMA 6:644728 — the operator's own LBD lineage). Locked: FRMA venue · agentic-loop headline · ledger+NAB2-hero
+demo · **Wayfinder = an APPROACH not a product** (swept through outline+§1) · title *"Closing the loop on
+literature-based discovery: receipt-backed adjudication of machine-generated hypotheses against Perturb-seq
+data."* **Outline** (`docs/manuscript/OUTLINE.md` v1.2) hardened by a **3-round repo-read codex-debate**
+(10→5→1, converged) — resolved the dataset **DOI → 10.64898/2025.12.23.696273** (Crossref; 10.1101 is a 404;
+fixed `references/README`), dropped CTLA4 from the ledger (mis-sourced), repointed the claim inventory to
+primary JSON. **Drafted §1 Intro / §2 Background / §3 Materials & Methods** — §3.4 carries the **no-API →
+headless-UI-automation-from-Claude-Code** methods element. **CS actor-critic review** (dogfood, drove CS
+headless): **16/18 claims MATCH, 0 mismatch**. **3-round prose codex-debate** (14→4→0, converged, zero sanding)
+— caught **F-004, a real factual error**: `ac_known` is the Open Targets *overall* score, not "genetic" (Codex
+read `sources.py`). Folded in operator edits (Cheng 2020 in-vivo cite; softened R01 framing; NAB2 RNA-seq-vs-
+genetic resolved). 5 commits `ec68a23`→`a2d125e`, all pushed. Reviews under `docs/reviews/`. **Next = §4
+Results** (honor: label-shuffle null distribution + rank-stability sensitivity). Tree clean.
+
 ### 2026-07-10 — Session close (full-close): submission BUILT + rebranded → Wayfinder; fire-ready
 Recreated the demo video in the operator's **cloned ElevenLabs voice** + music (2:52, gate PASS 96%). Ran a
 **6-agent independent judging panel** (~8/10, unanimous "likely top-6") then a **2-round frame-grounded
