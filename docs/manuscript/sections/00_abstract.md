@@ -20,7 +20,8 @@ experimental causality. The referee is willing to answer a confident, receipt-ba
 a *refuted* hypothesis from an *untested* one — a failed knockdown is reported as untested, an artifact
 caught rather than a false negative recorded. The entire loop — generation, adjudication, and provenance —
 ran inside an agentic scientific workbench in which an independent critic model enforced calibrated language
-on the platform's own output, and reproduced byte-for-byte when the workbench was driven programmatically.
+on the platform's own output, and its analyses reproduced exactly when the workbench was driven
+programmatically — the pipeline's funnel and ranking digit-for-digit, and the sensitivity panel byte-for-byte.
 Applied to the CD4⁺ resource, the approach culled 22,039 machine-generated hypotheses to a small set of
 receipt-backed survivors; a verdict ledger demonstrates that the referee discriminates, and negative controls
 locate that discrimination honestly. The worked example — NAB2 → Th1/Th2 polarization → atopic eczema — is a
