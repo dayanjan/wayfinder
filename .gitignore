@@ -55,3 +55,16 @@ SUBMIT_CHECKLIST.md
 
 # Copyrighted reference papers — never publish the PDFs (references.bib + README ARE tracked)
 references/*.pdf
+
+# LaTeX build artifacts (manuscript/latex) — source .tex tracked, build products ignored
+docs/manuscript/latex/*.aux
+docs/manuscript/latex/*.bbl
+docs/manuscript/latex/*.blg
+docs/manuscript/latex/*.log
+docs/manuscript/latex/*.out
+docs/manuscript/latex/*.fls
+docs/manuscript/latex/*.fdb_latexmk
+docs/manuscript/latex/*.pdf
+docs/manuscript/latex/*.docx
+docs/manuscript/latex/compile.log
+docs/manuscript/latex/__pycache__/

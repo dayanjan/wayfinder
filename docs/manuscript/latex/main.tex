@@ -1,0 +1,102 @@
+% Wayfinder manuscript — master document (LightsOut LaTeX approach, journal-adapted)
+% Compile: latexmk -pdf main.tex   (or .\compile.ps1)
+% Sections live in sections/*.tex (generated from the markdown by build_tex.py); edit prose there
+% or in the markdown source and re-run build_tex.py.
+
+\documentclass[11pt]{article}
+
+% --- encoding / fonts (helvet sans, the LightsOut look) ---
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{03C9}{\ensuremath{\omega}}  % omega in a bib title
+\DeclareUnicodeCharacter{2014}{---}                  % em-dash in a bib field
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}\onehalfspacing
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\tolerance=400\emergencystretch=3pt
+
+% --- colours + section headers (LightsOut aesthetic; starred = unnumbered so the manual
+%     "4.1b"-style numbers in titles match the prose's literal cross-references) ---
+\usepackage[dvipsnames]{xcolor}
+\definecolor{sectioncolor}{RGB}{128,0,0}
+\definecolor{subsectioncolor}{RGB}{0,51,102}
+\definecolor{markercolor}{RGB}{0,102,153}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\bfseries\large\color{sectioncolor}}{}{0em}{}
+  [\vspace{-0.5em}\textcolor{sectioncolor}{\rule{\textwidth}{0.5pt}}]
+\titleformat{\subsection}{\normalfont\bfseries\color{subsectioncolor}}
+  {\textcolor{markercolor}{$\blacksquare$}\ }{0em}{}
+\titleformat{\subsubsection}[runin]{\normalfont\bfseries\itshape}{}{0em}{}[:]
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+\titlespacing*{\subsubsection}{0pt}{4pt}{0.5em}
+
+% --- tables / figures / links ---
+\usepackage{calc}  % defines \real{} for pandoc's longtable column-width arithmetic
+\usepackage{graphicx,booktabs,longtable,array,caption}
+\captionsetup{font=footnotesize,labelfont=bf,skip=3pt}
+\usepackage[hidelinks]{hyperref}
+
+% --- references (numbered superscript, LightsOut style; swap to author-year for Frontiers final) ---
+\usepackage[numbers,super,sort&compress]{natbib}
+\bibliographystyle{unsrtnat}
+
+% --- pandoc helper macros (fragments use these) ---
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+% pandoc longtables without captions + hyperref reference a counter literally named 'none'
+\providecommand{\theHnone}{none.\arabic{none}}
+\newcounter{none}
+
+% --- title ---
+\title{\vspace{-2em}\bfseries\color{sectioncolor}Closing the loop on literature-based discovery:\\
+  receipt-backed adjudication of machine-generated hypotheses against Perturb-seq data}
+\author{Dayanjan Shanaka Wijesinghe}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Literature-based discovery (LBD) connects facts that are individually established but never joined, and
+four decades of work have made it a prolific generator of hypotheses. Its persistent weakness is not
+generation but triage: an LBD search returns far more candidate links than any laboratory can pursue, and
+ranking by literature-rarity tracks obscurity as readily as importance. We present \textbf{Wayfinder}, an
+approach that addresses this gap by pairing LBD generation with a deterministic referee that adjudicates
+each proposed \emph{gene $\rightarrow$ T-cell program $\rightarrow$ disease} hypothesis against a held
+experimental substrate --- a genome-scale CRISPRi Perturb-seq resource in primary human CD4$^{+}$ T cells
+--- and returns a verdict with a receipt at every hop. We keep two receipt classes distinct: the knockdown,
+effect, and program hops are backed by experimental perturbation measurements, whereas the disease hop is a
+genetic-association nomination rather than a claim of experimental causality. The referee is willing to
+answer a confident, receipt-backed \emph{no}, and distinguishes a \emph{refuted} hypothesis from an
+\emph{untested} one --- a failed knockdown is reported as untested, an artifact caught rather than a false
+negative recorded. The entire loop --- generation, adjudication, and provenance --- ran inside an agentic
+scientific workbench in which an independent critic model enforced calibrated language on the platform's own
+output, and its analyses reproduced exactly when the workbench was driven programmatically --- the
+pipeline's funnel and ranking digit-for-digit, and the sensitivity panel byte-for-byte. Applied to the
+CD4$^{+}$ resource, the approach culled 22{,}039 machine-generated hypotheses to a small set of
+receipt-backed survivors; a verdict ledger demonstrates that the referee discriminates, and negative
+controls locate that discrimination honestly. The worked example --- NAB2 $\rightarrow$ Th1/Th2 polarization
+$\rightarrow$ atopic eczema --- is a literature-novel regulatory nomination whose sharpest artifactual
+confounder, a CRISPRi \emph{cis}-effect on the adjacent \emph{STAT6}, we falsify against the study authors'
+own genome-wide data, and which an independent cross-model replication reproduced. The contribution is the
+method and what it found: receipt-backed adjudication of machine-generated hypotheses, and the calibrated
+\emph{no} that makes such adjudication worth trusting.
+
+\vspace{4pt}\noindent\textbf{Keywords:} literature-based discovery; hypothesis adjudication; Perturb-seq;
+CRISPRi screens; T-cell polarization; agentic language models; scientific reproducibility; falsification.
+\end{abstract}
+
+\section*{1. Introduction}\input{sections/01_introduction}
+\section*{2. Background}\input{sections/02_background}
+\section*{3. Materials and Methods}\input{sections/03_methods}
+\section*{4. Results}\input{sections/04_results}
+\section*{5. Discussion}\input{sections/05_discussion}
+
+\bibliography{../../../references/references}
+
+\end{document}
