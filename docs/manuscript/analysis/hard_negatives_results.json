@@ -1,0 +1,150 @@
+{
+  "condition": "Stim8hr",
+  "panel_A_arbitrary_out_of_funnel": {
+    "n_genes": 11415,
+    "by_outcome": {
+      "untested": 1914,
+      "reached_disease_hop": 9483,
+      "refuted_program": 9,
+      "refuted_effect": 9
+    },
+    "own_edge_cull": 1932,
+    "own_edge_cull_rate": 0.1693,
+    "untested_qc_rate": 0.1677,
+    "refuted_effect_rate": 0.0008
+  },
+  "panel_B_frozen_association_nomination": {
+    "n_nominations": 600,
+    "top_k_per_disease": 50,
+    "by_verdict": {
+      "refuted_for_c": 404,
+      "untested": 75,
+      "supported": 102,
+      "refuted_program": 11,
+      "refuted_effect": 8
+    },
+    "own_edge_cull": 94,
+    "own_edge_cull_rate": 0.1567,
+    "supported_rate": 0.17,
+    "stratum_in_A": {
+      "refuted_for_c": 228,
+      "supported": 101,
+      "refuted_effect": 1
+    },
+    "stratum_not_in_A": {
+      "refuted_for_c": 176,
+      "untested": 75,
+      "refuted_program": 11,
+      "refuted_effect": 7,
+      "supported": 1
+    },
+    "hard_negative_examples": [
+      {
+        "gene": "IL36RN",
+        "disease": "psoriasis",
+        "ac_known": 0.819,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "TREX1",
+        "disease": "systemic lupus erythematosus",
+        "ac_known": 0.78,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "TG",
+        "disease": "Hashimoto's thyroiditis",
+        "ac_known": 0.698,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "HNF1A",
+        "disease": "type 1 diabetes mellitus",
+        "ac_known": 0.693,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "PADI4",
+        "disease": "rheumatoid arthritis",
+        "ac_known": 0.676,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "SH2B3",
+        "disease": "celiac disease",
+        "ac_known": 0.642,
+        "referee": "refuted_program",
+        "in_A": false
+      },
+      {
+        "gene": "PTGS1",
+        "disease": "rheumatoid arthritis",
+        "ac_known": 0.617,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "FCRL3",
+        "disease": "rheumatoid arthritis",
+        "ac_known": 0.614,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "MS4A1",
+        "disease": "rheumatoid arthritis",
+        "ac_known": 0.613,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "PTGS1",
+        "disease": "ulcerative colitis",
+        "ac_known": 0.61,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "S1PR5",
+        "disease": "multiple sclerosis",
+        "ac_known": 0.609,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "IL5RA",
+        "disease": "asthma",
+        "ac_known": 0.608,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "MS4A1",
+        "disease": "multiple sclerosis",
+        "ac_known": 0.608,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "SLC5A2",
+        "disease": "type 1 diabetes mellitus",
+        "ac_known": 0.606,
+        "referee": "untested",
+        "in_A": false
+      },
+      {
+        "gene": "PTGS1",
+        "disease": "ankylosing spondylitis",
+        "ac_known": 0.605,
+        "referee": "untested",
+        "in_A": false
+      }
+    ]
+  },
+  "cache_files_added": 0
+}

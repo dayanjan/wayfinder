@@ -167,6 +167,41 @@ FDR \textless{} 0.05 (best FDR 0.054, type 1 diabetes, OR 2.73). The enrichment 
 verdict a confirmation-shaped pipeline never produces, and it is deterministic --- the \emph{no} is computed, not
 argued.
 
+\subsection*{4.2b Out-of-funnel discrimination: the referee's own edge, quantified}\label{out-of-funnel-discrimination-the-referees-own-edge-quantified}
+
+Section 4.1b established that the disease hop's near-total refutation rate is \emph{substrate-inherited} --- a
+property of the enrichment study's FDR family, not the referee's own doing. That invites the fair question a
+referee report pressed: once the substrate-inherited disease hop is set aside, how much does the referee
+\emph{itself} discriminate? Its own hops are the knockdown-QC gate (hop 0) and the effect and program checks
+(hops 1--2), each a deterministic computation the referee owns. We quantify their discrimination two ways,
+both offline and outcome-independent.
+
+\emph{On arbitrary genes.} We applied the referee to \textbf{all 11,415} genes perturbed at the 8-hour
+condition --- the full out-of-funnel population, not the pre-gated universe --- pairing each with an arbitrary
+disease (the referee's hops 0--2 are disease-independent). The referee's own hops cull \textbf{16.9\%} of
+them: \textbf{16.8\%} (1{,}914 genes) return \emph{untested} because the knockdown fails QC --- genes the
+substrate cannot speak to --- with only a small remainder refuted at the effect or program hop. The
+knockdown-QC gate is thus the referee's dominant own-edge discriminator (one arbitrary gene in six cannot be
+tested here), while the effect gate, lenient by design (any nonzero downstream signal passes), rarely fires
+on unselected genes. This is the honest shape of the referee's own \emph{no}: it is real, and it is
+concentrated in the quality-control catch rather than spread across the chain.
+
+\emph{On a frozen nominator's best guesses (hard negatives).} A stronger test must not choose genes by the
+outcome being evaluated. We froze a naive curated-association nominator --- for each of the 12 diseases, the
+top 50 perturbed genes by Open Targets association score, selected with no reference to the referee --- and
+applied the referee to the resulting \textbf{600} association-plausible (gene, disease) nominations. The
+verdicts decompose exactly along the line the reviews asked us to draw: \textbf{15.7\%} are culled at the
+referee's \emph{own} hops (\textbf{75} \emph{untested}, 8 \emph{refuted-effect}, 11 \emph{refuted-program}),
+\textbf{67.3\%} are \emph{refuted for the specific disease} (the substrate-inherited hop, \S{}4.1b), and only
+\textbf{17.0\%} are supported. The own-hop culls are the hard negatives --- genes a database-driven nominator
+would confidently advance that the data cannot support here --- and they include strongly-associated flagship
+pairs: \emph{IL36RN} $\times$ psoriasis (association 0.82), \emph{TREX1} $\times$ systemic lupus (0.78), and
+\emph{PADI4} $\times$ rheumatoid arthritis (0.68), each returned \emph{untested} because its knockdown failed
+QC in this screen. A curated-association ranking, however strong, cannot tell you whether the perturbation is
+even measurable; the referee's own hops can, and they flag roughly one in six of the top nominations. This is
+the discrimination the referee supplies on its own --- reported separately from, and not conflated with, the
+disease hop's substrate-inherited stringency.
+
 \subsection*{4.3 NAB2 $\rightarrow$ Th1/Th2 $\rightarrow$ atopic eczema, hop by hop}\label{nab2-th1th2-atopic-eczema-hop-by-hop}
 
 The highest-ranked near-novel survivor is \textbf{NAB2}, near-novel by an operational criterion --- low direct
