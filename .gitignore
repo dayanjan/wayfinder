@@ -53,5 +53,5 @@ CV/
 # Last-minute submission runbook (operator-only)
 SUBMIT_CHECKLIST.md
 
-# Copyrighted reference papers — never publish
-references/
+# Copyrighted reference papers — never publish the PDFs (references.bib + README ARE tracked)
+references/*.pdf
