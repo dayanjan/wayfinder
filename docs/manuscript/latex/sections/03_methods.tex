@@ -14,12 +14,12 @@ deposited matrix is read lazily from public object storage (byte-range reads, no
 arms: process terms (e.g.~``Th2 cells'', ``T helper 2'') used for the gene--program signal, and marker terms
 (GATA3, IL-4, IFN-$\gamma$, T-bet) additionally used for the program--disease signal, since disease literature
 legitimately cites markers. The disease set \textbf{C} comprises 12 immune diseases, each pinned to a MONDO
-identifier and re-verified live against Open Targets search and the EBI Ontology Lookup Service. This
+identifier \cite{mondo2022} and re-verified live against Open Targets search and the EBI Ontology Lookup Service. This
 verification is load-bearing: MONDO and EFO identifiers differ, and a wrong identifier makes Open Targets
 report ``no known association'' for every gene, spuriously inflating apparent novelty everywhere.
 
-\textbf{Literature and association sources.} Co-mention counts come from Europe PMC \texttt{hitCount} queries (all
-terms quoted); curated gene$\rightarrow$disease association scores come from the Open Targets GraphQL API --- the
+\textbf{Literature and association sources.} Co-mention counts come from Europe PMC \cite{europepmc2015} \texttt{hitCount} queries (all
+terms quoted); curated gene$\rightarrow$disease association scores come from the Open Targets GraphQL API \cite{opentargets2023} --- the
 \emph{overall} target--disease association score (not a genetics-only subset), used as a known-link / novelty
 prior. This is distinct from the disease \emph{labels} on the enrichment modules (the disease hop, \S{}3.3), which
 the source study derives from genetic evidence.

@@ -10,6 +10,7 @@ headless, by Codex, or in CI — for building and auditing the manuscript biblio
 | `crossref_lookup.py` | CrossRef REST: `doi <doi>`, `search <query>` (top 5), `cited-by <doi>`, `enrich` (fill missing DOIs in a `.bib` by title), `selftest`. |
 | `pubmed_fetch.py` | PubMed/PMC: PMID lookup, batch search, PMC full-text, `.bib` PMCID enrichment. Reads `NCBI_API_KEY` from `.env` (optional; raises rate limit). |
 | `citation_audit.py` | **Live** cross-check of `.bib` entries against OpenAlex + CrossRef + PubMed — flags wrong DOI, retractions, title/year drift. `resolve <key> --bib <path>` audits one entry; `audit --bib <path>` audits a set. |
+| `semantic_scholar.py` | Semantic Scholar (S2): `search <query>`, `paper <doi>`, `recommend <doi>` — adds TLDR one-line summaries, influential-citation counts, and related-work discovery. Reads `SEMANTIC_SCHOLAR_API_KEY`. |
 | `claim_tracker.py` | Scans source for statistical claims + `\cite` keys vs `.bib` (LaTeX-oriented — see caveat). |
 | `utils.py` | Shared helpers (`safe_print`, `find_project_root`, `.bib` load, summary formatting). Dependency of the above. |
 
