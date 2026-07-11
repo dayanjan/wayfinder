@@ -1,7 +1,7 @@
 \subsection*{3.1 Materials}\label{materials}
 
-\textbf{Perturbation data.} All adjudication runs against the aggregated supplementary tables of a
-genome-scale CRISPRi Perturb-seq study in primary human CD4+ T cells \cite{zhu2025}:
+\textbf{Perturbation data.} All prioritization runs against the aggregated supplementary tables of a
+genome-scale CRISPRi Perturb-seq study (a 2025 preprint) in primary human CD4+ T cells \cite{zhu2025}:
 (T1) per-perturbation differential-expression statistics, including an on-target effect flag and a count
 of downstream differentially expressed genes; (T2) a Th1/Th2 polarization-signature enrichment per
 perturbation, reported for two independent marker contrasts; (T3) a cluster-to-autoimmune-disease
@@ -80,7 +80,7 @@ and the final score for those survivors. At the 8-hour condition this funnels 3,
 
 \subsection*{3.3 The referee}\label{the-referee}
 
-The referee adjudicates one triple at a time as a four-hop chain, each hop reading a specific receipt:
+The referee evaluates one triple at a time as a four-hop chain, each hop reading a specific receipt:
 
 \begin{itemize}
 \tightlist
@@ -106,8 +106,14 @@ yields \textbf{refuted-effect}, and failure at the specific-disease hop is \text
 remaining a genetic-association nomination --- not a claim that the biology is proven. The confident \emph{no}
 lives in these demotions, all deterministically computed.
 
-Two honesty points belong in Methods, not only in Limitations. First, because \textbf{A} is preselected on
-knockdown-QC, effect, and program-significance, \emph{within the funnel} hops 0--2 are largely pre-gated (the
+We separate two categories that the rest of the paper --- and Figure 1 --- keep visually and textually
+distinct: \textbf{construction filters} (the knockdown-QC, effect, and program pre-gates that build the
+universe \textbf{A}) and \textbf{referee decisions} (the disease-C specificity test, together with the QC and
+effect demotions the referee adjudicates on \emph{arbitrary} genes). The referee genuinely owns the QC and
+effect hops; the disease hop it can only \emph{prioritize} as a genetic-association nomination. Two honesty
+points follow from this separation, and belong in Methods, not only in Limitations. First, because \textbf{A}
+is preselected on knockdown-QC, effect, and program-significance, \emph{within the funnel} hops 0--2 are
+largely pre-gated (the
 program hop is a strict tautology --- no eligible gene can fail it), so among funnel survivors the dominant
 cull is disease-C specificity rather than broad four-hop falsification. The confident-\emph{no} behaviour is
 therefore shown two ways: by the referee's demotions and exact-disease refutations within the funnel, and
@@ -119,7 +125,7 @@ Second, the program hop, being a within-funnel tautology, discriminates in an in
 
 \subsection*{3.4 The agentic loop, and how the instrument is operated}\label{the-agentic-loop-and-how-the-instrument-is-operated}
 
-Generation, adjudication, and provenance assembly were run inside Claude Science, a persistent-kernel
+Generation, evidence integration, and provenance assembly were run inside Claude Science, a persistent-kernel
 agentic scientific workbench, in which an author model writes and runs analysis code and an independent
 reviewer model verifies the result at separate checkpoints (Section 3.1).
 
@@ -141,13 +147,17 @@ liveness accounting below makes explicit --- the full-scale run reads from a loc
 raises on any live call, so unattended approval cannot silently alter the data receipts. We are candid that
 this is browser automation against a user interface with no stable public contract (Section 5.3); it is
 nonetheless what converts a click-once web session into a re-runnable, audited pipeline, and --- where a
-platform exposes no programmatic interface --- an under-appreciated route to reproducible \emph{agentic} science.
+platform exposes no programmatic interface --- an under-appreciated route to replicable-in-principle
+(UI-dependent) \emph{agentic} science.
 
 \textbf{Provenance and self-audit.} Every run is captured in the workbench's own audit store, from which we
 draw model identities, per-step costs, and the reviewer's checks. The reviewer verifies each reported
 number against the underlying artifacts and enforces calibrated language on the manuscript-facing output ---
 the receipt chain and the verdicts a reader sees; in this work it flagged overstated words (``validated'',
-``definitive'') in that output and they were removed. We scope this claim honestly: the enforcement applies
+``definitive'') in that output and they were removed. This self-audit is \emph{language hygiene plus
+receipt-consistency} --- that the wording stays calibrated and each cited number matches its artifact --- not
+an independent epistemic verification that the underlying biology is correct; that check is the held
+substrate's to make, not the critic's. We scope this claim honestly: the enforcement applies
 to the manuscript-facing receipt chain, not to every intermediate machine-generated log (an earlier
 generation record still carries a legacy ``validated'' string in a free-text field), which is why
 manuscript-facing verdicts cite the post-review receipt rather than the raw generation log. We characterize
@@ -164,4 +174,4 @@ Europe PMC and Open Targets calls; the headline gene did not appear in that smal
 nothing was cherry-picked, and a Stage-0 probe independently confirmed live external access from the
 kernel. (iii) \emph{Cross-family independence}: replication with a different vendor's models is kept external
 by design (Section 4.6). Reported this way, the workbench supplies generation, data-grounded
-adjudication, and a language self-audit; cross-model independence is supplied from outside it.
+prioritization, and a language self-audit; cross-model independence is supplied from outside it.

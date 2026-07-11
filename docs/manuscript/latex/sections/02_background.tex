@@ -18,15 +18,15 @@ through, and the field has said so of itself. Reviewing a proposal submitted for
 three reviewers named the problem directly --- LBD \emph{``generates an enormous number of hypotheses, almost none
 of which ever get followed up''}. Standard evaluations of LBD (time-slicing, link prediction) measure
 whether the generator would have \emph{rediscovered} known links, not whether a specific proposed hypothesis is
-supported by independent experimental data it has not seen \cite{henry2021}. We are precise about the scope of the answer this enables: adjudicating a
+supported by independent experimental data it has not seen \cite{henry2021}. We are precise about the scope of the answer this enables: prioritizing a
 hypothesis against a held experimental substrate closes the \emph{triage} loop --- which of the machine's
 hypotheses is worth pursuing --- not the experimental-follow-up loop itself. What has been missing is that
-adjudication step: a way to put each machine-generated hypothesis to a data test and record a verdict ---
+prioritization step: a way to put each machine-generated hypothesis to a data test and record a verdict ---
 including a \emph{no}.
 
 \subsection*{2.2 A held experimental substrate, and what counts as a receipt at each hop}\label{a-held-experimental-substrate-and-what-counts-as-a-receipt-at-each-hop}
 
-The adjudication step needs data that exists independently of the hypotheses being posed. We use a
+The prioritization step needs data that exists independently of the hypotheses being posed. We use a
 genome-scale CRISPRi Perturb-seq \cite{dixit2016,replogle2022} resource in primary human CD4+ T cells \cite{zhu2025},
 in which thousands of genes are individually knocked down and single-cell RNA sequencing reads out the
 transcriptional consequence of each perturbation across stimulation conditions. Because the measurements
@@ -35,7 +35,7 @@ referee queries them retrospectively rather than commissioning new experiments. 
 CPU-feasible because it runs over the study's aggregated supplementary tables --- per-guide knockdown
 efficiency, differential-expression statistics, a Th1/Th2 polarization signature, and a
 cluster-to-autoimmune-disease enrichment --- rather than the raw multi-million-cell matrices. This substrate
-is not a universal oracle of biological truth; it is a bounded, independent adjudication surface for
+is not a universal oracle of biological truth; it is a bounded, independent evidence surface for
 mechanistic T-cell claims --- valuable precisely because, for a hypothesis it \emph{can} speak to, it returns
 support, refutation, or \emph{untested} with a receipt, and stays silent (rather than guessing) on the rest.
 
@@ -47,11 +47,11 @@ downstream signature enrich for a disease --- is an \textbf{association receipt}
 genetic evidence (GWAS and related association data, without colocalization or linkage-disequilibrium
 control), so a positive verdict at this hop is a \emph{nomination}, not a claim of experimental disease
 causality. Reading the substrate as a direct experimental readout for the first three hops but an
-association signal for the fourth is what keeps the eventual claims calibrated.
+association signal for the fourth is what keeps the eventual claims within what the receipts support.
 
 \subsection*{2.3 Agentic language models as a scientific instrument}\label{agentic-language-models-as-a-scientific-instrument}
 
-The generation, adjudication, and provenance in this work were carried out inside an \emph{agentic} language-
+The generation, evidence integration, and provenance in this work were carried out inside an \emph{agentic} language-
 model environment, and because that setting is newer to the discovery-informatics reader than the biology
 or the LBD, we describe what it does and --- more importantly --- what discipline makes it trustworthy for
 science. Contemporary language models can be given \emph{tools}: they can call code, query a web API, or read a
@@ -73,5 +73,5 @@ it is \emph{role, model, and checkpoint} independence --- a distinct reviewer mo
 points --- within a single model family, not cross-vendor independence. Independence across model families
 is provided separately and externally (Section 4.6), by replicating the finding with a different vendor's
 models. With that boundary stated, the agentic workbench lets a single researcher run generation,
-data-grounded adjudication, and a self-audit of the result's language on one bench --- the capability the
+data-grounded prioritization, and a self-audit of the result's language on one bench --- the capability the
 rest of this paper puts to work.

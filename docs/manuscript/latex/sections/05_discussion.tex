@@ -19,19 +19,20 @@ of this --- a failed perturbation is reported as \emph{untested}, never as a fal
 approach can be trusted to reject as well as to nominate. The second is that the entire loop, generation
 through self-audit, ran inside an agentic workbench in which an independent reviewer model enforced
 calibrated language on the platform's own output. The paper's own thesis --- that machine-generated science
-must carry receipts and calibrated verdicts --- was applied to the machine that generated it.
+must carry receipts and honestly scoped verdicts --- was applied to the machine that generated it.
 
-There is a reproducibility dividend here that we did not anticipate at the outset. The workbench exposes no
+There is a replicability dividend here that we did not anticipate at the outset. The workbench exposes no
 programmatic interface, so an analysis run in it is ordinarily a one-off, hand-paced web session. By driving
 it headlessly and pulling its own provenance, we turned that one-off into a re-runnable, audited pipeline ---
 and the sensitivity analyses in \S{}4.1b make the point concrete: the same panel, run locally and then inside
 the workbench, reproduced byte-for-byte, verified by the workbench's own reviewer. An agentic analysis that
-would otherwise be irreproducible-by-construction became reproducible. This is a small step, but a real one,
-toward reproducible \emph{agentic} science rather than merely reproducible code.
+would otherwise be irreproducible-by-construction became replicable in principle --- subject to the
+platform's user interface remaining stable (\S{}5.3). This is a small step, but a real one, toward
+replicable-in-principle \emph{agentic} science rather than merely reproducible code.
 
 \subsection*{5.2 The next experiment the approach nominates}\label{the-next-experiment-the-approach-nominates}
 
-The value of an adjudication loop is not only that it culls, but that its survivors come with a sharp,
+The value of a prioritization loop is not only that it culls, but that its survivors come with a sharp,
 falsifiable next question. For NAB2, that question is directional. The Perturb-seq substrate tells us that
 knocking NAB2 \emph{down} reshapes the Th1/Th2 program; it does not tell us whether, in disease, one would want
 more NAB2 or less. We pursued that question orthogonally --- outside the Perturb-seq substrate --- and report the
@@ -82,7 +83,7 @@ a tautology (\texttt{refuted\_program\ $\equiv$\ 0}), so it discriminates in an 
 and ``43 supported'' is a joint product of the literature-novelty gate and the referee (the referee alone
 supports 395 of 47,220 pairs). We restate these in Results rather than burying them here.
 
-\textbf{The substrate is bounded, and singular.} The adjudication is retrospective against one Perturb-seq
+\textbf{The substrate is bounded, and singular.} The prioritization is retrospective against one Perturb-seq
 resource, one program (Th1/Th2), one cell type, and one set of aggregated tables; we ran no new wet-lab
 experiment. The approach is only as good as the held substrate for a given claim, and it stays silent ---
 returning \emph{untested} --- where the substrate cannot speak, which is a feature, but also a boundary on scope.
@@ -96,19 +97,20 @@ enforces it, are load-bearing rather than cosmetic.
 \textbf{The self-audit is within-family, and the automation depends on an unstable surface.} The workbench's
 reviewer is an independent \emph{role, model, and checkpoint}, but within a single model family; cross-family
 independence is supplied externally (\S{}4.6), not natively. And the headless driver depends on the workbench's
-web front-end, for which there is no stable public contract --- a reproducibility bridge over an API-less
+web front-end, for which there is no stable public contract --- a replicability bridge over an API-less
 platform, honestly, not a durable interface. If the front-end changes, the driver must be re-fitted.
 
 \subsection*{5.4 Conclusion}\label{conclusion}
 
 Literature-based discovery has never lacked for hypotheses; it has lacked a disciplined way to decide which
-ones to believe, and the candor to say \emph{no}. Wayfinder pairs a machine hypothesis-generator with a
-deterministic referee that adjudicates each proposal against a held experimental substrate and returns a
-verdict with a receipt at every hop --- supporting, refuting, or declining to test --- and runs the whole loop,
+ones to pursue, and the candor to say \emph{no}. Wayfinder pairs a machine hypothesis-generator with a
+deterministic referee that evaluates each proposal against a held experimental substrate and returns a
+prioritization verdict with a receipt at every hop --- supporting, refuting, or declining to test --- and runs the whole loop,
 including an audit of its own language, inside an agentic workbench whose work we can reproduce and inspect.
 Applied to a genome-scale CD4\textsuperscript{+} T-cell resource, it culled tens of thousands of machine-generated hypotheses
 to a small set of receipt-backed survivors, of which NAB2 $\rightarrow$ Th1/Th2 $\rightarrow$ atopic eczema is the worked example: a
 literature-novel regulatory nomination whose sharpest artifactual confounder we falsified against the study
 authors' own data, and which points to a concrete, falsifiable next experiment. The contribution is the
-method and what it found --- receipt-backed adjudication of machine-generated hypotheses, and the confident,
-calibrated \emph{no} that makes such adjudication worth trusting.
+method and what it found --- receipt-backed prioritization of machine-generated hypotheses, with explicit
+abstention and falsification diagnostics --- and the confident, receipt-backed \emph{no} that a triage step
+must be willing to give.

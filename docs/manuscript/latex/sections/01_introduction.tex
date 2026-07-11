@@ -29,15 +29,16 @@ They were right. LBD is a generator, and a generator with no discriminating filt
 one flood into another. Classic LBD ranks candidates by properties of the \emph{literature} --- how rare a
 co-mention is, how strong an intermediate link looks --- but rarity in the literature tracks \emph{obscurity} as
 readily as it tracks \emph{importance}, and a ranked list, however long, is not an answer. What has been
-missing is not more generation but adjudication: a way to ask, of each machine-generated hypothesis,
-\emph{is this actually supported by data?} --- and to be willing to answer \textbf{no}.
+missing is not more generation but \emph{evidence-grounded prioritization}: a way to ask, of each
+machine-generated hypothesis, \emph{is this actually supported by data?} --- and to be willing to answer \textbf{no}.
 
-Here we describe \textbf{Wayfinder}, an approach to closing that loop. The approach pairs LBD generation with
-a deterministic referee that adjudicates each proposed \emph{gene $\rightarrow$ T-cell program $\rightarrow$ disease} triple against a
+Here we describe \textbf{Wayfinder}, an approach to that triage gap. The approach pairs LBD generation with
+a deterministic referee that evaluates each proposed \emph{gene $\rightarrow$ T-cell program $\rightarrow$ disease} triple against a
 held experimental substrate --- a genome-scale CRISPRi Perturb-seq resource in primary human CD4+ T cells
-\cite{zhu2025} --- and returns a verdict with a receipt at every hop. We instantiate the
-approach in a concrete, reproducible implementation, but the contribution is the \emph{method} --- receipt-backed
-adjudication of machine-generated hypotheses --- and what it found, not a software product.
+\cite{zhu2025} --- and returns a prioritization verdict with a receipt at every hop. We instantiate the
+approach in a concrete implementation, but the contribution is the \emph{method} --- receipt-backed
+prioritization of machine-generated hypotheses, with explicit abstention and falsification diagnostics ---
+and what it found, not a software product.
 The receipts are of two kinds, and we keep them distinct: the knockdown, effect, and program hops are
 backed by \emph{experimental} measurements from the perturbation data; the disease hop is an \emph{association}
 receipt (genetic enrichment), a nomination rather than a claim of experimental causality.
@@ -46,7 +47,7 @@ Two features define the approach. First, the referee is willing to say a confide
 and it distinguishes a \emph{refuted} hypothesis from an \emph{untested} one: when a gene's knockdown fails quality
 control, the result is reported as \emph{untested}, never as a negative --- an artifact caught rather than a false
 negative recorded. Falsification, not confirmation, is the point. Second, the entire loop --- generation,
-adjudication, and the assembly of its own provenance --- was run inside an agentic scientific workbench
+evidence integration, and the assembly of its own provenance --- was run inside an agentic scientific workbench
 (Claude Science), in which one model authored the analysis and an independent reviewer model, at separate
 checkpoints, verified every number and enforced calibrated language on the manuscript-facing output,
 flagging and removing overstated words from the platform's own text. The platform audited its own output ---
@@ -55,7 +56,7 @@ check; cross-family independence is provided separately (Section 4.6).
 
 We demonstrate the Wayfinder approach on the CD4+ T-cell resource, where it posed 22,039
 gene$\rightarrow$program$\rightarrow$disease hypotheses that a literature-novelty gate and a deterministic referee together culled
-to a small set of receipt-backed survivors. A ledger of adjudicated verdicts \emph{demonstrates} that the
+to a small set of receipt-backed survivors. A ledger of referee verdicts \emph{demonstrates} that the
 referee discriminates --- supporting, refuting, and declining to test --- and a negative-control panel ---
 failed-knockdown genes, which must return \emph{untested}, and label-shuffled disease assignments --- probes how
 much of that discrimination is real rather than an artifact of the setup, finding the quality-control gate

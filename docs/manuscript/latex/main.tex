@@ -52,8 +52,8 @@
 \newcounter{none}
 
 % --- title ---
-\title{\vspace{-2em}\bfseries\color{sectioncolor}Closing the loop on literature-based discovery:\\
-  receipt-backed adjudication of machine-generated hypotheses against Perturb-seq data}
+\title{\vspace{-2em}\bfseries\color{sectioncolor}Receipt-backed prioritization for literature-based\\
+  discovery using Perturb-seq evidence}
 \author{Dayanjan Shanaka Wijesinghe}
 \date{\today}
 
@@ -65,30 +65,38 @@
 Literature-based discovery (LBD) connects facts that are individually established but never joined, and
 four decades of work have made it a prolific generator of hypotheses. Its persistent weakness is not
 generation but triage: an LBD search returns far more candidate links than any laboratory can pursue, and
-ranking by literature-rarity tracks obscurity as readily as importance. We present \textbf{Wayfinder}, an
-approach that addresses this gap by pairing LBD generation with a deterministic referee that adjudicates
-each proposed \emph{gene $\rightarrow$ T-cell program $\rightarrow$ disease} hypothesis against a held
-experimental substrate --- a genome-scale CRISPRi Perturb-seq resource in primary human CD4$^{+}$ T cells
---- and returns a verdict with a receipt at every hop. We keep two receipt classes distinct: the knockdown,
-effect, and program hops are backed by experimental perturbation measurements, whereas the disease hop is a
-genetic-association nomination rather than a claim of experimental causality. The referee is willing to
-answer a confident, receipt-backed \emph{no}, and distinguishes a \emph{refuted} hypothesis from an
-\emph{untested} one --- a failed knockdown is reported as untested, an artifact caught rather than a false
-negative recorded. The entire loop --- generation, adjudication, and provenance --- ran inside an agentic
-scientific workbench in which an independent critic model enforced calibrated language on the platform's own
-output, and its analyses reproduced exactly when the workbench was driven programmatically --- the
-pipeline's funnel and ranking digit-for-digit, and the sensitivity panel byte-for-byte. Applied to the
-CD4$^{+}$ resource, the approach culled 22{,}039 machine-generated hypotheses to a small set of
-receipt-backed survivors; a verdict ledger demonstrates that the referee discriminates, and negative
-controls locate that discrimination honestly. The worked example --- NAB2 $\rightarrow$ Th1/Th2 polarization
-$\rightarrow$ atopic eczema --- is a literature-novel regulatory nomination whose sharpest artifactual
-confounder, a CRISPRi \emph{cis}-effect on the adjacent \emph{STAT6}, we falsify against the study authors'
-own genome-wide data, and which an independent cross-model replication reproduced. The contribution is the
-method and what it found: receipt-backed adjudication of machine-generated hypotheses, and the calibrated
-\emph{no} that makes such adjudication worth trusting.
+ranking by literature-rarity tracks obscurity as readily as importance.
 
-\vspace{4pt}\noindent\textbf{Keywords:} literature-based discovery; hypothesis adjudication; Perturb-seq;
-CRISPRi screens; T-cell polarization; agentic language models; scientific reproducibility; falsification.
+\vspace{2pt}\noindent
+We present \textbf{Wayfinder}, an approach that addresses this gap by pairing LBD generation with a
+deterministic referee that evaluates each proposed \emph{gene $\rightarrow$ T-cell program $\rightarrow$
+disease} hypothesis against a held experimental substrate --- a genome-scale CRISPRi Perturb-seq resource in
+primary human CD4$^{+}$ T cells --- and returns, for each, a prioritization verdict with a receipt at every
+hop. We keep two receipt classes distinct: the knockdown, effect, and program hops are backed by
+experimental perturbation measurements, whereas the disease hop is a genetic-association nomination rather
+than a claim of experimental causality. Two diagnostics define the referee's behaviour. It is willing to
+answer a confident, receipt-backed \emph{no} --- a \emph{falsification} diagnostic --- and it distinguishes a
+\emph{refuted} hypothesis from an \emph{untested} one, an explicit \emph{abstention}: a failed knockdown is
+reported as untested, an artifact caught rather than a false negative recorded.
+
+\vspace{2pt}\noindent
+The entire loop --- generation, evidence integration, and provenance --- ran inside an agentic scientific
+workbench in which an independent critic model enforced calibrated \emph{language} on the platform's own
+output, and its analyses reproduced when the workbench was driven programmatically --- the pipeline's funnel
+and ranking digit-for-digit, and the sensitivity panel byte-for-byte (replicable in principle, subject to
+the platform's user interface). Applied to the CD4$^{+}$ resource, the approach culled 22{,}039
+machine-generated hypotheses to a small set of receipt-backed survivors; a verdict ledger demonstrates that
+the referee discriminates, and negative controls locate that discrimination honestly --- including the
+finding that the disease hop's stringency is inherited from the substrate rather than supplied by the
+referee. The worked example --- NAB2 $\rightarrow$ Th1/Th2 polarization $\rightarrow$ atopic eczema --- is a
+literature-novel regulatory nomination whose sharpest artifactual confounder, a CRISPRi \emph{cis}-effect on
+the adjacent \emph{STAT6}, we falsify against the study authors' own genome-wide data, and which an
+independent cross-model replication reproduced. The contribution is the method and what it found:
+\textbf{receipt-backed prioritization of machine-generated hypotheses, with explicit abstention and
+falsification diagnostics} --- not a demonstration of predictive correctness.
+
+\vspace{4pt}\noindent\textbf{Keywords:} literature-based discovery; hypothesis prioritization; Perturb-seq;
+CRISPRi screens; T-cell polarization; agentic language models; falsification; abstention.
 \end{abstract}
 
 \section*{1. Introduction}\input{sections/01_introduction}
