@@ -5,6 +5,19 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+> **READ-FIRST:** `docs/CLAIMS_EVIDENCE_LEDGER.md` — the canonical living index (claim → status → evidence →
+> source → critique). Any claim audit/review/revision reconciles against BOTH literature AND the experiments
+> it indexes. Anti-amnesia protocol: `memory/NEXT_SESSION.md`.
+
+**2026-07-12 (full-close) — CONTRIBUTION AUDIT + CLAIMS↔EXPERIMENTS RECONCILIATION + TRACEABILITY SPINE.**
+A 13-agent mixed-model (Claude+Codex) literature novelty audit (`docs/reviews/contribution-novelty-audit_2026-07-12/`,
+`VERDICT.md`) then a claims↔already-run-CS-experiments reconciliation (`docs/claims-vs-experiments_2026-07-12/`,
+`RECONCILIATION.md` + 6 recon passes). **Verdict:** method is novel-but-NARROW **and UNEVALUATED** (no
+precision/recall/baseline — the publish gate, gap G1); biology is stronger than the lit-audit implied — the
+STAT6 "mistaken-identity" attack RETRACTED (2 of 3 confounder channels experimentally CLOSED: B3 cis, B4
+cluster; only 12q13 disease-label B5 open); 9 honesty fixes catalogued. Built the canonical
+**`docs/CLAIMS_EVIDENCE_LEDGER.md`** + `NEW_EXPERIMENTS.md` (G1–G3) + anti-amnesia protocol so audits never
+again check literature-only. Committed `e626b4c`→`bba1e18`+. **Next = G1 held-out-eval de-risk spike.** See `memory/NEXT_SESSION.md`.
 **2026-07-11 (OVERNIGHT autonomous, full-close) — MANUSCRIPT SUBMISSION-READY: 4 FIGURES + RELATED-WORK +
 EVIDENCE-STRENGTHENING + 5-REVIEWER HARDENING; 32pp, 0 ERRORS.** Autonomous overnight run (operator asleep).
 Built **4 deterministic figures** (architecture / funnel+ledger / diagnostics / NAB2 hero chain) from committed

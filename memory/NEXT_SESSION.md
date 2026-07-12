@@ -1,62 +1,58 @@
 # NEXT_SESSION — async handoff (canonical; written/read by session-closer & session-start)
 
+## 🧭 READ-FIRST (anti-amnesia — do not skip)
+Before ANY claim audit, review, referee-response, revision, or new experiment, read
+**`docs/CLAIMS_EVIDENCE_LEDGER.md`** — the single living index of claim → status → evidence artifact →
+source → critique. **Rule:** reconcile every claim against BOTH the literature AND the experiment corpus it
+indexes; literature tells you if a claim is *novel*, the experiments tell you if it's *supported*. (This
+protocol exists because a 2026-07-12 literature-only audit forgot the CS confounder experiments and
+over-generalized the STAT6 critique. Don't repeat it.)
+
 ## 🚀 SUBMISSION FIRE-READY — still governs (unchanged)
 The Wayfinder hackathon submission remains BUILT + staged. On operator **"scrub and flip" / "we're ready"**:
 run `SUBMIT_CHECKLIST.md` (gitignored, repo root) steps 1–5 → scrub `wijesingheds` paths (LAST) · add video
 link · leak grep · commit · `gh repo edit dayanjan/wayfinder --visibility public` → hand back the public URL.
-Deadline: official EOD ET **Mon 2026-07-13**. See memory `submission-fire-ready`. Independent of the
-manuscript thread below.
+Deadline: official EOD ET **Mon 2026-07-13**. Independent of the manuscript thread below.
 
 ---
 
-## Next session priorities — written 2026-07-12 (manuscript polish continued; operator reading main.pdf)
+## Next session priorities — written 2026-07-12 (contribution audit + claims↔experiments reconciliation done)
 
-**Current state**: MANUSCRIPT thread — **submission-ready draft COMPLETE, review-hardened, and polished**
-(full-close; commits `62bb929` → `759a4fd`, all pushed). The manuscript has **4 figures** (padded
-boxes), a **related-work §2.4**, an **evidence-strengthening §5.3b**, a **corrected NAB2/STAT6 genomics**,
-**first-line paragraph indents** (run-in bold headings kept flush), and an **Acknowledgements + Data/code
-availability** section (Cerebral Valley hackathon; Marson lab dataset; Claude Science; Anthropic Claude Max +
-API credits). Every P0/P1 from a **5-reviewer pass (4 Claude + Codex) + a final Codex debate** is applied.
-Compiles at **32 pp, 0 errors, 0 undefined citations, 0 bibtex warnings**. Codex verdict: *"submission-defensible
-on its own terms."* The plausibility2026 byline is now filled (Yuan et al.) and the frozen markdown's stale
-genomics is synced. **Session 2026-07-12** then polished the figures (box padding, then a full whole-figure collision audit fixing the title/box, arrow/label, and panel-D median overlaps), made the abstract and every first-paragraph-after-heading indent (`indentfirst`), renamed the self-praising 'honest funnel' → 'the funnel' (caveats box 'Caveats'), thinned the repeated 'honest/honestly' prose (kept 2 earned uses), and aligned all STAT6-cis 'falsified' wording to 'tested / ruled out at the expression level'. Fresh clean rebuild: 32 pp, 0 errors, 0 undefined citations.
+**Current state**: A **13-agent mixed-model literature novelty audit** (`docs/reviews/contribution-novelty-audit_2026-07-12/`,
+capped by `VERDICT.md`) + a **claims↔already-run-CS-experiments reconciliation**
+(`docs/claims-vs-experiments_2026-07-12/`, capped by `RECONCILIATION.md`) are COMPLETE, committed, pushed
+(`e626b4c`→`bba1e18`+ledger). The findings are folded into the canonical **`docs/CLAIMS_EVIDENCE_LEDGER.md`**.
 
-**THE DELIVERABLE TO READ**: `docs/manuscript/latex/main.pdf` (32 pp, freshly compiled). Open it directly.
+**Verdict (re-balanced by the reconciliation):**
+- **Method** = novel-but-NARROW **and UNEVALUATED** (no precision/recall/baseline exists — confirmed by the
+  experiments themselves). This is the one thing blocking an evaluated-methods publication → gap **G1**.
+- **Biology** = stronger/better-defended than the literature audit alone implied. The STAT6 "mistaken identity"
+  attack was RETRACTED: of 3 confounder channels the experiments CLOSE two (expression cis-artifact B3 ·
+  cluster-membership B4); only the 12q13 GWAS-disease-label (B5) is open, and the paper foregrounds it → gap **G2**.
+- **Honesty** = largely accurate, with **9 specific fixes** to apply (in `NEW_EXPERIMENTS.md`; e.g. "byte-for-byte"
+  is literally false, 395-vs-406 funnel discrepancy, "flagged & removed" half-true, a self-caught wrong-cluster bug).
 
-**Next action** — CONTINUE the manuscript per the operator's read-through of `main.pdf` (operator is reading it now and will direct the next edits; discipline reminder: on any figure change, re-scan the WHOLE figure for overlaps, not just the changed element). Absent specific direction, the standing options:
-1. **Frontiers formatting for submission** [CLAUDE/HYBRID]: swap `natbib` numbered-super → Frontiers
-   author-year style + a Frontiers CSL for the DOCX path; apply the Frontiers article template; fill the one
-   pending byline (`plausibility2026` = arXiv:2606.01042 — bib placeholder "Byline pending"). (README "Still
-   to do".)
-2. **Execute an offline evidence-strengthener** the paper now promises in §5.3b [CLAUDE/CODEX]: the
-   highest-value is a **time-sliced held-out eval** (freeze literature at a cutoff, measure recovery); also a
-   **12q13 colocalization** attempt for NAB2 vs STAT6 (coloc/SMR) — both are real analyses, likely
-   post-hackathon.
-3. **Return to the hackathon submission** — say **"scrub and flip"** (governed above).
+**Next action** — `docs/claims-vs-experiments_2026-07-12/NEW_EXPERIMENTS.md` is the plan. In order:
+1. **G1 de-risk spike** [CLAUDE — needs live network]: confirm Europe PMC as-of-T date-windowing behaves + size
+   the post-T positive class at T∈{2016,2018,2020}. Decides held-out-eval (Option A) vs promote-hard_negatives
+   (Option B). Scope: `docs/plans/heldout-eval-scope_2026-07-12.md`. Output → `docs/spikes/heldout-eval-feasibility_<date>.md`.
+2. **Apply the 9 manuscript honesty fixes** [CLAUDE] — cheap, independent, record-hygiene.
+3. **G3 frozen EGR-distinctness receipt** [CLAUDE — small]: re-run `nab2_egr_mechanism_check.py`, commit its output JSON.
+4. **G2 eQTL-existence spike** [CODEX-SPIKE→CLAUDE]: does a NAB2 CD4⁺ cis-eQTL exist? (if not, B5 stays honestly-open).
+5. Build the chosen **G1 eval** [CODEX-RESCUE→CLAUDE] → the method becomes *measured* → re-assess publishability.
 
-**Prerequisites**: none blocking. `main.pdf` is current. If recompiling: `latexmk` is BROKEN on this machine
-(MiKTeX lost its `perl` engine) — compile with the 4-pass `pdflatex; bibtex main; pdflatex; pdflatex`
-sequence instead (documented in `docs/manuscript/latex/README.md`).
+**Prerequisites**: none blocking. Live literature tool works (`src.arbiter.lit.search.search_all`, .env keys).
+`main.pdf` still compiles (32pp) via the 4-pass `pdflatex; bibtex main; pdflatex; pdflatex` (latexmk broken).
 
-**Open questions** (all TODOs from the prior close are now done):
-- **Frontiers submission formatting** remains (the real pre-submission step, not "small"): swap `natbib`
-  numbered-super → Frontiers author-year + a Frontiers CSL for the DOCX path; apply the Frontiers article/Word
-  template. Deferred to actual submission.
-- Optional polish NOT applied (low-value, reviewer-noted; safe to skip): trim the CS `$6.41`/scriptability
-  detail to supplementary (§4.5); a fully-worked second survivor (EGR2) — handled by the n=1 limitation;
-  one-line PerTurboAgent cite; `12q13`→`12q13.3` once.
+**Do not touch**: submission artifacts / demo video (fire-ready; "scrub and flip" governs). Do NOT re-run
+`build_tex.py` (overwrites hand-edited .tex). The dated audit/reconciliation records are IMMUTABLE — cite,
+don't edit; update `docs/CLAIMS_EVIDENCE_LEDGER.md` for status changes.
 
-**Do not touch**: the submission artifacts / demo video (fire-ready; "scrub and flip" governs). Do NOT re-run
-`docs/manuscript/latex/build_tex.py` (overwrites hand-edited `.tex`). Figures regenerate deterministically via
-`docs/manuscript/latex/figures/make_figures.py` from the committed analysis JSON.
+**Context to preload** (≤10): `docs/CLAIMS_EVIDENCE_LEDGER.md` (READ FIRST — the living index);
+`docs/claims-vs-experiments_2026-07-12/RECONCILIATION.md`; `docs/claims-vs-experiments_2026-07-12/NEW_EXPERIMENTS.md`;
+`docs/reviews/contribution-novelty-audit_2026-07-12/VERDICT.md`; `docs/plans/heldout-eval-scope_2026-07-12.md`;
+`docs/manuscript/latex/main.pdf`; `memory/NEXT_SESSION.md`.
 
-**Context to preload** (≤10): `docs/manuscript/latex/main.pdf` (the deliverable);
-`docs/reviews/agent-review-and-resolution_manuscript_2026-07-11.md` (what the 5 reviewers found + how each was
-fixed); `docs/reviews/codex-debate_manuscript-final_2026-07-11.md` (final verdict);
-`docs/manuscript/latex/sections/04_results.tex`; `docs/manuscript/latex/sections/02_background.tex` (§2.4);
-`docs/manuscript/latex/sections/05_discussion.tex` (§5.3b); `docs/manuscript/latex/README.md`;
-`references/references.bib`; `docs/manuscript/latex/figures/make_figures.py`; `memory/NEXT_SESSION.md`.
+**Estimated budget**: G1 spike ≈ ½ session; fixes ≈ ½ session; G1 build ≈ 1 session; G2 ≈ 1 session.
 
-**Estimated budget**: Frontiers formatting = ½–1 session. A held-out eval or colocalization = 1 session each.
-
-## Mirror of this handoff is appended to memory/sessions/2026-07-11.md by session-closer.
+## Mirror of this handoff is appended to memory/sessions/2026-07-12.md by session-closer.

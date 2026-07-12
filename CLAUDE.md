@@ -2,6 +2,18 @@
 
 Hackathon build (*Built with Claude: Life Sciences*, **Researcher track — a researcher who also builds**). A **hypothesis referee**: Claude agents adjudicate a mechanistic T-cell claim and return a verdict with a **receipt for every hop**. The framing: a researcher who builds their own instruments — the referee, the LBD question-engine, and the Claude-Science automation are tools built *to ask and answer the research questions*. The deliverable is a **reproducible T-cell finding + how Claude Science reached it**; the tooling is the method/vehicle, and the builder-craft is evidence of a scientist who can build to get the science done. Full plan: `docs/plan.md` (v7). This file is the lean map.
 
+## Hackathon + what we're doing now
+- **Event:** *Built with Claude: Life Sciences* hackathon (organized by **Cerebral Valley**), **Researcher track** ("a researcher who also builds").
+- **Timeline:** started **July 7, 2026**; deadline **July 13, 2026, 9:00 PM ET** (see Hard constraints). Solo builder; async/interruptible.
+- **Deliverable:** a reproducible T-cell finding (NAB2 → Th1/Th2 → atopic eczema, receipt-backed) + how Claude Science reached it — the referee, the LBD question-engine, and the headless Claude-Science automation are instruments built to get the science done.
+- **Submission status: BUILT + FIRE-READY.** Repo `dayanjan/wayfinder` (private); say **"scrub and flip"** to run `SUBMIT_CHECKLIST.md` and flip it public. Demo video + 3-screen Streamlit app = the MVP.
+- **Current post-hackathon thread:** a **manuscript for FRMA** (`docs/manuscript/latex/main.pdf`) hardened by a 13-agent **contribution/novelty audit** and a **claims↔experiments reconciliation** (below). Live state: `WORK_PROGRESS.md` + `memory/NEXT_SESSION.md`.
+
+## Claims ↔ evidence traceability (READ-FIRST for any claim work)
+`docs/CLAIMS_EVIDENCE_LEDGER.md` is the canonical **living index**: every manuscript claim (M1–M10, B1–B7, R1–R5) → status → the experiment artifact that supports/refutes it → primary source (S1–S11) → review-panel critique + resolution.
+- **Anti-amnesia protocol (mandatory):** any claim audit / review / referee-response / revision reconciles against **BOTH** the literature **AND** the experiment corpus the ledger indexes — literature tells you if a claim is *novel*, the experiments tell you if it is *supported*; never one alone. (This exists because a 2026-07-12 literature-only audit forgot the Claude-Science confounder experiments and over-generalized the NAB2/STAT6 critique — 2 of 3 confounder channels were already experimentally closed.)
+- Dated records under `docs/reviews/contribution-novelty-audit_2026-07-12/` and `docs/claims-vs-experiments_2026-07-12/` are **immutable evidence** (cite, don't edit); the ledger is the living index you update. Open gaps → `docs/claims-vs-experiments_2026-07-12/NEW_EXPERIMENTS.md` (G1 held-out eval = the publish gate).
+
 ## The thesis (don't lose this)
 The edge is the **confident, receipt-backed NO** — refuting a plausible claim with a real experimental receipt, and catching artifacts (failed knockdown -> *untested*, not *negative*). Falsification, not confirmation, is the moat. The knockdown-QC gate is a **hero feature**, not a footnote.
 

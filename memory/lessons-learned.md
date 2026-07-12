@@ -218,3 +218,29 @@ round-2 ACCEPTANCES existed only in the debate text — Codex re-opened the runn
 ARTIFACTS carry the accepted changes; APPLY them mid-debate (or before the final round) and let the final
 round verify against the files, not the prose. This is what turned an abstract "good critique" into shipped,
 verified hardening. Pairs with doctrine §15.2 (a claim isn't done until the artifact/executed state shows it).
+
+## 2026-07-12 — Audits must reconcile against EXPERIMENTS, not just literature (+ a traceability spine)
+
+### The circular-amnesia failure that motivated this
+- A 13-agent literature-novelty audit (`docs/reviews/contribution-novelty-audit_2026-07-12/`) checked each
+  claim against the LITERATURE only. It concluded the NAB2→eczema flagship was "probably a STAT6 12q13
+  LD-passenger" — **forgetting that CS experiments had already tested exactly this** (`stage3_cis.json`:
+  STAT6 unmoved under NAB2-KD; the cluster-membership rejection). A claims↔experiments reconciliation
+  (`docs/claims-vs-experiments_2026-07-12/`) then showed the confounder splits into 3 channels, 2 CLOSED by
+  experiment, only the disease-label open. The audit over-generalized because it never opened the experiment corpus.
+- **Root cause:** claims, experiments, critiques, and sources lived in ~40 scattered files with no single index.
+
+### The fix (now in place — use it)
+- **`docs/CLAIMS_EVIDENCE_LEDGER.md`** is the canonical LIVING index: claim → status → evidence artifact →
+  source(S1–S11) → critique-resolution. Dated audit/reconciliation folders are the IMMUTABLE evidence (cite,
+  don't edit); the ledger is the thing you update.
+- **Protocol:** any claim audit/review/referee-response reconciles against BOTH literature AND the indexed
+  experiments. Literature = is it novel; experiments = is it supported. Never one alone.
+- Wired into the lifecycle: `memory/NEXT_SESSION.md` READ-FIRST block + preload list; session-closer checks
+  the ledger is current at close.
+
+### General principle
+- When primary experimental evidence exists in-repo, reading the manuscript's SUMMARY of it is not enough —
+  open the JSON/receipt/code. A recon-agent-per-experiment-cluster fan-out (6 agents, 2026-07-12) reading
+  primary artifacts caught what the literature panel missed AND surfaced 9 honesty flags (e.g. "byte-for-byte"
+  is literally false; a self-caught wrong-cluster bug) invisible from summaries.
