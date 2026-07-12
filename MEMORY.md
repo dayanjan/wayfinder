@@ -9,6 +9,18 @@ This file is the fast scan: where we are, what's decided, what happened lately.
 > source → critique). Any claim audit/review/revision reconciles against BOTH literature AND the experiments
 > it indexes. Anti-amnesia protocol: `memory/NEXT_SESSION.md`.
 
+**2026-07-12 (full-close, autonomous) — G1 HELD-OUT EVAL BUILT + RUN + INTEGRATED → publish-gate FATAL CLOSED.**
+Autonomous day-session (operator out). Built the time-sliced held-out evaluation (the manuscript's publish gate):
+recon resolved the frame = full A×C=47,220 novel-at-2016; Codex delegation blocked (Windows 0.144.1 sandbox bug +
+`danger-full-access` classifier-denied) → **direct-wrote** the harness `src/arbiter/eval/` + `cooccur_count_asof`
+(~950 LOC, 11/11 tests); read-only `codex review` still worked and caught the load-bearing bootstrap bug (fixed).
+Enumeration local (0 failures): 22,437 novel-at-2016 pairs, 5,570 positives (24.8%). **Result: NULL at the
+pre-registered primary** — C_broad +0.20 [−0.20,+0.65], C_mech −0.15 [−0.35,+0.30], joint `broad_null` (robust
+k=3/k=5/pure-disjoint); disease-hop-only matches/beats Wayfinder at p@20 (measured face of §4.1b). Integrated as
+**§4.7 + Fig 5** (reported straight), §5.3b step-1 done, ledger updated; manuscript compiles clean **34 pp**. The
+method is now *measured* — closes the audit's central FATAL. Commits `8858d67`→`a3f3141`, pushed. Audit trail:
+`docs/g1-build-log_2026-07-12.md`. **Next = 9 manuscript honesty fixes / contribution reframe / optional CS
+metric-verify.** See `memory/NEXT_SESSION.md`.
 **2026-07-12 (full-close) — CONTRIBUTION AUDIT + CLAIMS↔EXPERIMENTS RECONCILIATION + TRACEABILITY SPINE.**
 A 13-agent mixed-model (Claude+Codex) literature novelty audit (`docs/reviews/contribution-novelty-audit_2026-07-12/`,
 `VERDICT.md`) then a claims↔already-run-CS-experiments reconciliation (`docs/claims-vs-experiments_2026-07-12/`,
@@ -177,5 +189,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-11 (overnight) | **Manuscript: figures + related-work + review-hardening** | 4 deterministic figures wired (23pp→32pp, 0 err); §2.4 related-work + §5.3b strengthening; **genomics fix** (NAB2–STAT6 convergent ~43kb, not 1.9kb; Ensembl-verified); 5-reviewer pass (4 Claude + Codex) + final Codex debate → all P0/P1 fixed; ~28 DOI-verified refs; deliverable `main.pdf`; `62bb929` |
 
 | 2026-07-12 (PM) | **Contribution audit + claims↔experiments reconciliation + traceability + G1 de-risk** | 13-agent mixed-model novelty audit → do-not-publish-as-is (method unevaluated; uncited Popper/VERITAS); reconciliation RESCUED the biology (STAT6 mistaken-identity retracted, 2/3 channels closed) + CONFIRMED the eval gap + 9 honesty fixes; built anti-amnesia `CLAIMS_EVIDENCE_LEDGER` + `HACKATHON.md`; **G1 held-out eval de-risked (GO Option A) + plan v3 codex-debate-converged + CS health-check PASSED**. `e626b4c`→`4952c9a`. Next = build G1 |
+| 2026-07-12 (autonomous) | **G1 held-out eval BUILT + RUN + INTEGRATED (publish gate)** | Codex sandbox-blocked → direct-wrote harness `src/arbiter/eval/` (~950 LOC, 11/11 tests); read-only `codex review` caught the load-bearing bootstrap bug (fixed); enumeration local (0 fail): 22,437 frame / 5,570 pos (24.8%). **Result NULL at primary** (C_broad +0.20[−0.20,+0.65]; C_mech −0.15[−0.35,+0.30]; `broad_null`, robust k=3/5/pure-disjoint). Integrated §4.7 + Fig 5 (reported straight), §5.3b, ledger; 34pp clean. Closes audit FATAL (method now MEASURED). `8858d67`→`a3f3141` |
 
-_Last updated: 2026-07-12 (PM: contribution audit → claims↔experiments reconciliation → anti-amnesia traceability ledger → G1 held-out-eval de-risk + 3-round codex-debate + CS health-check; full-close; next = build G1)_
+_Last updated: 2026-07-12 (autonomous G1 build: harness direct-written + codex-reviewed → enumeration → NULL at primary → integrated §4.7 + Fig 5, reported straight → 34pp; full-close; next = 9 honesty fixes / contribution reframe / optional CS verify)_

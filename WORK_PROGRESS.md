@@ -9,7 +9,15 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 - **Working target: submit by EOD Friday 2026-07-10** (operator out of town Sat–Mon; official deadline still 2026-07-13). **Submission pivoted to a CS-native 3-min video**; tonight banked all design + de-risk + a 2-round codex-debate hardening (spine held). Friday = pre-capture 4 required frames (blockers) → assemble → gate → submit. Streamlit app + prior demo video = fallback MVP. Assets: `docs/demo-video-pack/cs/` + `assets/`.
 - **Active thread:** **MANUSCRIPT** for FRMA — **revision MVP underway; manuscript now 23pp/0-errors.** DONE this session: **reframe** (title → "Receipt-backed prioritization…"; top-line = prioritization + abstention + falsification; "calibrated"=language-only; CS→replicable-in-principle), **12q13 foregrounding** (§4.4b, 3 mechanisms separated), **C10** gate grid (`gate_grid.py`+§4.1c), **C2** hard negatives (`hard_negatives.py`+§4.2b, rebuts B1) — all run LOCALLY (repo code+cache, §19), cache-free. **Next = the 4 figures** (Fig 1/2 schematics HTML/SVG; Fig 3 NAB2 chain + Fig 4 sensitivity/permutation panel — render locally from committed JSON, or CS kernel). Remaining MVP strengtheners: C6 refinement (low value — Control 2 covers it), C3c positive control, C3a temporal. Submission stays fire-ready in parallel.
 - **Active thread (2026-07-12 PM):** manuscript-strengthening — 13-agent contribution/novelty audit + claims↔experiments reconciliation + **anti-amnesia traceability ledger** (`docs/CLAIMS_EVIDENCE_LEDGER.md`) + `docs/HACKATHON.md`. **G1 held-out eval (publish gate) FULLY DE-RISKED + spec-frozen** (plan v3, codex-debate converged/repo-verified) **+ CS-driver health-check PASSED** (drivable on port 8000). **Next = BUILD G1** (codex-rescue against v3, run in CS). Verdict: do-not-publish-as-is until G1 measures the method; biology real+novel (NAB2→Th2), eczema an honestly-open 12q13 confounder.
-- **Last updated:** 2026-07-12 (PM: audit → reconciliation → traceability → G1 de-risk + codex-debate + CS health-check; full-close)
+- **Active thread (2026-07-12, autonomous):** **G1 held-out eval (publish gate) BUILT + RUN + INTEGRATED.**
+  Codex sandbox-blocked → direct-wrote harness `src/arbiter/eval/` (~950 LOC, 11/11 tests; read-only codex review
+  caught + fixed the load-bearing bootstrap bug). Enumeration local (0 fail): 22,437 novel-at-2016 pairs, 5,570
+  positives (24.8%). **Result = NULL at the pre-registered primary** (C_broad +0.20 [−0.20,+0.65]; C_mech −0.15
+  [−0.35,+0.30]; `broad_null`, robust k=3/5/pure-disjoint). Reported STRAIGHT in new **§4.7 + Fig 5**; §5.3b step-1
+  done; ledger updated; manuscript **34 pp, 0 errors**. **Closes the audit's central FATAL — the method is now
+  MEASURED.** Audit trail `docs/g1-build-log_2026-07-12.md`. **Next = 9 honesty fixes / contribution reframe /
+  optional CS metric-verify.**
+- **Last updated:** 2026-07-12 (autonomous: G1 built → NULL at primary → integrated §4.7 + Fig 5, reported straight → 34pp; full-close)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/wayfinder` (private; renamed from pyzobot-arbiter, history preserved; flip public via `SUBMIT_CHECKLIST.md` — say "scrub and flip")
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -30,6 +38,25 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-12 (autonomous) — Session close (full-close): G1 held-out eval BUILT + RUN + INTEGRATED → publish-gate FATAL closed
+Autonomous day-session (operator out; "do as much as possible, brainstorm Claude↔Codex, get CS to do the planned
+work, record everything auditably; stay on mission — a proper manuscript"). **Built, ran, integrated G1** (the
+time-sliced held-out evaluation = the manuscript's publish gate). Recon resolved frame = full A×C=47,220
+novel-at-2016 (Wayfinder ranks the whole frame; gate = ranking signal). **Codex delegation blocked** (Windows
+0.144.1 sandbox bug `split writable root sets`; `danger-full-access` classifier-denied; config fix operator-gated
+w/ operator out) → **direct-wrote** the harness `src/arbiter/eval/{fetch,enumerate_frame,rankers,metrics,run_eval}`
++ `sources.cooccur_count_asof` (~950 LOC, 11/11 unit tests). **Read-only `codex review` works despite the
+write-sandbox bug** — caught the load-bearing bug (two-way cluster bootstrap resampling per-pair → too-narrow CIs)
++ 2 more; all fixed before any result. Enumeration local (cached/concurrent, 0 failures): 22,437 novel-at-2016
+pairs, 5,570 positives (24.8%). **Metrics → NULL at the pre-registered primary**: C_broad (Wayfinder−lit-rarity)
++0.20 [−0.20,+0.65]; C_mech (Wayfinder−disease-hop-only) −0.15 [−0.35,+0.30]; joint `broad_null`, robust across
+k=3/k=5/pure-disjoint. Wayfinder best on secondary p@5 (0.80) + MAP (0.287) but NOT the primary; disease-hop-only
+matches/beats it at p@20 — the measured face of §4.1b's substrate-inherited stringency. **Integrated** as new
+**§4.7 + Fig 5** (reported STRAIGHT), §4 intro six→seven, §5.3b step-1 future→done, ledger central-item updated;
+manuscript compiles clean **32→34 pp, 0 errors**. Closes the audit's central FATAL — the method is now *measured*.
+Commits `8858d67`→`a3f3141`, all pushed. Audit trail: `docs/g1-build-log_2026-07-12.md`. CS metric-verification
+deferred (limited marginal value for a null already backed by committed manifest + codex code-review + tests).
+
 ### 2026-07-12 (PM) — Session close (full-close): contribution audit + claims-vs-experiments reconciliation + traceability + G1 de-risk/debate/CS-health
 A 13-agent mixed-model (Claude+Codex) **contribution/novelty audit** (docs/reviews/contribution-novelty-audit_2026-07-12/, VERDICT.md) → **do-not-publish as-is**: method novel-but-narrow AND **unevaluated** (the FATAL); uncited evaluated near-neighbors Popper(2502.09858)/VERITAS(2604.12144). Operator flagged the lit-audit never opened the CS experiments → **claims↔experiments reconciliation** (docs/claims-vs-experiments_2026-07-12/, RECONCILIATION.md + 6 primary-artifact recon): experiments RESCUE the biology (STAT6 mistaken-identity RETRACTED — 2 of 3 confounder channels experimentally CLOSED; only 12q13 disease-label open), CONFIRM the eval gap, surface 9 honesty fixes. Built the **anti-amnesia CLAIMS_EVIDENCE_LEDGER** + protocol (CLAUDE.md/NEXT_SESSION/MEMORY/lessons/auto-memory) + **HACKATHON.md**. **G1 held-out eval de-risked** (as-of-T windowing verified; ~1,469 positives → GO Option A), **plan v3 codex-debate-hardened** (3-round repo-read, converged, no sanding, 13→0), **CS-driver health-check PASSED** (port 8000). Commits e626b4c→4952c9a, pushed. **Next = build G1.**
 
