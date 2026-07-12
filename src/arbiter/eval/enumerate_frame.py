@@ -67,13 +67,17 @@ def enumerate_frame(t: int = 2016, k_establish: int = 5, novel_max: int = 1,
     now_counts = fetch.count_many(list(now_q.values()), workers=workers, max_rps=max_rps,
                                   on_progress=lambda *a: _progress("now", *a))
     now = {gd: now_counts.get(q) for gd, q in now_q.items()}
-    positives = [gd for gd in frame if now[gd] is not None and now[gd] >= k_establish]
-    current_novel = [gd for gd in frame if now[gd] is not None and now[gd] <= novel_max]
-    jaccard = (len(current_novel) / len(frame)) if frame else 0.0
+    # A failed now-fetch is UNKNOWN, not negative: drop it from the labelled frame (record the count)
+    # rather than silently label it a negative (would bias the positives). Usually empty (fail=0).
+    labeled_frame = [gd for gd in frame if now[gd] is not None]
+    excluded_now_fail = [gd for gd in frame if now[gd] is None]
+    positives = [gd for gd in labeled_frame if now[gd] >= k_establish]
+    current_novel = [gd for gd in labeled_frame if now[gd] <= novel_max]
+    jaccard = (len(current_novel) / len(labeled_frame)) if labeled_frame else 0.0
 
     # 3) as-of-T ab (per gene) + bc (per disease) for the Wayfinder ranker score.
-    frame_genes = sorted({g for g, _ in frame})
-    frame_dis = sorted({d for _, d in frame})
+    frame_genes = sorted({g for g, _ in labeled_frame})
+    frame_dis = sorted({d for _, d in labeled_frame})
     ab_q = {g: S.cooccur_query(g, program_terms("AB"), t) for g in frame_genes}
     bc_q = {d: S.cooccur_query(program_terms("BC"), d, t) for d in frame_dis}
     ab_counts = fetch.count_many(list(ab_q.values()), workers=workers, max_rps=max_rps,
@@ -86,10 +90,12 @@ def enumerate_frame(t: int = 2016, k_establish: int = 5, novel_max: int = 1,
     n_failures = (len(asof_counts.failures) + len(now_counts.failures)
                   + len(ab_counts.failures) + len(bc_counts.failures))
 
+    frame_set = set(labeled_frame)   # build membership sets ONCE, not per-row (P2 perf)
+    pos_set = set(positives)
     rows = [{"gene": g, "disease": d, "ac_lit_asof": asof[(g, d)],
              "ac_lit_now": now.get((g, d)),
-             "in_frame": (g, d) in set(frame),
-             "is_positive": (g, d) in set(positives)}
+             "in_frame": (g, d) in frame_set,
+             "is_positive": (g, d) in pos_set}
             for (g, d) in pairs]
     rows.sort(key=lambda r: (r["gene"], r["disease"]))
     sha = hashlib.sha256(json.dumps(rows, sort_keys=True).encode("utf-8")).hexdigest()
@@ -101,7 +107,9 @@ def enumerate_frame(t: int = 2016, k_establish: int = 5, novel_max: int = 1,
             "base_AxC": BASE_AXC, "scope": "subset" if subset else "full",
             "subset_n": subset, "seed": seed, "retrieval_date_utc": retrieval_date,
             "europepmc_query_template": '(("<gene>") AND ("<disease>")) [AND (FIRST_PDATE:[1900-01-01 TO T-12-31])]',
-            "frame_size": len(frame), "positive_count": len(positives),
+            "frame_size": len(labeled_frame), "positive_count": len(positives),
+            "novel_at_T_asof_count": len(frame),
+            "excluded_now_fetch_fail": len(excluded_now_fail),
             "current_novel_frame_size": len(current_novel),
             "jaccard_novelAtT_vs_currentNovel": round(jaccard, 4),
             "n_failures": n_failures, "sha256_of_rows": sha,

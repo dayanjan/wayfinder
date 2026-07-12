@@ -57,13 +57,21 @@ def _prec_resampled(order, positives, pair_meta, gcount, dcount, k):
 
 def clustered_bootstrap_diff(order_a, order_b, positives, pair_meta, frame_genes, frame_diseases,
                              k=PRIMARY_K, n_boot=2000, seed=20260712):
-    """Paired prec@k difference (A-B) with a gene-and-disease two-way-clustered bootstrap 95% CI."""
+    """Paired prec@k difference (A-B) with a gene-and-disease two-way-clustered bootstrap 95% CI.
+
+    Two-way cluster bootstrap: resample the UNIQUE gene clusters and UNIQUE disease clusters (each drawn
+    n_clusters times with replacement), NOT the per-pair rows -- so a pair's multiplicity is
+    count(gene)*count(disease). Dedupe defensively here so a caller passing per-pair lists still gets a
+    correct cluster bootstrap (else clusters are weighted by pair-count and the CI is spuriously narrow).
+    """
+    genes = sorted(set(frame_genes))
+    diseases = sorted(set(frame_diseases))
     rng = random.Random(seed)
-    ng, nd = len(frame_genes), len(frame_diseases)
+    ng, nd = len(genes), len(diseases)
     diffs = []
     for _ in range(n_boot):
-        gc = Counter(rng.choices(frame_genes, k=ng))
-        dc = Counter(rng.choices(frame_diseases, k=nd))
+        gc = Counter(rng.choices(genes, k=ng))
+        dc = Counter(rng.choices(diseases, k=nd))
         pa = _prec_resampled(order_a, positives, pair_meta, gc, dc, k)
         pb = _prec_resampled(order_b, positives, pair_meta, gc, dc, k)
         diffs.append(pa - pb)

@@ -126,6 +126,22 @@ class TestMetrics(unittest.TestCase):
         self.assertEqual((r["ci_lo"], r["ci_hi"]), (0.0, 0.0))
         self.assertFalse(r["positive"])
 
+    def test_bootstrap_dedups_perpair_lists_and_shows_separation(self):
+        # 4 genes x 3 diseases; positives = the d0 column. order_a ranks positives first, b last.
+        frame = [f"g{i}||d{j}" for i in range(4) for j in range(3)]
+        pos = {p for p in frame if p.endswith("d0")}
+        pair_meta = {p: tuple(p.split("||")) for p in frame}
+        order_a = sorted(frame, key=lambda p: (p not in pos, p))
+        order_b = sorted(frame, key=lambda p: (p in pos, p))
+        # pass DUPLICATED per-pair lists (the bug shape) -> dedup inside must still give a cluster bootstrap
+        genes_dup = [pair_meta[p][0] for p in frame]
+        dis_dup = [pair_meta[p][1] for p in frame]
+        r = M.clustered_bootstrap_diff(order_a, order_b, pos, pair_meta, genes_dup, dis_dup,
+                                       k=4, n_boot=300)
+        self.assertEqual(r["point"], 1.0)      # all 4 positives at top of a, none in top-4 of b
+        self.assertGreater(r["ci_hi"], 0.0)
+        self.assertGreaterEqual(r["ci_lo"], 0.0)
+
     def test_joint_outcome_table(self):
         pos = {"ci_lo": 0.1, "ci_hi": 0.3}
         null = {"ci_lo": -0.1, "ci_hi": 0.2}

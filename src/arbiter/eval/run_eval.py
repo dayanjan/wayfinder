@@ -20,8 +20,9 @@ def run(manifest: dict, condition: str = "Stim8hr", n_boot: int = 2000, seed: in
     frame_rows = [r for r in manifest["rows"] if r["in_frame"]]
     pair_meta = {R.pid(r["gene"], r["disease"]): (r["gene"], r["disease"]) for r in frame_rows}
     positives = [R.pid(r["gene"], r["disease"]) for r in frame_rows if r["is_positive"]]
-    frame_genes = [r["gene"] for r in frame_rows]
-    frame_diseases = [r["disease"] for r in frame_rows]
+    # UNIQUE clusters for the two-way cluster bootstrap (not one-per-pair; see metrics.clustered_bootstrap_diff)
+    frame_genes = sorted({r["gene"] for r in frame_rows})
+    frame_diseases = sorted({r["disease"] for r in frame_rows})
 
     orders = R.build_orders(manifest, condition=condition, seed=seed)
     result = M.all_metrics(orders, positives, pair_meta, frame_genes, frame_diseases,
