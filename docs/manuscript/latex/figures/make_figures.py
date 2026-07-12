@@ -172,11 +172,13 @@ def fig2():
              fontsize=7.4, color="#333333")
     gsL.text(50, 20.5, "(+ 1 refuted-effect; 21,995 refuted for the specific disease)", ha="center",
              fontsize=7.1, color="#666666")
-    box(gsL, 4, 5, 92, 11,
-        "Honesty caveats (restated in Results): referee ALONE supports 395/47,220 pairs;\n"
-        "the novelty gate culls 395 -> 43. Within-funnel the program hop cannot fail\n"
-        "(refuted_program $\\equiv$ 0). '43 supported' is a JOINT gate$\\times$referee count.",
-        fc="#FFF7EC", ec=C_UNTESTED, fs=7.3, tc="#4A3C22", rounded=0.03)
+    box(gsL, 4, 2, 92, 16,
+        "Honesty caveats (restated in Results):\n"
+        "the referee ALONE supports 395/47,220 pairs;\n"
+        "the novelty gate culls 395 -> 43. Within the funnel\n"
+        "the program hop cannot fail (refuted_program $\\equiv$ 0),\n"
+        "and '43 supported' is a JOINT gate$\\times$referee count.",
+        fc="#FFF7EC", ec=C_UNTESTED, fs=7.0, tc="#4A3C22", rounded=0.03)
 
     gsR.text(50, 97, "Verdict ledger (spans the verdict space)", ha="center", fontsize=10.5, weight="bold")
     rows = [
