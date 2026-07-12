@@ -146,3 +146,14 @@ This is the perf move that made C10 (`gate_grid.py`) tractable and fully offline
 thing you're sweeping only filters ELIGIBILITY (not the per-item computation), precompute per-item once
 and vary the filter in a loop. Also: hop-0/1/2 referee outcomes are disease-INDEPENDENT, so ONE census
 characterizes the referee's own-edge cull rate across all diseases (used in `hard_negatives.py` Panel A).
+
+## Reconcile claims vs BOTH literature AND the in-repo experiment corpus (Noted: 2026-07-12)
+A literature-only claim audit forgets what was already tested in-repo (the NAB2/STAT6 miss). Maintain a living
+claim→evidence→source index (`docs/CLAIMS_EVIDENCE_LEDGER.md`) and reconcile every claim against both. A
+recon-agent-per-experiment-cluster fan-out reading PRIMARY artifacts (JSON/receipt/code, not manuscript summaries)
+catches what a lit panel misses and surfaces honesty flags invisible from summaries.
+
+## Repo-read codex-debate on an implementation plan = specification-completion (Noted: 2026-07-12)
+Running codex-debate `-s read-only` FROM the repo, telling Codex it MAY open referenced files to verify the plan's
+claims (§22), yields repo-VERIFIED findings (it caught an omitted `refuted_program` verdict class in referee_triple.py).
+Findings are cheap to accept → converges fast (13→0 in 3 rounds), and the hardened plan builds near one-shot.

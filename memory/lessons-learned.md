@@ -244,3 +244,16 @@ verified hardening. Pairs with doctrine §15.2 (a claim isn't done until the art
   open the JSON/receipt/code. A recon-agent-per-experiment-cluster fan-out (6 agents, 2026-07-12) reading
   primary artifacts caught what the literature panel missed AND surfaced 9 honesty flags (e.g. "byte-for-byte"
   is literally false; a self-caught wrong-cluster bug) invisible from summaries.
+
+## 2026-07-12 (cont.) — CS-driver port fix + debate-hardened plans + de-risk cadence
+
+### Claude Science driver port
+- CS on port 8000; `drive-claude-science` defaults 8765 → override `--url`/nonce to :8000. This was the whole
+  2026-07-11 "fragile" story. Health-check (fresh project → auto-approve → run → artifact → hash-verify) is the
+  right pre-flight before committing a real experiment to CS. Consider making cs-drive.js read the port from
+  `claude-science status` instead of hardcoding.
+
+### De-risk cadence that worked
+- For a publish-gating experiment: (1) cheap mechanical probe (as-of-T windowing), (2) sizing spike (positive
+  class), (3) freeze a write-for-the-weaker-executor plan, (4) repo-read codex-debate to harden it, (5) health-check
+  the execution surface (CS) — ALL before writing eval code. Each gate is committed + traceable via the ledger.

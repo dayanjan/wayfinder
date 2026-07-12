@@ -143,3 +143,13 @@ network (and needs the APIs live). For a DETERMINISTIC OFFLINE analysis, either 
 cache-complete, or MEASURE cache growth — count `data/lbd_cache/*.json` before/after and report it.
 `docs/manuscript/analysis/gate_grid.py` does the latter (it added 39 live `ac_lit` lookups → now cached →
 re-run is 0-growth); `hard_negatives.py` + `sensitivity_panel.py` touch no literature and are cache-free.
+
+## Claude Science driver: port 8000 vs default 8765 (Added: 2026-07-12)
+The running CS daemon is on **port 8000** (`claude-science status` → `"port": 8000`), but `drive-claude-science`'s
+`cs-drive.js` + SKILL.md default to **8765**. Symptom (the 2026-07-11 "fragile"): driver can't reach CS / nonce
+grep misses. Fix: pass `--url http://localhost:8000/` and mint the nonce on :8000 (`claude-science url` | grep
+`localhost:8000`). Health-check PASSED with the override 2026-07-12.
+
+## codex `exec --output-schema` logs contain many draft JSON objects (Added: 2026-07-12)
+The reasoning trace emits multiple schema-shaped JSON drafts; the echoed prior-round JSON (from the prompt) can be
+the LARGEST. Extract the **last** object with the expected `round_number`, not the largest.

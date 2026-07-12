@@ -71,3 +71,6 @@ docs/manuscript/latex/__pycache__/
 
 # Generated tool reports (citation_audit etc.)
 project-management/
+
+# codex-debate raw narration traces (structured JSON is committed; logs are not)
+docs/reviews/codex-debate_*/round_*_codex.log

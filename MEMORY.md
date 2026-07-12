@@ -17,7 +17,11 @@ precision/recall/baseline — the publish gate, gap G1); biology is stronger tha
 STAT6 "mistaken-identity" attack RETRACTED (2 of 3 confounder channels experimentally CLOSED: B3 cis, B4
 cluster; only 12q13 disease-label B5 open); 9 honesty fixes catalogued. Built the canonical
 **`docs/CLAIMS_EVIDENCE_LEDGER.md`** + `NEW_EXPERIMENTS.md` (G1–G3) + anti-amnesia protocol so audits never
-again check literature-only. Committed `e626b4c`→`bba1e18`+. **Next = G1 held-out-eval de-risk spike.** See `memory/NEXT_SESSION.md`.
+again check literature-only. Then **G1 (the held-out eval = publish gate) FULLY DE-RISKED**: sizing GO Option A
+(~1,469 positives); plan **v3 codex-debate-hardened** (3-round repo-read, converged, no sanding, 13→0 — caught the
+omitted `refuted_program` verdict class, rank-within-frame, a disease-hop-only baseline, co-primary contrasts);
+**CS-driver health-check PASSED** (drivable on port 8000; driver defaults 8765 — override). Committed
+`e626b4c`→`4952c9a`, pushed. **Next = BUILD G1** (codex-rescue against plan v3, run in CS). See `memory/NEXT_SESSION.md`.
 **2026-07-11 (OVERNIGHT autonomous, full-close) — MANUSCRIPT SUBMISSION-READY: 4 FIGURES + RELATED-WORK +
 EVIDENCE-STRENGTHENING + 5-REVIEWER HARDENING; 32pp, 0 ERRORS.** Autonomous overnight run (operator asleep).
 Built **4 deterministic figures** (architecture / funnel+ledger / diagnostics / NAB2 hero chain) from committed
@@ -172,4 +176,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 
 | 2026-07-11 (overnight) | **Manuscript: figures + related-work + review-hardening** | 4 deterministic figures wired (23pp→32pp, 0 err); §2.4 related-work + §5.3b strengthening; **genomics fix** (NAB2–STAT6 convergent ~43kb, not 1.9kb; Ensembl-verified); 5-reviewer pass (4 Claude + Codex) + final Codex debate → all P0/P1 fixed; ~28 DOI-verified refs; deliverable `main.pdf`; `62bb929` |
 
-_Last updated: 2026-07-12 (manuscript polished: figures collision-audited, abstract/first-para indents, 'honest funnel'→'funnel', 'honest' prose thinned, STAT6 'falsified'→'ruled out' aligned; 32pp/0-err; operator reading main.pdf; continue next session)_
+| 2026-07-12 (PM) | **Contribution audit + claims↔experiments reconciliation + traceability + G1 de-risk** | 13-agent mixed-model novelty audit → do-not-publish-as-is (method unevaluated; uncited Popper/VERITAS); reconciliation RESCUED the biology (STAT6 mistaken-identity retracted, 2/3 channels closed) + CONFIRMED the eval gap + 9 honesty fixes; built anti-amnesia `CLAIMS_EVIDENCE_LEDGER` + `HACKATHON.md`; **G1 held-out eval de-risked (GO Option A) + plan v3 codex-debate-converged + CS health-check PASSED**. `e626b4c`→`4952c9a`. Next = build G1 |
+
+_Last updated: 2026-07-12 (PM: contribution audit → claims↔experiments reconciliation → anti-amnesia traceability ledger → G1 held-out-eval de-risk + 3-round codex-debate + CS health-check; full-close; next = build G1)_

@@ -2,57 +2,57 @@
 
 ## 🧭 READ-FIRST (anti-amnesia — do not skip)
 Before ANY claim audit, review, referee-response, revision, or new experiment, read
-**`docs/CLAIMS_EVIDENCE_LEDGER.md`** — the single living index of claim → status → evidence artifact →
-source → critique. **Rule:** reconcile every claim against BOTH the literature AND the experiment corpus it
-indexes; literature tells you if a claim is *novel*, the experiments tell you if it's *supported*. (This
-protocol exists because a 2026-07-12 literature-only audit forgot the CS confounder experiments and
-over-generalized the STAT6 critique. Don't repeat it.)
+**`docs/CLAIMS_EVIDENCE_LEDGER.md`** — the single living index of claim → status → evidence → source → critique.
+**Rule:** reconcile every claim against BOTH the literature AND the experiment corpus it indexes. (Born
+2026-07-12 when a literature-only audit forgot the CS confounder experiments and over-generalized the STAT6 critique.)
 
 ## 🚀 SUBMISSION FIRE-READY — still governs (unchanged)
-The Wayfinder hackathon submission remains BUILT + staged. On operator **"scrub and flip" / "we're ready"**:
-run `SUBMIT_CHECKLIST.md` (gitignored, repo root) steps 1–5 → scrub `wijesingheds` paths (LAST) · add video
-link · leak grep · commit · `gh repo edit dayanjan/wayfinder --visibility public` → hand back the public URL.
-Deadline: official EOD ET **Mon 2026-07-13**. Independent of the manuscript thread below.
+The Wayfinder hackathon submission remains BUILT + staged. On operator **"scrub and flip"**: run
+`SUBMIT_CHECKLIST.md` (gitignored) steps 1–5 → flip `dayanjan/wayfinder` public → hand back the URL. Full
+hackathon facts: `docs/HACKATHON.md`. Official deadline EOD ET Mon 2026-07-13.
 
 ---
 
-## Next session priorities — written 2026-07-12 (contribution audit + claims↔experiments reconciliation done)
+## Next session priorities — written 2026-07-12 (full-close)
 
-**Current state**: A **13-agent mixed-model literature novelty audit** (`docs/reviews/contribution-novelty-audit_2026-07-12/`,
-capped by `VERDICT.md`) + a **claims↔already-run-CS-experiments reconciliation**
-(`docs/claims-vs-experiments_2026-07-12/`, capped by `RECONCILIATION.md`) are COMPLETE, committed, pushed
-(`e626b4c`→`bba1e18`+ledger). The findings are folded into the canonical **`docs/CLAIMS_EVIDENCE_LEDGER.md`**.
+**Current state**: MANUSCRIPT-strengthening thread. The **contribution audit + claims↔experiments reconciliation
++ traceability spine** are DONE. **G1 (the held-out eval = the publish gate) is FULLY DE-RISKED and SPEC-FROZEN
+and READY TO BUILD:** sizing GO Option A (~1,469 positives), plan **v3** codex-debate-hardened (converged,
+repo-verified, no sanding), and **CS-driver health-check PASSED** (CS drivable on port 8000). Commits
+`e626b4c`→`4952c9a`, all pushed; tree clean.
 
-**Verdict (re-balanced by the reconciliation):**
-- **Method** = novel-but-NARROW **and UNEVALUATED** (no precision/recall/baseline exists — confirmed by the
-  experiments themselves). This is the one thing blocking an evaluated-methods publication → gap **G1**.
-- **Biology** = stronger/better-defended than the literature audit alone implied. The STAT6 "mistaken identity"
-  attack was RETRACTED: of 3 confounder channels the experiments CLOSE two (expression cis-artifact B3 ·
-  cluster-membership B4); only the 12q13 GWAS-disease-label (B5) is open, and the paper foregrounds it → gap **G2**.
-- **Honesty** = largely accurate, with **9 specific fixes** to apply (in `NEW_EXPERIMENTS.md`; e.g. "byte-for-byte"
-  is literally false, 395-vs-406 funnel discrepancy, "flagged & removed" half-true, a self-caught wrong-cluster bug).
+**Next action**: **BUILD the G1 held-out eval to plan v3** (`docs/plans/heldout-eval-implementation-plan_2026-07-12.md`).
+Recommended shape: write the codex-rescue brief FROM v3 and launch it **[CODEX-RESCUE]** (a debate-hardened spec
+should land near one-shot), then **[CLAUDE]** run it in CS + integrate. Concrete build order (from v3):
+1. Add `cooccur_count_asof(a,b,T)` to `src/arbiter/lbd/sources.py` (append `FIRST_PDATE:[... TO {T}]`; VERIFIED).
+2. Enumerate the novel-at-T frame exactly (`ac_lit_asof(2016)≤1`) + a committed **count manifest** (freeze/hash
+   query,result,date) + the **blinded feasibility gate** (label counts only; re-confirm positives ≥100 after the
+   as-of-T ab-gate — the plan's build-time checkpoint).
+3. Implement 6 rankers — Wayfinder (exhaustive 8-class verdict order incl. `refuted_program`, then §3.2 score
+   as-of-T, `ac_known`=0), **B-disease-hop-only** (min-FDR collapse mirroring `_hop3_for_disease`), B-lit-rarity,
+   B-effect, B-enrichment-continuous, B-random.
+4. Two **co-primary** contrasts (C-broad vs lit-rarity; C-mech vs disease-hop-only) + gene&disease two-way-clustered
+   paired-difference bootstrap CIs; **report a null straight** per the frozen joint-outcome table.
+5. **Run in Claude Science** (native; CS drivable on **port 8000**, driver defaults 8765 — override
+   `--url http://localhost:8000/`, mint nonce on :8000) → §4 paragraph + one figure. Fallback: local + say-so.
 
-**Next action** — `docs/claims-vs-experiments_2026-07-12/NEW_EXPERIMENTS.md` is the plan. In order:
-1. **G1 de-risk spike** [CLAUDE — needs live network]: confirm Europe PMC as-of-T date-windowing behaves + size
-   the post-T positive class at T∈{2016,2018,2020}. Decides held-out-eval (Option A) vs promote-hard_negatives
-   (Option B). Scope: `docs/plans/heldout-eval-scope_2026-07-12.md`. Output → `docs/spikes/heldout-eval-feasibility_<date>.md`.
-2. **Apply the 9 manuscript honesty fixes** [CLAUDE] — cheap, independent, record-hygiene.
-3. **G3 frozen EGR-distinctness receipt** [CLAUDE — small]: re-run `nab2_egr_mechanism_check.py`, commit its output JSON.
-4. **G2 eQTL-existence spike** [CODEX-SPIKE→CLAUDE]: does a NAB2 CD4⁺ cis-eQTL exist? (if not, B5 stays honestly-open).
-5. Build the chosen **G1 eval** [CODEX-RESCUE→CLAUDE] → the method becomes *measured* → re-assess publishability.
+Then (lower priority): G3 (frozen EGR receipt), the 9 manuscript honesty fixes, G2 eQTL-existence spike.
 
-**Prerequisites**: none blocking. Live literature tool works (`src.arbiter.lit.search.search_all`, .env keys).
-`main.pdf` still compiles (32pp) via the 4-pass `pdflatex; bibtex main; pdflatex; pdflatex` (latexmk broken).
+**Prerequisites**: none blocking. `search_all` + as-of-T windowing verified. CS up (pid on :8000). latexmk broken
+(4-pass `pdflatex; bibtex main; pdflatex; pdflatex`).
 
-**Do not touch**: submission artifacts / demo video (fire-ready; "scrub and flip" governs). Do NOT re-run
-`build_tex.py` (overwrites hand-edited .tex). The dated audit/reconciliation records are IMMUTABLE — cite,
-don't edit; update `docs/CLAIMS_EVIDENCE_LEDGER.md` for status changes.
+**Open questions**: does the as-of-T ab-gate keep positives ≥100 (build checkpoint)? does a NAB2 CD4⁺ cis-eQTL
+exist (gates G2)?
 
-**Context to preload** (≤10): `docs/CLAIMS_EVIDENCE_LEDGER.md` (READ FIRST — the living index);
+**Do not touch**: submission artifacts / demo video (fire-ready; "scrub and flip"). Do NOT re-run `build_tex.py`.
+Dated audit/reconciliation/debate records are IMMUTABLE — cite; update `docs/CLAIMS_EVIDENCE_LEDGER.md` for status.
+
+**Context to preload** (≤10): `docs/CLAIMS_EVIDENCE_LEDGER.md` (READ FIRST); `docs/plans/heldout-eval-implementation-plan_2026-07-12.md`
+(the v3 build spec); `docs/reviews/codex-debate_heldout-eval-plan_2026-07-12.md` (debate synthesis);
 `docs/claims-vs-experiments_2026-07-12/RECONCILIATION.md`; `docs/claims-vs-experiments_2026-07-12/NEW_EXPERIMENTS.md`;
-`docs/reviews/contribution-novelty-audit_2026-07-12/VERDICT.md`; `docs/plans/heldout-eval-scope_2026-07-12.md`;
-`docs/manuscript/latex/main.pdf`; `memory/NEXT_SESSION.md`.
+`docs/reviews/contribution-novelty-audit_2026-07-12/VERDICT.md`; `src/arbiter/lbd/{sources,propose,referee_triple}.py`;
+`memory/NEXT_SESSION.md`.
 
-**Estimated budget**: G1 spike ≈ ½ session; fixes ≈ ½ session; G1 build ≈ 1 session; G2 ≈ 1 session.
+**Estimated budget**: codex-rescue build ≈ 1 session; CS run + integration ≈ ½–1 session.
 
 ## Mirror of this handoff is appended to memory/sessions/2026-07-12.md by session-closer.
