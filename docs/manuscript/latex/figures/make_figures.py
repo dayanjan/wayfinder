@@ -140,9 +140,6 @@ def fig1():
         "Cross-vendor independence supplied EXTERNALLY (S4.6): a 5-member replication lab\n"
         "(3 Opus-class + 2 Codex), 2 clean-room re-implementations -- unanimous pass.",
         fc="white", ec="#999999", fs=7.4, tc="#555555", rounded=0.03)
-    ax.text(50, 1.4, "Figure 1. Wayfinder separates construction filters (universe build + novelty gate) from "
-                     "referee decisions (per-pair, per-hop verdicts).",
-            ha="center", va="center", fontsize=7.0, color="#666666", style="italic")
     save(fig, "fig1_architecture")
 
 
@@ -150,7 +147,7 @@ def fig1():
 # FIGURE 2 -- Honest funnel + verdict ledger
 # ===============================================================================
 def fig2():
-    fig = plt.figure(figsize=(9.6, 6.2))
+    fig = plt.figure(figsize=(9.6, 7.2))
     gsL = fig.add_axes([0.04, 0.06, 0.44, 0.88]); gsL.axis("off")
     gsL.set_xlim(0, 100); gsL.set_ylim(0, 100)
     gsR = fig.add_axes([0.53, 0.06, 0.44, 0.88]); gsR.axis("off")
@@ -167,7 +164,7 @@ def fig2():
     for (num, lab, y, col), w in zip(steps, widths):
         x = 50 - w / 2
         box(gsL, x, y - 6, w, 11, f"{num}", fc=col, ec=col, tc="white", fs=13, weight="bold")
-        gsL.text(50, y - 9.3, lab, ha="center", va="top", fontsize=7.3, color="#333333")
+        gsL.text(50, y - 9.3, lab, ha="center", va="top", fontsize=7.9, color="#2A2A2A")
     for i in range(len(steps) - 1):
         gsL.annotate("", xy=(50, steps[i + 1][2] + 5.2), xytext=(50, steps[i][2] - 9.6),
                      arrowprops=dict(arrowstyle="-|>", color="#888888", lw=1.5))
@@ -179,7 +176,7 @@ def fig2():
         "Honesty caveats (restated in Results): referee ALONE supports 395/47,220 pairs;\n"
         "the novelty gate culls 395 -> 43. Within-funnel the program hop cannot fail\n"
         "(refuted_program $\\equiv$ 0). '43 supported' is a JOINT gate$\\times$referee count.",
-        fc="#FFF7EC", ec=C_UNTESTED, fs=6.6, tc="#5A4A2A", rounded=0.03)
+        fc="#FFF7EC", ec=C_UNTESTED, fs=7.3, tc="#4A3C22", rounded=0.03)
 
     gsR.text(50, 97, "Verdict ledger (spans the verdict space)", ha="center", fontsize=10.5, weight="bold")
     rows = [
@@ -195,7 +192,7 @@ def fig2():
         box(gsR, 6, y - 3.2, 3.4, 8.8, "", fc=col, ec=col)
         gsR.text(12, y + 3.0, gene, ha="left", va="center", fontsize=8.6, weight="bold", color=C_INK)
         gsR.text(94, y + 3.0, verdict, ha="right", va="center", fontsize=8.2, weight="bold", color=col)
-        gsR.text(12, y - 1.6, receipt, ha="left", va="center", fontsize=7.1, color="#555555")
+        gsR.text(12, y - 1.6, receipt, ha="left", va="center", fontsize=7.6, color="#444444")
         y -= 16
     gsR.text(50, 3, "untested (IL2) = abstention;  refuted (SLC1A5) = the confident, receipt-backed no.",
              ha="center", fontsize=7.3, color="#444444", style="italic")
@@ -250,7 +247,7 @@ def fig3():
             "(ranks 5,444 / 10,282). NAB2 self $-3.078$.\n"
             "A cis-artifact would push STAT6 down;\n"
             "it does not move -- the signal is NAB2-specific.",
-            ha="center", va="center", fontsize=6.5, color="#2A3A32")
+            ha="center", va="center", fontsize=7.0, color="#243028")
 
     box(ax, 51, 29, 46, 17, "", fc="#F3EEF7", ec=C_ASSOC, lw=1.4, rounded=0.03)
     ax.text(74, 44.4, "12q13 caveat (S4.4b)", ha="center", fontsize=8.0, weight="bold", color="#4A3A5A")
@@ -261,7 +258,7 @@ def fig3():
             "~43 kb apart) in the 12q13 atopy locus, so the\n"
             "disease-label provenance is OPEN -- foregrounded,\n"
             "not claimed discharged.",
-            ha="center", va="center", fontsize=6.4, color="#4A3A5A")
+            ha="center", va="center", fontsize=7.0, color="#3E2E52")
 
     box(ax, 3, 4, 94, 20, "", fc="#FBFAF7", ec="#CCCCCC", lw=1.0, rounded=0.02)
     ax.text(50, 21.5, "Two receipt classes, kept distinct", ha="center", fontsize=8.6, weight="bold")
@@ -285,7 +282,7 @@ def fig4():
     hn = load("hard_negatives_results.json")
 
     fig = plt.figure(figsize=(10.6, 10.8))
-    gs = fig.add_gridspec(2, 2, hspace=0.72, wspace=0.30,
+    gs = fig.add_gridspec(2, 2, hspace=0.52, wspace=0.30,
                           left=0.075, right=0.95, top=0.935, bottom=0.075)
     axA = fig.add_subplot(gs[0, 0]); axB = fig.add_subplot(gs[0, 1])
     axC = fig.add_subplot(gs[1, 0]); axD = fig.add_subplot(gs[1, 1])
@@ -314,7 +311,7 @@ def fig4():
     axA.text(0.5, -0.27,
              "Observed sits BELOW null (lower-tail p $\\approx$ 5$\\times10^{-4}$): the near-total\n"
              "refutation is substrate-inherited, not the referee's own discrimination.",
-             transform=axA.transAxes, ha="center", va="top", fontsize=7.0, color="#444444")
+             transform=axA.transAxes, ha="center", va="top", fontsize=7.7, color="#333333")
     for s in ("top", "right"):
         axA.spines[s].set_visible(False)
 
@@ -332,7 +329,7 @@ def fig4():
         for i, (mb, t) in enumerate(rowkeys):
             c = cells[(pct, mb, t)]
             txt = f"{int(M[i, j])}\n" + (f"R{c['nab2_eczema_rank']}" if c["nab2_eczema_survives"] else "×")
-            axB.text(j, i, txt, ha="center", va="center", fontsize=7.2,
+            axB.text(j, i, txt, ha="center", va="center", fontsize=7.7,
                      color="white" if M[i, j] > M.max() * 0.6 else "#222222",
                      weight="bold" if c["nab2_eczema_survives"] else "normal")
     axB.set_xticks(range(3)); axB.set_xticklabels([f"{p:.2f}" for p in pcts])
@@ -345,7 +342,7 @@ def fig4():
     axB.text(0.5, -0.20,
              "Cell = clean survivors; 'R#' = NAB2$\\times$eczema rank, '×' = pruned. Rank stays\n"
              "1-5 (median 4) wherever eligible; drops out only at the 0.75 literature floor.",
-             transform=axB.transAxes, ha="center", va="top", fontsize=7.0, color="#444444")
+             transform=axB.transAxes, ha="center", va="top", fontsize=7.7, color="#333333")
 
     # ---- Panel C: C2 hard-negatives decomposition ----
     pB = hn["panel_B_frozen_association_nomination"]
@@ -390,12 +387,12 @@ def fig4():
     axC.legend(handles, ["untested (QC)", "refuted-program", "refuted-effect",
                          "refuted-disease / reached hop", "supported"],
                loc="upper center", bbox_to_anchor=(0.5, -0.16), ncol=3,
-               fontsize=6.2, frameon=False, handlelength=1.1, columnspacing=1.2)
+               fontsize=7.1, frameon=False, handlelength=1.1, columnspacing=1.2)
     axC.text(0.5, -0.44,
              "Curated-association top guesses include IL36RN$\\times$psoriasis (0.82), TREX1$\\times$lupus\n"
              "(0.78), PADI4$\\times$RA (0.68) -- all UNTESTED (failed KD QC). Control 1: all 2,430\n"
              "failed-KD genes returned untested (100%, 0 leaks).",
-             transform=axC.transAxes, ha="center", va="top", fontsize=7.0, color="#444444")
+             transform=axC.transAxes, ha="center", va="top", fontsize=7.7, color="#333333")
 
     # ---- Panel D: NAB2 rank stability ----
     c3 = sens["control3_rank_stability"]
@@ -417,7 +414,7 @@ def fig4():
     axD.text(0.5, -0.20,
              "Across 27 objective-weight settings NAB2 ranks 1-8 (median 4; top-5 in 89%);\n"
              "across gate cells where eligible, rank 1-5. The verdict is invariant in all.",
-             transform=axD.transAxes, ha="center", va="top", fontsize=7.0, color="#444444")
+             transform=axD.transAxes, ha="center", va="top", fontsize=7.7, color="#333333")
 
     save(fig, "fig3_diagnostics")
 
