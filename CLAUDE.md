@@ -3,7 +3,8 @@
 Hackathon build (*Built with Claude: Life Sciences*, **Researcher track — a researcher who also builds**). A **hypothesis referee**: Claude agents adjudicate a mechanistic T-cell claim and return a verdict with a **receipt for every hop**. The framing: a researcher who builds their own instruments — the referee, the LBD question-engine, and the Claude-Science automation are tools built *to ask and answer the research questions*. The deliverable is a **reproducible T-cell finding + how Claude Science reached it**; the tooling is the method/vehicle, and the builder-craft is evidence of a scientist who can build to get the science done. Full plan: `docs/plan.md` (v7). This file is the lean map.
 
 ## Hackathon + what we're doing now
-- **Event:** *Built with Claude: Life Sciences* hackathon (organized by **Cerebral Valley**), **Researcher track** ("a researcher who also builds").
+**Full canonical fact sheet: `docs/HACKATHON.md`** (event, track, deadline, prizes, rules, judging, submission runbook). Quick version:
+- **Event:** *Built with Claude: Life Sciences* (Anthropic × Gladstone, run by **Cerebral Valley**), **Researcher track** ("a researcher who also builds").
 - **Timeline:** started **July 7, 2026**; deadline **July 13, 2026, 9:00 PM ET** (see Hard constraints). Solo builder; async/interruptible.
 - **Deliverable:** a reproducible T-cell finding (NAB2 → Th1/Th2 → atopic eczema, receipt-backed) + how Claude Science reached it — the referee, the LBD question-engine, and the headless Claude-Science automation are instruments built to get the science done.
 - **Submission status: BUILT + FIRE-READY.** Repo `dayanjan/wayfinder` (private); say **"scrub and flip"** to run `SUBMIT_CHECKLIST.md` and flip it public. Demo video + 3-screen Streamlit app = the MVP.
