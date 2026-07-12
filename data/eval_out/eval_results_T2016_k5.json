@@ -1,0 +1,123 @@
+{
+  "frame_size": 22437,
+  "positive_count": 5570,
+  "base_rate": 0.2483,
+  "primary_k": 20,
+  "per_method": {
+    "wayfinder": {
+      "prec@5": 0.8,
+      "prec@10": 0.5,
+      "prec@20": 0.35,
+      "prec@50": 0.4,
+      "MAP": 0.2869,
+      "recall@50": 0.0036,
+      "recall@100": 0.0084
+    },
+    "disease_hop_only": {
+      "prec@5": 0.4,
+      "prec@10": 0.4,
+      "prec@20": 0.5,
+      "prec@50": 0.38,
+      "MAP": 0.2575,
+      "recall@50": 0.0034,
+      "recall@100": 0.007
+    },
+    "lit_rarity": {
+      "prec@5": 0.4,
+      "prec@10": 0.2,
+      "prec@20": 0.15,
+      "prec@50": 0.1,
+      "MAP": 0.1801,
+      "recall@50": 0.0009,
+      "recall@100": 0.0023
+    },
+    "effect": {
+      "prec@5": 0.0,
+      "prec@10": 0.0,
+      "prec@20": 0.15,
+      "prec@50": 0.26,
+      "MAP": 0.2658,
+      "recall@50": 0.0023,
+      "recall@100": 0.0052
+    },
+    "enrichment_continuous": {
+      "prec@5": 0.4,
+      "prec@10": 0.6,
+      "prec@20": 0.45,
+      "prec@50": 0.38,
+      "MAP": 0.2576,
+      "recall@50": 0.0034,
+      "recall@100": 0.0068
+    },
+    "random": {
+      "prec@5": 0.4,
+      "prec@10": 0.4,
+      "prec@20": 0.25,
+      "prec@50": 0.24,
+      "MAP": 0.2465,
+      "recall@50": 0.0022,
+      "recall@100": 0.0043
+    }
+  },
+  "C_broad_wayfinder_vs_lit_rarity": {
+    "point": 0.2,
+    "ci_lo": -0.2,
+    "ci_hi": 0.65,
+    "n_boot": 2000,
+    "significant": false,
+    "positive": false
+  },
+  "C_mech_wayfinder_vs_disease_hop_only": {
+    "point": -0.15,
+    "ci_lo": -0.35,
+    "ci_hi": 0.3,
+    "n_boot": 2000,
+    "significant": false,
+    "positive": false
+  },
+  "joint_outcome": "broad_null",
+  "header": {
+    "experiment": "G1 time-sliced held-out evaluation",
+    "T": 2016,
+    "k_establish": 5,
+    "novel_max": 1,
+    "condition": "Stim8hr",
+    "base_AxC": 47220,
+    "scope": "full",
+    "subset_n": null,
+    "seed": 20260712,
+    "retrieval_date_utc": "2026-07-12",
+    "europepmc_query_template": "((\"<gene>\") AND (\"<disease>\")) [AND (FIRST_PDATE:[1900-01-01 TO T-12-31])]",
+    "frame_size": 22437,
+    "positive_count": 5570,
+    "novel_at_T_asof_count": 22437,
+    "excluded_now_fetch_fail": 0,
+    "current_novel_frame_size": 10435,
+    "jaccard_novelAtT_vs_currentNovel": 0.4651,
+    "n_failures": 0,
+    "sha256_of_rows": "cce1bb3ccc650fe25ae53d69a621c0bf740ac72a509743841af7ff058eb31276",
+    "note": "COMMITTED RECEIPT: metrics recompute from this file with no live API. now queried for frame members only (asof<=now monotonicity)."
+  },
+  "top20_wayfinder": [
+    "TESPA1||asthma",
+    "TESPA1||atopic eczema",
+    "EGR2||atopic eczema",
+    "NAB2||atopic eczema",
+    "JADE2||rheumatoid arthritis",
+    "JADE2||systemic lupus erythematosus",
+    "RNF19A||ulcerative colitis",
+    "TBCEL||atopic eczema",
+    "ADGRG5||Hashimoto's thyroiditis",
+    "SPATS2L||Crohn's disease",
+    "DMAC1||asthma",
+    "DMAC1||rheumatoid arthritis",
+    "MBIP||Hashimoto's thyroiditis",
+    "NUDT1||type 1 diabetes mellitus",
+    "IL21R||Hashimoto's thyroiditis",
+    "KCTD20||ulcerative colitis",
+    "S100A11||atopic eczema",
+    "SLC43A3||Crohn's disease",
+    "INPP4A||celiac disease",
+    "ZMAT3||ankylosing spondylitis"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "primary_k5": {
+    "positives": 5570,
+    "base_rate": 0.2483,
+    "C_broad": {
+      "point": 0.2,
+      "ci_lo": -0.2,
+      "ci_hi": 0.65,
+      "n_boot": 2000,
+      "significant": false,
+      "positive": false
+    },
+    "C_mech": {
+      "point": -0.15,
+      "ci_lo": -0.35,
+      "ci_hi": 0.3,
+      "n_boot": 2000,
+      "significant": false,
+      "positive": false
+    },
+    "joint": "broad_null",
+    "wayfinder_prec": {
+      "prec@5": 0.8,
+      "prec@10": 0.5,
+      "prec@20": 0.35,
+      "MAP": 0.2869
+    },
+    "disease_hop_prec@20": 0.5
+  },
+  "sens_k3": {
+    "positives": 9173,
+    "base_rate": 0.4088,
+    "C_broad": {
+      "point": 0.5,
+      "ci_lo": 0.0,
+      "ci_hi": 0.9,
+      "n_boot": 2000,
+      "significant": false,
+      "positive": false
+    },
+    "C_mech": {
+      "point": 0.1,
+      "ci_lo": -0.25,
+      "ci_hi": 0.45,
+      "n_boot": 2000,
+      "significant": false,
+      "positive": false
+    },
+    "joint": "broad_null",
+    "wayfinder_prec": {
+      "prec@5": 1.0,
+      "prec@10": 0.7,
+      "prec@20": 0.7,
+      "MAP": 0.4596
+    },
+    "disease_hop_prec@20": 0.6
+  },
+  "pure_disjoint_asof0_k5": {
+    "positives": 2319,
+    "base_rate": 0.1034,
+    "C_broad": {
+      "point": 0.0,
+      "ci_lo": -0.35,
+      "ci_hi": 0.45,
+      "n_boot": 2000,
+      "significant": false,
+      "positive": false
+    },
+    "C_mech": {
+      "point": -0.05,
+      "ci_lo": -0.3,
+      "ci_hi": 0.25,
+      "n_boot": 2000,
+      "significant": false,
+      "positive": false
+    },
+    "joint": "broad_null",
+    "wayfinder_prec": {
+      "prec@5": 0.4,
+      "prec@10": 0.3,
+      "prec@20": 0.15,
+      "MAP": 0.1598
+    },
+    "disease_hop_prec@20": 0.2
+  }
+}

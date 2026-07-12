@@ -47,9 +47,17 @@
 | R4 | Flagship rank stable (1–8 wt / 1–5 gate, med 4) | 4.1b/c | SUPPORTED-BY-EXP | gate_grid_results.json | S4,S5,S6 | conditions on NAB2 surviving gate (culled 9/27) | 2026-07-12 |
 | R5 | NAB2 distinct from EGR (NAB1 paralog opposition) | 4.3 | SUPPORTED-BY-EXP · **NEEDS-FIX** | nab2_egr_mechanism_check.py; replication D-set | S4 | lead with D3 (NAB1 opposition); no frozen receipt → **G3** | 2026-07-12 |
 
-**The central unresolved item (publish gate):** *no claim above is an EVALUATION.* Every "SUPPORTED-BY-EXP"
-is execution/reproduction/behavioral demonstration — none measures precision/recall vs a baseline. That gap
-is **G1** in `NEW_EXPERIMENTS.md` and is the one thing blocking an evaluated-methods publication.
+**The central item (publish gate) — now EXECUTED (2026-07-12).** G1, the time-sliced held-out evaluation, is
+built and run: it measures whether the method ranks future-established gene→program→disease links above
+baselines within a literature-novel-as-of-2016 frame (22,437 pairs, 5,570 positives). **Result: a NULL at the
+pre-registered primary** — C_broad (Wayfinder − lit-rarity) = +0.20 [−0.20, +0.65]; C_mech (Wayfinder −
+disease-hop-only) = −0.15 [−0.35, +0.30]; joint outcome `broad_null` (precision@20, gene-and-disease two-way-
+clustered bootstrap). Wayfinder leads on the secondary metrics (precision@5 = 0.80 and MAP = 0.287, both best
+of six rankers) but neither is the primary, and the disease-hop-only baseline matches/exceeds it at
+precision@20 — empirically confirming the "substrate-inherited stringency" reading (M8/M10). This CLOSES the
+audit's FATAL (method now *measured*, not merely demonstrated) and is reported straight in §4.7. Evidence:
+`data/eval_out/count_manifest_full_T2016_k5.json` (committed receipt), `eval_results_T2016_k5.json`,
+`src/arbiter/eval/`, `docs/g1-build-log_2026-07-12.md`, `docs/reviews/diff_g1-harness_2026-07-12.md`.
 
 ## Sources appendix (trace every claim to its origin)
 | ID | Source | Locator |

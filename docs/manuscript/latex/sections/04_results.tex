@@ -1,4 +1,4 @@
-We report six results. The funnel and verdict ledger show the referee discriminating across a spread of
+We report seven results. The funnel and verdict ledger show the referee discriminating across a spread of
 worked examples (\S{}4.1), and two negative controls plus a rank-stability check probe how much of that
 discrimination is a property of the data versus an artifact of the setup --- with one control returning a
 deliberately non-obvious answer (\S{}4.1b) --- and a gate-threshold grid shows the flagship's rank is
@@ -6,8 +6,11 @@ stable wherever it stays eligible (\S{}4.1c). The confident \emph{no} and the qu
 catch are examined on their own (\S{}4.2), because they are the point. NAB2 is then followed hop by hop as the
 worked hero (\S{}4.3), and its sharpest artifactual confounder is tested and ruled out at the expression level against the study authors' own
 genome-wide data (\S{}4.4), while the one confounder the substrate \emph{cannot} discharge --- the 12q13
-GWAS-label provenance --- is foregrounded rather than buried (\S{}4.4b). Finally we show the entire loop reproduced natively inside the agentic workbench,
+GWAS-label provenance --- is foregrounded rather than buried (\S{}4.4b). We show the entire loop reproduced natively inside the agentic workbench,
 audited by an independent critic model (\S{}4.5), and replicated by a second vendor's models (\S{}4.6).
+Finally, we move from demonstration to \emph{measurement}: a time-sliced held-out evaluation asks whether the
+method ranks future-established links above baselines, and reports the answer --- a null at the pre-registered
+primary metric --- straight (\S{}4.7).
 
 \subsection*{4.1 The funnel and the verdict ledger}\label{the-funnel-and-the-verdict-ledger}
 
@@ -443,3 +446,68 @@ the deposited data --- reproducible independently of our code --- rather than an
 implementation. We are careful about what this does and does not establish: it is evidence of computational
 robustness, not of biological validity, which the confounder analyses above and the limitations below
 (\S{}5.3) address separately.
+
+\subsection*{4.7 A time-sliced held-out evaluation: does the method rank future-established links above baselines?}\label{a-time-sliced-held-out-evaluation}
+
+Every result to this point is a \emph{demonstration} --- the referee discriminates on worked examples, its own
+hops cull hard negatives, the flagship is rank-stable --- but none \emph{measures} ranking quality against a
+baseline, the gap a review pressed as the decisive one. We close it with a retrospective, literature-time-sliced
+evaluation against the same fixed contemporary substrate. The estimand is deliberately narrow: among
+gene\,$\rightarrow$\,Th1/Th2\,$\rightarrow$\,disease links that were \textbf{literature-novel as of $T=2016$}
+(direct co-mention $\leq 1$ in Europe PMC papers first-published on or before 2016), does a data-grounded
+ranker recover the ones that became \textbf{literature-established afterwards} ($\geq 5$ co-mentions by the
+2026 retrieval) better than literature-rarity and single-axis data baselines? This measures decision quality
+against future \emph{literature} --- a proxy for usefulness, not biological truth and not forecasting.
+
+We enumerate the frame exactly rather than sampling it: all $3{,}935 \times 12 = 47{,}220$
+(gene\,$\in$\,A, disease\,$\in$\,C) pairs, restricted to the \textbf{22{,}437} that were novel as of 2016.
+Within that frame \textbf{5{,}570} pairs (a \textbf{24.8\%} base rate) had become established by retrieval --- so
+the frame is class-heavy and a random ranker already reaches precision $\approx$0.25 at any depth; the
+informative quantity is therefore the \emph{contrast} between methods, not absolute precision. Six rankers order
+this identical frame: \textbf{Wayfinder} (the full pipeline as an evaluation variant --- exhaustive eight-class
+verdict, then the as-of-2016 novelty-plus-effect score with the current-association term ablated, since it is
+not time-sliceable), a \textbf{disease-hop-only} baseline reproducing the referee's disease-enrichment hop in
+isolation (the min-FDR collapse of \S{}4.1b), and \textbf{literature-rarity}, \textbf{effect},
+\textbf{continuous-enrichment}, and \textbf{random} baselines. Two co-primary contrasts were pre-registered on
+precision@20 with gene-and-disease two-way-clustered paired bootstrap 95\% confidence intervals:
+$C_{\mathrm{broad}}$ (Wayfinder $-$ literature-rarity, ``does experimental grounding beat obscurity'') and
+$C_{\mathrm{mech}}$ (Wayfinder $-$ disease-hop-only, ``do the knockdown/effect/program hops add value beyond the
+disease-enrichment hop''). We committed in advance to reporting a confidence interval spanning zero as a null.
+
+\textbf{The result is a null at the primary metric, and we report it straight.} Neither contrast separates from
+zero: $C_{\mathrm{broad}} = +0.20$ [$-0.20$, $+0.65$] and $C_{\mathrm{mech}} = -0.15$ [$-0.35$, $+0.30$]
+(paired precision@20, 2{,}000 two-way-clustered bootstrap resamples). The pre-registered joint outcome is a
+\emph{broad null}: on this test the full pipeline does not rank future-established links above literature-rarity,
+and adds no measured value over the disease-enrichment hop alone --- indeed the disease-hop-only baseline
+(precision@20 $= 0.50$) matches or exceeds Wayfinder ($0.35$), an empirical confirmation of \S{}4.1b's argument
+that the disease hop's stringency, and here its ranking signal, is largely \emph{substrate-inherited} rather
+than supplied by the referee. Two honest qualifications accompany the null rather than soften it. First,
+Wayfinder is the strongest ranker at the very top of the list (precision@5 $= 0.80$, the highest of any method)
+and on mean average precision ($0.287$, likewise the highest of the six), so a top-of-ranking signal is present
+--- but neither is the pre-registered primary, and we do not promote a secondary metric to a headline. Second,
+the two-way disease-clustered interval is wide because the frame spans only \emph{twelve} disease clusters, so
+this evaluation is powered to detect only a large separation and does not rule out a moderate one; a larger
+disease panel and an external ground-truth set (\S{}5.3b) are the natural next steps. The null is robust to the
+analysis's free choices: at a looser establishment threshold ($k = 3$) the broad contrast rises to $+0.50$ but
+its clustered interval floor still touches zero ([$0.00$, $+0.90$]), and under the stricter pure-disjoint
+novelty definition (as-of-2016 co-mention $= 0$) it collapses to $+0.00$ ([$-0.35$, $+0.45$]); every variant
+returns the same broad-null verdict. The flagship
+NAB2\,$\times$\,atopic-eczema pair is itself in the frame (novel as of 2016, established by 2026), so the
+evaluation measures recovery of exactly the class of link the loop is built to surface. The evaluation ran
+locally from a committed count manifest that reproduces every number here with no live query; the harness
+carries unit tests and an independent cross-model code review (Figure 5).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig5_heldout_eval}
+\caption{\textbf{Time-sliced held-out evaluation (G1): from demonstration to measurement.} The frame is the
+22{,}437 (gene, disease) pairs novel as of 2016; 5{,}570 (24.8\%) became literature-established ($\geq 5$
+co-mentions) by 2026. \emph{(A)} precision@$k$ for six rankers over the identical frame; the dashed line is the
+random-ranker expectation (the base rate). Wayfinder (green) is the strongest ranker at the very top ($k = 5$,
+precision 0.80) but converges to the disease-enrichment and continuous-enrichment baselines by $k = 20$.
+\emph{(B)} the two pre-registered co-primary contrasts on precision@20 with gene-and-disease two-way-clustered
+bootstrap 95\% CIs; both cross zero (grey), so the joint outcome is a \emph{broad null}, reported straight. The
+disease-hop-only baseline matching Wayfinder at $k = 20$ is the measured face of the substrate-inherited
+stringency of \S{}4.1b.}
+\label{fig:heldout}
+\end{figure}

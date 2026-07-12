@@ -118,15 +118,19 @@ We are direct about what the diagnostics of Section 4 do and do not establish. T
 \emph{machinery} behaves as designed: the quality-control gate converts every failed knockdown into
 \emph{untested} without leakage, the referee refutes and demotes with receipts, its disease-hop stringency is
 label-dependent, and the flagship's rank is stable to the analysis's free parameters. They do \emph{not}
-establish that the referee \emph{decides correctly at scale} --- there is no external validation and no
-precision or recall against a ground truth, and we make no such claim. That gap is not a flaw to bury but the
-next programme of work, and the loop nominates it concretely.
+establish that the referee \emph{decides correctly at scale}. We have now taken the first measured step against
+that gap --- a time-sliced held-out evaluation (\S{}4.7) that returns a null at its pre-registered primary
+metric --- and broader external validation remains the programme of work the loop nominates concretely.
 
-Four steps, in priority order, would convert these behavioural diagnostics into a measured decision-quality
-claim. \textbf{(1) A time-sliced held-out evaluation} \cite{yetisgen2009}: freeze the literature at a cutoff,
-generate against the pre-cutoff corpus, and measure recovery of gene$\rightarrow$program$\rightarrow$disease
-relationships established only afterward, reporting precision@$k$, mean average precision, and recall --- the
-standard that separates ``the machinery runs'' from ``the machinery is right.'' \textbf{(2) An external
+Four steps, in priority order, take these behavioural diagnostics toward a measured decision-quality claim; the
+first we have now taken. \textbf{(1) A time-sliced held-out evaluation} \cite{yetisgen2009}, \emph{carried out
+here} (\S{}4.7): freezing the literature at 2016 and measuring recovery of
+gene$\rightarrow$program$\rightarrow$disease relationships established only afterward, it returns a \emph{null}
+at the pre-registered primary (precision@20, two-way-clustered CI) --- the full pipeline does not outrank
+literature-rarity or the disease-enrichment hop alone, though it leads at the very top of the list (precision@5)
+and on mean average precision. The single fixed twelve-disease substrate makes the clustered interval wide and
+the test low-powered; extending it across cutoffs and to a larger disease panel is the immediate follow-on, and
+converts ``the machinery runs'' toward ``the machinery is right.'' \textbf{(2) An external
 ground-truth panel} of known-true and known-false T-cell-program$\rightarrow$disease relationships, drawn from
 curated association evidence \cite{mountjoy2021} and the immunology literature, scored for precision, recall,
 and --- because the confident \emph{no} is the thesis --- the false-discovery and false-abstention rates on
