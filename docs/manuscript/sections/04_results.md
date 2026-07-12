@@ -160,7 +160,7 @@ the literature — and the same audit surfaced the confounder we take up next.
 
 ## 4.4 Falsifying the hardest confounder: the STAT6 *cis*-effect
 
-NAB2 sits ~1.9 kb from *STAT6*, the master type-2/atopic regulator, so the sharpest artifactual explanation
+NAB2 and *STAT6* (the master type-2/atopic regulator) are convergent tail-to-tail neighbours (3' ends overlap; promoters ~43 kb apart), so the sharpest artifactual explanation
 of NAB2's *perturbation* signal is a CRISPRi *cis*-effect: a guide targeting NAB2 could inadvertently
 repress the adjacent STAT6, and the observed Th2/eczema signal could be STAT6's, not NAB2's. We test this
 directly against the study authors' own deposited genome-wide differential-expression matrix (the 16.8 GB
@@ -199,7 +199,7 @@ it did not appear — nothing was cherry-picked — and independent re-querying 
 queries against the live APIs returned identical counts. *Cross-family independence* is kept external by
 design (§4.6).
 
-The self-audit is the part that mirrors the paper's own thesis (Figure 5). The author model (an Opus-class
+The self-audit is the part that mirrors the paper's own thesis. The author model (an Opus-class
 model) assembled the end-to-end receipt chain; an independent reviewer model (a Sonnet-class model),
 invoked at separate checkpoints, verified every reported number against the underlying artifacts and
 enforced calibrated language on the manuscript-facing output. It produced four verification checks: two

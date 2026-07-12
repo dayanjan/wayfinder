@@ -14,7 +14,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace}\onehalfspacing
-\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\setlength{\parindent}{1.6em}\setlength{\parskip}{3pt}
 \tolerance=400\emergencystretch=3pt
 
 % --- colours + section headers (LightsOut aesthetic; starred = unnumbered so the manual
@@ -107,6 +107,24 @@ CRISPRi screens; T-cell polarization; agentic language models; falsification; ab
 \section*{3. Materials and Methods}\input{sections/03_methods}
 \section*{4. Results}\input{sections/04_results}
 \section*{5. Discussion}\input{sections/05_discussion}
+
+\section*{Acknowledgements}
+This work began at the \textbf{\emph{Built with Claude: Life Sciences}} hackathon organized by
+\textbf{Cerebral Valley}, whose team we thank for convening the event. The entire study is a re-analysis of a
+public resource: we are grateful to the authors of the genome-scale CD4$^{+}$ T-cell Perturb-seq dataset ---
+Zhu, Dann, and colleagues in the \textbf{Marson laboratory} --- for depositing their data and aggregated
+supplementary tables openly \cite{zhu2025}, without which none of this would have been possible. The
+generation, evidence integration, and self-audit were carried out inside \textbf{Claude Science}, Anthropic's
+agentic scientific workbench, and the reasoning and language models throughout are Anthropic's Claude family
+(Section 3.1). We gratefully acknowledge \textbf{Anthropic} for a Claude Max account and the API credits that
+made the agentic experiments and their cross-model verification feasible. Responsibility for all claims,
+and for the calibrated language the paper argues for, rests with the author.
+
+\section*{Data and code availability}
+The Perturb-seq resource re-analysed here is public \cite{zhu2025}. All prioritization runs against its
+aggregated supplementary tables; the one genome-wide confounder check reads the study's deposited
+differential-expression matrix by byte-range from public object storage. The Wayfinder implementation,
+analysis scripts, and figure-generation code are released open-source (MIT).
 
 \bibliography{../../../references/references}
 

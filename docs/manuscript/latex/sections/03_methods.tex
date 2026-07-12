@@ -1,6 +1,6 @@
 \subsection*{3.1 Materials}\label{materials}
 
-\textbf{Perturbation data.} All prioritization runs against the aggregated supplementary tables of a
+\noindent \textbf{Perturbation data.} All prioritization runs against the aggregated supplementary tables of a
 genome-scale CRISPRi Perturb-seq study (a 2025 preprint) in primary human CD4+ T cells \cite{zhu2025}:
 (T1) per-perturbation differential-expression statistics, including an on-target effect flag and a count
 of downstream differentially expressed genes; (T2) a Th1/Th2 polarization-signature enrichment per
@@ -10,7 +10,7 @@ significance call. We work at the 8-hour stimulation condition unless noted. No 
 are used; for the one confounder check that needs genome-wide differential expression, the study's
 deposited matrix is read lazily from public object storage (byte-range reads, no bulk download).
 
-\textbf{Disease and program vocabularies.} The program \textbf{B} is fixed to Th1/Th2 polarization, with two term
+\noindent \textbf{Disease and program vocabularies.} The program \textbf{B} is fixed to Th1/Th2 polarization, with two term
 arms: process terms (e.g.~``Th2 cells'', ``T helper 2'') used for the gene--program signal, and marker terms
 (GATA3, IL-4, IFN-$\gamma$, T-bet) additionally used for the program--disease signal, since disease literature
 legitimately cites markers. The disease set \textbf{C} comprises 12 immune diseases, each pinned to a MONDO
@@ -18,13 +18,13 @@ identifier \cite{mondo2022} and re-verified live against Open Targets search and
 verification is load-bearing: MONDO and EFO identifiers differ, and a wrong identifier makes Open Targets
 report ``no known association'' for every gene, spuriously inflating apparent novelty everywhere.
 
-\textbf{Literature and association sources.} Co-mention counts come from Europe PMC \cite{europepmc2015} \texttt{hitCount} queries (all
+\noindent \textbf{Literature and association sources.} Co-mention counts come from Europe PMC \cite{europepmc2015} \texttt{hitCount} queries (all
 terms quoted); curated gene$\rightarrow$disease association scores come from the Open Targets GraphQL API \cite{opentargets2023} --- the
 \emph{overall} target--disease association score (not a genetics-only subset), used as a known-link / novelty
 prior. This is distinct from the disease \emph{labels} on the enrichment modules (the disease hop, \S{}3.3), which
 the source study derives from genetic evidence.
 
-\textbf{Model cast.} Inside the workbench (Section 3.4) the author role is an Opus-class model (Claude Opus
+\noindent \textbf{Model cast.} Inside the workbench (Section 3.4) the author role is an Opus-class model (Claude Opus
 4.8); the independent reviewer role is a Sonnet-class model (Claude Sonnet 5), invoked at separate
 verification checkpoints; lightweight inline sampling is handled by a smaller model. All
 biological interpretation is confined to these models reading deterministic receipts; no model computes a
@@ -32,7 +32,7 @@ receipt.
 
 \subsection*{3.2 Candidate generation}\label{candidate-generation}
 
-\textbf{A disease-answer-free gene universe.} The candidate gene set \textbf{A} is defined from the perturbation
+\noindent \textbf{A disease-answer-free gene universe.} The candidate gene set \textbf{A} is defined from the perturbation
 data alone, before any disease information is consulted. A gene enters \textbf{A} if it clears the knockdown-QC
 gate ($\geq$1 guide with a significant knockdown call in T4), has a significant transcriptional effect (an
 on-target significance flag or a nonzero downstream-DE count in T1), and shows a significant Th1/Th2 shift
@@ -42,7 +42,7 @@ count forward as an effect-strength prior. \textbf{A} is disease-answer-free, no
 preselected on the same knockdown/effect/program evidence the referee re-reads at hops 0--2 (a consequence
 we make explicit in \S{}3.3). At the 8-hour condition, \textbf{A} contains 3,935 genes.
 
-\textbf{Five deterministic signals.} For each (gene A, disease C) pair we compute: \texttt{ab}, the Europe PMC
+\noindent \textbf{Five deterministic signals.} For each (gene A, disease C) pair we compute: \texttt{ab}, the Europe PMC
 co-mention count of A with the Th1/Th2 process terms; \texttt{bc}, the co-mention count of the program terms with
 C (constant per disease); \texttt{ac\_known}, the Open Targets \emph{overall} target--disease association score of A for
 C (zero when absent --- the novelty signal; the overall score, not a genetics-only subset); \texttt{ac\_lit}, the
@@ -50,7 +50,7 @@ direct A--C co-mention count (computed only for referee
 survivors, to bound API cost); and \texttt{effect}, the downstream-DE count from T1. Every signal is a
 deterministic lookup.
 
-\textbf{Gate and ranking objective.} Eligibility requires all of: \texttt{ab\ $\geq$\ ab\_gate} (a universe percentile,
+\noindent \textbf{Gate and ranking objective.} Eligibility requires all of: \texttt{ab\ $\geq$\ ab\_gate} (a universe percentile,
 default the median, which removes candidates that look novel only because the gene is understudied),
 \texttt{bc\ $\geq$\ 3}, and \texttt{ac\_known\ $\leq$\ 0.1} (no established curated association). Raw \texttt{ac\_lit} is deliberately \emph{not} in the
 gate --- hard-gating on zero co-mention would exclude every well-studied strong regulator and reward
@@ -72,7 +72,7 @@ design of this objective is the only human judgment in an otherwise mechanical p
 survivor's verdict does not depend on the weights --- so the choice of weights affects which candidate is
 foregrounded, not whether it is supported (we examine rank stability under alternative weights in Section 4).
 
-\textbf{Order of operations.} The sweep builds \textbf{A}, prefetches the per-disease \texttt{bc}/\texttt{ac\_known} (12 calls
+\noindent \textbf{Order of operations.} The sweep builds \textbf{A}, prefetches the per-disease \texttt{bc}/\texttt{ac\_known} (12 calls
 each) and per-gene \texttt{ab}, applies the gate, then runs the deterministic referee \emph{first} (it is local and
 free) to keep only chain-held survivors (receipt-complete at every hop), and only then computes \texttt{ac\_lit}
 and the final score for those survivors. At the 8-hour condition this funnels 3,935 genes $\rightarrow$ 22,039 eligible
@@ -145,7 +145,7 @@ Generation, evidence integration, and provenance assembly were run inside Claude
 agentic scientific workbench, in which an author model writes and runs analysis code and an independent
 reviewer model verifies the result at separate checkpoints (Section 3.1).
 
-\textbf{Operating an instrument that has no API.} Claude Science exposes no programmatic task-submission
+\noindent \textbf{Operating an instrument that has no API.} Claude Science exposes no programmatic task-submission
 interface: analyses are ordinarily driven by hand in its web interface, which makes each run a one-off,
 hand-paced event rather than a reproducible procedure --- human clicking becomes the bottleneck at exactly
 the moment when keeping pace with the twin floods of data and literature is the whole point. To make the
@@ -166,7 +166,7 @@ nonetheless what converts a click-once web session into a re-runnable, audited p
 platform exposes no programmatic interface --- an under-appreciated route to replicable-in-principle
 (UI-dependent) \emph{agentic} science.
 
-\textbf{Provenance and self-audit.} Every run is captured in the workbench's own audit store, from which we
+\noindent \textbf{Provenance and self-audit.} Every run is captured in the workbench's own audit store, from which we
 draw model identities, per-step costs, and the reviewer's checks. The reviewer verifies each reported
 number against the underlying artifacts and enforces calibrated language on the manuscript-facing output ---
 the receipt chain and the verdicts a reader sees; in this work it flagged overstated words (``validated'',
@@ -180,7 +180,7 @@ manuscript-facing verdicts cite the post-review receipt rather than the raw gene
 the independence precisely, too: it is \emph{role, model, and checkpoint} independence --- a distinct reviewer
 model at distinct verification points --- within a single model family, not independence across vendors.
 
-\textbf{Three claims about liveness, kept distinct.} We separate what ran live from what was replayed, because
+\noindent \textbf{Three claims about liveness, kept distinct.} We separate what ran live from what was replayed, because
 conflating them would overstate the result. (i) \emph{Full-scale reproduction}: the generation pipeline ran
 unchanged over the entire 3,935-gene universe inside the workbench, but against a workbench-local cache of
 previously captured literature/association responses, under a guard that raises on any live network call

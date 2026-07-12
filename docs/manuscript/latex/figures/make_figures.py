@@ -65,9 +65,11 @@ def save(fig, stem):
 
 
 def box(ax, x, y, w, h, text, fc="white", ec=C_INK, lw=1.3, fs=8.5,
-        tc=C_INK, weight="normal", rounded=0.02, ha="center", va="center"):
-    p = FancyBboxPatch((x, y), w, h, boxstyle=f"round,pad=0.0,rounding_size={rounded}",
-                       linewidth=lw, edgecolor=ec, facecolor=fc, zorder=2)
+        tc=C_INK, weight="normal", rounded=0.02, ha="center", va="center", pad=0.5):
+    # `pad` grows the drawn box outward around its centered text -> visible breathing
+    # room between text and the border. Kept small so the growth clears neighbours/arrows.
+    p = FancyBboxPatch((x, y), w, h, boxstyle=f"round,pad={pad},rounding_size={rounded}",
+                       linewidth=lw, edgecolor=ec, facecolor=fc, zorder=2, mutation_aspect=1)
     ax.add_patch(p)
     if text:
         ax.text(x + w / 2 if ha == "center" else x + 0.6, y + h / 2, text,
@@ -241,7 +243,7 @@ def fig3():
     arrow(ax, hop3x + w / 2, 62, hop3x + w / 2, 46.5, color=C_ASSOC, lw=1.4, ls=(0, (3, 2)))
 
     box(ax, 3, 29, 46, 17, "", fc="#EEF4F1", ec=C_SUPPORTED, lw=1.4, rounded=0.03)
-    ax.text(26, 44.4, "STAT6 cis-effect: FALSIFIED (S4.4)", ha="center", fontsize=8.0, weight="bold", color="#1B6B52")
+    ax.text(26, 44.4, "STAT6 cis-effect: RULED OUT (S4.4)", ha="center", fontsize=8.0, weight="bold", color="#1B6B52")
     ax.text(26, 37.0,
             "Under NAB2-KD (authors' genome-wide DE):\n"
             "STAT6 log$_2$FC $+0.087$, adj. $p$ 0.788 $\\rightarrow$ UNMOVED\n"

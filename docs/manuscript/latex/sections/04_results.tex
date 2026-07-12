@@ -92,13 +92,13 @@ receipt --- including the abstention (IL2, \emph{untested}) and the confident, r
 To move ``the referee discriminates'' from assertion to a small measured result, we ran three checks as a
 bounded kernel analysis inside the workbench (\S{}3.4); Figure 3 collects these diagnostics.
 
-\textbf{Control 1 --- the QC gate does its job.} We applied the referee to every gene whose knockdown \emph{fails} QC
+\noindent \textbf{Control 1 --- the QC gate does its job.} We applied the referee to every gene whose knockdown \emph{fails} QC
 at the 8-hour condition (no guide reaching a significant knockdown call in T4): \textbf{2,430} genes. All 2,430
 returned \emph{untested} at hop 0 --- a \textbf{100\%} rate, with no leakage into a spurious \emph{refuted} or \emph{supported}
 verdict. The gate converts failed experiments into an honest ``cannot say,'' exactly as designed, and does so
 without exception across the full failed-knockdown set.
 
-\textbf{Control 2 --- the disease hop's stringency is substrate-inherited, and its pass count is label-dependent.}
+\noindent \textbf{Control 2 --- the disease hop's stringency is substrate-inherited, and its pass count is label-dependent.}
 Across the referee's native pair space of all \textbf{47,220} (gene $\in$ A) $\times$ (disease $\in$ C) combinations at the
 8-hour condition, the disease hop supports only \textbf{406 (0.86\%)} and refutes the remaining \textbf{99.14\%}. That
 stringency, however, is not the referee's own doing: under \textbf{2,000} permutations of the disease labels
@@ -119,7 +119,7 @@ stringency is substrate-inherited} --- not a demonstration of the referee's own 
 control speaks to the disease hop; it does not re-open the program-hop tautology of \S{}3.3, which is a
 construction property, not a chance one.)
 
-\textbf{Rank stability under alternative objective weights.} The ranking objective (\S{}3.2) has three free weights
+\noindent \textbf{Rank stability under alternative objective weights.} The ranking objective (\S{}3.2) has three free weights
 ($\beta$ on effect, \emph{w} on direct co-mention, \emph{w\textsubscript{2}} on curated association; default $\beta$ = 1, \emph{w} = 1, \emph{w\textsubscript{2}} = 3). The
 weights set \emph{priority} among eligible survivors, not the supported/refuted verdict, which is
 weight-independent by construction --- but a headline example that is rank-4 only at one weight setting would
