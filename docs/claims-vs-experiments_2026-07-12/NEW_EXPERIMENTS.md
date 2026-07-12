@@ -6,8 +6,9 @@ data it needs. Status is tracked in `docs/CLAIMS_EVIDENCE_LEDGER.md`. Priority =
 > **STATUS 2026-07-12: DE-RISKED → GO Option A** (Europe PMC as-of-T windowing verified; positive class
 > ~1,469/22,039, CI floor 807; `docs/spikes/heldout-eval-feasibility_2026-07-12.md`) **+ codex-debate-hardened**
 > (converged 3 rounds, repo-verified, no sanding; `docs/reviews/codex-debate_heldout-eval-plan_2026-07-12.md`).
-> **Build to the frozen spec** `docs/plans/heldout-eval-implementation-plan_2026-07-12.md` (v3). Next: CS-driver
-> health-check → enumerate frame + count manifest → 6 rankers + 2 co-primary contrasts → run in CS.
+> **Build to the frozen spec** `docs/plans/heldout-eval-implementation-plan_2026-07-12.md` (v3). **CS-driver
+> health-check PASSED 2026-07-12** (drivable on port 8000; driver defaults 8765 — override). Next:
+> enumerate frame + count manifest → 6 rankers + 2 co-primary contrasts → run in CS.
 **Serves:** M1/M3/M8/M10, R2/R4 — converts "SUPPORTED-BY-EXP (demonstration)" into "measured decision quality."
 **Why it's the gate:** every existing run is execution/reproduction; nothing measures precision/recall vs a
 baseline (`recon_analyses.md`). Without this the method is unpublishable as an *evaluated* method.

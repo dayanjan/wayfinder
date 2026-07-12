@@ -82,8 +82,11 @@ its sign; a null (CI spans 0) is reported straight.
 ## Where it runs
 **Claude Science (native)** via `drive-claude-science` — CS authors + runs the enumeration, the as-of-T sweep,
 and the metric harness, with provenance to `operon-cli.db` and an independent reviewer verifying every number
-(a §4.5-consistent CS result). **Prereq:** CS-driver health-check (flagged fragile 2026-07-11). **Fallback:** run
-locally and **state it ran locally** — never claim CS if it ran here (F-009 + calibrated-language discipline).
+(a §4.5-consistent CS result). **CS-driver health-check PASSED 2026-07-12** (end-to-end on a fresh project:
+sign-in → create → send → auto-approve code card → Python run → artifact, sha256 hash-verified vs local;
+`operon-cli.db` captured it). **Build note:** CS runs on **port 8000**; the driver + skill default to 8765 —
+override `--url http://localhost:8000/` + mint the nonce on `:8000`. **Fallback:** run locally and **state it ran
+locally** — never claim CS if it ran here (F-009 + calibrated-language discipline).
 
 ## Acceptance gates
 (a) exact enumerated frame + positive count reported, blinded feasibility gate passed (F-012);
