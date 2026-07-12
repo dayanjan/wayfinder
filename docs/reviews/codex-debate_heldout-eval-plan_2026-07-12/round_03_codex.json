@@ -1,0 +1,24 @@
+{
+  "round_number": 3,
+  "position_summary": "V3 resolves all remaining round-2 issues and is now a valid, buildable, decision-quality specification. Repository verification confirms that the stated eight-class Wayfinder order includes every answer emitted by `referee_triple`, including `refuted_program`, and that the disease-hop baseline uses the same significant-row collapse as `_hop3_for_disease`; the co-primary joint-outcome rule also prevents a disease-hop-carried result from being presented as a full three-hop win.",
+  "findings": [],
+  "escalated_findings": [],
+  "dropped_findings": [
+    {
+      "prior_finding_id": "F-002",
+      "rationale": "Fixed and repository-verified. `referee_triple.py` returns `untested`, `refuted_for_c`, `untested_for_c`, `refuted_effect`, `refuted_program`, `supported_weak`, `supported_flagged`, or `supported`. V3 lists exactly those eight classes in an explicit best-to-worst evaluation order, includes the previously omitted `refuted_program`, freezes score and pair-id tie-breaking, and correctly identifies this as a new whole-frame evaluation policy rather than the deployed proposer\u2019s existing order."
+    },
+    {
+      "prior_finding_id": "F-011",
+      "rationale": "Fixed and repository-verified. `_hop3_for_disease` filters the exact gene/program-condition/disease triple, defines support by the existence of at least one row with `p_adj_fdr < 0.05`, and selects `sig.sort_values(\"p_adj_fdr\").iloc[0]` for the supported receipt. V3 specifies that same minimum-FDR significant-row collapse, followed by OR and FDR ranking, and supplies stable pair-id tie-breaking for a total order."
+    },
+    {
+      "prior_finding_id": "F-014",
+      "rationale": "Fixed. V3 gives both contrasts co-primary decision roles and freezes the permitted interpretation of every relevant joint outcome: only two positive contrasts support the full three-hop value claim; broad-positive/mechanistic-null permits only a disease-hop-carried narrow result; and a broad null is reported straight. This closes the prior ambiguity about what constitutes a Wayfinder win."
+    }
+  ],
+  "new_findings": [],
+  "convergence_status": "converged",
+  "convergence_sanding_warning": null,
+  "recommended_next_question": "debate concluded"
+}

@@ -1,0 +1,81 @@
+{
+  "round_number": 2,
+  "position_summary": "V2 fixes most round-1 validity problems and preserves the novel hypothesis as an open retrospective test with an honest-null commitment. Repository inspection nevertheless shows that the Wayfinder total order is still incomplete, the disease-hop comparator is not executable as specified, and the incremental contrast needs a clearer inferential role before the result is decision-quality.",
+  "findings": [
+    {
+      "id": "F-014",
+      "title": "The incremental disease-hop contrast lacks a frozen decision role",
+      "severity": 4,
+      "likelihood": 5,
+      "blast_radius": 4,
+      "priority": "P1",
+      "evidence": "V2 freezes `precision@20(Wayfinder) \u2212 precision@20(B-lit-rarity)` as the sole PRIMARY estimand, while Wayfinder \u2212 B-disease-hop-only is only called a \u201csecond pre-registered contrast.\u201d Yet the estimand asks whether data-grounded Wayfinder outperforms literature rarity, and the plan elsewhere says the headline includes Wayfinder\u2019s incremental value beyond the disease hop. No joint decision rule says what conclusion is permitted if Wayfinder beats literature rarity but fails to beat disease-hop-only.",
+      "concern_path": "The likely result could be positive against literature rarity but null or negative against the GWAS-derived disease-hop baseline. Calling that a Wayfinder or three-hop success would not establish incremental value from QC/effect/program evidence; calling only the first contrast primary permits precisely that overinterpretation.",
+      "suggested_action": "Freeze a two-part conclusion rule: the literature-rarity contrast tests the broad fixed-substrate hypothesis, while the disease-hop contrast is a required mechanistic decomposition. Make both co-primary with multiplicity control, or explicitly state that failure on the incremental contrast permits only a disease-hop-driven result, not a full-Wayfinder advantage claim.",
+      "novelty_flag": true,
+      "concern_type": "novelty"
+    }
+  ],
+  "escalated_findings": [
+    {
+      "prior_finding_id": "F-002",
+      "rationale": "The repository contradicts the claimed exhaustive verdict order. `referee_triple.py` can return `refuted_program`, but v2\u2019s order omits that class entirely. The implemented `propose.py` also does not order survivor classes\u2014clean, weak, and flagged survivors are pooled and sorted only by score\u2014so the proposed class precedence is a new evaluation policy, not an exact extension of the implementation. Score normalization and ordering for all rows must be frozen explicitly."
+    },
+    {
+      "prior_finding_id": "F-011",
+      "rationale": "Adding the baseline addresses the concept but not its executable definition. T3 can contain multiple cluster rows for one gene\u2013disease pair; `referee_triple.py` defines support as any FDR<0.05 and selects the lowest-FDR significant row for its receipt, whereas v2 says \u201cOR, then \u2212FDR\u201d without specifying row aggregation. `B-enrichment-continuous` is then described as the same raw statistic as baseline 2, leaving the two baselines indistinguishable or implementation-dependent."
+    }
+  ],
+  "dropped_findings": [
+    {
+      "prior_finding_id": "F-001",
+      "rationale": "The common frame is now explicitly filtered to `ac_lit_asof<=1`, with establishment defined inside that frame."
+    },
+    {
+      "prior_finding_id": "F-003",
+      "rationale": "The monotonic-shrink claim was removed and exact sliced-frame reconstruction plus overlap reporting is required."
+    },
+    {
+      "prior_finding_id": "F-004",
+      "rationale": "The projected positive count is labeled preliminary, and exact enumeration is a prerequisite."
+    },
+    {
+      "prior_finding_id": "F-005",
+      "rationale": "V2 replaces marginal-CI comparison with paired method-difference inference and clustered resampling. Implementation details should be documented, but the original defect is addressed."
+    },
+    {
+      "prior_finding_id": "F-006",
+      "rationale": "A single cutoff and contrast are frozen as the primary estimand, with other cutoffs and dates designated secondary."
+    },
+    {
+      "prior_finding_id": "F-007",
+      "rationale": "The method is correctly labeled an `ac_known`-ablated evaluation variant rather than identical to the deployed proposer."
+    },
+    {
+      "prior_finding_id": "F-008",
+      "rationale": "The proposed helper is mechanically addable to `sources.py`: `cooccur_count` already builds a fully parenthesized two-arm query passed to `europepmc_count`. V2 adds boundary, alias, golden-query, and receipt tests."
+    },
+    {
+      "prior_finding_id": "F-009",
+      "rationale": "A committed, hashed query/count manifest sufficient to recompute metrics resolves dependence on mutable live responses."
+    },
+    {
+      "prior_finding_id": "F-010",
+      "rationale": "The temporal language is now correctly retrospective and the novel claim is preserved. Repository evidence supports the provenance claim: project source-paper records state that T3 disease membership came from Open Targets genetic evidence\u2014GWAS, burden, and ClinVar\u2014not Europe PMC co-mentions. This is distinct from the outcome label, though it remains a contemporary GWAS-derived substrate with locus-to-gene limitations."
+    },
+    {
+      "prior_finding_id": "F-012",
+      "rationale": "V2 freezes an ordered fallback based only on label counts and prohibits performance inspection before frame lock."
+    },
+    {
+      "prior_finding_id": "F-013",
+      "rationale": "V2 explicitly scopes the outcome as popularity-confounded and adds stratified reporting plus blinded manual label checks."
+    }
+  ],
+  "new_findings": [
+    "F-014"
+  ],
+  "convergence_status": "still iterating",
+  "convergence_sanding_warning": null,
+  "recommended_next_question": "Specify the exhaustive verdict order including `refuted_program`, define how multiple T3 cluster rows collapse into each disease-hop score, distinguish the two enrichment baselines, and freeze what conclusion is allowed for each joint outcome of the literature-rarity and disease-hop contrasts."
+}

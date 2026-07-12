@@ -70,7 +70,9 @@ is **G1** in `NEW_EXPERIMENTS.md` and is the one thing blocking an evaluated-met
 - Literature novelty audit: `docs/reviews/contribution-novelty-audit_2026-07-12/` (VERDICT.md + 15 agent files)
 - Claims↔experiments reconciliation: `docs/claims-vs-experiments_2026-07-12/` (RECONCILIATION.md + 6 recon + CLAIMS_LEDGER.md)
 - New-experiment plan (gaps G1–G3): `docs/claims-vs-experiments_2026-07-12/NEW_EXPERIMENTS.md`
-- Held-out-eval scope (G1): `docs/plans/heldout-eval-scope_2026-07-12.md`
+- Held-out-eval (G1): scope `docs/plans/heldout-eval-scope_2026-07-12.md`; **frozen build spec (v3, debate-hardened)**
+  `docs/plans/heldout-eval-implementation-plan_2026-07-12.md`; de-risk `docs/spikes/heldout-eval-feasibility_2026-07-12.md`;
+  codex-debate (converged, GO Option A) `docs/reviews/codex-debate_heldout-eval-plan_2026-07-12.md`
 
 ## Maintenance
 On any change that affects a claim (new experiment, manuscript edit, a fix applied), update the row's Status +
