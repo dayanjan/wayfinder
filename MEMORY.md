@@ -5,6 +5,21 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+**2026-07-11 (OVERNIGHT autonomous, full-close) — MANUSCRIPT SUBMISSION-READY: 4 FIGURES + RELATED-WORK +
+EVIDENCE-STRENGTHENING + 5-REVIEWER HARDENING; 32pp, 0 ERRORS.** Autonomous overnight run (operator asleep).
+Built **4 deterministic figures** (architecture / funnel+ledger / diagnostics / NAB2 hero chain) from committed
+JSON and wired them in (23pp→32pp). Added **§2.4 Related approaches** (honest positioning vs AI co-scientist /
+FutureHouse Robin+PaperQA2 / SciAgents / Coscientist / The AI Scientist) + **§5.3b evidence-strengthening
+program** (time-sliced held-out, external panel, colocalization, prospective perturbation); ~28 DOI-verified
+refs. **Corrected a load-bearing genomics error** — NAB2 and STAT6 are convergent tail-to-tail neighbours
+(~43 kb promoters, 3′ ends overlap; Ensembl GRCh38), NOT the "~1.9 kb" the draft claimed. Ran a **5-reviewer
+critical pass (4 Claude agents + Codex adversarial)** then a **final repo-read Codex verification debate** →
+all P0s fixed (funnel 43-not-44 matching Fig 2; 395/406 + 2,430/1,914 reconciliations) + substantive P1s
+(STAT6 cis scoped to "no detectable expression-level cis-effect"; §2.4 de-strawmanned; abstract names the
+un-dischargeable 12q13 confounder; §5.2 hedged on the Th2-shift sign; n=1 flagship limitation). Codex verdict:
+**submission-defensible on its own terms.** Committed+pushed `62bb929`. **Deliverable to read:
+`docs/manuscript/latex/main.pdf` (32pp). Next = read it → Frontiers formatting, or an offline strengthener
+(held-out eval / coloc).** Review records in `docs/reviews/`. See `memory/NEXT_SESSION.md`.
 **2026-07-11 (evening, full-close) — REVISION MVP: 4 SLICES LANDED (reframe + 12q13 + C10 + C2); MANUSCRIPT
 23pp, 0 ERRORS.** Executed the converged revision roadmap. **Reframe** (`cde28b2`): retitled →
 "Receipt-backed prioritization for literature-based discovery using Perturb-seq evidence"; top-line →
@@ -142,4 +157,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-11 | **Full draft + LaTeX + citations + review roadmap** | §4 Results (CS-reproduced sensitivity panel, delta-0; 3-round debate 10→1→1) + §5 + Abstract → full §1–§5 arc. Ported LightsOut **citation stack** + `semantic_scholar.py`; **references.bib 4→12** (DOIs resolved/audited, **Zotero 12 in-sync**), wired into .tex. Built **LaTeX manuscript** (LightsOut approach) → **21pp PDF, 0 errors**; fixed equation margin-bleed + colored→black headings. Two **Major-Revision reviews** → dossier + **converged 3-round revision debate** → top-line = "prioritization + abstention + falsification diagnostics". **Codex 0.141→0.144.1, default gpt-5.6-sol.** Next = revision MVP |
 | 2026-07-11 (evening) | **Revision MVP: reframe + 12q13 + C10 + C2** | 4 tested commits (`cde28b2`→`676fead`), manuscript 23pp/0-err. Reframe (title + prioritization/abstention/falsification top-line, "calibrated"=language-only, CS→replicable-in-principle); §4.4b foregrounds the 12q13 GWAS-label confounder (3 mechanisms separated); **C10** gate grid (`gate_grid.py`+§4.1c: NAB2×eczema rank {1,4,5} med 4, survives 18/27, misses=pct=0.75); **C2** hard negatives (`hard_negatives.py`+§4.2b: referee own-hop cull 16.9% arbitrary / 15.7% of top-association noms, vs 67.3% substrate-inherited — rebuts B1). All LOCAL (repo code+cache, §19), cache-free. Next = 4 figures |
 
-_Last updated: 2026-07-11 (evening — revision MVP: reframe + 12q13 + C10 + C2 landed, manuscript 23pp; next = the 4 figures)_
+| 2026-07-11 (overnight) | **Manuscript: figures + related-work + review-hardening** | 4 deterministic figures wired (23pp→32pp, 0 err); §2.4 related-work + §5.3b strengthening; **genomics fix** (NAB2–STAT6 convergent ~43kb, not 1.9kb; Ensembl-verified); 5-reviewer pass (4 Claude + Codex) + final Codex debate → all P0/P1 fixed; ~28 DOI-verified refs; deliverable `main.pdf`; `62bb929` |
+
+_Last updated: 2026-07-11 (overnight — manuscript submission-ready: figures + related-work + review-hardened, 32pp; next = read main.pdf → Frontiers formatting or a strengthener)_

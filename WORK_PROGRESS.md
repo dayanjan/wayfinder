@@ -8,7 +8,7 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 - **Active workstream:** **Submission → CS-native 3-min video (see the Working-target line below). Next session = capture + assemble + submit.** _(Manuscript + remaining-experiments gap analysis deferred — post-submission upside, not this week.)_ Prior finding state: CS proven to AUTHOR + run the LBD generator 100% live from scratch (micro-sweep) AND at full scale over all genes × 3 conditions (loose sweep: filter-safe, NAB2 reproduced Stim8hr-specific, 39 candidates in `CANDIDATES.md`). NAB2 drug-target verdict: DepMap negative-for-cancer; **GEO direction mining → association-backed NAB2-DOWN per-cell in lesional skin → knockdown likely backwards, NAB2 reads as a Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Referee direction-label bug fixed (verdicts safe). Only unbuilt CS stretch = Stage 2. Demo/app/notebook remain the **submission MVP**.
 - **Working target: submit by EOD Friday 2026-07-10** (operator out of town Sat–Mon; official deadline still 2026-07-13). **Submission pivoted to a CS-native 3-min video**; tonight banked all design + de-risk + a 2-round codex-debate hardening (spine held). Friday = pre-capture 4 required frames (blockers) → assemble → gate → submit. Streamlit app + prior demo video = fallback MVP. Assets: `docs/demo-video-pack/cs/` + `assets/`.
 - **Active thread:** **MANUSCRIPT** for FRMA — **revision MVP underway; manuscript now 23pp/0-errors.** DONE this session: **reframe** (title → "Receipt-backed prioritization…"; top-line = prioritization + abstention + falsification; "calibrated"=language-only; CS→replicable-in-principle), **12q13 foregrounding** (§4.4b, 3 mechanisms separated), **C10** gate grid (`gate_grid.py`+§4.1c), **C2** hard negatives (`hard_negatives.py`+§4.2b, rebuts B1) — all run LOCALLY (repo code+cache, §19), cache-free. **Next = the 4 figures** (Fig 1/2 schematics HTML/SVG; Fig 3 NAB2 chain + Fig 4 sensitivity/permutation panel — render locally from committed JSON, or CS kernel). Remaining MVP strengtheners: C6 refinement (low value — Control 2 covers it), C3c positive control, C3a temporal. Submission stays fire-ready in parallel.
-- **Last updated:** 2026-07-11 (evening — revision MVP: reframe + 12q13 + C10 + C2 landed; manuscript 23pp; next = 4 figures)
+- **Last updated:** 2026-07-11 (overnight autonomous — manuscript SUBMISSION-READY: 4 figures + §2.4 related-work + §5.3b strengthening + genomics fix + 5-reviewer/Codex hardening; 32pp/0-err; deliverable `docs/manuscript/latex/main.pdf`; next = read it → Frontiers formatting or a strengthener)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/wayfinder` (private; renamed from pyzobot-arbiter, history preserved; flip public via `SUBMIT_CHECKLIST.md` — say "scrub and flip")
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -29,6 +29,25 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-11 (overnight, autonomous) — Session close (full-close): manuscript figures + research + review-hardening
+Operator handed the manuscript to an unattended overnight run and slept. Delivered a **submission-ready draft**.
+**Figures:** built 4 deterministic figures (`figures/make_figures.py`, from the committed analysis JSON) —
+architecture (construction-vs-referee separated), funnel+ledger, diagnostics panel (Control 1/2 + C10 gate
+grid + C2 hard negatives + rank stability), NAB2 4-hop hero chain — wired with captions; **23pp→32pp, 0 errors**.
+(Rendered locally, not in Claude Science: CS driver port-mismatched/fragile, and the numbers were already
+CS-verified in a prior session.) **Research (3 background agents → verified sources):** new **§2.4 Related
+approaches** (honest positioning vs AI co-scientist / Robin+PaperQA2 / SciAgents / Coscientist / The AI
+Scientist + "Plausibility Is Not Prediction"), new **§5.3b evidence-strengthening program**; ~28 DOI-verified
+references (all resolution-checked). **Load-bearing genomics fix:** "NAB2 ~1.9 kb from STAT6" was WRONG —
+Ensembl GRCh38 shows convergent tail-to-tail neighbours (3′ ends overlap ~72 bp, promoters ~43 kb apart);
+corrected everywhere and used to strengthen the cis-argument. **Critical review:** 4 Claude agents
+(referee / immunology+genetics / LBD-methods / statistics) + Codex adversarial → all P0s (funnel 43-not-44
+matching Fig 2; 395/406 + 2,430/1,914 reconciliations) + P1s fixed; then a **final repo-read Codex debate**
+(8/10 RESOLVED; scoped the STAT6 "falsify"→"no detectable expression-level cis-effect"; the "bib corruption"
+finding was a verified FALSE POSITIVE — proper UTF-8, Codex terminal mojibake). Codex: **submission-defensible
+on its own terms.** Committed+pushed `62bb929`. Review records in `docs/reviews/`. **Deliverable to read:
+`docs/manuscript/latex/main.pdf`.** Next = read it → Frontiers formatting, or an offline strengthener.
+
 ### 2026-07-11 20:35 — Session close (full-close): revision MVP — reframe + 12q13 + C10 + C2
 Executed the first four slices of the converged revision roadmap; 4 tested commits (`cde28b2`→`676fead`),
 all pushed; manuscript **21pp→23pp, 0 errors**. **Reframe** (`cde28b2`): retitled → *"Receipt-backed
