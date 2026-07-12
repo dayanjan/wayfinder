@@ -13,10 +13,12 @@ audited by an independent critic model (\S{}4.5), and replicated by a second ven
 
 At the 8-hour stimulation condition, the generator built a disease-answer-free universe of \textbf{3,935}
 knockdown-gated, program-significant genes, from which the gate admitted \textbf{22,039} eligible
-(gene, disease) pairs. Running the deterministic referee over those pairs returned \textbf{43} with a positive
-disease hop, of which \textbf{30} held the full chain cleanly (nonzero positive effect); the remainder split into
-10 effect-zero \emph{supported-weak}, 3 off-target \emph{supported-flagged}, and 1 \emph{refuted-effect}, with the other
-\textbf{21,995} pairs \emph{refuted for the specific disease} (Table 3). The generate-to-cull ratio is the headline
+(gene, disease) pairs. Running the deterministic referee over those pairs returned \textbf{43} \emph{supported} pairs --- a positive
+disease hop together with an admissible effect: \textbf{30} held the full chain cleanly (nonzero positive
+effect), 10 were effect-zero \emph{supported-weak}, and 3 were off-target \emph{supported-flagged}. One
+further pair had a positive disease hop but a refuted effect (\emph{refuted-effect}), and the remaining
+\textbf{21,995} pairs were \emph{refuted for the specific disease}, so that 43 + 1 + 21,995 = 22,039
+(Table 3). The generate-to-cull ratio is the headline
 shape: 22,039 machine-generated questions reduced by data receipts to 30 clean survivors, none asserting
 more than a table value supports.
 
@@ -27,12 +29,13 @@ construction); the dominant cull among eligible pairs is therefore disease-speci
 falsification. The program hop discriminates in an individual triple's receipt (a reported quantity --- NAB2's
 Ota \emph{z} = 7.71), not as an independent filter on funnel survivors. Second, the ``43'' is a \textbf{joint} product
 of the literature-novelty gate and the referee, not a referee-only count: the referee alone supports
-\textbf{395 of 47,220} pairs, and the novelty gate culls 395 $\rightarrow$ 43. The honest reading is ``referee-supported
+\textbf{395 of 47,220} pairs --- of the \textbf{406} whose disease hop passes (\S{}4.1b), 395 also clear the
+knockdown-QC, effect, and program hops --- and the novelty gate then culls 395 $\rightarrow$ 43. The honest reading is ``referee-supported
 \emph{among literature-eligible} pairs.'' Accordingly we present the ledger below as a \textbf{demonstration that the
 referee discriminates} --- that on worked examples it will support, decline to test, and refute, each with a
 receipt --- not as a measured precision or recall.
 
-The verdict ledger (Table 2) places five genes across the full verdict spectrum, each with its per-hop
+The verdict ledger (Table 2; Figure 2) places five genes across the full verdict spectrum, each with its per-hop
 receipt:
 
 {\def\LTcaptype{none} % do not increment counter
@@ -70,10 +73,24 @@ zero-literature absence, which would reward obscurity (\S{}3.2). We note that th
 the verdict space, not sampled to estimate a rate; \S{}4.1b supplies a disease-hop support-\emph{rate} control over
 the full A$\times$C space --- not a ledger accuracy rate, nor a claim of precision or recall.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig2_funnel_ledger}
+\caption{\textbf{The honest funnel and the verdict ledger.} \emph{Left:} at the 8-hour condition the
+generator built a universe of 3{,}935 genes and admitted 22{,}039 eligible (gene, disease) pairs, of which
+43 passed the disease and effect hops and 30 held the full chain cleanly. The reductions carry the honesty
+caveats restated in the text: the referee alone supports 395/47{,}220 pairs and the novelty gate culls
+395$\rightarrow$43, so ``43 supported'' is a joint gate$\times$referee count, and within the funnel the
+program hop cannot fail. \emph{Right:} five genes spanning the verdict space, each with its deciding
+receipt --- including the abstention (IL2, \emph{untested}) and the confident, receipt-backed \emph{no}
+(SLC1A5, \emph{refuted}).}
+\label{fig:funnel}
+\end{figure}
+
 \subsection*{4.1b Sensitivity: two negative controls and rank stability}\label{b-sensitivity-two-negative-controls-and-rank-stability}
 
 To move ``the referee discriminates'' from assertion to a small measured result, we ran three checks as a
-bounded kernel analysis inside the workbench (\S{}3.4).
+bounded kernel analysis inside the workbench (\S{}3.4); Figure 3 collects these diagnostics.
 
 \textbf{Control 1 --- the QC gate does its job.} We applied the referee to every gene whose knockdown \emph{fails} QC
 at the 8-hour condition (no guide reaching a significant knockdown call in T4): \textbf{2,430} genes. All 2,430
@@ -165,7 +182,11 @@ autoimmunity story, SLC1A5 clears the QC gate (1/2 guides significant) and shift
 its disease hop \emph{refutes}: it appears in nine autoimmune-disease cluster gene-sets but none reaches
 FDR \textless{} 0.05 (best FDR 0.054, type 1 diabetes, OR 2.73). The enrichment data decline the link. This is the
 verdict a confirmation-shaped pipeline never produces, and it is deterministic --- the \emph{no} is computed, not
-argued.
+argued. We are precise about \emph{which} kind of \emph{no} this is: SLC1A5's refutation sits at the
+substrate's own FDR boundary (best 0.054), and \S{}4.1b shows that the disease hop's stringency is inherited
+from the enrichment study rather than supplied by the referee. The referee's \emph{own} confident no is
+better located in the knockdown-QC gate --- IL2 above, and, at scale, the roughly one perturbation in six the
+gate flags as \emph{untested} on arbitrary genes (\S{}4.2b).
 
 \subsection*{4.2b Out-of-funnel discrimination: the referee's own edge, quantified}\label{out-of-funnel-discrimination-the-referees-own-edge-quantified}
 
@@ -177,10 +198,12 @@ referee report pressed: once the substrate-inherited disease hop is set aside, h
 both offline and outcome-independent.
 
 \emph{On arbitrary genes.} We applied the referee to \textbf{all 11,415} genes perturbed at the 8-hour
-condition --- the full out-of-funnel population, not the pre-gated universe --- pairing each with an arbitrary
+condition with a resolvable gene identifier (of 12{,}539 in the knockdown-efficiency table) --- the full
+out-of-funnel population, not the pre-gated universe --- pairing each with an arbitrary
 disease (the referee's hops 0--2 are disease-independent). The referee's own hops cull \textbf{16.9\%} of
-them: \textbf{16.8\%} (1{,}914 genes) return \emph{untested} because the knockdown fails QC --- genes the
-substrate cannot speak to --- with only a small remainder refuted at the effect or program hop. The
+them: \textbf{16.8\%} (1{,}914 genes) return \emph{untested} because the knockdown fails QC --- the
+identifier-resolved subset of the 2{,}430 failed-knockdown genes of Control 1 (\S{}4.1b), which counts the
+full table --- with only a small remainder refuted at the effect or program hop. The
 knockdown-QC gate is thus the referee's dominant own-edge discriminator (one arbitrary gene in six cannot be
 tested here), while the effect gate, lenient by design (any nonzero downstream signal passes), rarely fires
 on unselected genes. This is the honest shape of the referee's own \emph{no}: it is real, and it is
@@ -202,6 +225,27 @@ even measurable; the referee's own hops can, and they flag roughly one in six of
 the discrimination the referee supplies on its own --- reported separately from, and not conflated with, the
 disease hop's substrate-inherited stringency.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{fig3_diagnostics}
+\caption{\textbf{Diagnostics of the referee's behaviour} (Stim8hr; each panel a diagnostic of the
+machinery, not a validation). \textbf{(A)} Control 2: across 2{,}000 disease-label permutations the null
+supports 467.7$\pm$10.9 pairs (0.99\%); the observed 406 (0.86\%) sits 5.6 SD \emph{below} the null, so the
+near-total refutation rate is inherited from the enrichment substrate, not supplied by the referee.
+\textbf{(B)} Threshold grid (C10): clean-survivor count and NAB2$\times$eczema rank across
+\texttt{ab\_gate\_pct}$\times$\texttt{min\_bc}$\times$\texttt{tau}; survivors rise as the gate loosens and
+NAB2 ranks 1--5 (median 4) wherever eligible, dropping out only at the 0.75 literature floor. \textbf{(C)}
+Out-of-funnel discrimination (C2): the referee's own hops cull 16.9\% of 11{,}415 arbitrary genes and
+15.7\% of a frozen curated-association nominator's 600 top guesses --- including strongly-associated hard
+negatives (IL36RN$\times$psoriasis, TREX1$\times$lupus, PADI4$\times$rheumatoid arthritis), each
+\emph{untested} for a failed knockdown --- separated from the substrate-inherited disease-hop cull.
+Control 1: all 2{,}430 failed-knockdown genes returned \emph{untested} (100\%, no leakage). \textbf{(D)}
+Flagship rank stability (Control 3): NAB2's rank across 27 objective-weight settings (median 4; top-5 in
+89\%) and across gate cells where eligible (1--5); the verdict is invariant throughout. Panels render the
+committed analysis outputs, reproduced byte-for-byte inside the workbench (\S4.5).}
+\label{fig:diagnostics}
+\end{figure}
+
 \subsection*{4.3 NAB2 $\rightarrow$ Th1/Th2 $\rightarrow$ atopic eczema, hop by hop}\label{nab2-th1th2-atopic-eczema-hop-by-hop}
 
 The highest-ranked near-novel survivor is \textbf{NAB2}, near-novel by an operational criterion --- low direct
@@ -215,8 +259,10 @@ hop (Figure 4):
   \textbf{Hop 0 --- knockdown QC.} 2/2 guides significant, best adjusted \emph{p} $\approx$ 1$\times$10\textsuperscript{-}\textsuperscript{1}\textsuperscript{6} (guide expression 0.056
   vs.~non-targeting control 0.567). The perturbation worked.
 \item
-  \textbf{Hop 1 --- effect.} On-target knockdown, effect -16.9 (-16.88 exact), \textbf{301 downstream differentially expressed genes},
-  no off-target flag. A large, clean transcriptional consequence.
+  \textbf{Hop 1 --- effect.} On-target knockdown, effect -16.9 (-16.88 exact; the referee's signed effect
+  statistic, not a log-fold-change --- distinct from the genome-wide log$_2$FC of $-3.08$ for NAB2 itself in
+  \S{}4.4), \textbf{301 downstream differentially expressed genes}, no off-target flag. A large, clean
+  transcriptional consequence.
 \item
   \textbf{Hop 2 --- program.} Th2-associated in the Ota contrast \cite{ota2021} (\emph{z} = 7.71, adjusted \emph{p} = 1.96$\times$10\textsuperscript{-}\textsuperscript{1}\textsuperscript{3},
   log-fold-change +0.63; polarity marker-checked); not significant in the H\"{o}llbacher contrast \cite{hollbacher2020} --- one of
@@ -224,23 +270,50 @@ hop (Figure 4):
 \item
   \textbf{Hop 3 --- disease.} Member of two atopic-eczema-enriched modules: OR 3.90 (FDR 0.0028) and OR 3.43
   (FDR 0.0224). These are genome-wide functional immune modules (significant clusters 90 and 100 ---
-  BACH2, BCL6, IRF4, CD28, IL4, IL10), not a 12q13 locus artifact.
+  BACH2, BCL6, IRF4, CD28, IL4, IL10), not a locally colocated 12q13 gene-set artifact --- though the LD
+  provenance of the GWAS disease \emph{label} remains open (\S{}4.4b).
 \end{itemize}
 
 The precisely scoped claim is: \emph{consistent with a re-derived NAB2 $\rightarrow$ Th1/Th2 $\rightarrow$ atopic-eczema chain the literature
 has not made.} We keep the two receipt classes explicit even for the hero --- the knockdown, effect, and
 program hops rest on experimental perturbation measurements; the atopic-eczema link is a \textbf{genetic-
 association nomination} (an Open Targets GWAS-based disease label, without colocalization or LD control),
-not an expression claim or a proof of disease causality. An independent four-agent literature audit found
-zero papers connecting NAB2 either to Th1/Th2 polarization or to atopic eczema --- the finding is novel in
-the literature --- and the same audit surfaced the confounder we take up next.
+not an expression claim or a proof of disease causality. An independent four-agent literature audit surfaced
+no papers connecting NAB2 either to Th1/Th2 polarization or to atopic eczema (a targeted agent search, not
+an exhaustive systematic review, so we claim novelty in the surfaced literature rather than proven absence)
+--- NAB2's only described T-cell role is as an EGR-family coregulator, the Egr-1/NAB2 module tuning T-cell
+activation \cite{collins2008}, distinct from Th1/Th2 polarization --- and the same audit surfaced the
+confounder we take up next.
 
-\subsection*{\texorpdfstring{4.4 Falsifying the hardest confounder: the STAT6 \emph{cis}-effect}{4.4 Falsifying the hardest confounder: the STAT6 cis-effect}}\label{falsifying-the-hardest-confounder-the-stat6-cis-effect}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig4_nab2_chain}
+\caption{\textbf{NAB2 $\rightarrow$ Th1/Th2 $\rightarrow$ atopic eczema, hop by hop, with the two receipt
+classes kept distinct.} Hops 0--2 (blue) are experimental receipts --- the knockdown worked (2/2 guides),
+produced a large on-target effect ($-16.9$, 301 downstream DE genes), and shifted the Th2 program (Ota
+\emph{z}$=7.71$); together they license a re-derived NAB2 regulatory role the literature has not made. The
+disease hop (purple) is an association receipt --- eczema-module enrichment (OR 3.90 / 3.43) from a
+GWAS-based label --- and licenses a nomination, not experimental disease causality. The sharpest
+artifactual explanation of the perturbation signal, a CRISPRi \emph{cis}-effect on \emph{STAT6}, shows no
+detectable STAT6-expression change: STAT6 is unmoved under NAB2 knockdown (log$_2$FC $+0.087$, adj.\ \emph{p} 0.788). The confounder
+the substrate cannot discharge --- whether the GWAS eczema \emph{label} is LD-inherited within the 12q13
+atopy locus, where NAB2 and STAT6 are convergent neighbours with overlapping 3$'$ ends and promoters
+$\sim$43\,kb apart --- is foregrounded, not claimed resolved (\S4.4b).}
+\label{fig:nab2}
+\end{figure}
 
-NAB2 sits \textasciitilde1.9 kb from \emph{STAT6}, the master type-2/atopic regulator, so the sharpest artifactual explanation
-of NAB2's \emph{perturbation} signal is a CRISPRi \emph{cis}-effect: a guide targeting NAB2 could inadvertently
-repress the adjacent STAT6, and the observed Th2/eczema signal could be STAT6's, not NAB2's. We test this
-directly against the study authors' own deposited genome-wide differential-expression matrix (the 16.8 GB
+\subsection*{\texorpdfstring{4.4 Testing the hardest confounder: the STAT6 \emph{cis}-effect}{4.4 Testing the hardest confounder: the STAT6 cis-effect}}\label{falsifying-the-hardest-confounder-the-stat6-cis-effect}
+
+NAB2 and \emph{STAT6}, the master type-2/atopic regulator, are immediate neighbours in the 12q13 atopy
+locus --- convergently oriented (tail-to-tail), with overlapping 3$'$ ends and transcription start sites
+\textasciitilde43\,kb apart (GRCh38) --- so a CRISPRi \emph{cis}-effect --- a guide targeting NAB2's promoter
+inadvertently repressing STAT6, making the observed Th2/eczema signal STAT6's rather than NAB2's --- is the
+confounder a reviewer will raise first. The corrected geometry makes it \emph{a priori} weak: dCas9--KRAB
+silencing spreads promoter-proximally \cite{lensch2022}, and STAT6's promoter sits \textasciitilde43\,kb from
+the NAB2 guide, so strong promoter-directed spread is unlikely (the residual channel is 3$'$ transcriptional
+read-through across the overlapping ends, not promoter spreading). Because geometry alone is not decisive, we
+settle it empirically, against the study authors' own deposited genome-wide differential-expression matrix
+(the 16.8 GB
 \texttt{GWCD4i.DE\_stats.h5ad}, read lazily from public object storage by byte-range, no download). Under NAB2
 knockdown at Stim8hr:
 
@@ -275,20 +348,26 @@ Of 10,282 measured genes, 302 are significantly moved by NAB2 knockdown ($\appro
 the study's own QC fields and our finding analysis rather than the genome-wide DE row above: NAB2 and STAT6
 share zero perturbation-effect clusters (their knockdowns are not equivalent); NAB2 clears the study's own
 reproducibility bar (cross-guide/donor R 0.74); and the authors' own off-target flag --- a transcription
-start site within 10 kb showing significant down-regulation --- is False for NAB2, meaning their pipeline
-already found no \emph{cis} down-regulation of any near neighbor, STAT6 included. We therefore report the
-\emph{cis}-artifact as \textbf{refuted}: the signal is consistent with NAB2 perturbation rather than STAT6 bleed. We
-scope the claim precisely --- this strengthens the case that the \emph{perturbation} signal is NAB2-specific; it
-does not prove the disease link, which remains a genetic-association nomination.
+start site within 10 kb of the guide showing significant down-regulation --- is False for NAB2, so their
+pipeline found no \emph{cis} down-regulation of NAB2's immediate transcription-start-site neighbours (STAT6's
+own start site lies \textasciitilde43\,kb away, outside that window, and is covered directly by the
+genome-wide check above, where it is unmoved). We therefore find \textbf{no detectable STAT6-expression
+\emph{cis}-effect} at this readout: the signal is consistent with NAB2 perturbation rather than STAT6 bleed.
+We scope the claim precisely --- one aggregate Stim8hr expression null excludes a detectable expression-level
+\emph{cis}-effect, not every conceivable cis channel (transient, subset-specific, or chromatin-level) ---
+which is why we lean on it together with the geometric argument above (\S{}4.4): it strengthens the case that
+the \emph{perturbation} signal is NAB2-specific, and it does not prove the disease link, which remains a
+genetic-association nomination.
 
 \subsection*{\texorpdfstring{4.4b The confounder we cannot discharge: the 12q13 atopy locus}{4.4b The confounder we cannot discharge: the 12q13 atopy locus}}\label{the-confounder-we-cannot-discharge-the-12q13-atopy-locus}
 
 The STAT6 falsification addresses one of \emph{three} distinct ways the 12q13 locus could manufacture NAB2's
 eczema signal, and we separate them deliberately because only two are answerable with our data --- and we do
 not want the one we can falsify to stand in for the one we cannot. NAB2 lies within the 12q13
-atopic-dermatitis susceptibility locus, \textasciitilde1.9 kb from \emph{STAT6}. \textbf{(i) A CRISPRi \emph{cis}-effect}
---- the NAB2 guide silently repressing the adjacent STAT6, so the transcriptional signal is STAT6's --- is
-\textbf{falsified}: STAT6 is unmoved under NAB2 knockdown (\S{}4.4). \textbf{(ii) A cluster-membership
+atopic-dermatitis susceptibility locus, immediately adjacent to \emph{STAT6}: the two genes are convergently
+oriented, their 3$'$ ends overlap, and their promoters lie \textasciitilde43\,kb apart. \textbf{(i) A CRISPRi \emph{cis}-effect}
+--- the NAB2 guide silently repressing the neighbouring STAT6, so the transcriptional signal is STAT6's --- is
+\textbf{ruled out at the expression level}: STAT6 is unmoved under NAB2 knockdown (\S{}4.4). \textbf{(ii) A cluster-membership
 artifact} --- NAB2's eczema modules being a 12q13-colocated gene set rather than genome-wide functional
 modules --- is \textbf{rejected}: the significant modules (clusters 90 and 100) are genome-wide functional
 immune modules (BACH2, BCL6, IRF4, CD28, IL4, IL10), with STAT6 absent (\S{}4.6). \textbf{(iii) An
@@ -303,7 +382,8 @@ evidence for NAB2 as a Th1/Th2 regulator is receipt-backed and confounder-tested
 regulatory role to \emph{atopic eczema specifically} rests on a genetic-association label whose locus
 provenance remains unresolved. Resolving it requires variant-level colocalization against the 12q13
 atopic-dermatitis GWAS --- outside this substrate, and precisely the disease-hop analysis the loop nominates
-next (\S{}5.2, \S{}5.3). Stating the boundary this plainly is itself the calibrated-language discipline the
+next (\S{}5.2, \S{}5.3); that test itself presupposes a detectable NAB2 \emph{cis}-eQTL in CD4$^+$ T cells,
+without which even variant-level data cannot cleanly separate NAB2 from STAT6. Stating the boundary this plainly is itself the calibrated-language discipline the
 paper argues for: the honest verdict here is \emph{a receipt-backed regulatory nomination with an unresolved
 disease-label provenance}, not a settled NAB2$\rightarrow$eczema link.
 
@@ -322,7 +402,7 @@ it did not appear --- nothing was cherry-picked --- and independent re-querying 
 queries against the live APIs returned identical counts. \emph{Cross-family independence} is kept external by
 design (\S{}4.6).
 
-The self-audit is the part that mirrors the paper's own thesis (Figure 5). The author model (an Opus-class
+The self-audit is the part that mirrors the paper's own thesis. The author model (an Opus-class
 model) assembled the end-to-end receipt chain; an independent reviewer model (a Sonnet-class model),
 invoked at separate checkpoints, verified every reported number against the underlying artifacts and
 enforced calibrated language on the manuscript-facing output. It produced four verification checks: two
@@ -358,5 +438,8 @@ substrate cannot settle and which we leave open (\S{}5.3). It corrected an effec
 log-fold-change ratio; the \emph{z}-ratio is \textasciitilde3$\times$). And it reframed the distinctness argument onto its strongest
 support --- cluster co-membership, magnitude, and guide-specificity --- rather than the shared disease profile,
 which if anything \emph{aids} the confounder. That a hostile independent re-derivation reproduced every number
-and improved the framing is the strongest available evidence that the finding is a property of the data,
-not of our implementation.
+and improved the framing is the strongest available evidence that the reported quantities are a property of
+the deposited data --- reproducible independently of our code --- rather than an artifact of our
+implementation. We are careful about what this does and does not establish: it is evidence of computational
+robustness, not of biological validity, which the confounder analyses above and the limitations below
+(\S{}5.3) address separately.

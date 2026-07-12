@@ -76,7 +76,7 @@ foregrounded, not whether it is supported (we examine rank stability under alter
 each) and per-gene \texttt{ab}, applies the gate, then runs the deterministic referee \emph{first} (it is local and
 free) to keep only chain-held survivors (receipt-complete at every hop), and only then computes \texttt{ac\_lit}
 and the final score for those survivors. At the 8-hour condition this funnels 3,935 genes $\rightarrow$ 22,039 eligible
-(gene, disease) pairs $\rightarrow$ 43 with a positive disease-hop enrichment $\rightarrow$ 30 clean full-chain nominations.
+(gene, disease) pairs $\rightarrow$ 43 supported (positive disease hop with an admissible effect) $\rightarrow$ 30 clean full-chain nominations.
 
 \subsection*{3.3 The referee}\label{the-referee}
 
@@ -122,6 +122,22 @@ it discriminates at every hop (a gene whose knockdown fails QC returns \emph{unt
 real transcriptional effect is \emph{refuted} at hop 1). That out-of-funnel ledger is quantified in Section 4.2b.
 Second, the program hop, being a within-funnel tautology, discriminates in an individual triple's receipt
 --- as a reported quantity --- not as an independent filter on funnel survivors.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig1_architecture}
+\caption{\textbf{The Wayfinder architecture: construction separated from adjudication.} The generator
+builds a disease-answer-free universe of knockdown-gated, program-significant genes and applies a
+literature-novelty gate, yielding 22{,}039 eligible (gene, disease) pairs (\emph{construction filters},
+top). A deterministic referee then evaluates each pair hop by hop and returns one verdict ---
+\emph{supported}, \emph{refuted}, or \emph{untested} --- with a data receipt at every hop (\emph{referee
+decisions}, bottom). Hops 0--2 (knockdown QC, effect, program) are experimental receipts the referee owns;
+the disease hop is an association receipt whose near-total stringency is inherited from the substrate
+(\S4.1b). The whole loop runs inside an agentic workbench (Claude Science) with an independent
+language-critic self-audit; cross-vendor independence is supplied externally by a five-member replication
+lab (\S4.6).}
+\label{fig:architecture}
+\end{figure}
 
 \subsection*{3.4 The agentic loop, and how the instrument is operated}\label{the-agentic-loop-and-how-the-instrument-is-operated}
 

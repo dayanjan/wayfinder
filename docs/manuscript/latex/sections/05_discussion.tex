@@ -40,14 +40,17 @@ result as a nomination for the next experiment, not as a finding.
 
 Two lines of evidence bear on it. First, NAB2 is not a cancer dependency in the DepMap screens, which is
 consistent with (though not proof of) a regulatory rather than an essential role --- non-contradictory context
-rather than support. Second, and more informative, mining public expression data for the \emph{direction} of the
-NAB2--atopic-eczema association: in lesional atopic-dermatitis skin, NAB2 is \textbf{down} relative to non-lesional
+rather than support. Second, and more suggestive, an \emph{exploratory} mining of public lesional-versus-non-lesional
+atopic-dermatitis expression data (bulk and single-cell; datasets and accessions in the project's
+direction-analysis record, and outside the referee substrate) for the \emph{direction} of the
+NAB2--atopic-eczema association: NAB2 reads \textbf{down} in lesional atopic-dermatitis skin relative to non-lesional
 (bulk log\textsubscript{2}FC -0.32, FDR 0.002; anti-correlated with Th2 activity, $\rho$ -0.34), and a single-cell analysis
 confirmed this is a per-cell reduction in the disease-relevant compartments (keratinocyte -0.51,
 paired \emph{p} 0.027; T/NK -0.57) rather than a shift in cell-type composition. Read together, these are more
 consistent with NAB2 acting as a \textbf{Th2 brake that is lost or suppressed in chronic lesions} than as a Th2
-driver --- a reading that reconciles with the perturbation data (the brake is engaged during acute
-polarization and lost in chronic disease; knocking it down removes it). If that reading holds, the naive
+driver --- a reading whose concordance with the perturbation data turns on the \emph{sign} of the Th2-program
+change under NAB2 knockdown, which the substrate's directional metrics do not by themselves settle here, so
+we advance the brake model as the directional \emph{question} to test rather than an established concordance. If that reading holds, the naive
 therapeutic move --- topical knockdown --- is likely \emph{backwards}, and the direction to test is
 \textbf{restoration or up-modulation} of NAB2.
 
@@ -61,6 +64,13 @@ bench at the one experiment most worth running.
 \subsection*{5.3 Limitations}\label{limitations}
 
 We inherit the LBD tradition of a candid limitations section, and there is a great deal to be candid about.
+
+\textbf{One flagship, worked to depth; the rest nominated.} The full falsification apparatus --- the STAT6
+\emph{cis}-test, the independent cross-model replication, and the three-way 12q13 decomposition --- was
+applied to a single survivor (NAB2). The other 29 clean survivors carry their per-hop receipts but were not
+individually adjudicated to that depth, so the confounder-falsification workflow is \emph{demonstrated}, not
+\emph{evaluated at scale}; systematically applying it across survivors (and the held-out and external
+benchmarks of \S5.3b) is the work that would turn demonstration into measured performance.
 
 \textbf{The verdicts are nominations, not causal claims.} Every ``supported'' verdict means the chain held with a
 receipt at each hop, not that the biology is established. This is sharpest at the disease hop, which is an
@@ -101,6 +111,37 @@ reviewer is an independent \emph{role, model, and checkpoint}, but within a sing
 independence is supplied externally (\S{}4.6), not natively. And the headless driver depends on the workbench's
 web front-end, for which there is no stable public contract --- a replicability bridge over an API-less
 platform, honestly, not a durable interface. If the front-end changes, the driver must be re-fitted.
+
+\subsection*{5.3b What would strengthen the evidence, and how}\label{strengthening-the-evidence}
+
+We are direct about what the diagnostics of Section 4 do and do not establish. They show that the
+\emph{machinery} behaves as designed: the quality-control gate converts every failed knockdown into
+\emph{untested} without leakage, the referee refutes and demotes with receipts, its disease-hop stringency is
+label-dependent, and the flagship's rank is stable to the analysis's free parameters. They do \emph{not}
+establish that the referee \emph{decides correctly at scale} --- there is no external validation and no
+precision or recall against a ground truth, and we make no such claim. That gap is not a flaw to bury but the
+next programme of work, and the loop nominates it concretely.
+
+Four steps, in priority order, would convert these behavioural diagnostics into a measured decision-quality
+claim. \textbf{(1) A time-sliced held-out evaluation} \cite{yetisgen2009}: freeze the literature at a cutoff,
+generate against the pre-cutoff corpus, and measure recovery of gene$\rightarrow$program$\rightarrow$disease
+relationships established only afterward, reporting precision@$k$, mean average precision, and recall --- the
+standard that separates ``the machinery runs'' from ``the machinery is right.'' \textbf{(2) An external
+ground-truth panel} of known-true and known-false T-cell-program$\rightarrow$disease relationships, drawn from
+curated association evidence \cite{mountjoy2021} and the immunology literature, scored for precision, recall,
+and --- because the confident \emph{no} is the thesis --- the false-discovery and false-abstention rates on
+the \emph{refuted} and \emph{untested} classes specifically. \textbf{(3) Colocalization for the flagship}: the
+one confounder the substrate cannot discharge (\S4.4b) is exactly the analysis the loop nominates --- a
+variant-level colocalization or summary-data Mendelian randomization test \cite{giambartolomei2014,smr2016}
+between the 12q13 atopic-dermatitis GWAS \cite{paternoster2015} and CD4$^+$ T-cell \emph{NAB2} versus
+\emph{STAT6} expression, decisive given the two genes' convergent geometry, and a direct instance of the
+association-to-cause ladder that proximity alone cannot climb \cite{smemo2014,schaid2018}. \textbf{(4)
+Prospective perturbation}, the field's emerging gold standard \cite{gottweis2025}: an independent NAB2
+knockdown --- or, per the brake reading (\S5.2), a restoration --- in primary CD4$^+$ T cells, read out on
+Th1/Th2 markers with an orthogonal method to control for CRISPRi \emph{cis}-artifacts. None of these is gating
+for the present contribution --- a prioritization method with explicit abstention and falsification
+diagnostics --- but each is a rung on the ladder from association to cause, and naming them precisely is part
+of the calibrated-language discipline the paper argues for.
 
 \subsection*{5.4 Conclusion}\label{conclusion}
 

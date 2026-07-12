@@ -13,10 +13,10 @@ The paradigm's persistent weakness is not generation but \emph{triage}. An ABC s
 returns thousands of candidate links, and the ranking signals available to classical LBD are properties
 of the literature --- how rare a co-mention is, how strong an intermediate association looks. Rarity in the
 literature, however, tracks \emph{obscurity} at least as strongly as it tracks \emph{importance}: a gene can look
-novel simply because no one has studied it. The result is a long ranked list that no laboratory can work
+novel simply because no one has studied it \cite{stoeger2018}. The result is a long ranked list that no laboratory can work
 through, and the field has said so of itself. Reviewing a proposal submitted for funding consideration,
 three reviewers named the problem directly --- LBD \emph{``generates an enormous number of hypotheses, almost none
-of which ever get followed up''}. Standard evaluations of LBD (time-slicing, link prediction) measure
+of which ever get followed up''}. Standard evaluations of LBD (time-slicing, link prediction \cite{yetisgen2009,moreau2023}) measure
 whether the generator would have \emph{rediscovered} known links, not whether a specific proposed hypothesis is
 supported by independent experimental data it has not seen \cite{henry2021}. We are precise about the scope of the answer this enables: prioritizing a
 hypothesis against a held experimental substrate closes the \emph{triage} loop --- which of the machine's
@@ -27,7 +27,7 @@ including a \emph{no}.
 \subsection*{2.2 A held experimental substrate, and what counts as a receipt at each hop}\label{a-held-experimental-substrate-and-what-counts-as-a-receipt-at-each-hop}
 
 The prioritization step needs data that exists independently of the hypotheses being posed. We use a
-genome-scale CRISPRi Perturb-seq \cite{dixit2016,replogle2022} resource in primary human CD4+ T cells \cite{zhu2025},
+genome-scale CRISPRi Perturb-seq \cite{dixit2016,adamson2016,replogle2022} resource in primary human CD4+ T cells \cite{zhu2025},
 in which thousands of genes are individually knocked down and single-cell RNA sequencing reads out the
 transcriptional consequence of each perturbation across stimulation conditions. Because the measurements
 were made before --- and without reference to --- any triple we test, they function as a \emph{held substrate}: the
@@ -75,3 +75,46 @@ is provided separately and externally (Section 4.6), by replicating the finding 
 models. With that boundary stated, the agentic workbench lets a single researcher run generation,
 data-grounded prioritization, and a self-audit of the result's language on one bench --- the capability the
 rest of this paper puts to work.
+
+\subsection*{2.4 Related approaches, and the gap Wayfinder occupies}\label{related-approaches}
+
+Three lines of work bear on the triage problem, and Wayfinder is best understood by what it borrows from
+each and what it withholds. \emph{Classical LBD ranking} --- from Arrowsmith \cite{smalheiser1998} through
+PubMed-scale predication stores \cite{kilicoglu2012} to modern co-occurrence and graph systems
+\cite{pyysalo2019} --- ranks candidate A--C links by properties of the \emph{literature}: co-mention
+statistics, association measures, semantic-vector similarity, and knowledge-graph link-prediction scores
+(reviewed in \cite{thilakaratne2019,gopalakrishnan2019}). These return a ranked list with a numeric
+plausibility, but the score is a literature-derived statistic; such systems do not put a candidate to an
+independent \emph{data} test, cannot abstain on data-quality grounds, and do not return a \emph{refuted}.
+Wayfinder consumes an LBD-style candidate but replaces the literature-similarity score with a data
+adjudication.
+
+\emph{LLM hypothesis generation} now produces fluent, often-novel biomedical hypotheses, and a benchmarking
+literature has grown around it. The recurring failure mode is over-confident hallucination: reliability-focused
+work explicitly targets truthfulness \cite{truthhypo2025}, and, most pointedly for us, a recent contrastive
+study shows that a language model's \emph{plausibility} judgements about cellular perturbations diverge from
+held-out CRISPR ground truth \cite{plausibility2026} --- direct motivation for grounding the decision in a
+deterministic experimental gate rather than in model judgement.
+
+\emph{Agentic ``AI-scientist'' systems} are the closest neighbours, and we are careful not to strawman them.
+Google's AI co-scientist is built around critique and ranking --- a tournament of simulated scientific debate
+--- and reports wet-lab-validated hits \cite{gottweis2025}; FutureHouse's agents attach source citations to
+claims and, in Robin, analyse real assay data inside the loop \cite{paperqa2024,robin2025}; SciAgents reasons
+over an ontological knowledge graph with an explicit critic \cite{sciagents2025}; and other systems run their
+own experiments end-to-end in chemistry and machine learning \cite{boiko2023,aiscientist2024}. These are
+capable and, in several cases, experimentally validated. We are not aware, however, of a system that does the
+specific combination Wayfinder targets: a \textbf{deterministic, non-LLM referee} that scores each hypothesis against a
+\textbf{held, pre-existing} experimental substrate and returns a per-hop \emph{experimental} receipt --- an
+odds ratio, a $p$-value, an effect size --- for every causal edge, with a quality-control-gated
+\textbf{abstention} (a failed knockdown reported as \emph{untested}, not negative) and a \textbf{falsification}
+as first-class verdicts. Their receipts, where present, are literature citations (PaperQA2) or the outputs of
+model debate; and the systems that \emph{do} touch experimental data --- Robin, which analyses real assay
+data, and the chemistry and machine-learning systems that run their own experiments --- generate that
+evidence from \emph{new} experiments rather than adjudicating each hypothesis against a \emph{held,
+pre-existing} substrate. They optimise, moreover, for producing \emph{plausible} hypotheses, whereas the
+deliverable here is the confident, receipt-backed \emph{no}. Even approaches that benchmark language models against perturbation
+readouts \cite{perturbqa2025} frame the task as prediction accuracy, not as a referee that abstains and
+refutes with a receipt. The gap Wayfinder occupies is therefore narrow and specific: an LBD front-end paired
+with a deterministic experimental back-end, reporting prioritization, abstention, and falsification --- each
+with a receipt --- in a division of labour where the language model's visible agency is reserved for judgement
+and provenance, never for computing the evidence.

@@ -36,6 +36,7 @@
 \usepackage{amsmath}
 \usepackage{calc}  % defines \real{} for pandoc's longtable column-width arithmetic
 \usepackage{graphicx,booktabs,longtable,array,caption}
+\graphicspath{{figures/}}
 \captionsetup{font=footnotesize,labelfont=bf,skip=3pt}
 \usepackage[hidelinks]{hyperref}
 
@@ -90,8 +91,10 @@ the referee discriminates, and negative controls locate that discrimination hone
 finding that the disease hop's stringency is inherited from the substrate rather than supplied by the
 referee. The worked example --- NAB2 $\rightarrow$ Th1/Th2 polarization $\rightarrow$ atopic eczema --- is a
 literature-novel regulatory nomination whose sharpest artifactual confounder, a CRISPRi \emph{cis}-effect on
-the adjacent \emph{STAT6}, we falsify against the study authors' own genome-wide data, and which an
-independent cross-model replication reproduced. The contribution is the method and what it found:
+the adjacent \emph{STAT6}, we test against the study authors' own genome-wide data, where STAT6 is unmoved (no
+detectable expression-level \emph{cis}-effect). The confounder we \emph{cannot} discharge ---
+whether the eczema label is linkage-inherited within the 12q13 locus --- we foreground rather than claim
+resolved; an independent cross-model replication reproduced the finding. The contribution is the method and what it found:
 \textbf{receipt-backed prioritization of machine-generated hypotheses, with explicit abstention and
 falsification diagnostics} --- not a demonstration of predictive correctness.
 
