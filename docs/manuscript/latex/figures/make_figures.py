@@ -153,20 +153,20 @@ def fig2():
     gsR = fig.add_axes([0.53, 0.06, 0.44, 0.88]); gsR.axis("off")
     gsR.set_xlim(0, 100); gsR.set_ylim(0, 100)
 
-    gsL.text(50, 97, "The honest funnel (Stim8hr)", ha="center", fontsize=10.5, weight="bold")
+    gsL.text(50, 99, "The honest funnel (Stim8hr)", ha="center", fontsize=10.5, weight="bold")
     steps = [
-        ("3,935", "knockdown-gated, program-significant genes (universe A)", 92, "#4C72B0"),
-        ("22,039", "eligible (gene, disease) pairs admitted by the gate", 74, "#5B8F4A"),
-        ("43", "positive disease hop + passing effect", 56, "#B0812E"),
-        ("30", "clean full-chain survivors", 38, C_SUPPORTED),
+        ("3,935", "knockdown-gated, program-significant genes (universe A)", 90, "#4C72B0"),
+        ("22,039", "eligible (gene, disease) pairs admitted by the gate", 72, "#5B8F4A"),
+        ("43", "positive disease hop + passing effect", 54, "#B0812E"),
+        ("30", "clean full-chain survivors", 36, C_SUPPORTED),
     ]
     widths = [86, 68, 34, 22]
     for (num, lab, y, col), w in zip(steps, widths):
         x = 50 - w / 2
-        box(gsL, x, y - 6, w, 11, f"{num}", fc=col, ec=col, tc="white", fs=13, weight="bold")
-        gsL.text(50, y - 9.3, lab, ha="center", va="top", fontsize=7.9, color="#2A2A2A")
+        box(gsL, x, y - 5, w, 10, f"{num}", fc=col, ec=col, tc="white", fs=13, weight="bold")
+        gsL.text(50, y - 6.6, lab, ha="center", va="top", fontsize=7.9, color="#2A2A2A")
     for i in range(len(steps) - 1):
-        gsL.annotate("", xy=(50, steps[i + 1][2] + 5.2), xytext=(50, steps[i][2] - 9.6),
+        gsL.annotate("", xy=(50, steps[i + 1][2] + 5), xytext=(50, steps[i][2] - 9.6),
                      arrowprops=dict(arrowstyle="-|>", color="#888888", lw=1.5))
     gsL.text(50, 24, "43 = 30 clean + 10 supported-weak + 3 supported-flagged", ha="center",
              fontsize=7.4, color="#333333")
@@ -180,7 +180,7 @@ def fig2():
         "and '43 supported' is a JOINT gate$\\times$referee count.",
         fc="#FFF7EC", ec=C_UNTESTED, fs=7.0, tc="#4A3C22", rounded=0.03)
 
-    gsR.text(50, 97, "Verdict ledger (spans the verdict space)", ha="center", fontsize=10.5, weight="bold")
+    gsR.text(50, 99, "Verdict ledger (spans the verdict space)", ha="center", fontsize=10.5, weight="bold")
     rows = [
         ("NAB2 -> atopic eczema", "supported", C_SUPPORTED, "full chain; eczema clusters OR 3.90/3.43"),
         ("EGR2 -> asthma", "supported", C_SUPPORTED, "effect -11.06, 854 DE; asthma OR 20.4"),
@@ -403,8 +403,9 @@ def fig4():
     bins = np.arange(0.5, 9.5, 1)
     axD.hist(wranks, bins=bins, color=C_FLAGGED, alpha=0.8, label=f"weight grid (n={len(wranks)})", edgecolor="white")
     axD.hist(granks, bins=bins, color=C_SUPPORTED, alpha=0.6, label=f"gate grid, eligible (n={len(granks)})", edgecolor="white")
+    axD.set_ylim(0, 8.2)
     axD.axvline(c3["nab2_rank_median"], color=C_REFUTED, ls="--", lw=1.6)
-    axD.text(c3["nab2_rank_median"] + 0.15, axD.get_ylim()[1] * 0.78, "median 4",
+    axD.text(c3["nab2_rank_median"], 7.7, "median 4", ha="center",
              color=C_REFUTED, fontsize=8, weight="bold")
     axD.set_xticks(range(1, 9))
     axD.set_xlabel("NAB2 $\\times$ eczema rank among survivors")
