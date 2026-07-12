@@ -11,7 +11,7 @@ figures regenerate at revision time without a UI dependency.
 
 Outputs (PDF for LaTeX \includegraphics + PNG for inspection):
   fig1_architecture.{pdf,png}   -- construction vs. referee, separated (C1/C7)
-  fig2_funnel_ledger.{pdf,png}  -- honest funnel + verdict ledger
+  fig2_funnel_ledger.{pdf,png}  -- funnel + verdict ledger
   fig3_nab2_chain.{pdf,png}     -- NAB2 4-hop receipt chain + STAT6 + 12q13 caveat
   fig4_diagnostics.{pdf,png}    -- Control1/2 + C10 gate grid + C2 hard negatives
 
@@ -153,7 +153,7 @@ def fig2():
     gsR = fig.add_axes([0.53, 0.06, 0.44, 0.88]); gsR.axis("off")
     gsR.set_xlim(0, 100); gsR.set_ylim(0, 100)
 
-    gsL.text(50, 99, "The honest funnel (Stim8hr)", ha="center", fontsize=10.5, weight="bold")
+    gsL.text(50, 99, "The funnel (Stim8hr)", ha="center", fontsize=10.5, weight="bold")
     steps = [
         ("3,935", "knockdown-gated, program-significant genes (universe A)", 90, "#4C72B0"),
         ("22,039", "eligible (gene, disease) pairs admitted by the gate", 72, "#5B8F4A"),
@@ -173,7 +173,7 @@ def fig2():
     gsL.text(50, 20.5, "(+ 1 refuted-effect; 21,995 refuted for the specific disease)", ha="center",
              fontsize=7.1, color="#666666")
     box(gsL, 4, 2, 92, 16,
-        "Honesty caveats (restated in Results):\n"
+        "Caveats (restated in Results):\n"
         "the referee ALONE supports 395/47,220 pairs;\n"
         "the novelty gate culls 395 -> 43. Within the funnel\n"
         "the program hop cannot fail (refuted_program $\\equiv$ 0),\n"
