@@ -9,53 +9,53 @@ manuscript thread below.
 
 ---
 
-## Next session priorities — written 2026-07-11 (full-close)
+## Next session priorities — written 2026-07-11 20:35 (full-close)
 
-**Current state**: **Manuscript = full draft (Abstract + §1–§5) authored in LaTeX** (`docs/manuscript/latex/`,
-compiles to a 21pp PDF, 0 errors, 12 refs). Two independent referee reviews returned **Major Revision**; a
-**3-round codex-debate on the revision plan CONVERGED** (on gpt-5.6-sol). The debate-hardened, resource-tagged
-**revision roadmap is the plan of record**: `docs/reviews/codex-debate_revision-plan_2026-07-11.md` (its
-"Round-2 refinements" section is authoritative on analysis design). Tree clean; all pushed (`94a40ea`).
-**LaTeX is now the authoritative manuscript source** — edit `docs/manuscript/latex/sections/*.tex` directly;
-do NOT re-run `build_tex.py` (one-time migration; it would overwrite hand edits).
+**Current state**: Manuscript revision MVP **underway**. Four tested slices landed + pushed this session
+(`cde28b2`→`676fead`): **reframe** (title → "Receipt-backed prioritization…"; top-line = prioritization +
+abstention + falsification; "calibrated"=language-only; CS→replicable-in-principle), **12q13 foregrounding**
+(§4.4b), **C10 gate grid** (`gate_grid.py`+§4.1c), **C2 hard negatives** (`hard_negatives.py`+§4.2b, rebuts
+B1). Manuscript compiles **23pp, 0 errors**. All diagnostics run LOCALLY (repo code + `data/lbd_cache/`,
+doctrine §19), cache-free/deterministic. Tree clean; all pushed. **LaTeX .tex is authoritative** — edit
+`docs/manuscript/latex/sections/*.tex` directly; do NOT re-run `build_tex.py`.
 
-**Next action** — **execute the revision MVP** in this order (all reframes are cheap and unblock the rest):
-1. **[CLAUDE] Reframe** across the .tex: top-line → "receipt-backed **prioritization** with explicit
-   **abstention (untested)** + **falsification (refuted)** diagnostics"; retitle away from "Closing the loop";
-   "adjudication"→"prioritization" at the disease hop; "calibrated" = vocabulary discipline only; separate
-   **construction filters** (KD/effect/program pre-gate) from **referee decisions** in §3.3; de-weight Claude
-   Science to Methods/appendix; NAB2 → one case study (move NAB2-direction/DepMap to Discussion).
-2. **[CLAUDE via CS] The design-corrected diagnostics** (all outcome-independent / pre-registered — see roadmap
-   Round-2 refinements): **C6** = ONE disease-label permutation over T3 rows preserving cluster/gene-set +
-   FDR/OR marginals; **C2** hard-negatives from a **frozen literature-only nomination rule**; **C10** gate grid
-   (ab_gate_pct × min_bc × τ, Stim8hr); **C3a** frozen Stim8hr discovery cohort → evaluate the SAME pairs'
-   receipts at Rest/Stim48hr (coverage → transition matrix); **positive control** = canonical Th1/Th2
-   regulators vs the referee **blinded to the novelty gate**; **C9** enumerate the 6 NAB2 Europe PMC co-mentions.
-3. **[CLAUDE] 12q13/LD** → foreground limitation subsection + a 12q13 GWAS literature subsection (colocalization
-   unavailable; never claim discharged). Locus-wide neighbor check = sanity only.
-4. **[CLAUDE via CS + HTML/SVG] The 4 essential figures** (zero exist): Fig 1 architecture (construction-vs-
-   referee separated), Fig 2 ledger+funnel+diagnostics, Fig 3 NAB2 chain + 12q13 caveat, Fig 4 sensitivity/
-   permutation-null panel.
-5. **[CLAUDE] Quick fixes**: split the abstract; reconcile −16.9/−16.88; note the substrate is a 2025 preprint.
+**Next action** — **build the 4 essential figures** (roadmap step 4; zero exist — the reviewers' highest-
+visibility gap). Recommended order + the data are ready:
+1. **Fig 4 — sensitivity/permutation panel** [CLAUDE, local render]: render from the committed JSON
+   (`docs/manuscript/analysis/{sensitivity_results,gate_grid_results,hard_negatives_results}.json`) via
+   matplotlib or HTML/SVG — Control 1/2/3 + C10 grid + C2 decomposition. Pure §19 direct path, no CS needed.
+2. **Fig 3 — NAB2 4-hop chain + 12q13 caveat** [CLAUDE, HTML/SVG or CS kernel]: the hop-by-hop receipt
+   chain with the disease hop annotated "GWAS label; LD provenance open (§4.4b)".
+3. **Fig 1 — architecture, construction-vs-referee visually separated** [CLAUDE, HTML/SVG schematic] (C1/C7).
+4. **Fig 2 — ledger + honest funnel annotated with C2/C6 diagnostics** [CLAUDE, HTML/SVG or data].
+   Then `\includegraphics` them into the .tex + captions; recompile.
 
-**Prerequisites**: none blocking. CS daemon up on **port 8000** (skill default 8765 is stale — pass the port).
-`drive-claude-science` validated. All analyses are feasible **offline** except the positive control + C9 (need
-the literature APIs — all four confirmed live). Codex default is now **gpt-5.6-sol** (codex 0.144.1).
+**Prerequisites**: none blocking. Figure data all committed as JSON. If a data figure is built in the CS
+kernel instead of locally, CS daemon is on **port 8000** (skill default 8765 is stale — pass the port).
+Recommend LOCAL render (matplotlib/HTML-SVG) per §19 — deterministic, no CS dependency.
 
-**Open questions**: build figures in CS kernel (data figs 3/4) vs HTML/SVG (schematics 1/2)? How far into the
-MVP before a re-submission-readiness check? Keep or trim Fig 5 (self-audit) given the CS de-weight.
+**Open questions**:
+- Data figures local-render (matplotlib/HTML-SVG from committed JSON) vs CS kernel? Recommend LOCAL (§19).
+- **C6**: Control 2 (§4.1b) is already a disease-label shuffle; R2 wants ONE principled null preserving
+  cluster/gene-set + row marginals. Low marginal value (Control 2 largely covers it) — refine in place or
+  skip for MVP?
+- Do the offline strengtheners (C3c positive control blinded to novelty gate; C3a frozen-cohort temporal)
+  before or after the figures? Harness pattern is now in place (`gate_grid.py`/`hard_negatives.py`).
 
-**Do not touch**: the submission artifacts / demo video (fire-ready; "scrub and flip" governs). Do NOT re-run
-`docs/manuscript/latex/build_tex.py` (would overwrite hand-edited .tex). `references/*.pdf` gitignored;
-`project-management/` is gitignored tool output. `.claude/scratch/` is gitignored scratch.
+**Do not touch**: the submission artifacts / demo video (fire-ready; "scrub and flip" governs). Do NOT
+re-run `docs/manuscript/latex/build_tex.py` (overwrites hand-edited .tex). `references/*.pdf` gitignored;
+`data/lbd_cache/` gitignored (39 new ac_lit entries from gate_grid live there — re-runs are deterministic
+on this machine; a fresh clone would re-fetch). `.claude/scratch/` gitignored.
 
-**Context to preload** (≤10): `docs/reviews/codex-debate_revision-plan_2026-07-11.md` (THE plan);
-`docs/manuscript/reviews/REVIEW_DOSSIER_2026-07-11.md`; `docs/manuscript/latex/sections/04_results.md`
-(source) OR `.../latex/sections/04_results.tex` (authoritative); `docs/manuscript/analysis/sensitivity_panel.py`;
-`src/arbiter/lbd/propose.py`; `src/arbiter/lbd/referee_triple.py`; `docs/lbd_finding_nab2_2026-07-08.md`;
-`docs/manuscript/latex/README.md`; `WORK_PROGRESS.md`; `memory/NEXT_SESSION.md`.
+**Context to preload** (≤10): `docs/reviews/codex-debate_revision-plan_2026-07-11.md` (THE roadmap — figure
+spec in "Figures — minimum viable set"); `docs/manuscript/reviews/REVIEW_DOSSIER_2026-07-11.md`;
+`docs/manuscript/analysis/gate_grid_results.json`; `docs/manuscript/analysis/hard_negatives_results.json`;
+`docs/manuscript/analysis/sensitivity_results.json`; `docs/manuscript/latex/sections/04_results.tex`;
+`docs/manuscript/latex/main.tex`; `docs/manuscript/latex/README.md`; `docs/lbd_finding_nab2_2026-07-08.md`;
+`memory/NEXT_SESSION.md`.
 
-**Estimated budget**: multi-session. MVP step 1 (reframe) = one focused session; each diagnostic (step 2) =
-~½ session; figures (step 4) = one session. Start with step 1 (reframe) — cheap, unblocks everything.
+**Estimated budget**: figures = one focused session (Fig 4 + Fig 3 the priorities; Fig 1/2 schematics
+cheaper). Each remaining offline diagnostic (C3c/C3a) ≈ ½ session. Start with **Fig 4** (data ready, local
+render, highest depth-per-effort).
 
 ## Mirror of this handoff is appended to memory/sessions/2026-07-11.md by session-closer.

@@ -133,3 +133,13 @@ margin-bleed + colored headings.
 On a ChatGPT-account, plain `gpt-5.6`/`gpt-5.6-codex`/`sol` are "not supported"; only **`gpt-5.6-sol`** is —
 but codex 0.141 errors "requires a newer version". `codex update` (npm-global) → 0.144.1 fixes it. Set
 `model = "gpt-5.6-sol"` in `~/.codex/config.toml`.
+
+## `_http.py` fetches LIVE on a cache miss — no raise-on-miss guard (Added: 2026-07-11)
+`src/arbiter/lbd/_http.py:cached_request` returns cached JSON on a hit but on a MISS sleeps 0.34s,
+does `requests.request(...)`, and writes the response to `data/lbd_cache/`. There is **no pure-replay
+guard in this layer** — the guard the Claude Science full-sweep used was EXTERNAL to the code. So any
+`sources.cooccur_count` / `opentargets_*` / `propose.sweep()` with uncached inputs silently hits the
+network (and needs the APIs live). For a DETERMINISTIC OFFLINE analysis, either keep every input
+cache-complete, or MEASURE cache growth — count `data/lbd_cache/*.json` before/after and report it.
+`docs/manuscript/analysis/gate_grid.py` does the latter (it added 39 live `ac_lit` lookups → now cached →
+re-run is 0-growth); `hard_negatives.py` + `sensitivity_panel.py` touch no literature and are cache-free.

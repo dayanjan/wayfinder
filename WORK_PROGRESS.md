@@ -7,8 +7,8 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
 - **Phase:** Researcher-track finding COMPLETE + fully vetted — **NAB2→Th1/Th2→atopic eczema** replicated (5-agent lab, unanimous PASS) and **all confounders closed, incl. the DEFINITIVE STAT6 cis-check** (authors' genome-wide DE: NAB2-KD leaves STAT6 unmoved → cis/shadow EXCLUDED). Verdict = genuine novel NAB2-specific regulator (nomination re causality).
 - **Active workstream:** **Submission → CS-native 3-min video (see the Working-target line below). Next session = capture + assemble + submit.** _(Manuscript + remaining-experiments gap analysis deferred — post-submission upside, not this week.)_ Prior finding state: CS proven to AUTHOR + run the LBD generator 100% live from scratch (micro-sweep) AND at full scale over all genes × 3 conditions (loose sweep: filter-safe, NAB2 reproduced Stim8hr-specific, 39 candidates in `CANDIDATES.md`). NAB2 drug-target verdict: DepMap negative-for-cancer; **GEO direction mining → association-backed NAB2-DOWN per-cell in lesional skin → knockdown likely backwards, NAB2 reads as a Th2 BRAKE → restore/UP-modulate** (needs perturbation proof). Referee direction-label bug fixed (verdicts safe). Only unbuilt CS stretch = Stage 2. Demo/app/notebook remain the **submission MVP**.
 - **Working target: submit by EOD Friday 2026-07-10** (operator out of town Sat–Mon; official deadline still 2026-07-13). **Submission pivoted to a CS-native 3-min video**; tonight banked all design + de-risk + a 2-round codex-debate hardening (spine held). Friday = pre-capture 4 required frames (blockers) → assemble → gate → submit. Streamlit app + prior demo video = fallback MVP. Assets: `docs/demo-video-pack/cs/` + `assets/`.
-- **Active thread:** **MANUSCRIPT** for FRMA — **FULL DRAFT (Abstract + §1–§5) in LaTeX, compiles (21pp, 0 errors)**; **12-ref bibliography** (resolved/audited, **Zotero 12 in-sync**); two **Major-Revision referee reviews** → **converged 3-round revision roadmap** (`docs/reviews/codex-debate_revision-plan_2026-07-11.md`). Top-line reframed → "**receipt-backed prioritization + abstention + falsification diagnostics**" (not correctness/adjudication/calibrated). **Next = execute revision MVP** (reframe + C6/C2/C10/C3a diagnostics + 12q13 foregrounding + 4 figures). Submission stays fire-ready in parallel.
-- **Last updated:** 2026-07-11 (full draft in LaTeX + citations/Zotero + converged revision roadmap + codex→gpt-5.6-sol; next = revision MVP)
+- **Active thread:** **MANUSCRIPT** for FRMA — **revision MVP underway; manuscript now 23pp/0-errors.** DONE this session: **reframe** (title → "Receipt-backed prioritization…"; top-line = prioritization + abstention + falsification; "calibrated"=language-only; CS→replicable-in-principle), **12q13 foregrounding** (§4.4b, 3 mechanisms separated), **C10** gate grid (`gate_grid.py`+§4.1c), **C2** hard negatives (`hard_negatives.py`+§4.2b, rebuts B1) — all run LOCALLY (repo code+cache, §19), cache-free. **Next = the 4 figures** (Fig 1/2 schematics HTML/SVG; Fig 3 NAB2 chain + Fig 4 sensitivity/permutation panel — render locally from committed JSON, or CS kernel). Remaining MVP strengtheners: C6 refinement (low value — Control 2 covers it), C3c positive control, C3a temporal. Submission stays fire-ready in parallel.
+- **Last updated:** 2026-07-11 (evening — revision MVP: reframe + 12q13 + C10 + C2 landed; manuscript 23pp; next = 4 figures)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/wayfinder` (private; renamed from pyzobot-arbiter, history preserved; flip public via `SUBMIT_CHECKLIST.md` — say "scrub and flip")
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -29,6 +29,27 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-11 20:35 — Session close (full-close): revision MVP — reframe + 12q13 + C10 + C2
+Executed the first four slices of the converged revision roadmap; 4 tested commits (`cde28b2`→`676fead`),
+all pushed; manuscript **21pp→23pp, 0 errors**. **Reframe** (`cde28b2`): retitled → *"Receipt-backed
+prioritization for literature-based discovery using Perturb-seq evidence"*; top-line everywhere →
+**prioritization + abstention (untested) + falsification (refuted) diagnostics**; "adjudicate" softened
+except QC+effect hops; **"calibrated" reserved for LANGUAGE only**; CS reproducibility →
+replicable-in-principle (UI-dependent); self-audit = language-hygiene not epistemic verification;
+construction-vs-referee split sharpened (§3.3); quick fixes (abstract split, −16.9/−16.88, 2025-preprint).
+**12q13 foregrounding** (`24cefad`): new **§4.4b** separates the 3 mechanisms — STAT6-cis falsified (§4.4),
+cluster-membership rejected (§4.6), **GWAS-label LD-inheritance = cannot discharge** (foregrounded as the
+flagship's key open question); §4 intro + §5.3 cross-ref. **C10 gate grid** (`0b612d5`,
+`docs/manuscript/analysis/gate_grid.py` + **§4.1c**): 27-cell ab_gate_pct×min_bc×tau; verdict+score
+gate-independent → 47,220-pair census once + set arithmetic; default reproduces 30/rank-4; NAB2×eczema rank
+{1,4,5} med 4, verdict invariant, survives 18/27 (misses = exactly pct=0.75, near-novelty at the literature
+floor); Jaccard med 0.41. **C2 hard negatives** (`676fead`, `hard_negatives.py` + **§4.2b**): rebuts
+reviewer B1 — Panel A (all 11,415 perturbed genes) own-edge cull 16.9% (~all QC-untested; effect gate
+lenient), Panel B (frozen curated-association top-50/disease = 600) 15.7% own-hop cull vs 67.3%
+substrate-inherited disease-hop cull, 17.0% supported; hard negatives incl. IL36RN×psoriasis (0.82),
+TREX1×lupus, PADI4×RA — all UNTESTED. All analyses LOCAL (repo code+cache, doctrine §19), cache-free
+(gate_grid measured +39 cached ac_lit lookups). Tree clean. **Next = the 4 figures.**
+
 ### 2026-07-11 — Session close (full-close): full draft in LaTeX + citations + converged revision roadmap
 Big session. **Drafted §4 Results** (~1,900w) with a cache-free **sensitivity panel** (Control 1 QC 2,430→
 untested; Control 2 label-shuffle 406/47,220 vs 467.7±10.9 → **substrate-inherited stringency**, lower-tail

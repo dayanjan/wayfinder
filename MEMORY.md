@@ -5,6 +5,19 @@ the live dashboard in `WORK_PROGRESS.md`; the handoff in `memory/NEXT_SESSION.md
 This file is the fast scan: where we are, what's decided, what happened lately.
 
 ## Current Status
+**2026-07-11 (evening, full-close) — REVISION MVP: 4 SLICES LANDED (reframe + 12q13 + C10 + C2); MANUSCRIPT
+23pp, 0 ERRORS.** Executed the converged revision roadmap. **Reframe** (`cde28b2`): retitled →
+"Receipt-backed prioritization for literature-based discovery using Perturb-seq evidence"; top-line →
+**prioritization + abstention + falsification diagnostics**; "calibrated"=language-only; CS→replicable-in-
+principle; construction-vs-referee split sharpened. **12q13 foregrounding** (`24cefad`): new §4.4b separates
+the 3 mechanisms (STAT6-cis falsified · cluster-membership rejected · GWAS-label LD = CANNOT discharge,
+foregrounded). **C10 gate grid** (`0b612d5`, `gate_grid.py`+§4.1c): 27-cell ab_gate_pct×min_bc×tau; default
+reproduces 30/rank-4; NAB2×eczema rank {1,4,5} median 4, verdict invariant, survives 18/27 (misses = exactly
+pct=0.75). **C2 hard negatives** (`676fead`, `hard_negatives.py`+§4.2b): rebuts B1 — referee's OWN hops cull
+16.9% of arbitrary genes + 15.7% of a frozen curated-association nominator's top-600 (IL36RN×psoriasis 0.82 →
+untested), separated from the 67.3% substrate-inherited disease-hop cull. All run LOCALLY (repo code+cache,
+§19), cache-free/deterministic. **Next = the 4 figures** (render locally from committed JSON, or CS kernel).
+See `memory/NEXT_SESSION.md`.
 **2026-07-11 (full-close) — FULL DRAFT (Abstract + §1–§5) IN LaTeX, COMPILES (21pp); 12-REF BIBLIOGRAPHY +
 ZOTERO LIVE; TWO REFEREE REVIEWS → CONVERGED REVISION ROADMAP; CODEX → gpt-5.6-sol.** Drafted §4 (CS-
 reproduced sensitivity panel, delta-0) + §5 + Abstract; 3-round §4 debate converged. Ported the LightsOut
@@ -127,5 +140,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 | 2026-07-10 (cont.) | **Manuscript kickoff — outline + sections 1-3** | Template = **Henry et al. 2021** (FRMA); Wayfinder framed as an **approach**; title locked; **outline** hardened by 3-round repo-read codex-debate (10→5→1; DOI→10.64898); **§1/§2/§3 drafted** (§3.4 = no-API CS driver); **CS actor-critic verified 16/18**; **prose codex-debate 14→4→0 converged** (caught `ac_known`=overall-not-genetic via code read). 5 commits `ec68a23`→`a2d125e`. Next = §4 Results |
 
 | 2026-07-11 | **Full draft + LaTeX + citations + review roadmap** | §4 Results (CS-reproduced sensitivity panel, delta-0; 3-round debate 10→1→1) + §5 + Abstract → full §1–§5 arc. Ported LightsOut **citation stack** + `semantic_scholar.py`; **references.bib 4→12** (DOIs resolved/audited, **Zotero 12 in-sync**), wired into .tex. Built **LaTeX manuscript** (LightsOut approach) → **21pp PDF, 0 errors**; fixed equation margin-bleed + colored→black headings. Two **Major-Revision reviews** → dossier + **converged 3-round revision debate** → top-line = "prioritization + abstention + falsification diagnostics". **Codex 0.141→0.144.1, default gpt-5.6-sol.** Next = revision MVP |
+| 2026-07-11 (evening) | **Revision MVP: reframe + 12q13 + C10 + C2** | 4 tested commits (`cde28b2`→`676fead`), manuscript 23pp/0-err. Reframe (title + prioritization/abstention/falsification top-line, "calibrated"=language-only, CS→replicable-in-principle); §4.4b foregrounds the 12q13 GWAS-label confounder (3 mechanisms separated); **C10** gate grid (`gate_grid.py`+§4.1c: NAB2×eczema rank {1,4,5} med 4, survives 18/27, misses=pct=0.75); **C2** hard negatives (`hard_negatives.py`+§4.2b: referee own-hop cull 16.9% arbitrary / 15.7% of top-association noms, vs 67.3% substrate-inherited — rebuts B1). All LOCAL (repo code+cache, §19), cache-free. Next = 4 figures |
 
-_Last updated: 2026-07-11 (full draft in LaTeX; 12-ref bibliography + Zotero; converged revision roadmap; codex→gpt-5.6-sol; next = execute revision MVP)_
+_Last updated: 2026-07-11 (evening — revision MVP: reframe + 12q13 + C10 + C2 landed, manuscript 23pp; next = the 4 figures)_

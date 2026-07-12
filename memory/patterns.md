@@ -135,3 +135,14 @@ model into confabulation (see gotchas). Trajectory of a healthy debate: finding 
 (standalone CLIs). The `resolve <key> --bib` live-audit + `zotero_sync push` are the high-value pieces;
 the `audit --tex` mode is LaTeX-cite-specific. Added `semantic_scholar.py` (TLDRs, related-work). Workflow:
 crossref/S2 resolve → build .bib → citation_audit resolve (tier=OK) → zotero push → wire \cite.
+
+## Gate/weight-independence collapses a sensitivity grid to one census + set arithmetic (Noted: 2026-07-11)
+For the LBD pipeline, a (gene,disease) pair's **referee verdict AND its objective score are both
+independent of the eligibility gate** (the universe A and the z-normalization scale are computed over the
+fixed data, not over `ab_gate_pct`/`min_bc`/`tau`). So a 27-cell × 47,220-pair threshold grid does NOT
+need 27 sweeps: compute each pair's verdict ONCE over the full A×C space (memoized), score each surviving
+pair ONCE, then every grid cell is pure set-arithmetic on the gate + a re-rank of the cached scores.
+This is the perf move that made C10 (`gate_grid.py`) tractable and fully offline. Generalizes: when the
+thing you're sweeping only filters ELIGIBILITY (not the per-item computation), precompute per-item once
+and vary the filter in a loop. Also: hop-0/1/2 referee outcomes are disease-INDEPENDENT, so ONE census
+characterizes the referee's own-edge cull rate across all diseases (used in `hard_negatives.py` Panel A).
