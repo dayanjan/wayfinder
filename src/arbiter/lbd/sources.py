@@ -48,6 +48,38 @@ def cooccur_count(terms_a, terms_b) -> int:
     return europepmc_count(f"({a}) AND ({b})")
 
 
+def cooccur_query(terms_a, terms_b, year: int | None = None) -> str:
+    """The exact Europe PMC query string cooccur_count / cooccur_count_asof issue.
+
+    Factored out so the concurrent enumeration harness (arbiter.eval) can build the
+    identical string and hit the SAME on-disk cache key as the serial path. When
+    `year` is given, the co-mention is restricted to papers whose FIRST_PDATE is on or
+    before {year}-12-31 (the as-of-T literature window used by the held-out eval, G1).
+    """
+    if isinstance(terms_a, str):
+        terms_a = [terms_a]
+    if isinstance(terms_b, str):
+        terms_b = [terms_b]
+    a = " OR ".join(_phrase(t) for t in terms_a)
+    b = " OR ".join(_phrase(t) for t in terms_b)
+    base = f"({a}) AND ({b})"
+    if year is None:
+        return base
+    return f"({base}) AND (FIRST_PDATE:[1900-01-01 TO {year}-12-31])"
+
+
+def cooccur_count_asof(terms_a, terms_b, year: int) -> int:
+    """As-of-`year` literature co-mention count.
+
+    Same as cooccur_count but restricted to papers first-published on/before {year}-12-31.
+    Windowing verified 2026-07-12 (strict monotone, e.g. STAT6 x asthma:
+    1950('16) < 2463('18) < 3034('20) < 5467(now)). Used to freeze literature at cutoff T
+    for the time-sliced held-out evaluation (G1). Monotone guarantee: asof(T) <= now, so a
+    pair novel-now is novel-as-of-T (the enumeration exploits this).
+    """
+    return europepmc_count(cooccur_query(terms_a, terms_b, year))
+
+
 # --- Open Targets: the known gene->disease association set (to EXCLUDE) ------------
 # associatedTargets page size is capped at 3000 (size>3000 errors). Rows are ordered by
 # score DESC, so we paginate and stop once scores fall below the novelty floor -- a gene
