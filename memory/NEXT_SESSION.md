@@ -9,21 +9,21 @@ manuscript thread below.
 
 ---
 
-## Next session priorities — written 2026-07-11 (overnight autonomous session)
+## Next session priorities — written 2026-07-12 (manuscript polish continued; operator reading main.pdf)
 
 **Current state**: MANUSCRIPT thread — **submission-ready draft COMPLETE, review-hardened, and polished**
-(full-close; commits `62bb929` → `4f4337f` → `ab87fb2`, all pushed). The manuscript has **4 figures** (padded
+(full-close; commits `62bb929` → `759a4fd`, all pushed). The manuscript has **4 figures** (padded
 boxes), a **related-work §2.4**, an **evidence-strengthening §5.3b**, a **corrected NAB2/STAT6 genomics**,
 **first-line paragraph indents** (run-in bold headings kept flush), and an **Acknowledgements + Data/code
 availability** section (Cerebral Valley hackathon; Marson lab dataset; Claude Science; Anthropic Claude Max +
 API credits). Every P0/P1 from a **5-reviewer pass (4 Claude + Codex) + a final Codex debate** is applied.
 Compiles at **32 pp, 0 errors, 0 undefined citations, 0 bibtex warnings**. Codex verdict: *"submission-defensible
 on its own terms."* The plausibility2026 byline is now filled (Yuan et al.) and the frozen markdown's stale
-genomics is synced.
+genomics is synced. **Session 2026-07-12** then polished the figures (box padding, then a full whole-figure collision audit fixing the title/box, arrow/label, and panel-D median overlaps), made the abstract and every first-paragraph-after-heading indent (`indentfirst`), renamed the self-praising 'honest funnel' → 'the funnel' (caveats box 'Caveats'), thinned the repeated 'honest/honestly' prose (kept 2 earned uses), and aligned all STAT6-cis 'falsified' wording to 'tested / ruled out at the expression level'. Fresh clean rebuild: 32 pp, 0 errors, 0 undefined citations.
 
 **THE DELIVERABLE TO READ**: `docs/manuscript/latex/main.pdf` (32 pp, freshly compiled). Open it directly.
 
-**Next action** — operator reads `main.pdf`; then choose one of:
+**Next action** — CONTINUE the manuscript per the operator's read-through of `main.pdf` (operator is reading it now and will direct the next edits; discipline reminder: on any figure change, re-scan the WHOLE figure for overlaps, not just the changed element). Absent specific direction, the standing options:
 1. **Frontiers formatting for submission** [CLAUDE/HYBRID]: swap `natbib` numbered-super → Frontiers
    author-year style + a Frontiers CSL for the DOCX path; apply the Frontiers article template; fill the one
    pending byline (`plausibility2026` = arXiv:2606.01042 — bib placeholder "Byline pending"). (README "Still

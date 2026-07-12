@@ -159,4 +159,4 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 
 | 2026-07-11 (overnight) | **Manuscript: figures + related-work + review-hardening** | 4 deterministic figures wired (23pp→32pp, 0 err); §2.4 related-work + §5.3b strengthening; **genomics fix** (NAB2–STAT6 convergent ~43kb, not 1.9kb; Ensembl-verified); 5-reviewer pass (4 Claude + Codex) + final Codex debate → all P0/P1 fixed; ~28 DOI-verified refs; deliverable `main.pdf`; `62bb929` |
 
-_Last updated: 2026-07-11 (overnight — manuscript submission-ready: figures + related-work + review-hardened, 32pp; next = read main.pdf → Frontiers formatting or a strengthener)_
+_Last updated: 2026-07-12 (manuscript polished: figures collision-audited, abstract/first-para indents, 'honest funnel'→'funnel', 'honest' prose thinned, STAT6 'falsified'→'ruled out' aligned; 32pp/0-err; operator reading main.pdf; continue next session)_
