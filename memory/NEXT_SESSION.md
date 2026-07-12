@@ -11,11 +11,15 @@ manuscript thread below.
 
 ## Next session priorities — written 2026-07-11 (overnight autonomous session)
 
-**Current state**: MANUSCRIPT thread — **submission-ready draft COMPLETE and review-hardened** (full-close,
-committed+pushed `62bb929`). The manuscript now has **4 figures**, a **related-work §2.4**, an
-**evidence-strengthening §5.3b**, a **corrected NAB2/STAT6 genomics**, and every P0/P1 from a **5-reviewer
-critical pass (4 Claude agents + Codex) + a final repo-read Codex debate** applied. Compiles at **32 pp, 0
-errors, 0 undefined citations**. Codex verdict: *"submission-defensible on its own terms."*
+**Current state**: MANUSCRIPT thread — **submission-ready draft COMPLETE, review-hardened, and polished**
+(full-close; commits `62bb929` → `4f4337f` → `ab87fb2`, all pushed). The manuscript has **4 figures** (padded
+boxes), a **related-work §2.4**, an **evidence-strengthening §5.3b**, a **corrected NAB2/STAT6 genomics**,
+**first-line paragraph indents** (run-in bold headings kept flush), and an **Acknowledgements + Data/code
+availability** section (Cerebral Valley hackathon; Marson lab dataset; Claude Science; Anthropic Claude Max +
+API credits). Every P0/P1 from a **5-reviewer pass (4 Claude + Codex) + a final Codex debate** is applied.
+Compiles at **32 pp, 0 errors, 0 undefined citations, 0 bibtex warnings**. Codex verdict: *"submission-defensible
+on its own terms."* The plausibility2026 byline is now filled (Yuan et al.) and the frozen markdown's stale
+genomics is synced.
 
 **THE DELIVERABLE TO READ**: `docs/manuscript/latex/main.pdf` (32 pp, freshly compiled). Open it directly.
 
@@ -34,14 +38,13 @@ errors, 0 undefined citations**. Codex verdict: *"submission-defensible on its o
 (MiKTeX lost its `perl` engine) — compile with the 4-pass `pdflatex; bibtex main; pdflatex; pdflatex`
 sequence instead (documented in `docs/manuscript/latex/README.md`).
 
-**Open questions**:
-- Fill `plausibility2026` (arXiv:2606.01042) real byline before journal submission (unverifiable headlessly
-  tonight; S2/arXiv API had no record yet).
-- Optional polish NOT applied (low-value, reviewer-noted): trim the CS `$6.41`/scriptability detail to
-  supplementary (§4.5); add a fully-worked second survivor (EGR2) — handled instead by the n=1 limitation;
+**Open questions** (all TODOs from the prior close are now done):
+- **Frontiers submission formatting** remains (the real pre-submission step, not "small"): swap `natbib`
+  numbered-super → Frontiers author-year + a Frontiers CSL for the DOCX path; apply the Frontiers article/Word
+  template. Deferred to actual submission.
+- Optional polish NOT applied (low-value, reviewer-noted; safe to skip): trim the CS `$6.41`/scriptability
+  detail to supplementary (§4.5); a fully-worked second survivor (EGR2) — handled by the n=1 limitation;
   one-line PerTurboAgent cite; `12q13`→`12q13.3` once.
-- The **frozen markdown source** (`docs/manuscript/sections/*.md`) still carries the OLD "1.9 kb" / "Figure 5"
-  — the `.tex` is authoritative (README says so); sync or delete the markdown before public release if desired.
 
 **Do not touch**: the submission artifacts / demo video (fire-ready; "scrub and flip" governs). Do NOT re-run
 `docs/manuscript/latex/build_tex.py` (overwrites hand-edited `.tex`). Figures regenerate deterministically via
