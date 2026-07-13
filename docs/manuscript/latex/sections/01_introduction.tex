@@ -38,7 +38,9 @@ held experimental substrate --- a genome-scale CRISPRi Perturb-seq resource in p
 \cite{zhu2025} --- and returns a prioritization verdict with a receipt at every hop. We instantiate the
 approach in a concrete implementation, but the contribution is the \emph{method} --- receipt-backed
 prioritization of machine-generated hypotheses, with explicit abstention and falsification diagnostics ---
-and what it found, not a software product.
+and what it found, not a software product. And we hold the method to a measurement rather than only a
+demonstration: a time-sliced held-out evaluation (\S{}4.7) tests whether it ranks future-established links above
+baselines and returns a null at its pre-registered primary metric, which we report straight.
 The receipts are of two kinds, and we keep them distinct: the knockdown, effect, and program hops are
 backed by \emph{experimental} measurements from the perturbation data; the disease hop is an \emph{association}
 receipt (genetic enrichment), a nomination rather than a claim of experimental causality.

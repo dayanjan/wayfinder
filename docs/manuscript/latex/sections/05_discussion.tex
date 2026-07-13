@@ -25,7 +25,7 @@ There is a replicability dividend here that we did not anticipate at the outset.
 programmatic interface, so an analysis run in it is ordinarily a one-off, hand-paced web session. By driving
 it headlessly and pulling its own provenance, we turned that one-off into a re-runnable, audited pipeline ---
 and the sensitivity analyses in \S{}4.1b make the point concrete: the same panel, run locally and then inside
-the workbench, reproduced byte-for-byte, verified by the workbench's own reviewer. An agentic analysis that
+the workbench, reproduced value-identically (the two outputs differ only by line-ending), verified by the workbench's own reviewer. An agentic analysis that
 would otherwise be irreproducible-by-construction became replicable in principle --- subject to the
 platform's user interface remaining stable (\S{}5.3). This is a small step, but a real one, toward
 replicable-in-principle \emph{agentic} science rather than merely reproducible code.
@@ -45,8 +45,9 @@ atopic-dermatitis expression data (bulk and single-cell; datasets and accessions
 direction-analysis record, and outside the referee substrate) for the \emph{direction} of the
 NAB2--atopic-eczema association: NAB2 reads \textbf{down} in lesional atopic-dermatitis skin relative to non-lesional
 (bulk log\textsubscript{2}FC -0.32, FDR 0.002; anti-correlated with Th2 activity, $\rho$ -0.34), and a single-cell analysis
-confirmed this is a per-cell reduction in the disease-relevant compartments (keratinocyte -0.51,
-paired \emph{p} 0.027; T/NK -0.57) rather than a shift in cell-type composition. Read together, these are more
+indicated a per-cell reduction rather than a shift in cell-type composition --- \emph{significant} in the
+keratinocyte compartment (-0.51, paired \emph{p} 0.027) and in the same direction but \emph{not} significant in
+the T/NK compartment (-0.57, \emph{p} 0.11), so we read it as a partial per-cell confirmation. Read together, these are more
 consistent with NAB2 acting as a \textbf{Th2 brake that is lost or suppressed in chronic lesions} than as a Th2
 driver --- a reading whose concordance with the perturbation data turns on the \emph{sign} of the Th2-program
 change under NAB2 knockdown, which the substrate's directional metrics do not by themselves settle here, so
@@ -56,8 +57,11 @@ therapeutic move --- topical knockdown --- is likely \emph{backwards}, and the d
 
 We are candid about the ceiling on this. Expression tracks the direction of \emph{association}, not the
 distinction between an effector and a brake; the voting-arm evidence was mixed (one significant arm, others
-ambiguous or null); and only a perturbation --- showing that \emph{restoring} NAB2 dampens the Th2 program --- can
-convert this brake hypothesis into a directional therapeutic claim. That perturbation is the experiment the
+ambiguous or null); and the brake reading carries a specific mechanistic caveat --- NAB2's one described T-cell
+role is as an EGR-family co-regulator (\S{}4.3), and EGR2 is itself STAT6-driven and \emph{pro}-type-2, so if
+NAB2's Th2 effect is mediated through EGR2 the brake-versus-effector sign could invert, which is exactly why the
+directional claim awaits a perturbation. Only a perturbation --- showing that \emph{restoring} NAB2 dampens the
+Th2 program --- can convert this brake hypothesis into a directional therapeutic claim. That perturbation is the experiment the
 loop nominates. This is exactly the shape we argue for: the approach does not end the inquiry, it points a
 bench at the one experiment most worth running.
 

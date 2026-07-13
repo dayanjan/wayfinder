@@ -245,7 +245,7 @@ negatives (IL36RN$\times$psoriasis, TREX1$\times$lupus, PADI4$\times$rheumatoid 
 Control 1: all 2{,}430 failed-knockdown genes returned \emph{untested} (100\%, no leakage). \textbf{(D)}
 Flagship rank stability (Control 3): NAB2's rank across 27 objective-weight settings (median 4; top-5 in
 89\%) and across gate cells where eligible (1--5); the verdict is invariant throughout. Panels render the
-committed analysis outputs, reproduced byte-for-byte inside the workbench (\S4.5).}
+committed analysis outputs, reproduced value-identically inside the workbench (\S4.5).}
 \label{fig:diagnostics}
 \end{figure}
 
@@ -411,7 +411,8 @@ invoked at separate checkpoints, verified every reported number against the unde
 enforced calibrated language on the manuscript-facing output. It produced four verification checks: two
 confirming that every cited receipt and the final ``what ran where'' table matched the source of truth, and ---
 the telling one --- a check that \textbf{flagged the words ``validated'' (in a title) and ``definitive'' (in a heading)
-as calibrated-language violations, both of which were then removed}. The platform corrected its own
+as calibrated-language violations and removed them from the manuscript-facing output} (the raw generation log
+retains ``validated'' in a free-text field, as noted below). The platform corrected its own manuscript-facing
 overstatement. We characterize this independence precisely: it is \emph{role, model, and checkpoint} independence
 --- a distinct reviewer model at distinct verification points within a single model family --- not independence
 across vendors. It is also why manuscript-facing verdicts cite the post-review receipt rather than the raw
@@ -440,8 +441,9 @@ distinct question of whether the GWAS disease \emph{label} is LD-inherited from 
 substrate cannot settle and which we leave open (\S{}5.3). It corrected an effect-size overstatement (``\textasciitilde8$\times$ stronger'' is the
 log-fold-change ratio; the \emph{z}-ratio is \textasciitilde3$\times$). And it reframed the distinctness argument onto its strongest
 support --- cluster co-membership, magnitude, and guide-specificity --- rather than the shared disease profile,
-which if anything \emph{aids} the confounder. That a hostile independent re-derivation reproduced every number
-and improved the framing is the strongest available evidence that the reported quantities are a property of
+which if anything \emph{aids} the confounder. That a hostile independent re-derivation reproduced every headline
+receipt --- while catching and correcting two errors of our own (the confounder-script cluster mislabel above and
+the effect-size overstatement) --- is the strongest available evidence that the reported quantities are a property of
 the deposited data --- reproducible independently of our code --- rather than an artifact of our
 implementation. We are careful about what this does and does not establish: it is evidence of computational
 robustness, not of biological validity, which the confounder analyses above and the limitations below

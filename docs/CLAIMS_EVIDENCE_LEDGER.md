@@ -59,6 +59,18 @@ audit's FATAL (method now *measured*, not merely demonstrated) and is reported s
 `data/eval_out/count_manifest_full_T2016_k5.json` (committed receipt), `eval_results_T2016_k5.json`,
 `src/arbiter/eval/`, `docs/g1-build-log_2026-07-12.md`, `docs/reviews/diff_g1-harness_2026-07-12.md`.
 
+## Manuscript honesty fixes — status (2026-07-13)
+The 9 honesty flags from `docs/claims-vs-experiments_2026-07-12/RECONCILIATION.md` are now all resolved.
+**Applied 2026-07-13** (reconciled against the current manuscript, not the list): **M6** "byte-for-byte" →
+"value-identical" (abstract + §4.5 caption + §5.1); **M5** "both removed" → "removed from the manuscript-facing
+output; ``validated'' persists in the raw-log free-text field"; **M7** "reproduced every number" → "reproduced
+every headline receipt while catching+correcting two of our own errors"; **B6** T/NK −0.57 now stated n.s.
+(p 0.11) → "partial per-cell confirmation" (§5.2); **B7** EGR2-is-STAT6-driven pro-type-2 sign-flip caveat added
+to §5.2. **Already resolved in prior revisions** (verified present): R2 (395/406 reconciled in §4.1), M8/R4 (rank
+stability conditioned on gate survival, §4.1b/c), the buggy [74,90] script (narrative uses corrected 90/100),
+stale "1.9 kb" (already "~43 kb"). Also **2026-07-13**: abstract + §1 reframed to state the method is now
+*measured* (G1 held-out eval, null reported straight), not only demonstrated.
+
 ## Sources appendix (trace every claim to its origin)
 | ID | Source | Locator |
 |----|--------|---------|
