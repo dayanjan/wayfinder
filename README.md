@@ -33,8 +33,9 @@ re-derived here with a receipt at every hop.
 - **The confident NO (the moat).** A failed knockdown returns **untested**, never "no effect": IL2's
   knockdown-QC gate failed (0/2 guides reached significance) → *untested*, an artifact caught rather than a
   false negative. NAB2's gate passed (2/2 guides, adj_p 1e−16), so NAB2 can be judged.
-- **A confounder refuted against the authors' own data.** NAB2 sits ~1.9 kb from *STAT6* (a master Th2/atopy
-  regulator), so a CRISPRi cis-artifact was the obvious worry. Reading the authors' own deposited genome-wide
+- **A confounder refuted against the authors' own data.** NAB2 and *STAT6* (a master Th2/atopy regulator) are
+  convergent tail-to-tail neighbours (~43 kb between promoters), so a CRISPRi cis-artifact was the obvious
+  worry. Reading the authors' own deposited genome-wide
   DE matrix, **STAT6 is unmoved by NAB2 knockdown** (log2FC +0.09, adj_p 0.79) while NAB2's own transcript
   drops (−3.08 log2FC, z≈−17) → the cis-artifact is **refuted**.
 - **Calibrated, not overclaimed.** The eczema link is an Open Targets GWAS-genetic *nomination* (no
@@ -59,6 +60,28 @@ workbench), which authored and ran the literature-based-discovery generator live
 **actor–critic**: an **Opus 4.8** author with an independent **Sonnet 5 reviewer** that verified every number
 *and enforced calibrated language* — it flagged the words "validated" and "definitive" as overclaims, and they
 were cut. The platform checked its own work.
+
+## Model use — Claude for the science, cross-model for the rigor
+
+I build with more than one model on purpose: combine their strengths, and use each to check the other — while
+keeping the science itself on one platform. Nothing here is hidden.
+
+**The science ran in Claude (Anthropic), end to end.** The generation → referee → provenance pipeline executed
+natively inside Claude Science — verified from its own audit store (`operon-cli.db`) as **Opus 4.8** (author),
+**Sonnet 5** (the independent reviewer), and **Haiku 4.5** (inline). Every scientific receipt and number in this
+repo was produced by deterministic tools + Claude; no other model computed a result in the pipeline. Claude Code
+wrote the fresh tool layer during the event and orchestrated the build.
+
+**A second model family — OpenAI's Codex (via the `codex` CLI) — was used as a cross-model *engineering* aid,
+deliberately kept outside the science pipeline:** (1) **code review** that caught real bugs before any result
+depended on them (attributed inline in the source); (2) **adversarial red-teaming** of the plans, the LBD spec,
+and the manuscript (`docs/reviews/codex-*`); and (3) **independent replication** — 2 of 5 agents in the
+cross-model replication were Codex, clean-room re-deriving the NAB2 finding to confirm it reproduces across model
+families (`docs/replication_report_2026-07-08.md`).
+
+Using a rival model family to attack and re-derive the work is not a shortcut around Claude — it is the integrity
+posture. The finding is stronger because it survived a second model's scrutiny, and the science it describes was
+done in Claude.
 
 ## Reproduce
 
