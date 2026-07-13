@@ -31,16 +31,19 @@ drive didn't converge (driver fragility) → **fell back to an independent local
 confirms C_broad +0.20 / C_mech −0.15) + codex code-review + reproducibility + unit tests. Manuscript **35 pp,
 0 errors**. Commits `a695c43`, `8f1cb3d`.
 
+**ALSO DONE 2026-07-13:** **CS corroboration OBTAINED** (blind + headless; the driver fix = target an existing
+frame URL, persisted to auto-memory `cs-driving-method` + the skill's known-limitations) — §4.7 carries it,
+result at `data/eval_out/cs_verify_result.json`. **G3 DONE** — frozen EGR-distinctness receipt
+`docs/manuscript/analysis/egr_distinctness_results.json` (`opposition_confirmed=true`); §4.3 leads with the
+NAB1 paralog-opposition D3 fact; ledger R5 → SUPPORTED-BY-EXP. Manuscript 35 pp, 0 errors. Commits through `e09dfe2`.
+
 **Next action** (pick one; ordered by value):
-1. **G3 (frozen EGR receipt)** — re-run `docs/nab2_egr_mechanism_check.py`, commit the output JSON as the R5
-   receipt (lead with the NAB1 paralog-opposition D3 fact). Cheap. **[CLAUDE — small]**
-2. **Re-assess publishability** now that G1 is measured (the audit's "do not publish until measured" is
-   satisfied): decide whether the paper is submission-ready as an evaluated-methods paper with an honest null,
-   or whether to strengthen (external ground-truth panel / larger disease panel) first. **[CLAUDE]**
-3. **(Optional) Retry CS metric-verification** — a fresh `claude-science` restart + single-frame drive (the
-   queue was backlogged, 23 msgs). Blind input ready at `data/eval_out/cs_verify_input.json`, prompt at
-   `.claude/scratch/g1/cs_verify_prompt.txt`. Low priority (metrics already verified 4 ways). **[CLAUDE]**
-4. **G2 eQTL-existence spike** — does a NAB2 CD4⁺ cis-eQTL exist (gates whether B5/12q13 is resolvable)? **[CODEX-SPIKE then CLAUDE]**
+1. **Re-assess publishability** now that G1 is measured (the audit's "do not publish until measured" is
+   satisfied) and R5 has a receipt: decide whether the paper is submission-ready as an evaluated-methods paper
+   with an honest null, or whether to strengthen (external ground-truth panel / larger disease panel) first. **[CLAUDE]**
+2. **Frontiers/FRMA submission formatting** — the current build uses the LightsOut LaTeX template; convert to the
+   venue's format if submitting. **[CLAUDE]**
+3. **G2 eQTL-existence spike** — does a NAB2 CD4⁺ cis-eQTL exist (gates whether B5/12q13 is resolvable)? **[CODEX-SPIKE then CLAUDE]**
 
 **Prerequisites**: none blocking. Manuscript compiles via 4-pass `pdflatex; bibtex main; pdflatex; pdflatex`
 (latexmk broken). CS up on :8000 if pursuing #3.
