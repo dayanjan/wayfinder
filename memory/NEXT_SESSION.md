@@ -11,55 +11,46 @@ The Wayfinder hackathon submission remains BUILT + staged. On operator **"scrub 
 
 ---
 
-## Next session priorities — written 2026-07-12 (full-close, autonomous G1 build)
+## Next session priorities — written 2026-07-13 (full-close)
 
-**Current state**: **G1 (the held-out evaluation = the manuscript's publish gate) is BUILT, RUN, and
-INTEGRATED.** The audit's central FATAL — "method demonstrated, never measured" — is **CLOSED**: the method is
-now *measured*, and the honest result is a **NULL at the pre-registered primary metric**, reported straight in
-new **§4.7 + Fig 5**. Manuscript compiles clean (**34 pp, 0 errors**). Full audit trail:
-`docs/g1-build-log_2026-07-12.md`. Commits `8858d67`→`a3f3141`, all pushed; tree clean.
+**Current state**: Manuscript **finalized for this pass** — 36 pp, 6 figures, 0 errors, 4-pass clean, all
+pushed (through `c802fd1`); tree clean. This session: G1 measured-null + **CS corroboration** (blind, §4.7 +
+Fig 6), 9 honesty fixes, contribution reframe (finding-first Contributions block, §1), self-praise sweep, **G3**
+EGR-distinctness receipt (R5 closed), and a **retitle** to foreground Claude Science for the hackathon. Deliverable:
+`docs/manuscript/latex/main.pdf` (regenerate via 4-pass `pdflatex; bibtex main; pdflatex; pdflatex`).
 
-**G1 result (for context)**: frame 22,437 novel-at-2016 pairs, 5,570 positives (24.8%). C_broad (Wayfinder−lit-
-rarity) +0.20 [−0.20,+0.65]; C_mech (Wayfinder−disease-hop-only) −0.15 [−0.35,+0.30]; joint `broad_null`, robust
-across k=3/k=5/pure-disjoint. Wayfinder leads on secondary p@5 (0.80) + MAP (0.287) but not the primary; disease-
-hop-only matches/beats it at p@20 — the measured face of §4.1b's substrate-inherited stringency.
+**Next action — REFERENCE VERIFICATION (no hallucinations + relevance).** Two checks over the manuscript's
+citations (**39 `\cite` commands** across `docs/manuscript/latex/sections/` + `main.tex`; entries in
+`docs/manuscript/latex/references.bib`):
+1. **No hallucinated references** — every `references.bib` entry is a real paper with a resolving DOI. Prior
+   sessions DOI-resolved them, but re-verify. **In-repo tools already present:**
+   `tools/{crossref_lookup,semantic_scholar,zotero_sync}.py` (the ported LightsOut citation stack) — use these
+   to resolve/confirm each DOI/title programmatically (deterministic, §19 direct-tool-over-MCP).
+2. **Relevance** — for each `\cite`, confirm the cited paper actually supports the specific statement it backs
+   (the common failure: a real paper cited for the wrong claim). This needs reading each cited title/abstract
+   and matching to the sentence. **Reuse skills from the LightsOut R01 / R01-template sibling projects** —
+   the operator says those have citation-audit / reference-relevance skills; find + reuse them rather than
+   rebuild. (Locate via the sibling repos; check their `.claude/skills/`.)
+   **[CLAUDE + in-repo tools; reuse LightsOut R01 skills]**
 
-**DONE 2026-07-13** (the 3 prior next-moves): (1) the 9 manuscript honesty fixes — 5 applied + 4 already
-resolved, verified; (2) contribution reframe — abstract + §1 now state the method is *measured* (null reported
-straight), "evaluated honestly rather than asserted"; (3) CS metric-verification ATTEMPTED but the headless
-drive didn't converge (driver fragility) → **fell back to an independent local recompute** (fresh code path
-confirms C_broad +0.20 / C_mech −0.15) + codex code-review + reproducibility + unit tests. Manuscript **35 pp,
-0 errors**. Commits `a695c43`, `8f1cb3d`.
+**Then (lower priority)**:
+- **Re-assess publishability** (the audit's "do not publish until measured" bar is met; R5 has a receipt now).
+- **Frontiers/FRMA submission formatting** (current build = LightsOut LaTeX template).
+- **G2 eQTL-existence spike** — does a NAB2 CD4⁺ cis-eQTL exist (gates whether B5/12q13 is resolvable)? **[CODEX-SPIKE then CLAUDE]**
 
-**ALSO DONE 2026-07-13:** **CS corroboration OBTAINED** (blind + headless; the driver fix = target an existing
-frame URL, persisted to auto-memory `cs-driving-method` + the skill's known-limitations) — §4.7 carries it,
-result at `data/eval_out/cs_verify_result.json`. **G3 DONE** — frozen EGR-distinctness receipt
-`docs/manuscript/analysis/egr_distinctness_results.json` (`opposition_confirmed=true`); §4.3 leads with the
-NAB1 paralog-opposition D3 fact; ledger R5 → SUPPORTED-BY-EXP. Manuscript 35 pp, 0 errors. Commits through `e09dfe2`.
+**Prerequisites**: none blocking. `tools/*.py` need the project `.env` keys (already present per prior sessions).
 
-**Next action** (pick one; ordered by value):
-1. **Re-assess publishability** now that G1 is measured (the audit's "do not publish until measured" is
-   satisfied) and R5 has a receipt: decide whether the paper is submission-ready as an evaluated-methods paper
-   with an honest null, or whether to strengthen (external ground-truth panel / larger disease panel) first. **[CLAUDE]**
-2. **Frontiers/FRMA submission formatting** — the current build uses the LightsOut LaTeX template; convert to the
-   venue's format if submitting. **[CLAUDE]**
-3. **G2 eQTL-existence spike** — does a NAB2 CD4⁺ cis-eQTL exist (gates whether B5/12q13 is resolvable)? **[CODEX-SPIKE then CLAUDE]**
+**Open questions**: any citation cited for a claim it does not actually support? Any bib entry that fails to resolve?
 
-**Prerequisites**: none blocking. Manuscript compiles via 4-pass `pdflatex; bibtex main; pdflatex; pdflatex`
-(latexmk broken). CS up on :8000 if pursuing #3.
+**Do not touch**: submission artifacts / demo video (fire-ready). Committed G1/G3 receipts
+(`data/eval_out/{count_manifest_full_T2016_k5,eval_results_T2016_k5,sensitivity,cs_verify_result}.json`,
+`docs/manuscript/analysis/egr_distinctness_results.json`) + dated audit records are IMMUTABLE — cite, don't edit;
+update `CLAIMS_EVIDENCE_LEDGER.md` for status.
 
-**Open questions**: does the null survive an external ground-truth panel + a larger (>12) disease panel (raises
-power)? Given G1 is now measured, is the paper publishable as-is (audit's "do not publish until measured" is met)?
+**Context to preload** (≤10): `docs/CLAIMS_EVIDENCE_LEDGER.md`; `docs/manuscript/latex/references.bib`;
+`docs/manuscript/latex/sections/` (for the `\cite` sites); `tools/crossref_lookup.py`;
+`tools/semantic_scholar.py`; `docs/g1-build-log_2026-07-12.md`; `docs/HACKATHON.md`; `memory/NEXT_SESSION.md`.
 
-**Do not touch**: submission artifacts / demo video (fire-ready; "scrub and flip"). The committed G1 receipts
-(`data/eval_out/count_manifest_full_T2016_k5.json`, `eval_results_T2016_k5.json`, `sensitivity.json`) and the
-dated audit/reconciliation/debate records are IMMUTABLE — cite, don't edit; update `CLAIMS_EVIDENCE_LEDGER.md`.
+**Estimated budget**: reference verification ≈ 1 session (39 cites; tool-assisted).
 
-**Context to preload** (≤10): `docs/g1-build-log_2026-07-12.md`; `docs/CLAIMS_EVIDENCE_LEDGER.md`;
-`docs/manuscript/latex/sections/04_results.tex` (§4.7); `data/eval_out/SUMMARY.md`;
-`docs/claims-vs-experiments_2026-07-12/NEW_EXPERIMENTS.md`; `docs/reviews/diff_g1-harness_2026-07-12.md`;
-`src/arbiter/eval/`; `memory/NEXT_SESSION.md`.
-
-**Estimated budget**: honesty fixes ≈ ½ session; contribution reframe ≈ ½ session; CS verify ≈ ½–1 session.
-
-## Mirror of this handoff is appended to memory/sessions/2026-07-12.md by session-closer.
+## Mirror of this handoff is appended to memory/sessions/2026-07-13.md by session-closer.

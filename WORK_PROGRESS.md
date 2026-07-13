@@ -17,7 +17,12 @@ Live snapshot dashboard. Updated by `session-closer` at each session close and b
   done; ledger updated; manuscript **34 pp, 0 errors**. **Closes the audit's central FATAL — the method is now
   MEASURED.** Audit trail `docs/g1-build-log_2026-07-12.md`. **Next = 9 honesty fixes / contribution reframe /
   optional CS metric-verify.**
-- **Last updated:** 2026-07-12 (autonomous: G1 built → NULL at primary → integrated §4.7 + Fig 5, reported straight → 34pp; full-close)
+- **Active thread (2026-07-13):** **MANUSCRIPT FINALIZED.** CS corroboration (blind, §4.7 + Fig 6) + 9 honesty
+  fixes + contribution reframe (finding-first Contributions block) + G3 EGR receipt (R5 closed) + self-praise
+  sweep + retitle (names Claude Science; "stress-testing" not "falsifying"). **36 pp, 6 figures, 0 errors.**
+  Commits `a695c43`→`c802fd1`, pushed. **Next = REFERENCE VERIFICATION** (no hallucinations + relevance; reuse
+  LightsOut R01 skills + in-repo `tools/*.py`).
+- **Last updated:** 2026-07-13 (manuscript finalized: CS corroboration + Fig 6 + honesty fixes + reframe + G3 + retitle; full-close)
 - **Deadline:** 2026-07-13 (official EOD ET; operator personal stop 9:00 PM ET)
 - **Repo:** `dayanjan/wayfinder` (private; renamed from pyzobot-arbiter, history preserved; flip public via `SUBMIT_CHECKLIST.md` — say "scrub and flip")
 - **Claude Science:** installed on WSL, driven headless via the `drive-claude-science` skill (validated E2E, zero-click)
@@ -38,6 +43,22 @@ Legend: 🟢 done · 🟡 in progress · 🔴 blocked · ⛔ off-track · ⚪ no
 None. (Claude Science entitlement + sandbox verified; endpoint does not block it.)
 
 ## Progress log
+### 2026-07-13 — Session close (full-close): manuscript finalized — CS corroboration + honesty fixes + reframe + G3 + retitle
+Interactive finalization on top of the G1 build. **CS corroboration OBTAINED** (blind, headless): after
+root-causing the driver failure (home-page `--url` doesn't post on CS 0.1.16-dev → **fix = drive an existing
+frame URL**, saved to auto-memory), CS reproduced the held-out eval exactly (points +0.20/−0.15, `broad_null`,
+CIs concordant) → new §4.7 sentence + **Fig 6** (local-vs-CS concordance) + ledger. **9 honesty fixes** (5
+applied: M6/M5/M7/B6/B7; 4 already resolved). **Contribution reframe** → the method is *measured*; added a
+**finding-first enumerated Contributions block** in §1 (NAB2 novelty → method → measurement → reproducibility)
++ "what we do not claim". **G3** — frozen EGR-distinctness receipt (`egr_distinctness_results.json`,
+`opposition_confirmed=true`; §4.3 leads with NAB1 paralog-opposition), ledger R5 → SUPPORTED-BY-EXP (last
+script-only gap closed). **Self-praise sweep** — removed ~13 "honest/candid/report straight" instances (a
+calibrated-language paper states results plainly). **Retitle** to foreground the hackathon platform:
+*"Receipt-backed, self-auditing literature-based discovery in an agentic workbench (Claude Science): prioritizing
+and stress-testing Perturb-seq hypotheses"* ("stress-testing" not "falsifying" — avoids negative + fabrication
+misread). Manuscript **36 pp, 6 figures, 0 errors, 4-pass clean**. Commits `a695c43`→`c802fd1`, all pushed.
+**Next = reference verification** (no hallucinations + relevance; reuse LightsOut R01 skills + in-repo `tools/*.py`).
+
 ### 2026-07-12 (autonomous) — Session close (full-close): G1 held-out eval BUILT + RUN + INTEGRATED → publish-gate FATAL closed
 Autonomous day-session (operator out; "do as much as possible, brainstorm Claude↔Codex, get CS to do the planned
 work, record everything auditably; stay on mission — a proper manuscript"). **Built, ran, integrated G1** (the

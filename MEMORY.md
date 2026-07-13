@@ -9,6 +9,19 @@ This file is the fast scan: where we are, what's decided, what happened lately.
 > source → critique). Any claim audit/review/revision reconciles against BOTH literature AND the experiments
 > it indexes. Anti-amnesia protocol: `memory/NEXT_SESSION.md`.
 
+**2026-07-13 (full-close) — MANUSCRIPT FINALIZED: CS corroboration + honesty fixes + reframe + G3 + retitle.**
+Interactive finalization on top of the G1 build. **CS corroboration OBTAINED** (blind, headless): CS reproduced
+the held-out eval exactly (points +0.20/−0.15, `broad_null`) → new §4.7 sentence + **Fig 6** (local-vs-CS
+concordance); driver root-cause = home-page `--url` doesn't post on CS 0.1.16-dev, **fix = existing frame URL**
+(saved to auto-memory `cs-driving-method` + the skill). **9 honesty fixes** (5 applied, 4 already done).
+**Contribution reframe** → measured, with a **finding-first enumerated Contributions block** (§1) + "what we do
+not claim". **G3** frozen EGR-distinctness receipt (`egr_distinctness_results.json`, `opposition_confirmed=true`;
+§4.3 leads with NAB1 paralog-opposition) → ledger R5 SUPPORTED. **Self-praise sweep** (removed ~13
+"honest/candid/report straight"). **Retitled** to name the platform: *"Receipt-backed, self-auditing
+literature-based discovery in an agentic workbench (Claude Science): prioritizing and stress-testing Perturb-seq
+hypotheses"* ("stress-testing" not "falsifying" — avoids negative + data-fabrication misread). Manuscript **36 pp,
+6 figs, 0 errors**. Commits `a695c43`→`c802fd1`, pushed. **Next = REFERENCE VERIFICATION** (no hallucinations +
+relevance; reuse LightsOut R01 skills + in-repo `tools/*.py`). See `memory/NEXT_SESSION.md`.
 **2026-07-12 (full-close, autonomous) — G1 HELD-OUT EVAL BUILT + RUN + INTEGRATED → publish-gate FATAL CLOSED.**
 Autonomous day-session (operator out). Built the time-sliced held-out evaluation (the manuscript's publish gate):
 recon resolved the frame = full A×C=47,220 novel-at-2016; Codex delegation blocked (Windows 0.144.1 sandbox bug +
@@ -190,5 +203,6 @@ build decisions here as they're made (embeddings provider, agent boundaries, ver
 
 | 2026-07-12 (PM) | **Contribution audit + claims↔experiments reconciliation + traceability + G1 de-risk** | 13-agent mixed-model novelty audit → do-not-publish-as-is (method unevaluated; uncited Popper/VERITAS); reconciliation RESCUED the biology (STAT6 mistaken-identity retracted, 2/3 channels closed) + CONFIRMED the eval gap + 9 honesty fixes; built anti-amnesia `CLAIMS_EVIDENCE_LEDGER` + `HACKATHON.md`; **G1 held-out eval de-risked (GO Option A) + plan v3 codex-debate-converged + CS health-check PASSED**. `e626b4c`→`4952c9a`. Next = build G1 |
 | 2026-07-12 (autonomous) | **G1 held-out eval BUILT + RUN + INTEGRATED (publish gate)** | Codex sandbox-blocked → direct-wrote harness `src/arbiter/eval/` (~950 LOC, 11/11 tests); read-only `codex review` caught the load-bearing bootstrap bug (fixed); enumeration local (0 fail): 22,437 frame / 5,570 pos (24.8%). **Result NULL at primary** (C_broad +0.20[−0.20,+0.65]; C_mech −0.15[−0.35,+0.30]; `broad_null`, robust k=3/5/pure-disjoint). Integrated §4.7 + Fig 5 (reported straight), §5.3b, ledger; 34pp clean. Closes audit FATAL (method now MEASURED). `8858d67`→`a3f3141` |
+| 2026-07-13 | **Manuscript finalized** | CS corroboration (blind; §4.7 + Fig 6) + 9 honesty fixes + reframe (finding-first Contributions block) + G3 EGR receipt (R5 closed) + self-praise sweep + retitle (names Claude Science; "stress-testing" not "falsifying"). 36pp/6figs/0err. `a695c43`→`c802fd1`. Next = reference verification |
 
-_Last updated: 2026-07-12 (autonomous G1 build: harness direct-written + codex-reviewed → enumeration → NULL at primary → integrated §4.7 + Fig 5, reported straight → 34pp; full-close; next = 9 honesty fixes / contribution reframe / optional CS verify)_
+_Last updated: 2026-07-13 (manuscript finalized: CS corroboration + Fig 6 + honesty fixes + reframe + G3 + retitle; 36pp/6figs; full-close; next = reference verification — no hallucinations + relevance, reuse LightsOut R01 skills)_
