@@ -24,18 +24,23 @@ rarity) +0.20 [−0.20,+0.65]; C_mech (Wayfinder−disease-hop-only) −0.15 [�
 across k=3/k=5/pure-disjoint. Wayfinder leads on secondary p@5 (0.80) + MAP (0.287) but not the primary; disease-
 hop-only matches/beats it at p@20 — the measured face of §4.1b's substrate-inherited stringency.
 
+**DONE 2026-07-13** (the 3 prior next-moves): (1) the 9 manuscript honesty fixes — 5 applied + 4 already
+resolved, verified; (2) contribution reframe — abstract + §1 now state the method is *measured* (null reported
+straight), "evaluated honestly rather than asserted"; (3) CS metric-verification ATTEMPTED but the headless
+drive didn't converge (driver fragility) → **fell back to an independent local recompute** (fresh code path
+confirms C_broad +0.20 / C_mech −0.15) + codex code-review + reproducibility + unit tests. Manuscript **35 pp,
+0 errors**. Commits `a695c43`, `8f1cb3d`.
+
 **Next action** (pick one; ordered by value):
-1. **Apply the 9 manuscript honesty fixes** from `docs/claims-vs-experiments_2026-07-12/NEW_EXPERIMENTS.md`
-   (M6 "byte-for-byte"→"value-identical"; M5 "flagged & removed" wording; R2 funnel 395↔406; M8/R4 rank-
-   stability conditions; B6 T/NK n.s.; retire the buggy [74,90] script cite; stale "1.9 kb"; M7 wording; B7
-   EGR2 caveat). Cheap, independent, honest-record hygiene. **[CLAUDE]**
-2. **Re-assess the manuscript contribution framing** now that G1 is measured (null): the paper is honestly
-   "receipt-backed prioritization + abstention + falsification with an evaluated null"; confirm the abstract +
-   §1 + §5 lead with that and don't overclaim ranking superiority. **[CLAUDE]**
-3. **(Optional) CS independent-verification of G1 metrics**: drive CS (:8000) to recompute the two co-primary
-   contrasts from the committed manifest + reviewer-verify +0.20/−0.15/broad_null (a §4.5-consistent check).
-   Lower priority — the null is already backed by the committed manifest + codex code-review + unit tests. **[CLAUDE]**
-4. **G3 (frozen EGR receipt)** — re-run `nab2_egr_mechanism_check.py`, commit the output JSON (R5). **[CLAUDE — small]**
+1. **G3 (frozen EGR receipt)** — re-run `docs/nab2_egr_mechanism_check.py`, commit the output JSON as the R5
+   receipt (lead with the NAB1 paralog-opposition D3 fact). Cheap. **[CLAUDE — small]**
+2. **Re-assess publishability** now that G1 is measured (the audit's "do not publish until measured" is
+   satisfied): decide whether the paper is submission-ready as an evaluated-methods paper with an honest null,
+   or whether to strengthen (external ground-truth panel / larger disease panel) first. **[CLAUDE]**
+3. **(Optional) Retry CS metric-verification** — a fresh `claude-science` restart + single-frame drive (the
+   queue was backlogged, 23 msgs). Blind input ready at `data/eval_out/cs_verify_input.json`, prompt at
+   `.claude/scratch/g1/cs_verify_prompt.txt`. Low priority (metrics already verified 4 ways). **[CLAUDE]**
+4. **G2 eQTL-existence spike** — does a NAB2 CD4⁺ cis-eQTL exist (gates whether B5/12q13 is resolvable)? **[CODEX-SPIKE then CLAUDE]**
 
 **Prerequisites**: none blocking. Manuscript compiles via 4-pass `pdflatex; bibtex main; pdflatex; pdflatex`
 (latexmk broken). CS up on :8000 if pursuing #3.
