@@ -4,7 +4,7 @@
 //   node app/smoke_referee.mjs [screenshotDir]              # in another
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const NM = process.env.DEMO_NODE_MODULES || 'C:/Users/wijesingheds/.claude/skills/demo-video/node_modules';
+const NM = process.env.DEMO_NODE_MODULES || '';
 const { chromium } = require(`${NM}/playwright`);
 
 const URL = process.env.APP_URL || `http://localhost:${process.env.PORT || 8533}/`;

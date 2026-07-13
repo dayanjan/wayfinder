@@ -4,13 +4,13 @@
 // Supersedes ../demo.config.mjs (the Streamlit cut, kept as fallback recipe).
 
 export const BASE = "http://localhost:8000/";   // CS home — VERIFY the port Friday: `claude-science status`
-export const ENV_FILE = "C:/Users/wijesingheds/Documents/04 Fun with Coding/01 Dayanjan LLC Hub/.env"; // ElevenLabs key
+export const ENV_FILE = process.env.ELEVENLABS_ENV_FILE; // ElevenLabs key
 export const VIEWPORT = { width: 1920, height: 1080 };
 
 // CS authenticates via a saved browser session (nonce-minted), NOT a login form.
 // record.mjs injects this as the context storageState. Pair with actor.user:"" to skip login.
 // PRE-FLIGHT Friday: refresh this by running the drive-claude-science tracer once (auth can expire).
-export const STORAGE_STATE = "C:/Users/wijesingheds/.claude/skills/drive-claude-science/cs_state.json";
+export const STORAGE_STATE = process.env.CS_STORAGE_STATE;
 
 export const VOICE = "en-US-AndrewMultilingualNeural"; // draft edge-tts (unused when TTS.mode=elevenlabs)
 export const RATE = "-4%";

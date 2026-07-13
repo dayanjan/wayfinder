@@ -2,7 +2,7 @@
 // Single actor, NO auth (the app is open on localhost). user:"" => login is skipped.
 
 export const BASE = "http://localhost:8501/";
-export const ENV_FILE = "C:/Users/wijesingheds/Documents/04 Fun with Coding/01 Dayanjan LLC Hub/.env"; // ElevenLabs key (final pass)
+export const ENV_FILE = process.env.ELEVENLABS_ENV_FILE; // ElevenLabs key (final pass)
 export const VIEWPORT = { width: 1920, height: 1080 };
 
 // draft voice (edge-tts); flip TTS.mode to elevenlabs for the final cut

@@ -9,7 +9,7 @@
 const pg = (rec) => rec.page;
 
 const ASSETS =
-  "file:///C:/Users/wijesingheds/Documents/04%20Fun%20with%20Coding/2026-07-07%20PyZoBot-Arbiter/docs/demo-video-pack/assets/";
+  process.env.WAYFINDER_ASSETS_URL  // e.g. file:///<repo>/docs/demo-video-pack/assets/;
 const CS = "http://localhost:8000/";   // confirm port via `claude-science status`
 
 // VERIFIED frame URLs (2026-07-09 de-risk; see CAPTURE_PLAN.md).

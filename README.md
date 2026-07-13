@@ -6,7 +6,7 @@ navigate the gap: it surfaces the data's implicit hypotheses with literature-bas
 each one against real experimental data and returns a verdict with a receipt for every hop** — *supported*,
 *refuted*, or *untested (the knockdown failed)*. The library and the lab, on one bench.
 
-> **▶ 3-minute demo video:** *(link added at submission)*
+> **▶ 3-minute demo video:** https://youtu.be/MbgojaAFfz0
 >
 > Built for **Built with Claude: Life Sciences** (Anthropic × Gladstone Institutes), July 2026 —
 > **Researcher track ("a researcher who also builds").** The whole pipeline was reproduced natively inside
