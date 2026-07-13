@@ -40,7 +40,7 @@ approach in a concrete implementation, but the contribution is the \emph{method}
 prioritization of machine-generated hypotheses, with explicit abstention and falsification diagnostics ---
 and what it found, not a software product. And we hold the method to a measurement rather than only a
 demonstration: a time-sliced held-out evaluation (\S{}4.7) tests whether it ranks future-established links above
-baselines and returns a null at its pre-registered primary metric, which we report straight.
+baselines and returns a null at its pre-registered primary metric.
 The receipts are of two kinds, and we keep them distinct: the knockdown, effect, and program hops are
 backed by \emph{experimental} measurements from the perturbation data; the disease hop is an \emph{association}
 receipt (genetic enrichment), a nomination rather than a claim of experimental causality.
@@ -75,29 +75,33 @@ the signal is NAB2-specific, and does not claim to prove the disease link. Wayfi
 experimental follow-up; it makes the prior question --- \emph{which of these thousands is worth a bench's time?}
 --- answerable, with a receipt.
 
-\noindent \textbf{Contributions.} Stated up front so a reader can judge relevance before the details:
+\noindent \textbf{Contributions.} Stated up front --- what we found, then how --- so a reader can judge
+relevance before the details:
 \begin{enumerate}
 \tightlist
-\item \textbf{A receipt-backed prioritization architecture} --- LBD hypothesis generation paired with a
-  \emph{deterministic, non-LLM} referee that adjudicates each gene$\rightarrow$program$\rightarrow$disease triple
-  against a held Perturb-seq substrate and returns a per-hop receipt, with two first-class diagnostics:
-  \emph{abstention} (a knockdown-QC gate reports an untestable perturbation as \emph{untested}, never a
+\item \textbf{A biological finding: NAB2 as a literature-novel Th1/Th2 \emph{polarization} regulator.} A targeted
+  literature audit surfaced no papers linking NAB2 to Th1/Th2 polarization or to atopic eczema; the perturbation
+  data support NAB2 as a polarization regulator with a receipt at every hop, distinct from its one described
+  T-cell role as an EGR-family activation coregulator (its paralog NAB1 moves the program the opposite way;
+  \S{}4.3). We nominate it toward atopic eczema, exclude the sharpest artifact --- a STAT6 \emph{cis}-effect ---
+  at the expression level, and foreground the one confounder we cannot discharge (12q13 LD provenance) rather
+  than claim it resolved.
+\item \textbf{How we found it: a receipt-backed prioritization architecture.} LBD hypothesis generation paired
+  with a \emph{deterministic, non-LLM} referee that adjudicates each gene$\rightarrow$program$\rightarrow$disease
+  triple against a held Perturb-seq substrate and returns a per-hop receipt, with two first-class diagnostics
+  --- \emph{abstention} (a knockdown-QC gate reports an untestable perturbation as \emph{untested}, never a
   negative) and \emph{falsification} (a confident, receipt-backed \emph{no}). The ingredients are individually
   prior art; the \emph{integration} --- and a deterministic \emph{experimental} referee in place of an LLM
-  judge --- is the contribution, positioned against evaluated near-neighbours in \S{}2.4.
-\item \textbf{An honest measurement of that architecture, not only a demonstration} --- a pre-registered,
-  time-sliced held-out evaluation (\S{}4.7) that returns a \emph{null} at its primary metric: the pipeline does
-  not rank future-established links above literature-rarity or the disease-enrichment hop alone. We report the
-  null straight and trace the residual ranking signal to the substrate-inherited disease hop.
-\item \textbf{A reproducibility method for API-less agentic science} --- driving a workbench that exposes no
+  judge --- is the methodological contribution, positioned against evaluated near-neighbours in \S{}2.4.
+\item \textbf{A measurement of the method, not only a demonstration.} A pre-registered, time-sliced held-out
+  evaluation (\S{}4.7) returns a \emph{null} at its primary metric: the pipeline does not rank future-established
+  links above literature-rarity or the disease-enrichment hop alone, and the residual ranking signal traces to
+  the substrate-inherited disease hop.
+\item \textbf{A reproducibility method for API-less agentic science.} Driving a workbench that exposes no
   programmatic interface headlessly into a re-runnable, self-audited pipeline (\S{}3.4), with an independent
   critic model enforcing calibrated language on the platform's own output.
-\item \textbf{A receipt-backed biological nomination} --- NAB2 as a literature-novel Th1/Th2 \emph{polarization}
-  regulator, distinct from its known EGR-activation role (\S{}4.3), nominated toward atopic eczema; the sharpest
-  artifact (a STAT6 \emph{cis}-effect) is excluded at the expression level and the one confounder we cannot
-  discharge (12q13 LD provenance) is foregrounded, not resolved.
 \end{enumerate}
-\noindent \textbf{What we do not claim:} predictive correctness or superior ranking (we measured it --- null);
+\noindent \textbf{What we do not claim:} predictive correctness or superior ranking (measured --- null);
 novelty of the individual diagnostics (prior art); experimental disease \emph{causality} (an association
 nomination); or cross-vendor self-audit independence (role- and checkpoint-independence within a single model
 family, \S{}4.5).

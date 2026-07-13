@@ -87,7 +87,7 @@ The referee evaluates one triple at a time as a four-hop chain, each hop reading
 \item
   \textbf{Hop 0 --- knockdown QC.} Did the perturbation actually work (T4)? If no guide reaches a significant
   knockdown, the triple is returned \textbf{untested} --- never as a negative. This is the gate that converts a
-  failed experiment into an honest ``we cannot say,'' rather than a false ``no effect.''
+  failed experiment into a ``we cannot say,'' rather than a false ``no effect.''
 \item
   \textbf{Hop 1 --- effect.} Did the (real) knockdown produce a reproducible transcriptional effect (T1): a
   nonzero downstream-DE count, on target, without an off-target flag?
@@ -159,8 +159,8 @@ approval is logged in the audit store --- so the consent trail is inspectable af
 absent. Network approvals were granted only for the named data and literature endpoints the task used --- an
 auditable, endpoint-specific approval trail rather than a claim of an enforced allowlist --- and, as the
 liveness accounting below makes explicit --- the full-scale run reads from a local cache under a guard that
-raises on any live call, so unattended approval cannot silently alter the data receipts. We are candid that
-this is browser automation against a user interface with no stable public contract (Section 5.3); it is
+raises on any live call, so unattended approval cannot silently alter the data receipts. This
+is browser automation against a user interface with no stable public contract (Section 5.3); it is
 nonetheless what converts a click-once web session into a re-runnable, audited pipeline, and --- where a
 platform exposes no programmatic interface --- an under-appreciated route to replicable-in-principle
 (UI-dependent) \emph{agentic} science.

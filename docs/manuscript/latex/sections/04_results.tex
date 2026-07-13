@@ -10,7 +10,7 @@ GWAS-label provenance --- is foregrounded rather than buried (\S{}4.4b). We show
 audited by an independent critic model (\S{}4.5), and replicated by a second vendor's models (\S{}4.6).
 Finally, we move from demonstration to \emph{measurement}: a time-sliced held-out evaluation asks whether the
 method ranks future-established links above baselines, and reports the answer --- a null at the pre-registered
-primary metric --- straight (\S{}4.7).
+primary metric (\S{}4.7).
 
 \subsection*{4.1 The funnel and the verdict ledger}\label{the-funnel-and-the-verdict-ledger}
 
@@ -481,14 +481,14 @@ $C_{\mathrm{broad}}$ (Wayfinder $-$ literature-rarity, ``does experimental groun
 $C_{\mathrm{mech}}$ (Wayfinder $-$ disease-hop-only, ``do the knockdown/effect/program hops add value beyond the
 disease-enrichment hop''). We committed in advance to reporting a confidence interval spanning zero as a null.
 
-\textbf{The result is a null at the primary metric, and we report it straight.} Neither contrast separates from
+\textbf{The result is a null at the primary metric.} Neither contrast separates from
 zero: $C_{\mathrm{broad}} = +0.20$ [$-0.20$, $+0.65$] and $C_{\mathrm{mech}} = -0.15$ [$-0.35$, $+0.30$]
 (paired precision@20, 2{,}000 two-way-clustered bootstrap resamples). The pre-registered joint outcome is a
 \emph{broad null}: on this test the full pipeline does not rank future-established links above literature-rarity,
 and adds no measured value over the disease-enrichment hop alone --- indeed the disease-hop-only baseline
 (precision@20 $= 0.50$) matches or exceeds Wayfinder ($0.35$), an empirical confirmation of \S{}4.1b's argument
 that the disease hop's stringency, and here its ranking signal, is largely \emph{substrate-inherited} rather
-than supplied by the referee. Two honest qualifications accompany the null rather than soften it. First,
+than supplied by the referee. Two qualifications accompany the null rather than soften it. First,
 Wayfinder is the strongest ranker at the very top of the list (precision@5 $= 0.80$, the highest of any method)
 and on mean average precision ($0.287$, likewise the highest of the six), so a top-of-ranking signal is present
 --- but neither is the pre-registered primary, and we do not promote a secondary metric to a headline. Second,
@@ -518,7 +518,7 @@ co-mentions) by 2026. \emph{(A)} precision@$k$ for six rankers over the identica
 random-ranker expectation (the base rate). Wayfinder (green) is the strongest ranker at the very top ($k = 5$,
 precision 0.80) but converges to the disease-enrichment and continuous-enrichment baselines by $k = 20$.
 \emph{(B)} the two pre-registered co-primary contrasts on precision@20 with gene-and-disease two-way-clustered
-bootstrap 95\% CIs; both cross zero (grey), so the joint outcome is a \emph{broad null}, reported straight. The
+bootstrap 95\% CIs; both cross zero (grey), so the joint outcome is a \emph{broad null}. The
 disease-hop-only baseline matching Wayfinder at $k = 20$ is the measured face of the substrate-inherited
 stringency of \S{}4.1b.}
 \label{fig:heldout}
