@@ -1,0 +1,177 @@
+{
+  "experiment": "G3 \u2014 EGR/NAB-module distinctness receipt for NAB2 (serves R5)",
+  "condition": "Stim8hr",
+  "source": "S4 (aggregated supplementary tables T1/T2 + referee)",
+  "genes": {
+    "NAB2": {
+      "kd_gated": true,
+      "ontarget_effect_size": -16.88158589006466,
+      "n_downstream": 301,
+      "offtarget_flag": false,
+      "program_shift": {
+        "Ota": {
+          "log_fc": 0.6332,
+          "adj_p": 1.954764933784385e-13,
+          "sig": true,
+          "tag": "Th1"
+        },
+        "Holl": {
+          "log_fc": 0.6085,
+          "adj_p": 0.2046207165854035,
+          "sig": false,
+          "tag": "ns"
+        }
+      },
+      "referee_supported_diseases": [
+        "asthma",
+        "atopic eczema"
+      ]
+    },
+    "NAB1": {
+      "kd_gated": true,
+      "ontarget_effect_size": -15.149670730336611,
+      "n_downstream": 0,
+      "offtarget_flag": false,
+      "program_shift": {
+        "Ota": {
+          "log_fc": -0.2387,
+          "adj_p": 0.0020490175106175,
+          "sig": true,
+          "tag": "Th2"
+        },
+        "Holl": {
+          "log_fc": -0.685,
+          "adj_p": 0.0232065812179824,
+          "sig": true,
+          "tag": "Th2"
+        }
+      },
+      "referee_supported_diseases": []
+    },
+    "EGR1": {
+      "kd_gated": true,
+      "ontarget_effect_size": -4.698451379872767,
+      "n_downstream": 6,
+      "offtarget_flag": false,
+      "program_shift": {
+        "Ota": {
+          "log_fc": -0.4682,
+          "adj_p": 0.1038096898285665,
+          "sig": false,
+          "tag": "ns"
+        },
+        "Holl": {
+          "log_fc": -0.2121,
+          "adj_p": 0.971025055980335,
+          "sig": false,
+          "tag": "ns"
+        }
+      },
+      "referee_supported_diseases": []
+    },
+    "EGR2": {
+      "kd_gated": true,
+      "ontarget_effect_size": -11.061330168611285,
+      "n_downstream": 854,
+      "offtarget_flag": false,
+      "program_shift": {
+        "Ota": {
+          "log_fc": 0.3304,
+          "adj_p": 0.5878690161089861,
+          "sig": false,
+          "tag": "ns"
+        },
+        "Holl": {
+          "log_fc": 2.443,
+          "adj_p": 0.0494339891511844,
+          "sig": true,
+          "tag": "Th1"
+        }
+      },
+      "referee_supported_diseases": [
+        "Crohn's disease",
+        "ankylosing spondylitis",
+        "asthma",
+        "atopic eczema",
+        "celiac disease",
+        "multiple sclerosis",
+        "psoriasis",
+        "rheumatoid arthritis",
+        "systemic lupus erythematosus",
+        "type 1 diabetes mellitus",
+        "ulcerative colitis"
+      ]
+    },
+    "EGR3": {
+      "kd_gated": true,
+      "ontarget_effect_size": -3.769778552049028,
+      "n_downstream": 101,
+      "offtarget_flag": false,
+      "program_shift": {
+        "Ota": {
+          "log_fc": 1.0815,
+          "adj_p": 0.3166473180157525,
+          "sig": false,
+          "tag": "ns"
+        },
+        "Holl": {
+          "log_fc": 0.1138,
+          "adj_p": 0.987817419484488,
+          "sig": false,
+          "tag": "ns"
+        }
+      },
+      "referee_supported_diseases": []
+    }
+  },
+  "nab2_vs_egr": {
+    "EGR1": {
+      "shared": [],
+      "nab2_only": [
+        "asthma",
+        "atopic eczema"
+      ],
+      "egr_only": []
+    },
+    "EGR2": {
+      "shared": [
+        "asthma",
+        "atopic eczema"
+      ],
+      "nab2_only": [],
+      "egr_only": [
+        "Crohn's disease",
+        "ankylosing spondylitis",
+        "celiac disease",
+        "multiple sclerosis",
+        "psoriasis",
+        "rheumatoid arthritis",
+        "systemic lupus erythematosus",
+        "type 1 diabetes mellitus",
+        "ulcerative colitis"
+      ]
+    },
+    "EGR3": {
+      "shared": [],
+      "nab2_only": [
+        "asthma",
+        "atopic eczema"
+      ],
+      "egr_only": []
+    }
+  },
+  "d3_paralog_opposition_load_bearing": {
+    "claim": "NAB2 and its paralog NAB1 (both EGR corepressors) shift the Th1/Th2 program in OPPOSITE directions -> NAB2's phenotype is not a shared NAB/EGR-module effect.",
+    "nab2_significant_direction": "Th1",
+    "nab1_significant_directions": [
+      "Th2",
+      "Th2"
+    ],
+    "nab1_both_contrasts_significant": true,
+    "opposition_confirmed": true
+  },
+  "supporting": {
+    "d1_effect_and_downstream": "NAB2 eff -16.88 / 301 downstream DE vs NAB1 -15.15 / 0 downstream (paralog has no transcriptional consequence here).",
+    "d2_disease_specificity": "NAB2 supports {asthma, atopic eczema} only; EGR2 is a promiscuous hub (all 11 eligible diseases); NAB1/EGR1/EGR3 support none."
+  }
+}

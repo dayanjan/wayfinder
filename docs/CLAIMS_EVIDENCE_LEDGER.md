@@ -45,7 +45,7 @@
 | R2 | Referee-alone supports 395/47,220 | 4.1 | **NEEDS-FIX** | sensitivity_results.json | S4 | **number discrepancy: text 395 vs JSON 406 → reconcile** | 2026-07-12 |
 | R3 | Control 1: 2,430 failed-KD all untested (100%) | 4.1b | SUPPORTED-BY-EXP | Control-1 output | S4 | no leakage | 2026-07-12 |
 | R4 | Flagship rank stable (1–8 wt / 1–5 gate, med 4) | 4.1b/c | SUPPORTED-BY-EXP | gate_grid_results.json | S4,S5,S6 | conditions on NAB2 surviving gate (culled 9/27) | 2026-07-12 |
-| R5 | NAB2 distinct from EGR (NAB1 paralog opposition) | 4.3 | SUPPORTED-BY-EXP · **NEEDS-FIX** | nab2_egr_mechanism_check.py; replication D-set | S4 | lead with D3 (NAB1 opposition); no frozen receipt → **G3** | 2026-07-12 |
+| R5 | NAB2 distinct from EGR (NAB1 paralog opposition) | 4.3 | SUPPORTED-BY-EXP | **egr_distinctness_results.json** (G3 receipt, `opposition_confirmed=true`); nab2_egr_mechanism_check.py | S4 | **G3 DONE 2026-07-13**: frozen receipt committed; §4.3 now leads with D3 (NAB2 Th1 vs NAB1 Th2 both contrasts sig) | 2026-07-13 |
 
 **The central item (publish gate) — now EXECUTED (2026-07-12).** G1, the time-sliced held-out evaluation, is
 built and run: it measures whether the method ranks future-established gene→program→disease links above
