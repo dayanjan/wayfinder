@@ -55,7 +55,10 @@ disease-hop-only) = −0.15 [−0.35, +0.30]; joint outcome `broad_null` (precis
 clustered bootstrap). Wayfinder leads on the secondary metrics (precision@5 = 0.80 and MAP = 0.287, both best
 of six rankers) but neither is the primary, and the disease-hop-only baseline matches/exceeds it at
 precision@20 — empirically confirming the "substrate-inherited stringency" reading (M8/M10). This CLOSES the
-audit's FATAL (method now *measured*, not merely demonstrated) and is reported straight in §4.7. Evidence:
+audit's FATAL (method now *measured*, not merely demonstrated) and is reported straight in §4.7.
+**Independently reproduced in Claude Science (2026-07-13, blind + headless):** precision table + both
+co-primary points (+0.20 / −0.15) exact, same `broad_null` verdict, concordant CIs
+(`data/eval_out/cs_verify_result.json`). Evidence:
 `data/eval_out/count_manifest_full_T2016_k5.json` (committed receipt), `eval_results_T2016_k5.json`,
 `src/arbiter/eval/`, `docs/g1-build-log_2026-07-12.md`, `docs/reviews/diff_g1-harness_2026-07-12.md`.
 
