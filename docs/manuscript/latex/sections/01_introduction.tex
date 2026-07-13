@@ -75,6 +75,33 @@ the signal is NAB2-specific, and does not claim to prove the disease link. Wayfi
 experimental follow-up; it makes the prior question --- \emph{which of these thousands is worth a bench's time?}
 --- answerable, with a receipt.
 
+\noindent \textbf{Contributions.} Stated up front so a reader can judge relevance before the details:
+\begin{enumerate}
+\tightlist
+\item \textbf{A receipt-backed prioritization architecture} --- LBD hypothesis generation paired with a
+  \emph{deterministic, non-LLM} referee that adjudicates each gene$\rightarrow$program$\rightarrow$disease triple
+  against a held Perturb-seq substrate and returns a per-hop receipt, with two first-class diagnostics:
+  \emph{abstention} (a knockdown-QC gate reports an untestable perturbation as \emph{untested}, never a
+  negative) and \emph{falsification} (a confident, receipt-backed \emph{no}). The ingredients are individually
+  prior art; the \emph{integration} --- and a deterministic \emph{experimental} referee in place of an LLM
+  judge --- is the contribution, positioned against evaluated near-neighbours in \S{}2.4.
+\item \textbf{An honest measurement of that architecture, not only a demonstration} --- a pre-registered,
+  time-sliced held-out evaluation (\S{}4.7) that returns a \emph{null} at its primary metric: the pipeline does
+  not rank future-established links above literature-rarity or the disease-enrichment hop alone. We report the
+  null straight and trace the residual ranking signal to the substrate-inherited disease hop.
+\item \textbf{A reproducibility method for API-less agentic science} --- driving a workbench that exposes no
+  programmatic interface headlessly into a re-runnable, self-audited pipeline (\S{}3.4), with an independent
+  critic model enforcing calibrated language on the platform's own output.
+\item \textbf{A receipt-backed biological nomination} --- NAB2 as a literature-novel Th1/Th2 \emph{polarization}
+  regulator, distinct from its known EGR-activation role (\S{}4.3), nominated toward atopic eczema; the sharpest
+  artifact (a STAT6 \emph{cis}-effect) is excluded at the expression level and the one confounder we cannot
+  discharge (12q13 LD provenance) is foregrounded, not resolved.
+\end{enumerate}
+\noindent \textbf{What we do not claim:} predictive correctness or superior ranking (we measured it --- null);
+novelty of the individual diagnostics (prior art); experimental disease \emph{causality} (an association
+nomination); or cross-vendor self-audit independence (role- and checkpoint-independence within a single model
+family, \S{}4.5).
+
 The remainder of this paper is organized as follows. Section 2 provides background on the LBD follow-up
 problem, the Perturb-seq substrate, and agentic language models for scientific work. Section 3 details the
 generator, the referee, and the workbench. Section 4 reports the verdict ledger, the confident-no and
