@@ -1,0 +1,51 @@
+{
+  "precision": {
+    "wayfinder": {
+      "prec@5": 0.8,
+      "prec@10": 0.5,
+      "prec@20": 0.35,
+      "prec@50": 0.4
+    },
+    "disease_hop_only": {
+      "prec@5": 0.4,
+      "prec@10": 0.4,
+      "prec@20": 0.5,
+      "prec@50": 0.38
+    },
+    "lit_rarity": {
+      "prec@5": 0.4,
+      "prec@10": 0.2,
+      "prec@20": 0.15,
+      "prec@50": 0.1
+    },
+    "effect": {
+      "prec@5": 0.0,
+      "prec@10": 0.0,
+      "prec@20": 0.15,
+      "prec@50": 0.26
+    },
+    "enrichment_continuous": {
+      "prec@5": 0.4,
+      "prec@10": 0.6,
+      "prec@20": 0.45,
+      "prec@50": 0.38
+    },
+    "random": {
+      "prec@5": 0.4,
+      "prec@10": 0.4,
+      "prec@20": 0.25,
+      "prec@50": 0.24
+    }
+  },
+  "C_broad": {
+    "point": 0.2,
+    "ci_lo": -0.25,
+    "ci_hi": 0.7
+  },
+  "C_mech": {
+    "point": -0.15,
+    "ci_lo": -0.35,
+    "ci_hi": 0.35
+  },
+  "joint_outcome": "broad_null"
+}

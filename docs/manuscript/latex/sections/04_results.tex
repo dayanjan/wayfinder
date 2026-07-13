@@ -422,7 +422,9 @@ overstatement. We characterize this independence precisely: it is \emph{role, mo
 --- a distinct reviewer model at distinct verification points within a single model family --- not independence
 across vendors. It is also why manuscript-facing verdicts cite the post-review receipt rather than the raw
 generation log, which still carries a pre-critic ``validated'' string in a free-text field: that pre- to
-post-critic difference \emph{is} the self-audit.
+post-critic difference \emph{is} the self-audit. The same headless operation reproduces the held-out evaluation
+of \S{}4.7 blind and to the same broad-null verdict, extending this self-audit from the finding to the
+\emph{measurement} (Figure 6).
 
 \subsection*{4.6 Independent cross-model replication}\label{independent-cross-model-replication}
 
@@ -507,7 +509,8 @@ recomputation inside the agentic workbench (\S{}4.5), driven headlessly and blin
 reproduced the per-method precision table and both co-primary point estimates exactly
 ($C_{\mathrm{broad}} = +0.20$, $C_{\mathrm{mech}} = -0.15$) and returned the same broad-null verdict; its
 two-way-clustered intervals were concordant, both spanning zero (with minor width differences from an
-independent random-number stream) --- the \S{}4.5 self-audit discipline applied to the evaluation itself.
+independent random-number stream) --- the \S{}4.5 self-audit discipline applied to the evaluation itself
+(Figure 6).
 
 \begin{figure}[htbp]
 \centering
@@ -522,4 +525,20 @@ bootstrap 95\% CIs; both cross zero (grey), so the joint outcome is a \emph{broa
 disease-hop-only baseline matching Wayfinder at $k = 20$ is the measured face of the substrate-inherited
 stringency of \S{}4.1b.}
 \label{fig:heldout}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig6_cs_reproduction}
+\caption{\textbf{The held-out evaluation independently reproduced inside Claude Science (\S{}4.5), driven
+headlessly and blind to the expected values.} \emph{(A)} precision@$k$ for the six rankers as computed by the
+local harness (lines) and, overlaid, by Claude Science (open markers): the markers fall on the lines --- the two
+computations agree at every point. \emph{(B)} the two co-primary contrasts, local (blue) versus Claude Science
+(orange), each a point estimate and a gene-and-disease two-way-clustered bootstrap 95\% CI: the point estimates
+are identical ($C_{\mathrm{broad}} = +0.20$, $C_{\mathrm{mech}} = -0.15$) and both intervals span zero, so the
+workbench returns the same broad-null verdict. Interval widths differ slightly because the two runs draw from
+independent random-number streams (NumPy in the workbench, the standard library locally). This is the self-audit
+discipline of \S{}4.5 applied to the evaluation itself: the metric computation --- where the review pipeline
+earlier caught a bootstrap-weighting error --- is confirmed by a second, blind implementation.}
+\label{fig:csrepro}
 \end{figure}
