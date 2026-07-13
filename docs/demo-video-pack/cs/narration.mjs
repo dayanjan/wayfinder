@@ -8,10 +8,12 @@
 // IL2 cold-open (b0), spoken builder name (b2), "one key confounder" + "thirty clean candidates survive
 // the referee gates" scoping, Anthropic's-workbench reviewer line. Held under the hard 3:00 max.
 // v5 (2026-07-13): (1) b2 spoken surname respelled phonetically "Vijay-Sing-her" for the cloned voice —
-// TRUE spelling is Wijesinghe (kept correct in the displayed lower-thirds/cards); operator QA the audio.
-// (2) b6 SWAP (net-neutral, stays < 3:00): dropped the "Swanson's ABC is just the start" flourish and
-// added the honest held-out-null result (the manuscript's central measurement, cut 07-10 predated it).
-// RE-RENDER + RE-GATE required; confirm total runtime stays under the hard 3:00 at gate time.
+// TRUE spelling is Wijesinghe (kept correct in the displayed lower-thirds/cards).
+// (2) b6: dropped the "Swanson's ABC is just the start" flourish, added the honest held-out-null result
+// (the manuscript's central measurement, cut 07-10 predated it). (3) endcap trimmed to hold the total
+// under the hard 3:00 cap after (2)'s addition.
+// RENDERED 2026-07-13 (this pipeline, live CS on :8765): final 2:57.97 (< 3:00), transcription gate PASS
+// 94% mean WITH the CC-BY music bed. Master MP4: .tmp/demo-cs/out/wayfinder_v5.mp4 (out-of-band).
 
 export const TURNS = {
   walk: [
@@ -53,6 +55,5 @@ export const CARDS = {
   title: { text:
     "Wayfinder — the library and the lab, on one bench." },
   endcap: { text:
-    "I built the missing generation half, beside the test — generate a hypothesis, then refute or back " +
-    "it with a receipt. Reproducible from public data. That's Wayfinder." },
+    "I built the missing generation half — back or refute, with a receipt. That's Wayfinder." },
 };
