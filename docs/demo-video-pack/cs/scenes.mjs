@@ -95,6 +95,9 @@ export const SCENES = {
     // REQUIRED frame — reviewer flag via prepared CS-receipt overlay (stage5/review.json).
     await p.goto(ASSETS + "overlay-reviewer.html", { waitUntil: "load", timeout: 20000 });
     await rec.setCaption("...and the platform checks itself — a reviewer flagged 'validated' and 'definitive', and I cut them");
+    await rec.untilT(Math.max(1, b6 * 0.78));
+    // v5 — silent caption for the honest held-out null (no added spoken time; synced to the new b6 clause).
+    await rec.setCaption("Held-out test (links unseen pre-2016): the referee's own ranking came back null — reported straight");
     await rec.sceneEnd();
     await rec.setCaption("");
   },

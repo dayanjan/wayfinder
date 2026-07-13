@@ -92,7 +92,10 @@ available" toast offers Restart — dismiss via ✕; restarting kills daemon pid
 > regulator. Its cis-artifact confounder was refuted live against the authors' own genome-wide data.)
 >
 > The whole pipeline ran inside **Claude Science**, whose independent reviewer model flagged and cut the
-> project's own overclaims. *The library and the lab, on one bench.*
+> project's own overclaims. And we held the method to the same bar: measured as a predictor on held-out
+> (post-2016) links, it returns a **null** at its primary metric — reported straight. The contribution is
+> the receipts, the abstention, and the NAB2 nomination, not a claim of predictive correctness.
+> *The library and the lab, on one bench.*
 >
 > **Built by** Dayanjan Shanaka Wijesinghe, Ph.D. ("Shanaka"), Associate Professor at Virginia Commonwealth
 > University School of Pharmacy and former Deputy Director of VCU's Lipidomics/Metabolomics Core Facility —

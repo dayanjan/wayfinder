@@ -7,6 +7,11 @@
 // v4 (2026-07-10): renamed to Wayfinder; folds in the frame-grounded codex-debate + panel edits —
 // IL2 cold-open (b0), spoken builder name (b2), "one key confounder" + "thirty clean candidates survive
 // the referee gates" scoping, Anthropic's-workbench reviewer line. Held under the hard 3:00 max.
+// v5 (2026-07-13): (1) b2 spoken surname respelled phonetically "Vijay-Sing-her" for the cloned voice —
+// TRUE spelling is Wijesinghe (kept correct in the displayed lower-thirds/cards); operator QA the audio.
+// (2) b6 SWAP (net-neutral, stays < 3:00): dropped the "Swanson's ABC is just the start" flourish and
+// added the honest held-out-null result (the manuscript's central measurement, cut 07-10 predated it).
+// RE-RENDER + RE-GATE required; confirm total runtime stays under the hard 3:00 at gate time.
 
 export const TURNS = {
   walk: [
@@ -18,7 +23,7 @@ export const TURNS = {
       "no one can read even their own field. And the data — one omics run, millions of measurements " +
       "per sample. The discoveries hide in the gap between them." },
     { id: "b2_matrix", text:
-      "I felt this directly — I'm Shanaka Wijesinghe. For years I ran a metabolomics core facility — " +
+      "I felt this directly — I'm Shanaka Vijay-Sing-her. For years I ran a metabolomics core facility — " +
       "samples in, thousands of features out. The researcher always asked the one question that " +
       "mattered: what does it all mean? One hypothesis at a time doesn't scale to data like this." },
     { id: "b3_swanson", text:
@@ -40,7 +45,7 @@ export const TURNS = {
       "One key confounder — a possible STAT6 cis-artifact — was refuted live against the authors' own " +
       "genome-wide data; the disease label stays a nomination. And Anthropic's scientific workbench " +
       "checked its own work — its reviewer model flagged the words validated and definitive, and I cut " +
-      "them. Swanson's ABC is just the start." },
+      "them. Measured on links it had never seen, the referee itself came back null — reported straight." },
   ],
 };
 
